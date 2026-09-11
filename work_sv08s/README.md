@@ -28,3 +28,21 @@ homing, QGL and nozzle cleaning. See the [implementation and acceptance procedur
 See [change reasoning and evidence](../../validation/modernization/work_sv08s/reasoning.md),
 [offline checks](../../validation/modernization/work_sv08s/results.json), and
 [pilot acceptance](../../validation/modernization/work_sv08s/acceptance.md).
+
+## Install on a printer
+
+The repository includes an idempotent installer that clones or fast-forwards this
+repository, links the shared `machine.cfg`, `macros/`, `options/`, and `scripts/`
+paths into `~/printer_data/config`, and registers the repository with Moonraker's
+Update Manager:
+
+```bash
+git clone https://github.com/DonutCatDev/Formative_SV08_Configs.git
+cd Formative_SV08_Configs
+./install-sv08.sh
+```
+
+The existing `printer.cfg` is never changed and must already contain an active
+`[include machine.cfg]` line. Existing shared paths are moved to a timestamped
+`~/printer_data/config/.formative-sv08-backups/` directory before linking. Run
+`./install-sv08.sh --no-restart` to defer the Moonraker restart.
