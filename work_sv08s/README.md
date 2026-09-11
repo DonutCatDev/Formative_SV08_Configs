@@ -46,3 +46,10 @@ The existing `printer.cfg` is never changed and must already contain an active
 `[include machine.cfg]` line. Existing shared paths are moved to a timestamped
 `~/printer_data/config/.formative-sv08-backups/` directory before linking. Run
 `./install-sv08.sh --no-restart` to defer the Moonraker restart.
+
+## Tag a release
+
+Run `./tag-release.sh` from a clean, fully pushed branch to create and push an
+annotated timestamp tag. Tags use the Moonraker-compatible numeric form
+`vYEAR.MONTH.DAYHHMMSS`; the annotation records the readable local timestamp and
+the complete commit ID.

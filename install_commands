@@ -1,0 +1,5 @@
+git clone https://github.com/DonutCatDev/Formative_SV08_Configs.git
+cd Formative_SV08_Configs
+./install-sv08.sh
+
+ls -l ~/printer_data/config/{machine.cfg,macros,options,scripts}
