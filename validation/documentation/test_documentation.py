@@ -32,7 +32,8 @@ class DocumentationTests(unittest.TestCase):
                     for n,line in s.rows:
                         if line.strip():
                             self.assertIn(f'| [{n}](',output[g.page(path)])
-        self.assertEqual(len(output), len(b.files)+1)
+        individual = [path for path in b.files if not g.PRINTER_ENTRY.fullmatch(path.name)]
+        self.assertEqual(len(output), len(individual)+2)
 
     def test_reference_links_and_source_lines_resolve(self):
         b = g.Builder()
@@ -117,6 +118,13 @@ class DocumentationTests(unittest.TestCase):
             index = b.build()[docs/'README.md']
             self.assertIn('printer-01.cfg', index)
             self.assertIn('printer-13.cfg', index)
+            self.assertIn(docs/'printer-template.cfg.md', b.build())
+            self.assertNotIn(docs/'printer-01.cfg.md', b.build())
+            self.assertNotIn(docs/'printer-13.cfg.md', b.build())
+            (cfg/'printer-13.cfg').write_text(
+                '[include macros/example.cfg]\n[mcu]\nserial: different-structure\n')
+            with self.assertRaisesRegex(ValueError, 'Printer entry-point structure differs'):
+                g.Builder().build()
 
     def test_unknown_commands_and_unreviewed_summaries_fail(self):
         with self.small_tree() as (cfg,docs,tools):
