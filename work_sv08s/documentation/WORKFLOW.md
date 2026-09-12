@@ -6,8 +6,8 @@ The generator uses only Python's standard library and never runs printer G-code.
 
 ## Whenever a config macro changes
 
-1. Edit the candidate config. Inspect its callers and called macros as required
-   by the workspace guidance. Do not edit either baseline snapshot.
+1. Edit the shared config. Inspect its callers and called macros before changing
+   behavior. Do not edit a printer's deployed, machine-local `printer.cfg`.
 2. Review the matching purpose summary and any line-specific explanations in
    [_tools/annotations.json](_tools/annotations.json). Change explanations to
    describe the implementation actually present, including defaults, conditions,
@@ -22,12 +22,12 @@ The generator uses only Python's standard library and never runs printer G-code.
    `--check` and the documentation tests. Include source, annotations and docs
    together in the same change.
 
-From the workspace root in PowerShell:
+From the repository root:
 
-```powershell
-.venv/Scripts/python.exe -B updated_configs/work_sv08s/documentation/_tools/generate.py --write
-.venv/Scripts/python.exe -B updated_configs/work_sv08s/documentation/_tools/generate.py --check
-.venv/Scripts/python.exe -B validation/documentation/test_documentation.py
+```bash
+python -B work_sv08s/documentation/_tools/generate.py --write
+python -B work_sv08s/documentation/_tools/generate.py --check
+python -B validation/documentation/test_documentation.py
 ```
 
 `--check` is read-only and fails for stale/missing/generated-orphan pages,
@@ -38,15 +38,15 @@ File renames or deletions update the index and dependent references on regenerat
 
 For automatic local updates while editing, leave this running in a terminal:
 
-```powershell
-.venv/Scripts/python.exe -B updated_configs/work_sv08s/documentation/_tools/generate.py --watch
+```bash
+python -B work_sv08s/documentation/_tools/generate.py --watch
 ```
 
 The watcher detects changes to configs, annotations and the generator every
 second and attempts regeneration. If review is required, it reports the exact
 macro and waits for the annotation edit; it does not invent a new purpose.
 Ctrl+C stops it. The watcher is provided but is not automatically installed as
-a background service or started by opening this workspace.
+a background service or started by opening this repository.
 
 ## Adding an unfamiliar command or template
 
@@ -61,8 +61,8 @@ made by the generator.
 
 ## GitHub workflow
 
-[macro-documentation.yml](../../../.github/workflows/macro-documentation.yml)
-runs on pushes and pull requests that change the pilot configs, documentation
+[macro-documentation.yml](../../.github/workflows/macro-documentation.yml)
+runs on pushes and pull requests that change the shared configs, documentation
 or documentation tests, and can also be dispatched manually. It checks freshness
 and coverage. If the checked-in docs are stale, the check fails; a subsequent
 step attempts regeneration and uploads the regenerated documentation as an
@@ -75,6 +75,5 @@ contact a printer, push commits or post messages. To require freshness before
 merging, select its check in the repository's branch rules when appropriate.
 No remote workflow run or branch-rule change was performed during local setup.
 
-Validation results belong under `validation/documentation/`; progress notes
-belong under `progression/work_sv08s/`. Link those records from progress rather
-than placing test logs alongside these reference pages.
+Validation results belong under `validation/documentation/`, not alongside the
+generated reference pages.

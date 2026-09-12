@@ -1,0 +1,55 @@
+name: Macro documentation
+
+on:
+  push:
+    paths:
+      - 'work_sv08s/config/**'
+      - 'work_sv08s/documentation/**'
+      - 'validation/documentation/**'
+      - '.github/workflows/macro-documentation.yml'
+  pull_request:
+    paths:
+      - 'work_sv08s/config/**'
+      - 'work_sv08s/documentation/**'
+      - 'validation/documentation/**'
+      - '.github/workflows/macro-documentation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Check committed documentation is current
+        run: python work_sv08s/documentation/_tools/generate.py --check
+      - name: Validate coverage, links and update behavior
+        if: always()
+        run: python validation/documentation/test_documentation.py
+      - name: Generate documentation for review
+        if: always()
+        id: generate
+        run: python work_sv08s/documentation/_tools/generate.py --write
+      - name: Attach regenerated reference
+        if: always() && steps.generate.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: formative-sv08-macro-documentation
+          path: work_sv08s/documentation/
+          retention-days: 14
+      - name: Attach documentation test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: documentation-validation
+          path: validation/documentation/results.json
+          if-no-files-found: ignore
