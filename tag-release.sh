@@ -10,8 +10,9 @@ die() {
 command -v git >/dev/null 2>&1 || die 'git is required'
 command -v date >/dev/null 2>&1 || die 'date is required'
 
-REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" ||
-    die 'run this script from inside the Formative_SV08_Configs repository'
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)" ||
+    die 'tag-release.sh must be stored inside the Formative_SV08_Configs repository'
 cd "$REPO_ROOT"
 
 [[ -z "$(git status --porcelain=v1)" ]] ||

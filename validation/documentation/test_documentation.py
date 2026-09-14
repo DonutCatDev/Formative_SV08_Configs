@@ -126,6 +126,20 @@ class DocumentationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Printer entry-point structure differs'):
                 g.Builder().build()
 
+    def test_empty_wildcard_include_is_optional_but_direct_include_is_required(self):
+        with self.small_tree() as (cfg, docs, tools):
+            printer = cfg/'printer.cfg'
+            printer.write_text(
+                printer.read_text()+'[include custom_plugins/*.cfg]\n')
+            builder = g.Builder()
+            self.assertIn(printer, builder.active)
+            page_text = builder.build()[g.page(printer)]
+            self.assertIn('No matching file in this tree', page_text)
+            printer.write_text(
+                printer.read_text()+'[include custom_plugins/required.cfg]\n')
+            with self.assertRaisesRegex(ValueError, 'Unresolved active include'):
+                g.Builder()
+
     def test_unknown_commands_and_unreviewed_summaries_fail(self):
         with self.small_tree() as (cfg,docs,tools):
             source = cfg/'macros/example.cfg'

@@ -6,6 +6,7 @@ Unknown commands fail closed and need an explanation in annotations.json.
 from __future__ import annotations
 import argparse
 from dataclasses import dataclass
+import glob
 import hashlib
 import html
 import json
@@ -102,7 +103,7 @@ def active_tree(sections):
         for section in sections[path]:
             if section.name.startswith('include '):
                 matches = sorted(path.parent.glob(section.name[8:]))
-                if not matches:
+                if not matches and not glob.has_magic(section.name[8:]):
                     raise ValueError('Unresolved active include: ' + section.name)
                 for child in matches:
                     if not child.resolve().is_relative_to(CONFIG.resolve()):

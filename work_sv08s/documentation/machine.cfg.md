@@ -5,13 +5,14 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../config/machine.cfg) · [All files](README.md) · [Reading guide](READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `ae86b17d977d2f388609fb64c57d3a203aca17b79bc1b7d279b5a5a49dc7cd90`.
+Source text SHA256 (LF-normalized): `50e7eb916e845a49ef8e90af21164607bc399210dbfe4a06e9843c80539bc13a`.
 
 ## Includes
 
 - <code>mainsail.cfg</code>: [mainsail.cfg](mainsail.cfg.md)
 - <code>macros/*.cfg</code>: [macros/calibration.cfg](macros/calibration.cfg.md), [macros/cleaning.cfg](macros/cleaning.cfg.md), [macros/client.cfg](macros/client.cfg.md), [macros/custom-macros.cfg](macros/custom-macros.cfg.md), [macros/filament.cfg](macros/filament.cfg.md), [macros/homing.cfg](macros/homing.cfg.md), [macros/preparation.cfg](macros/preparation.cfg.md), [macros/shell_command.cfg](macros/shell_command.cfg.md), [macros/sovol-macros.cfg](macros/sovol-macros.cfg.md)
 - <code>timelapse.cfg</code>: [timelapse.cfg](timelapse.cfg.md)
+- <code>custom_plugins/*.cfg</code>: No matching file in this tree; this entry is not an active resolved include.
 - <code>options/lcd/*.cfg</code>: [options/lcd/lcd.cfg](options/lcd/lcd.cfg.md), [options/lcd/macros.cfg](options/lcd/macros.cfg.md), [options/lcd/sovol-menu-moonraker.cfg](options/lcd/sovol-menu-moonraker.cfg.md)
 - <code>options/probe/eddy-sovol.cfg</code>: [options/probe/eddy-sovol.cfg](options/probe/eddy-sovol.cfg.md)
 
@@ -22,42 +23,42 @@ Source text SHA256 (LF-normalized): `ae86b17d977d2f388609fb64c57d3a203aca17b79bc
 
 ## Other configuration sections
 
-- <code>printer</code> — [source line 18](../config/machine.cfg#L18).
-- <code>stepper_x</code> — [source line 28](../config/machine.cfg#L28).
-- <code>tmc2209 stepper_x</code> — [source line 44](../config/machine.cfg#L44).
-- <code>stepper_y</code> — [source line 55](../config/machine.cfg#L55).
-- <code>tmc2209 stepper_y</code> — [source line 71](../config/machine.cfg#L71).
-- <code>stepper_z</code> — [source line 82](../config/machine.cfg#L82).
-- <code>tmc2209 stepper_z</code> — [source line 98](../config/machine.cfg#L98).
-- <code>stepper_z1</code> — [source line 107](../config/machine.cfg#L107).
-- <code>tmc2209 stepper_z1</code> — [source line 115](../config/machine.cfg#L115).
-- <code>stepper_z2</code> — [source line 124](../config/machine.cfg#L124).
-- <code>tmc2209 stepper_z2</code> — [source line 132](../config/machine.cfg#L132).
-- <code>stepper_z3</code> — [source line 141](../config/machine.cfg#L141).
-- <code>tmc2209 stepper_z3</code> — [source line 149](../config/machine.cfg#L149).
-- <code>thermistor my_thermistor_e</code> — [source line 158](../config/machine.cfg#L158).
-- <code>extruder</code> — [source line 166](../config/machine.cfg#L166).
-- <code>tmc2209 extruder</code> — [source line 188](../config/machine.cfg#L188).
-- <code>verify_heater extruder</code> — [source line 196](../config/machine.cfg#L196).
-- <code>thermistor my_thermistor</code> — [source line 210](../config/machine.cfg#L210).
-- <code>heater_bed</code> — [source line 218](../config/machine.cfg#L218).
-- <code>verify_heater heater_bed</code> — [source line 226](../config/machine.cfg#L226).
-- <code>quad_gantry_level</code> — [source line 232](../config/machine.cfg#L232).
-- <code>multi_pin print_cooling_fan_pins</code> — [source line 247](../config/machine.cfg#L247).
-- <code>fan</code> — [source line 251](../config/machine.cfg#L251).
-- <code>fan_generic exhaust_fan</code> — [source line 255](../config/machine.cfg#L255).
-- <code>controller_fan MCU_fan</code> — [source line 260](../config/machine.cfg#L260).
-- <code>heater_fan hotend_fan</code> — [source line 290](../config/machine.cfg#L290).
-- <code>gcode_arcs</code> — [source line 300](../config/machine.cfg#L300).
-- <code>led main_led</code> — [source line 304](../config/machine.cfg#L304).
-- <code>temperature_sensor mcu_temp</code> — [source line 314](../config/machine.cfg#L314).
-- <code>temperature_sensor Host_temp</code> — [source line 319](../config/machine.cfg#L319).
-- <code>temperature_sensor Toolhead_Temp</code> — [source line 324](../config/machine.cfg#L324).
-- <code>exclude_object</code> — [source line 328](../config/machine.cfg#L328).
-- <code>adxl345</code> — [source line 330](../config/machine.cfg#L330).
-- <code>resonance_tester</code> — [source line 333](../config/machine.cfg#L333).
-- <code>input_shaper</code> — [source line 339](../config/machine.cfg#L339).
-- <code>save_variables</code> — [source line 341](../config/machine.cfg#L341).
+- <code>printer</code> — [source line 21](../config/machine.cfg#L21).
+- <code>stepper_x</code> — [source line 31](../config/machine.cfg#L31).
+- <code>tmc2209 stepper_x</code> — [source line 47](../config/machine.cfg#L47).
+- <code>stepper_y</code> — [source line 58](../config/machine.cfg#L58).
+- <code>tmc2209 stepper_y</code> — [source line 74](../config/machine.cfg#L74).
+- <code>stepper_z</code> — [source line 85](../config/machine.cfg#L85).
+- <code>tmc2209 stepper_z</code> — [source line 101](../config/machine.cfg#L101).
+- <code>stepper_z1</code> — [source line 110](../config/machine.cfg#L110).
+- <code>tmc2209 stepper_z1</code> — [source line 118](../config/machine.cfg#L118).
+- <code>stepper_z2</code> — [source line 127](../config/machine.cfg#L127).
+- <code>tmc2209 stepper_z2</code> — [source line 135](../config/machine.cfg#L135).
+- <code>stepper_z3</code> — [source line 144](../config/machine.cfg#L144).
+- <code>tmc2209 stepper_z3</code> — [source line 152](../config/machine.cfg#L152).
+- <code>thermistor my_thermistor_e</code> — [source line 161](../config/machine.cfg#L161).
+- <code>extruder</code> — [source line 169](../config/machine.cfg#L169).
+- <code>tmc2209 extruder</code> — [source line 191](../config/machine.cfg#L191).
+- <code>verify_heater extruder</code> — [source line 199](../config/machine.cfg#L199).
+- <code>thermistor my_thermistor</code> — [source line 213](../config/machine.cfg#L213).
+- <code>heater_bed</code> — [source line 221](../config/machine.cfg#L221).
+- <code>verify_heater heater_bed</code> — [source line 229](../config/machine.cfg#L229).
+- <code>quad_gantry_level</code> — [source line 235](../config/machine.cfg#L235).
+- <code>multi_pin print_cooling_fan_pins</code> — [source line 250](../config/machine.cfg#L250).
+- <code>fan</code> — [source line 254](../config/machine.cfg#L254).
+- <code>fan_generic exhaust_fan</code> — [source line 258](../config/machine.cfg#L258).
+- <code>temperature_fan MCU_fan</code> — [source line 265](../config/machine.cfg#L265).
+- <code>heater_fan hotend_fan</code> — [source line 278](../config/machine.cfg#L278).
+- <code>gcode_arcs</code> — [source line 288](../config/machine.cfg#L288).
+- <code>led main_led</code> — [source line 292](../config/machine.cfg#L292).
+- <code>temperature_sensor mcu_temp</code> — [source line 302](../config/machine.cfg#L302).
+- <code>temperature_sensor Host_temp</code> — [source line 307](../config/machine.cfg#L307).
+- <code>temperature_sensor Toolhead_Temp</code> — [source line 312](../config/machine.cfg#L312).
+- <code>exclude_object</code> — [source line 316](../config/machine.cfg#L316).
+- <code>adxl345</code> — [source line 318](../config/machine.cfg#L318).
+- <code>resonance_tester</code> — [source line 321](../config/machine.cfg#L321).
+- <code>input_shaper</code> — [source line 327](../config/machine.cfg#L327).
+- <code>save_variables</code> — [source line 329](../config/machine.cfg#L329).
 
 <a id="filament_switch_sensor-filament_sensor"></a>
 
@@ -69,13 +70,13 @@ This configuration section supplies an event-triggered command template rather t
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [202](../config/machine.cfg#L202) | <code>[filament_switch_sensor filament_sensor]</code> | Declare this configuration section. |
-| [203](../config/machine.cfg#L203) | <code>pause_on_runout: True</code> | Set the pause on runout option: <code>True</code>. |
-| [204](../config/machine.cfg#L204) | <code>event_delay: 3.0</code> | Set the event delay option: <code>3.0</code>. |
-| [205](../config/machine.cfg#L205) | <code>pause_delay: 0.5</code> | Set the pause delay option: <code>0.5</code>. |
-| [206](../config/machine.cfg#L206) | <code>runout_gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [207](../config/machine.cfg#L207) | <code>M600</code> | Run [M600](macros/client.cfg.md#gcode_macro-m600), which is evaluated separately when reached. Use its default arguments. |
-| [208](../config/machine.cfg#L208) | <code>switch_pin: PE9</code> | Set the switch pin option: <code>PE9</code>. |
+| [205](../config/machine.cfg#L205) | <code>[filament_switch_sensor filament_sensor]</code> | Declare this configuration section. |
+| [206](../config/machine.cfg#L206) | <code>pause_on_runout: True</code> | Set the pause on runout option: <code>True</code>. |
+| [207](../config/machine.cfg#L207) | <code>event_delay: 3.0</code> | Set the event delay option: <code>3.0</code>. |
+| [208](../config/machine.cfg#L208) | <code>pause_delay: 0.5</code> | Set the pause delay option: <code>0.5</code>. |
+| [209](../config/machine.cfg#L209) | <code>runout_gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [210](../config/machine.cfg#L210) | <code>M600</code> | Run [M600](macros/client.cfg.md#gcode_macro-m600), which is evaluated separately when reached. Use its default arguments. |
+| [211](../config/machine.cfg#L211) | <code>switch_pin: PE9</code> | Set the switch pin option: <code>PE9</code>. |
 
 <a id="idle_timeout"></a>
 
@@ -87,6 +88,6 @@ This configuration section supplies an event-triggered command template rather t
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [310](../config/machine.cfg#L310) | <code>[idle_timeout]</code> | Declare this configuration section. |
-| [311](../config/machine.cfg#L311) | <code>gcode: _IDLE_TIMEOUT</code> | Begin the command template. Run [_IDLE_TIMEOUT](macros/client.cfg.md#gcode_macro-_idle_timeout), which is evaluated separately when reached. Use its default arguments. |
-| [312](../config/machine.cfg#L312) | <code>timeout: 600</code> | Set the timeout option: <code>600</code>. |
+| [298](../config/machine.cfg#L298) | <code>[idle_timeout]</code> | Declare this configuration section. |
+| [299](../config/machine.cfg#L299) | <code>gcode: _IDLE_TIMEOUT</code> | Begin the command template. Run [_IDLE_TIMEOUT](macros/client.cfg.md#gcode_macro-_idle_timeout), which is evaluated separately when reached. Use its default arguments. |
+| [300](../config/machine.cfg#L300) | <code>timeout: 600</code> | Set the timeout option: <code>600</code>. |
