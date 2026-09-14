@@ -48,7 +48,9 @@ The existing `printer.cfg` is never changed and must already contain an active
 
 ## Tag a release
 
-Run `./tag-release.sh` from a clean, fully pushed branch to create and push an
-annotated timestamp tag. Tags use the Moonraker-compatible numeric form
-`vYEAR.MONTH.DAYHHMMSS`; the annotation records the readable local timestamp and
-the complete commit ID.
+Include `[release]` in the final commit message pushed to `main` to have
+GitHub Actions create and push an annotated timestamp tag. Tags use the
+Moonraker-compatible numeric form `vYEAR.MONTH.DAYHHMMSS`; the annotation
+records the UTC timestamp and complete commit ID. The workflow can also be run
+manually from GitHub Actions. `./tag-release.sh` remains available as a local
+fallback.
