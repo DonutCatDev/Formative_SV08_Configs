@@ -1,0 +1,4 @@
+# Runtime activation links owned by Formative_SV08_Plugins. The deployed
+# `options` path is symlinked into this checkout, so ignoring these links keeps
+# Moonraker's configuration repository clean while plugins are installed.
+work_sv08s/config/options/lcd/00-custom-plugin-*.cfg
