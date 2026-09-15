@@ -115,7 +115,8 @@
     "M25": "Pause virtual SD printing through the native SD command.",
     "M26": "Set the virtual SD file position using S; zero rewinds to the beginning.",
     "M27": "Report virtual SD printing status.",
-    "NETWORK_STATUS_REFRESH": "Ask the project's network_status extension to refresh network information. The extension implementation is external to these config files; this command alone does not prove its network behavior."
+    "NETWORK_STATUS_REFRESH": "Ask the project's network_status extension to refresh network information. The extension implementation is external to these config files; this command alone does not prove its network behavior.",
+    "PROBE_EDDY_CURRENT_TAP_CALIBRATE": "Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific."
   },
   "variables": {
     "tap_validated": "operator commissioning flag; not a measured validation result",
