@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/filament.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `a43bcb0aca7b61032d29e5369a93be153507f26342151dc8c4665c6375c3d8a0`.
+Source text SHA256 (LF-normalized): `3391ae313d177919a1edbf1e0883d93ed93966c0530b0024dff9f9042f8f3d39`.
 
 ## Macro and action index
 
@@ -220,7 +220,7 @@ Heats first, then calls a separate unload macro. This standalone unload pattern 
 
 ## gcode_macro _FILAMENT_HEAT
 
-Rejects active printing and invalid configured loading temperature. A measured nozzle temperature of 210C or lower triggers a wait, even when Klipper already reports that extrusion is permitted; this keeps the 175C pause-standby state out of manual loading and unloading. During pause it waits for an existing target above the extrusion minimum or falls back to the configured loading temperature.
+Rejects active printing and invalid configured loading temperature. Always sets and waits for the configured loading temperature (240C by default), including from 175C pause standby or while cooling from a hotter nozzle. Callers proceed to unloading or the manual-load confirmation prompt only after the wait completes.
 
 **Calls and state references:** [_PILOT_SETTINGS](preparation.cfg.md#gcode_macro-_pilot_settings). Conditional references are not necessarily executed.
 
@@ -237,12 +237,9 @@ Rejects active printing and invalid configured loading temperature. A measured n
 | [105](../../config/macros/filament.cfg#L105) | <code>{% if load &lt;= minimum or load &gt;= maximum %}</code> | Start a conditional branch: <code>load  is at most  minimum or load  is at least  maximum</code>. Only a true branch emits its commands. |
 | [106](../../config/macros/filament.cfg#L106) | <code>{action_raise_error(&quot;The configured filament loading temperature is invalid.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
 | [107](../../config/macros/filament.cfg#L107) | <code>{% endif %}</code> | End this conditional block. |
-| [108](../../config/macros/filament.cfg#L108) | <code>{% set target = printer.extruder.target if printer.pause_resume.is_paused and printer.extruder.target &gt; minimum else load %}</code> | Choose the existing nozzle target when paused and that target is above the extrusion minimum; otherwise choose the configured loading temperature. |
-| [109](../../config/macros/filament.cfg#L109) | <code># The 175C pause standby target can still satisfy can_extrude. Require a</code> | Comment only; Klipper does not execute this line. |
-| [110](../../config/macros/filament.cfg#L110) | <code># measured loading temperature above 210C before allowing manual handling.</code> | Comment only; Klipper does not execute this line. |
-| [111](../../config/macros/filament.cfg#L111) | <code>{% if printer.extruder.temperature&#124;float &lt;= 210 %}</code> | Start a conditional branch: <code>the measured nozzle temperature as a decimal  is at most  210</code>. Only a true branch emits its commands. |
-| [112](../../config/macros/filament.cfg#L112) | <code>M109 S{target}</code> | Set the nozzle target using <code>{target}</code> °C; zero turns its heater off. Wait for the requested temperature. |
-| [113](../../config/macros/filament.cfg#L113) | <code>{% endif %}</code> | End this conditional block. |
+| [108](../../config/macros/filament.cfg#L108) | <code># Always establish the configured loading target, including from pause standby.</code> | Comment only; Klipper does not execute this line. |
+| [109](../../config/macros/filament.cfg#L109) | <code># M109 waits before the caller unloads or opens the manual-load prompt.</code> | Comment only; Klipper does not execute this line. |
+| [110](../../config/macros/filament.cfg#L110) | <code>M109 S{load}</code> | Set the nozzle target using <code>{load}</code> °C; zero turns its heater off. Wait for the requested temperature. |
 
 <a id="gcode_macro-_unload_filament_moves"></a>
 
@@ -254,23 +251,23 @@ Feeds 25mm, retracts 10mm and 20mm, waits three seconds, then retracts another 5
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [115](../../config/macros/filament.cfg#L115) | <code>[gcode_macro _UNLOAD_FILAMENT_MOVES]</code> | Declare this callable macro. |
-| [116](../../config/macros/filament.cfg#L116) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [117](../../config/macros/filament.cfg#L117) | <code>{% if not printer.extruder.can_extrude %}</code> | Start a conditional branch: <code>not the nozzle is hot enough to extrude</code>. Only a true branch emits its commands. |
-| [118](../../config/macros/filament.cfg#L118) | <code>{action_raise_error(&quot;Nozzle is too cold to unload filament.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [119](../../config/macros/filament.cfg#L119) | <code>{% endif %}</code> | End this conditional block. |
-| [120](../../config/macros/filament.cfg#L120) | <code>SAVE_GCODE_STATE NAME=unload_filament_state</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [121](../../config/macros/filament.cfg#L121) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
-| [122](../../config/macros/filament.cfg#L122) | <code>G1 E25 F300</code> | command filament E=<code>25</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [123](../../config/macros/filament.cfg#L123) | <code>G1 E-10 F1500</code> | command filament E=<code>-10</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 25 mm/s (1500 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [124](../../config/macros/filament.cfg#L124) | <code>G1 E-20 F600</code> | command filament E=<code>-20</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 10 mm/s (600 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [125](../../config/macros/filament.cfg#L125) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [126](../../config/macros/filament.cfg#L126) | <code>G4 P3000</code> | Wait for <code>P3000</code> (P is milliseconds; 1000 ms = 1 second). |
-| [127](../../config/macros/filament.cfg#L127) | <code>G1 E-50 F300</code> | command filament E=<code>-50</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [128](../../config/macros/filament.cfg#L128) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [129](../../config/macros/filament.cfg#L129) | <code>RESTORE_GCODE_STATE NAME=unload_filament_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
-| [130](../../config/macros/filament.cfg#L130) | <code>RELEASE_EXTRUDER</code> | Run [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), which is evaluated separately when reached. Use its default arguments. |
-| [131](../../config/macros/filament.cfg#L131) | <code>{% if not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>not the printer is paused</code>. Only a true branch emits its commands. |
-| [132](../../config/macros/filament.cfg#L132) | <code>M104 S0</code> | Set the nozzle target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [133](../../config/macros/filament.cfg#L133) | <code>{% endif %}</code> | End this conditional block. |
-| [134](../../config/macros/filament.cfg#L134) | <code>M117 Filament unloaded</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [113](../../config/macros/filament.cfg#L113) | <code>[gcode_macro _UNLOAD_FILAMENT_MOVES]</code> | Declare this callable macro. |
+| [114](../../config/macros/filament.cfg#L114) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [115](../../config/macros/filament.cfg#L115) | <code>{% if not printer.extruder.can_extrude %}</code> | Start a conditional branch: <code>not the nozzle is hot enough to extrude</code>. Only a true branch emits its commands. |
+| [116](../../config/macros/filament.cfg#L116) | <code>{action_raise_error(&quot;Nozzle is too cold to unload filament.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [117](../../config/macros/filament.cfg#L117) | <code>{% endif %}</code> | End this conditional block. |
+| [118](../../config/macros/filament.cfg#L118) | <code>SAVE_GCODE_STATE NAME=unload_filament_state</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [119](../../config/macros/filament.cfg#L119) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
+| [120](../../config/macros/filament.cfg#L120) | <code>G1 E25 F300</code> | command filament E=<code>25</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [121](../../config/macros/filament.cfg#L121) | <code>G1 E-10 F1500</code> | command filament E=<code>-10</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 25 mm/s (1500 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [122](../../config/macros/filament.cfg#L122) | <code>G1 E-20 F600</code> | command filament E=<code>-20</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 10 mm/s (600 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [123](../../config/macros/filament.cfg#L123) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [124](../../config/macros/filament.cfg#L124) | <code>G4 P3000</code> | Wait for <code>P3000</code> (P is milliseconds; 1000 ms = 1 second). |
+| [125](../../config/macros/filament.cfg#L125) | <code>G1 E-50 F300</code> | command filament E=<code>-50</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [126](../../config/macros/filament.cfg#L126) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [127](../../config/macros/filament.cfg#L127) | <code>RESTORE_GCODE_STATE NAME=unload_filament_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [128](../../config/macros/filament.cfg#L128) | <code>RELEASE_EXTRUDER</code> | Run [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), which is evaluated separately when reached. Use its default arguments. |
+| [129](../../config/macros/filament.cfg#L129) | <code>{% if not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>not the printer is paused</code>. Only a true branch emits its commands. |
+| [130](../../config/macros/filament.cfg#L130) | <code>M104 S0</code> | Set the nozzle target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [131](../../config/macros/filament.cfg#L131) | <code>{% endif %}</code> | End this conditional block. |
+| [132](../../config/macros/filament.cfg#L132) | <code>M117 Filament unloaded</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
