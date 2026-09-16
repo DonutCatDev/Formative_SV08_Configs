@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../../config/options/lcd/sovol-menu-moonraker.cfg) · [All files](../../README.md) · [Reading guide](../../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `45e7f933b0306325476013c7d3c6608c7bb9702402e27bc0d3a24dfb3656d449`.
+Source text SHA256 (LF-normalized): `88b07635ed9947642f2fa16b039f2156eeac7ea40f75a9b717b2d61c26084aaf`.
 
 ## Macro and action index
 
@@ -191,16 +191,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [54](../../../config/options/lcd/sovol-menu-moonraker.cfg#L54) | <code>[menu __main __tune __speed]</code> | Declare this configuration section. |
-| [55](../../../config/options/lcd/sovol-menu-moonraker.cfg#L55) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [56](../../../config/options/lcd/sovol-menu-moonraker.cfg#L56) | <code>name: Speed: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Speed: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
-| [57](../../../config/options/lcd/sovol-menu-moonraker.cfg#L57) | <code>input: {printer.gcode_move.speed_factor}</code> | Read the current editable LCD value: <code>{the feed-rate multiplier}</code>. |
-| [58](../../../config/options/lcd/sovol-menu-moonraker.cfg#L58) | <code>input_min: 0.01</code> | Set the minimum editable value: <code>0.01</code>. |
-| [59](../../../config/options/lcd/sovol-menu-moonraker.cfg#L59) | <code>input_max: 5</code> | Set the maximum editable value: <code>5</code>. |
-| [60](../../../config/options/lcd/sovol-menu-moonraker.cfg#L60) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [61](../../../config/options/lcd/sovol-menu-moonraker.cfg#L61) | <code>realtime: True</code> | Choose whether editing immediately applies changes: <code>True</code>. |
-| [62](../../../config/options/lcd/sovol-menu-moonraker.cfg#L62) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [63](../../../config/options/lcd/sovol-menu-moonraker.cfg#L63) | <code>M220 S{&#x27;%d&#x27; % (menu.input*100)}</code> | Set the movement feed-rate multiplier to S percent; 100 restores normal speed. |
+| [34](../../../config/options/lcd/sovol-menu-moonraker.cfg#L34) | <code>[menu __main __tune __speed]</code> | Declare this configuration section. |
+| [35](../../../config/options/lcd/sovol-menu-moonraker.cfg#L35) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [36](../../../config/options/lcd/sovol-menu-moonraker.cfg#L36) | <code>name: Speed: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Speed: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
+| [37](../../../config/options/lcd/sovol-menu-moonraker.cfg#L37) | <code>input: {printer.gcode_move.speed_factor}</code> | Read the current editable LCD value: <code>{the feed-rate multiplier}</code>. |
+| [38](../../../config/options/lcd/sovol-menu-moonraker.cfg#L38) | <code>input_min: 0.01</code> | Set the minimum editable value: <code>0.01</code>. |
+| [39](../../../config/options/lcd/sovol-menu-moonraker.cfg#L39) | <code>input_max: 5</code> | Set the maximum editable value: <code>5</code>. |
+| [40](../../../config/options/lcd/sovol-menu-moonraker.cfg#L40) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [41](../../../config/options/lcd/sovol-menu-moonraker.cfg#L41) | <code>realtime: True</code> | Choose whether editing immediately applies changes: <code>True</code>. |
+| [42](../../../config/options/lcd/sovol-menu-moonraker.cfg#L42) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [43](../../../config/options/lcd/sovol-menu-moonraker.cfg#L43) | <code>M220 S{&#x27;%d&#x27; % (menu.input*100)}</code> | Set the movement feed-rate multiplier to S percent; 100 restores normal speed. |
 
 <a id="menu-__main-__tune-__flow"></a>
 
@@ -210,16 +210,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [65](../../../config/options/lcd/sovol-menu-moonraker.cfg#L65) | <code>[menu __main __tune __flow]</code> | Declare this configuration section. |
-| [66](../../../config/options/lcd/sovol-menu-moonraker.cfg#L66) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [67](../../../config/options/lcd/sovol-menu-moonraker.cfg#L67) | <code>name: Flow: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Flow: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
-| [68](../../../config/options/lcd/sovol-menu-moonraker.cfg#L68) | <code>input: {printer.gcode_move.extrude_factor}</code> | Read the current editable LCD value: <code>{the extrusion multiplier}</code>. |
-| [69](../../../config/options/lcd/sovol-menu-moonraker.cfg#L69) | <code>input_min: 0.01</code> | Set the minimum editable value: <code>0.01</code>. |
-| [70](../../../config/options/lcd/sovol-menu-moonraker.cfg#L70) | <code>input_max: 2</code> | Set the maximum editable value: <code>2</code>. |
-| [71](../../../config/options/lcd/sovol-menu-moonraker.cfg#L71) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [72](../../../config/options/lcd/sovol-menu-moonraker.cfg#L72) | <code>realtime: True</code> | Choose whether editing immediately applies changes: <code>True</code>. |
-| [73](../../../config/options/lcd/sovol-menu-moonraker.cfg#L73) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [74](../../../config/options/lcd/sovol-menu-moonraker.cfg#L74) | <code>M221 S{&#x27;%d&#x27; % (menu.input*100)}</code> | Set the extrusion multiplier to S percent; 100 restores normal filament flow. |
+| [45](../../../config/options/lcd/sovol-menu-moonraker.cfg#L45) | <code>[menu __main __tune __flow]</code> | Declare this configuration section. |
+| [46](../../../config/options/lcd/sovol-menu-moonraker.cfg#L46) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [47](../../../config/options/lcd/sovol-menu-moonraker.cfg#L47) | <code>name: Flow: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Flow: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
+| [48](../../../config/options/lcd/sovol-menu-moonraker.cfg#L48) | <code>input: {printer.gcode_move.extrude_factor}</code> | Read the current editable LCD value: <code>{the extrusion multiplier}</code>. |
+| [49](../../../config/options/lcd/sovol-menu-moonraker.cfg#L49) | <code>input_min: 0.01</code> | Set the minimum editable value: <code>0.01</code>. |
+| [50](../../../config/options/lcd/sovol-menu-moonraker.cfg#L50) | <code>input_max: 2</code> | Set the maximum editable value: <code>2</code>. |
+| [51](../../../config/options/lcd/sovol-menu-moonraker.cfg#L51) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [52](../../../config/options/lcd/sovol-menu-moonraker.cfg#L52) | <code>realtime: True</code> | Choose whether editing immediately applies changes: <code>True</code>. |
+| [53](../../../config/options/lcd/sovol-menu-moonraker.cfg#L53) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [54](../../../config/options/lcd/sovol-menu-moonraker.cfg#L54) | <code>M221 S{&#x27;%d&#x27; % (menu.input*100)}</code> | Set the extrusion multiplier to S percent; 100 restores normal filament flow. |
 
 <a id="menu-__main-__tune-__fanspeed"></a>
 
@@ -229,15 +229,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [76](../../../config/options/lcd/sovol-menu-moonraker.cfg#L76) | <code>[menu __main __tune __fanspeed]</code> | Declare this configuration section. |
-| [77](../../../config/options/lcd/sovol-menu-moonraker.cfg#L77) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [78](../../../config/options/lcd/sovol-menu-moonraker.cfg#L78) | <code>name: Fan speed: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Fan speed: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
-| [79](../../../config/options/lcd/sovol-menu-moonraker.cfg#L79) | <code>input: {printer[&quot;fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan&quot;].speed}</code>. |
-| [80](../../../config/options/lcd/sovol-menu-moonraker.cfg#L80) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [81](../../../config/options/lcd/sovol-menu-moonraker.cfg#L81) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
-| [82](../../../config/options/lcd/sovol-menu-moonraker.cfg#L82) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [83](../../../config/options/lcd/sovol-menu-moonraker.cfg#L83) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [84](../../../config/options/lcd/sovol-menu-moonraker.cfg#L84) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
+| [56](../../../config/options/lcd/sovol-menu-moonraker.cfg#L56) | <code>[menu __main __tune __fanspeed]</code> | Declare this configuration section. |
+| [57](../../../config/options/lcd/sovol-menu-moonraker.cfg#L57) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [58](../../../config/options/lcd/sovol-menu-moonraker.cfg#L58) | <code>name: Fan speed: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Fan speed: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
+| [59](../../../config/options/lcd/sovol-menu-moonraker.cfg#L59) | <code>input: {printer[&quot;fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan&quot;].speed}</code>. |
+| [60](../../../config/options/lcd/sovol-menu-moonraker.cfg#L60) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [61](../../../config/options/lcd/sovol-menu-moonraker.cfg#L61) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
+| [62](../../../config/options/lcd/sovol-menu-moonraker.cfg#L62) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [63](../../../config/options/lcd/sovol-menu-moonraker.cfg#L63) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [64](../../../config/options/lcd/sovol-menu-moonraker.cfg#L64) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
 
 <a id="menu-__main-__tune-__hotend0_target"></a>
 
@@ -247,16 +247,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [86](../../../config/options/lcd/sovol-menu-moonraker.cfg#L86) | <code>[menu __main __tune __hotend0_target]</code> | Declare this configuration section. |
-| [87](../../../config/options/lcd/sovol-menu-moonraker.cfg#L87) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [88](../../../config/options/lcd/sovol-menu-moonraker.cfg#L88) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code>. |
-| [89](../../../config/options/lcd/sovol-menu-moonraker.cfg#L89) | <code>name: {&quot;Ex0:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder.temperature)}</code> | Set the LCD label: <code>{&quot;Ex0:%3.0f (%4.0f)&quot; % (the value selected on the LCD, the measured nozzle temperature)}</code>. |
-| [90](../../../config/options/lcd/sovol-menu-moonraker.cfg#L90) | <code>input: {printer.extruder.target}</code> | Read the current editable LCD value: <code>{the nozzle temperature target}</code>. |
-| [91](../../../config/options/lcd/sovol-menu-moonraker.cfg#L91) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [92](../../../config/options/lcd/sovol-menu-moonraker.cfg#L92) | <code>input_max: {printer.configfile.config.extruder.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_temp}</code>. |
-| [93](../../../config/options/lcd/sovol-menu-moonraker.cfg#L93) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
-| [94](../../../config/options/lcd/sovol-menu-moonraker.cfg#L94) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [95](../../../config/options/lcd/sovol-menu-moonraker.cfg#L95) | <code>M104 T0 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [66](../../../config/options/lcd/sovol-menu-moonraker.cfg#L66) | <code>[menu __main __tune __hotend0_target]</code> | Declare this configuration section. |
+| [67](../../../config/options/lcd/sovol-menu-moonraker.cfg#L67) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [68](../../../config/options/lcd/sovol-menu-moonraker.cfg#L68) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code>. |
+| [69](../../../config/options/lcd/sovol-menu-moonraker.cfg#L69) | <code>name: {&quot;Ex0:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder.temperature)}</code> | Set the LCD label: <code>{&quot;Ex0:%3.0f (%4.0f)&quot; % (the value selected on the LCD, the measured nozzle temperature)}</code>. |
+| [70](../../../config/options/lcd/sovol-menu-moonraker.cfg#L70) | <code>input: {printer.extruder.target}</code> | Read the current editable LCD value: <code>{the nozzle temperature target}</code>. |
+| [71](../../../config/options/lcd/sovol-menu-moonraker.cfg#L71) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [72](../../../config/options/lcd/sovol-menu-moonraker.cfg#L72) | <code>input_max: {printer.configfile.config.extruder.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_temp}</code>. |
+| [73](../../../config/options/lcd/sovol-menu-moonraker.cfg#L73) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [74](../../../config/options/lcd/sovol-menu-moonraker.cfg#L74) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [75](../../../config/options/lcd/sovol-menu-moonraker.cfg#L75) | <code>M104 T0 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
 
 <a id="menu-__main-__tune-__hotend1_target"></a>
 
@@ -266,16 +266,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [97](../../../config/options/lcd/sovol-menu-moonraker.cfg#L97) | <code>[menu __main __tune __hotend1_target]</code> | Declare this configuration section. |
-| [98](../../../config/options/lcd/sovol-menu-moonraker.cfg#L98) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [99](../../../config/options/lcd/sovol-menu-moonraker.cfg#L99) | <code>enable: {(&#x27;extruder1&#x27; in printer) and (&#x27;extruder1&#x27; in printer.heaters.available_heaters)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder1&#x27; in printer) and (&#x27;extruder1&#x27; in printer.heaters.available_heaters)}</code>. |
-| [100](../../../config/options/lcd/sovol-menu-moonraker.cfg#L100) | <code>name: {&quot;Ex1:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder1.temperature)}</code> | Set the LCD label: <code>{&quot;Ex1:%3.0f (%4.0f)&quot; % (the value selected on the LCD, printer.extruder1.temperature)}</code>. |
-| [101](../../../config/options/lcd/sovol-menu-moonraker.cfg#L101) | <code>input: {printer.extruder1.target}</code> | Read the current editable LCD value: <code>{printer.extruder1.target}</code>. |
-| [102](../../../config/options/lcd/sovol-menu-moonraker.cfg#L102) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [103](../../../config/options/lcd/sovol-menu-moonraker.cfg#L103) | <code>input_max: {printer.configfile.config.extruder1.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder1.max_temp}</code>. |
-| [104](../../../config/options/lcd/sovol-menu-moonraker.cfg#L104) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
-| [105](../../../config/options/lcd/sovol-menu-moonraker.cfg#L105) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [106](../../../config/options/lcd/sovol-menu-moonraker.cfg#L106) | <code>M104 T1 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [77](../../../config/options/lcd/sovol-menu-moonraker.cfg#L77) | <code>[menu __main __tune __hotend1_target]</code> | Declare this configuration section. |
+| [78](../../../config/options/lcd/sovol-menu-moonraker.cfg#L78) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [79](../../../config/options/lcd/sovol-menu-moonraker.cfg#L79) | <code>enable: {(&#x27;extruder1&#x27; in printer) and (&#x27;extruder1&#x27; in printer.heaters.available_heaters)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder1&#x27; in printer) and (&#x27;extruder1&#x27; in printer.heaters.available_heaters)}</code>. |
+| [80](../../../config/options/lcd/sovol-menu-moonraker.cfg#L80) | <code>name: {&quot;Ex1:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder1.temperature)}</code> | Set the LCD label: <code>{&quot;Ex1:%3.0f (%4.0f)&quot; % (the value selected on the LCD, printer.extruder1.temperature)}</code>. |
+| [81](../../../config/options/lcd/sovol-menu-moonraker.cfg#L81) | <code>input: {printer.extruder1.target}</code> | Read the current editable LCD value: <code>{printer.extruder1.target}</code>. |
+| [82](../../../config/options/lcd/sovol-menu-moonraker.cfg#L82) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [83](../../../config/options/lcd/sovol-menu-moonraker.cfg#L83) | <code>input_max: {printer.configfile.config.extruder1.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder1.max_temp}</code>. |
+| [84](../../../config/options/lcd/sovol-menu-moonraker.cfg#L84) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [85](../../../config/options/lcd/sovol-menu-moonraker.cfg#L85) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [86](../../../config/options/lcd/sovol-menu-moonraker.cfg#L86) | <code>M104 T1 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
 
 <a id="menu-__main-__tune-__hotbed_target"></a>
 
@@ -285,16 +285,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [108](../../../config/options/lcd/sovol-menu-moonraker.cfg#L108) | <code>[menu __main __tune __hotbed_target]</code> | Declare this configuration section. |
-| [109](../../../config/options/lcd/sovol-menu-moonraker.cfg#L109) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [110](../../../config/options/lcd/sovol-menu-moonraker.cfg#L110) | <code>enable: {&#x27;heater_bed&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;heater_bed&#x27; in printer}</code>. |
-| [111](../../../config/options/lcd/sovol-menu-moonraker.cfg#L111) | <code>name: {&quot;Bed:%3.0f (%4.0f)&quot; % (menu.input, printer.heater_bed.temperature)}</code> | Set the LCD label: <code>{&quot;Bed:%3.0f (%4.0f)&quot; % (the value selected on the LCD, printer.heater_bed.temperature)}</code>. |
-| [112](../../../config/options/lcd/sovol-menu-moonraker.cfg#L112) | <code>input: {printer.heater_bed.target}</code> | Read the current editable LCD value: <code>{printer.heater_bed.target}</code>. |
-| [113](../../../config/options/lcd/sovol-menu-moonraker.cfg#L113) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [114](../../../config/options/lcd/sovol-menu-moonraker.cfg#L114) | <code>input_max: {printer.configfile.config.heater_bed.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.heater_bed.max_temp}</code>. |
-| [115](../../../config/options/lcd/sovol-menu-moonraker.cfg#L115) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
-| [116](../../../config/options/lcd/sovol-menu-moonraker.cfg#L116) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [117](../../../config/options/lcd/sovol-menu-moonraker.cfg#L117) | <code>M140 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the bed target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [88](../../../config/options/lcd/sovol-menu-moonraker.cfg#L88) | <code>[menu __main __tune __hotbed_target]</code> | Declare this configuration section. |
+| [89](../../../config/options/lcd/sovol-menu-moonraker.cfg#L89) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [90](../../../config/options/lcd/sovol-menu-moonraker.cfg#L90) | <code>enable: {&#x27;heater_bed&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;heater_bed&#x27; in printer}</code>. |
+| [91](../../../config/options/lcd/sovol-menu-moonraker.cfg#L91) | <code>name: {&quot;Bed:%3.0f (%4.0f)&quot; % (menu.input, printer.heater_bed.temperature)}</code> | Set the LCD label: <code>{&quot;Bed:%3.0f (%4.0f)&quot; % (the value selected on the LCD, printer.heater_bed.temperature)}</code>. |
+| [92](../../../config/options/lcd/sovol-menu-moonraker.cfg#L92) | <code>input: {printer.heater_bed.target}</code> | Read the current editable LCD value: <code>{printer.heater_bed.target}</code>. |
+| [93](../../../config/options/lcd/sovol-menu-moonraker.cfg#L93) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [94](../../../config/options/lcd/sovol-menu-moonraker.cfg#L94) | <code>input_max: {printer.configfile.config.heater_bed.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.heater_bed.max_temp}</code>. |
+| [95](../../../config/options/lcd/sovol-menu-moonraker.cfg#L95) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [96](../../../config/options/lcd/sovol-menu-moonraker.cfg#L96) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [97](../../../config/options/lcd/sovol-menu-moonraker.cfg#L97) | <code>M140 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the bed target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
 
 <a id="menu-__main-__tune-__exhaustfanonoff"></a>
 
@@ -304,16 +304,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [119](../../../config/options/lcd/sovol-menu-moonraker.cfg#L119) | <code>[menu __main __tune __exhaustfanonoff]</code> | Declare this configuration section. |
-| [120](../../../config/options/lcd/sovol-menu-moonraker.cfg#L120) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [121](../../../config/options/lcd/sovol-menu-moonraker.cfg#L121) | <code>name: Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code>. |
-| [122](../../../config/options/lcd/sovol-menu-moonraker.cfg#L122) | <code>enable: {&#x27;fan_generic exhaust_fan&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;fan_generic exhaust_fan&#x27; in printer}</code>. |
-| [123](../../../config/options/lcd/sovol-menu-moonraker.cfg#L123) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [124](../../../config/options/lcd/sovol-menu-moonraker.cfg#L124) | <code>{% if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 %}</code> | Start a conditional branch: <code>printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0</code>. Only a true branch emits its commands. |
-| [125](../../../config/options/lcd/sovol-menu-moonraker.cfg#L125) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=0</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
-| [126](../../../config/options/lcd/sovol-menu-moonraker.cfg#L126) | <code>{% else %}</code> | Otherwise use this branch. |
-| [127](../../../config/options/lcd/sovol-menu-moonraker.cfg#L127) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=1</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
-| [128](../../../config/options/lcd/sovol-menu-moonraker.cfg#L128) | <code>{% endif %}</code> | End this conditional block. |
+| [99](../../../config/options/lcd/sovol-menu-moonraker.cfg#L99) | <code>[menu __main __tune __exhaustfanonoff]</code> | Declare this configuration section. |
+| [100](../../../config/options/lcd/sovol-menu-moonraker.cfg#L100) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [101](../../../config/options/lcd/sovol-menu-moonraker.cfg#L101) | <code>name: Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code>. |
+| [102](../../../config/options/lcd/sovol-menu-moonraker.cfg#L102) | <code>enable: {&#x27;fan_generic exhaust_fan&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;fan_generic exhaust_fan&#x27; in printer}</code>. |
+| [103](../../../config/options/lcd/sovol-menu-moonraker.cfg#L103) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [104](../../../config/options/lcd/sovol-menu-moonraker.cfg#L104) | <code>{% if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 %}</code> | Start a conditional branch: <code>printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0</code>. Only a true branch emits its commands. |
+| [105](../../../config/options/lcd/sovol-menu-moonraker.cfg#L105) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=0</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
+| [106](../../../config/options/lcd/sovol-menu-moonraker.cfg#L106) | <code>{% else %}</code> | Otherwise use this branch. |
+| [107](../../../config/options/lcd/sovol-menu-moonraker.cfg#L107) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=1</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
+| [108](../../../config/options/lcd/sovol-menu-moonraker.cfg#L108) | <code>{% endif %}</code> | End this conditional block. |
 
 <a id="menu-__main-__tune-__exhaustfanspeed"></a>
 
@@ -323,15 +323,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [130](../../../config/options/lcd/sovol-menu-moonraker.cfg#L130) | <code>[menu __main __tune __exhaustfanspeed]</code> | Declare this configuration section. |
-| [131](../../../config/options/lcd/sovol-menu-moonraker.cfg#L131) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [132](../../../config/options/lcd/sovol-menu-moonraker.cfg#L132) | <code>name: Exhaust Fan:{&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Exhaust Fan:{&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
-| [133](../../../config/options/lcd/sovol-menu-moonraker.cfg#L133) | <code>input: {printer[&quot;fan_generic exhaust_fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan_generic exhaust_fan&quot;].speed}</code>. |
-| [134](../../../config/options/lcd/sovol-menu-moonraker.cfg#L134) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [135](../../../config/options/lcd/sovol-menu-moonraker.cfg#L135) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
-| [136](../../../config/options/lcd/sovol-menu-moonraker.cfg#L136) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [137](../../../config/options/lcd/sovol-menu-moonraker.cfg#L137) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [138](../../../config/options/lcd/sovol-menu-moonraker.cfg#L138) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED={menu.input}</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
+| [110](../../../config/options/lcd/sovol-menu-moonraker.cfg#L110) | <code>[menu __main __tune __exhaustfanspeed]</code> | Declare this configuration section. |
+| [111](../../../config/options/lcd/sovol-menu-moonraker.cfg#L111) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [112](../../../config/options/lcd/sovol-menu-moonraker.cfg#L112) | <code>name: Exhaust Fan:{&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Exhaust Fan:{&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
+| [113](../../../config/options/lcd/sovol-menu-moonraker.cfg#L113) | <code>input: {printer[&quot;fan_generic exhaust_fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan_generic exhaust_fan&quot;].speed}</code>. |
+| [114](../../../config/options/lcd/sovol-menu-moonraker.cfg#L114) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [115](../../../config/options/lcd/sovol-menu-moonraker.cfg#L115) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
+| [116](../../../config/options/lcd/sovol-menu-moonraker.cfg#L116) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [117](../../../config/options/lcd/sovol-menu-moonraker.cfg#L117) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [118](../../../config/options/lcd/sovol-menu-moonraker.cfg#L118) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED={menu.input}</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
 
 <a id="menu-__main-__tune-__ledonoff"></a>
 
@@ -341,15 +341,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [141](../../../config/options/lcd/sovol-menu-moonraker.cfg#L141) | <code>[menu __main __tune __ledonoff]</code> | Declare this configuration section. |
-| [142](../../../config/options/lcd/sovol-menu-moonraker.cfg#L142) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [143](../../../config/options/lcd/sovol-menu-moonraker.cfg#L143) | <code>enable: {&#x27;led main_led&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;led main_led&#x27; in printer}</code>. |
-| [144](../../../config/options/lcd/sovol-menu-moonraker.cfg#L144) | <code>name: Dim LED:    {&#x27;%3d%s&#x27; % (menu.input*100,&#x27;%&#x27;) if menu.input else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Dim LED: {&#x27;%3d%s&#x27; % (the value selected on the LCD*100,&#x27;%&#x27;) if the value selected on the LCD else &#x27;OFF&#x27;}</code>. |
-| [145](../../../config/options/lcd/sovol-menu-moonraker.cfg#L145) | <code>input: {printer[&#x27;led main_led&#x27;].color_data[0][3]}</code> | Read the current editable LCD value: <code>{printer[&#x27;led main_led&#x27;].color_data[0][3]}</code>. |
-| [146](../../../config/options/lcd/sovol-menu-moonraker.cfg#L146) | <code>input_min: 0.0</code> | Set the minimum editable value: <code>0.0</code>. |
-| [147](../../../config/options/lcd/sovol-menu-moonraker.cfg#L147) | <code>input_max: 1.0</code> | Set the maximum editable value: <code>1.0</code>. |
-| [148](../../../config/options/lcd/sovol-menu-moonraker.cfg#L148) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [149](../../../config/options/lcd/sovol-menu-moonraker.cfg#L149) | <code>gcode: SET_LED LED=main_led WHITE={menu.input}</code> | Begin the command template. Set the named LED channel brightness on a 0..1 scale. WHITE selects the white channel. SYNC=0 applies without synchronizing to queued motion; otherwise synchronization is enabled by default. |
+| [121](../../../config/options/lcd/sovol-menu-moonraker.cfg#L121) | <code>[menu __main __tune __ledonoff]</code> | Declare this configuration section. |
+| [122](../../../config/options/lcd/sovol-menu-moonraker.cfg#L122) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [123](../../../config/options/lcd/sovol-menu-moonraker.cfg#L123) | <code>enable: {&#x27;led main_led&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;led main_led&#x27; in printer}</code>. |
+| [124](../../../config/options/lcd/sovol-menu-moonraker.cfg#L124) | <code>name: Dim LED:    {&#x27;%3d%s&#x27; % (menu.input*100,&#x27;%&#x27;) if menu.input else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Dim LED: {&#x27;%3d%s&#x27; % (the value selected on the LCD*100,&#x27;%&#x27;) if the value selected on the LCD else &#x27;OFF&#x27;}</code>. |
+| [125](../../../config/options/lcd/sovol-menu-moonraker.cfg#L125) | <code>input: {printer[&#x27;led main_led&#x27;].color_data[0][3]}</code> | Read the current editable LCD value: <code>{printer[&#x27;led main_led&#x27;].color_data[0][3]}</code>. |
+| [126](../../../config/options/lcd/sovol-menu-moonraker.cfg#L126) | <code>input_min: 0.0</code> | Set the minimum editable value: <code>0.0</code>. |
+| [127](../../../config/options/lcd/sovol-menu-moonraker.cfg#L127) | <code>input_max: 1.0</code> | Set the maximum editable value: <code>1.0</code>. |
+| [128](../../../config/options/lcd/sovol-menu-moonraker.cfg#L128) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [129](../../../config/options/lcd/sovol-menu-moonraker.cfg#L129) | <code>gcode: SET_LED LED=main_led WHITE={menu.input}</code> | Begin the command template. Set the named LED channel brightness on a 0..1 scale. WHITE selects the white channel. SYNC=0 applies without synchronizing to queued motion; otherwise synchronization is enabled by default. |
 
 <a id="menu-__main-__tune-__save"></a>
 
@@ -359,8 +359,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [151](../../../config/options/lcd/sovol-menu-moonraker.cfg#L151) | <code>[menu __main __tune __save]</code> | Declare this configuration section. |
-| [152](../../../config/options/lcd/sovol-menu-moonraker.cfg#L152) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [131](../../../config/options/lcd/sovol-menu-moonraker.cfg#L131) | <code>[menu __main __tune __save]</code> | Declare this configuration section. |
+| [132](../../../config/options/lcd/sovol-menu-moonraker.cfg#L132) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__tune-__save-__save_config"></a>
 
@@ -370,8 +370,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [154](../../../config/options/lcd/sovol-menu-moonraker.cfg#L154) | <code>[menu __main __tune __save __save_config]</code> | Declare this configuration section. |
-| [155](../../../config/options/lcd/sovol-menu-moonraker.cfg#L155) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [134](../../../config/options/lcd/sovol-menu-moonraker.cfg#L134) | <code>[menu __main __tune __save __save_config]</code> | Declare this configuration section. |
+| [135](../../../config/options/lcd/sovol-menu-moonraker.cfg#L135) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament1"></a>
 
@@ -381,11 +381,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [157](../../../config/options/lcd/sovol-menu-moonraker.cfg#L157) | <code>[menu __main __filament1]</code> | Declare this configuration section. |
-| [158](../../../config/options/lcd/sovol-menu-moonraker.cfg#L158) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [159](../../../config/options/lcd/sovol-menu-moonraker.cfg#L159) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and (printer.print_stats.state == &quot;printing&quot; or printer.print_stats.state == &quot;paused&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and (the print state  equals  &quot;printing&quot; or the print state  equals  &quot;paused&quot;)}</code>. |
-| [160](../../../config/options/lcd/sovol-menu-moonraker.cfg#L160) | <code>name: {&#x27;Runout recovery&#x27; if printer.print_stats.state == &quot;paused&quot; else &#x27;Change filament&#x27;}</code> | Set the LCD label: <code>{&#x27;Runout recovery&#x27; if the print state  equals  &quot;paused&quot; else &#x27;Change filament&#x27;}</code>. |
-| [161](../../../config/options/lcd/sovol-menu-moonraker.cfg#L161) | <code>index: 2</code> | Set the item ordering: <code>2</code>. |
+| [137](../../../config/options/lcd/sovol-menu-moonraker.cfg#L137) | <code>[menu __main __filament1]</code> | Declare this configuration section. |
+| [138](../../../config/options/lcd/sovol-menu-moonraker.cfg#L138) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [139](../../../config/options/lcd/sovol-menu-moonraker.cfg#L139) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and (printer.print_stats.state == &quot;printing&quot; or printer.print_stats.state == &quot;paused&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and (the print state  equals  &quot;printing&quot; or the print state  equals  &quot;paused&quot;)}</code>. |
+| [140](../../../config/options/lcd/sovol-menu-moonraker.cfg#L140) | <code>name: {&#x27;Runout recovery&#x27; if printer.print_stats.state == &quot;paused&quot; else &#x27;Change filament&#x27;}</code> | Set the LCD label: <code>{&#x27;Runout recovery&#x27; if the print state  equals  &quot;paused&quot; else &#x27;Change filament&#x27;}</code>. |
+| [141](../../../config/options/lcd/sovol-menu-moonraker.cfg#L141) | <code>index: 2</code> | Set the item ordering: <code>2</code>. |
 
 <a id="menu-__main-__filament1-__load"></a>
 
@@ -397,13 +397,13 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [163](../../../config/options/lcd/sovol-menu-moonraker.cfg#L163) | <code>[menu __main __filament1 __load]</code> | Declare this configuration section. |
-| [164](../../../config/options/lcd/sovol-menu-moonraker.cfg#L164) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [165](../../../config/options/lcd/sovol-menu-moonraker.cfg#L165) | <code>enable: {printer.print_stats.state == &quot;paused&quot; and not printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;paused&quot; and not the stored state of _FILAMENT_LOAD.active}</code>. |
-| [166](../../../config/options/lcd/sovol-menu-moonraker.cfg#L166) | <code>name: Heat for loading</code> | Set the LCD label: <code>Heat for loading</code>. |
-| [167](../../../config/options/lcd/sovol-menu-moonraker.cfg#L167) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [168](../../../config/options/lcd/sovol-menu-moonraker.cfg#L168) | <code>LOAD_FILAMENT</code> | Run [LOAD_FILAMENT](../../macros/filament.cfg.md#gcode_macro-load_filament), which is evaluated separately when reached. Use its default arguments. |
-| [169](../../../config/options/lcd/sovol-menu-moonraker.cfg#L169) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [143](../../../config/options/lcd/sovol-menu-moonraker.cfg#L143) | <code>[menu __main __filament1 __load]</code> | Declare this configuration section. |
+| [144](../../../config/options/lcd/sovol-menu-moonraker.cfg#L144) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [145](../../../config/options/lcd/sovol-menu-moonraker.cfg#L145) | <code>enable: {printer.print_stats.state == &quot;paused&quot; and not printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;paused&quot; and not the stored state of _FILAMENT_LOAD.active}</code>. |
+| [146](../../../config/options/lcd/sovol-menu-moonraker.cfg#L146) | <code>name: Heat for loading</code> | Set the LCD label: <code>Heat for loading</code>. |
+| [147](../../../config/options/lcd/sovol-menu-moonraker.cfg#L147) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [148](../../../config/options/lcd/sovol-menu-moonraker.cfg#L148) | <code>LOAD_FILAMENT</code> | Run [LOAD_FILAMENT](../../macros/filament.cfg.md#gcode_macro-load_filament), which is evaluated separately when reached. Use its default arguments. |
+| [149](../../../config/options/lcd/sovol-menu-moonraker.cfg#L149) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__filament1-__confirm"></a>
 
@@ -415,13 +415,13 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [171](../../../config/options/lcd/sovol-menu-moonraker.cfg#L171) | <code>[menu __main __filament1 __confirm]</code> | Declare this configuration section. |
-| [172](../../../config/options/lcd/sovol-menu-moonraker.cfg#L172) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [173](../../../config/options/lcd/sovol-menu-moonraker.cfg#L173) | <code>enable: {printer.print_stats.state == &quot;paused&quot; and printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;paused&quot; and the stored state of _FILAMENT_LOAD.active}</code>. |
-| [174](../../../config/options/lcd/sovol-menu-moonraker.cfg#L174) | <code>name: Confirm loaded</code> | Set the LCD label: <code>Confirm loaded</code>. |
-| [175](../../../config/options/lcd/sovol-menu-moonraker.cfg#L175) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [176](../../../config/options/lcd/sovol-menu-moonraker.cfg#L176) | <code>CONFIRM_FILAMENT_LOADED</code> | Run [CONFIRM_FILAMENT_LOADED](../../macros/filament.cfg.md#gcode_macro-confirm_filament_loaded), which is evaluated separately when reached. Use its default arguments. |
-| [177](../../../config/options/lcd/sovol-menu-moonraker.cfg#L177) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [151](../../../config/options/lcd/sovol-menu-moonraker.cfg#L151) | <code>[menu __main __filament1 __confirm]</code> | Declare this configuration section. |
+| [152](../../../config/options/lcd/sovol-menu-moonraker.cfg#L152) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [153](../../../config/options/lcd/sovol-menu-moonraker.cfg#L153) | <code>enable: {printer.print_stats.state == &quot;paused&quot; and printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;paused&quot; and the stored state of _FILAMENT_LOAD.active}</code>. |
+| [154](../../../config/options/lcd/sovol-menu-moonraker.cfg#L154) | <code>name: Confirm loaded</code> | Set the LCD label: <code>Confirm loaded</code>. |
+| [155](../../../config/options/lcd/sovol-menu-moonraker.cfg#L155) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [156](../../../config/options/lcd/sovol-menu-moonraker.cfg#L156) | <code>CONFIRM_FILAMENT_LOADED</code> | Run [CONFIRM_FILAMENT_LOADED](../../macros/filament.cfg.md#gcode_macro-confirm_filament_loaded), which is evaluated separately when reached. Use its default arguments. |
+| [157](../../../config/options/lcd/sovol-menu-moonraker.cfg#L157) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__filament1-__cancel_load"></a>
 
@@ -433,13 +433,13 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [179](../../../config/options/lcd/sovol-menu-moonraker.cfg#L179) | <code>[menu __main __filament1 __cancel_load]</code> | Declare this configuration section. |
-| [180](../../../config/options/lcd/sovol-menu-moonraker.cfg#L180) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [181](../../../config/options/lcd/sovol-menu-moonraker.cfg#L181) | <code>enable: {printer.print_stats.state == &quot;paused&quot; and printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;paused&quot; and the stored state of _FILAMENT_LOAD.active}</code>. |
-| [182](../../../config/options/lcd/sovol-menu-moonraker.cfg#L182) | <code>name: Cancel loading</code> | Set the LCD label: <code>Cancel loading</code>. |
-| [183](../../../config/options/lcd/sovol-menu-moonraker.cfg#L183) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [184](../../../config/options/lcd/sovol-menu-moonraker.cfg#L184) | <code>CANCEL_FILAMENT_LOAD</code> | Run [CANCEL_FILAMENT_LOAD](../../macros/filament.cfg.md#gcode_macro-cancel_filament_load), which is evaluated separately when reached. Use its default arguments. |
-| [185](../../../config/options/lcd/sovol-menu-moonraker.cfg#L185) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [159](../../../config/options/lcd/sovol-menu-moonraker.cfg#L159) | <code>[menu __main __filament1 __cancel_load]</code> | Declare this configuration section. |
+| [160](../../../config/options/lcd/sovol-menu-moonraker.cfg#L160) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [161](../../../config/options/lcd/sovol-menu-moonraker.cfg#L161) | <code>enable: {printer.print_stats.state == &quot;paused&quot; and printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;paused&quot; and the stored state of _FILAMENT_LOAD.active}</code>. |
+| [162](../../../config/options/lcd/sovol-menu-moonraker.cfg#L162) | <code>name: Cancel loading</code> | Set the LCD label: <code>Cancel loading</code>. |
+| [163](../../../config/options/lcd/sovol-menu-moonraker.cfg#L163) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [164](../../../config/options/lcd/sovol-menu-moonraker.cfg#L164) | <code>CANCEL_FILAMENT_LOAD</code> | Run [CANCEL_FILAMENT_LOAD](../../macros/filament.cfg.md#gcode_macro-cancel_filament_load), which is evaluated separately when reached. Use its default arguments. |
+| [165](../../../config/options/lcd/sovol-menu-moonraker.cfg#L165) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__filament1-__unload"></a>
 
@@ -451,13 +451,13 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [187](../../../config/options/lcd/sovol-menu-moonraker.cfg#L187) | <code>[menu __main __filament1 __unload]</code> | Declare this configuration section. |
-| [188](../../../config/options/lcd/sovol-menu-moonraker.cfg#L188) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [189](../../../config/options/lcd/sovol-menu-moonraker.cfg#L189) | <code>enable: {printer.print_stats.state == &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;printing&quot;}</code>. |
-| [190](../../../config/options/lcd/sovol-menu-moonraker.cfg#L190) | <code>name: Start filament change</code> | Set the LCD label: <code>Start filament change</code>. |
-| [191](../../../config/options/lcd/sovol-menu-moonraker.cfg#L191) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [192](../../../config/options/lcd/sovol-menu-moonraker.cfg#L192) | <code>M600</code> | Run [M600](../../macros/client.cfg.md#gcode_macro-m600), which is evaluated separately when reached. Use its default arguments. |
-| [193](../../../config/options/lcd/sovol-menu-moonraker.cfg#L193) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [167](../../../config/options/lcd/sovol-menu-moonraker.cfg#L167) | <code>[menu __main __filament1 __unload]</code> | Declare this configuration section. |
+| [168](../../../config/options/lcd/sovol-menu-moonraker.cfg#L168) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [169](../../../config/options/lcd/sovol-menu-moonraker.cfg#L169) | <code>enable: {printer.print_stats.state == &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the print state  equals  &quot;printing&quot;}</code>. |
+| [170](../../../config/options/lcd/sovol-menu-moonraker.cfg#L170) | <code>name: Start filament change</code> | Set the LCD label: <code>Start filament change</code>. |
+| [171](../../../config/options/lcd/sovol-menu-moonraker.cfg#L171) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [172](../../../config/options/lcd/sovol-menu-moonraker.cfg#L172) | <code>M600</code> | Run [M600](../../macros/client.cfg.md#gcode_macro-m600), which is evaluated separately when reached. Use its default arguments. |
+| [173](../../../config/options/lcd/sovol-menu-moonraker.cfg#L173) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__resume"></a>
 
@@ -469,19 +469,19 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [195](../../../config/options/lcd/sovol-menu-moonraker.cfg#L195) | <code>[menu __main __resume]</code> | Declare this configuration section. |
-| [196](../../../config/options/lcd/sovol-menu-moonraker.cfg#L196) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [197](../../../config/options/lcd/sovol-menu-moonraker.cfg#L197) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and printer.print_stats.state == &quot;paused&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and the print state  equals  &quot;paused&quot;}</code>. |
-| [198](../../../config/options/lcd/sovol-menu-moonraker.cfg#L198) | <code>name: Resume printing</code> | Set the LCD label: <code>Resume printing</code>. |
-| [199](../../../config/options/lcd/sovol-menu-moonraker.cfg#L199) | <code>index: 3</code> | Set the item ordering: <code>3</code>. |
-| [200](../../../config/options/lcd/sovol-menu-moonraker.cfg#L200) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [201](../../../config/options/lcd/sovol-menu-moonraker.cfg#L201) | <code>M117 Resume printing</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [202](../../../config/options/lcd/sovol-menu-moonraker.cfg#L202) | <code>{% if &quot;pause_resume&quot; in printer %}</code> | Start a conditional branch: <code>&quot;pause_resume&quot; in printer</code>. Only a true branch emits its commands. |
-| [203](../../../config/options/lcd/sovol-menu-moonraker.cfg#L203) | <code>RESUME</code> | Run [RESUME](../../mainsail.cfg.md#gcode_macro-resume), which is evaluated separately when reached. Use its default arguments. |
-| [204](../../../config/options/lcd/sovol-menu-moonraker.cfg#L204) | <code>{% else %}</code> | Otherwise use this branch. |
-| [205](../../../config/options/lcd/sovol-menu-moonraker.cfg#L205) | <code>M24</code> | Start or resume virtual SD printing through the native SD command. |
-| [206](../../../config/options/lcd/sovol-menu-moonraker.cfg#L206) | <code>{% endif %}</code> | End this conditional block. |
-| [207](../../../config/options/lcd/sovol-menu-moonraker.cfg#L207) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [175](../../../config/options/lcd/sovol-menu-moonraker.cfg#L175) | <code>[menu __main __resume]</code> | Declare this configuration section. |
+| [176](../../../config/options/lcd/sovol-menu-moonraker.cfg#L176) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [177](../../../config/options/lcd/sovol-menu-moonraker.cfg#L177) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and printer.print_stats.state == &quot;paused&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and the print state  equals  &quot;paused&quot;}</code>. |
+| [178](../../../config/options/lcd/sovol-menu-moonraker.cfg#L178) | <code>name: Resume printing</code> | Set the LCD label: <code>Resume printing</code>. |
+| [179](../../../config/options/lcd/sovol-menu-moonraker.cfg#L179) | <code>index: 3</code> | Set the item ordering: <code>3</code>. |
+| [180](../../../config/options/lcd/sovol-menu-moonraker.cfg#L180) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [181](../../../config/options/lcd/sovol-menu-moonraker.cfg#L181) | <code>M117 Resume printing</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [182](../../../config/options/lcd/sovol-menu-moonraker.cfg#L182) | <code>{% if &quot;pause_resume&quot; in printer %}</code> | Start a conditional branch: <code>&quot;pause_resume&quot; in printer</code>. Only a true branch emits its commands. |
+| [183](../../../config/options/lcd/sovol-menu-moonraker.cfg#L183) | <code>RESUME</code> | Run [RESUME](../../mainsail.cfg.md#gcode_macro-resume), which is evaluated separately when reached. Use its default arguments. |
+| [184](../../../config/options/lcd/sovol-menu-moonraker.cfg#L184) | <code>{% else %}</code> | Otherwise use this branch. |
+| [185](../../../config/options/lcd/sovol-menu-moonraker.cfg#L185) | <code>M24</code> | Start or resume virtual SD printing through the native SD command. |
+| [186](../../../config/options/lcd/sovol-menu-moonraker.cfg#L186) | <code>{% endif %}</code> | End this conditional block. |
+| [187](../../../config/options/lcd/sovol-menu-moonraker.cfg#L187) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__pause"></a>
 
@@ -493,19 +493,19 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [209](../../../config/options/lcd/sovol-menu-moonraker.cfg#L209) | <code>[menu __main __pause]</code> | Declare this configuration section. |
-| [210](../../../config/options/lcd/sovol-menu-moonraker.cfg#L210) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [211](../../../config/options/lcd/sovol-menu-moonraker.cfg#L211) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and printer.print_stats.state == &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and the print state  equals  &quot;printing&quot;}</code>. |
-| [212](../../../config/options/lcd/sovol-menu-moonraker.cfg#L212) | <code>name: Pause printing</code> | Set the LCD label: <code>Pause printing</code>. |
-| [213](../../../config/options/lcd/sovol-menu-moonraker.cfg#L213) | <code>index: 3</code> | Set the item ordering: <code>3</code>. |
-| [214](../../../config/options/lcd/sovol-menu-moonraker.cfg#L214) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [215](../../../config/options/lcd/sovol-menu-moonraker.cfg#L215) | <code>M117 Pause printing</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [216](../../../config/options/lcd/sovol-menu-moonraker.cfg#L216) | <code>{% if &quot;pause_resume&quot; in printer %}</code> | Start a conditional branch: <code>&quot;pause_resume&quot; in printer</code>. Only a true branch emits its commands. |
-| [217](../../../config/options/lcd/sovol-menu-moonraker.cfg#L217) | <code>PAUSE</code> | Run [PAUSE](../../mainsail.cfg.md#gcode_macro-pause), which is evaluated separately when reached. Use its default arguments. |
-| [218](../../../config/options/lcd/sovol-menu-moonraker.cfg#L218) | <code>{% else %}</code> | Otherwise use this branch. |
-| [219](../../../config/options/lcd/sovol-menu-moonraker.cfg#L219) | <code>M25</code> | Pause virtual SD printing through the native SD command. |
-| [220](../../../config/options/lcd/sovol-menu-moonraker.cfg#L220) | <code>{% endif %}</code> | End this conditional block. |
-| [221](../../../config/options/lcd/sovol-menu-moonraker.cfg#L221) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [189](../../../config/options/lcd/sovol-menu-moonraker.cfg#L189) | <code>[menu __main __pause]</code> | Declare this configuration section. |
+| [190](../../../config/options/lcd/sovol-menu-moonraker.cfg#L190) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [191](../../../config/options/lcd/sovol-menu-moonraker.cfg#L191) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and printer.print_stats.state == &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and the print state  equals  &quot;printing&quot;}</code>. |
+| [192](../../../config/options/lcd/sovol-menu-moonraker.cfg#L192) | <code>name: Pause printing</code> | Set the LCD label: <code>Pause printing</code>. |
+| [193](../../../config/options/lcd/sovol-menu-moonraker.cfg#L193) | <code>index: 3</code> | Set the item ordering: <code>3</code>. |
+| [194](../../../config/options/lcd/sovol-menu-moonraker.cfg#L194) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [195](../../../config/options/lcd/sovol-menu-moonraker.cfg#L195) | <code>M117 Pause printing</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [196](../../../config/options/lcd/sovol-menu-moonraker.cfg#L196) | <code>{% if &quot;pause_resume&quot; in printer %}</code> | Start a conditional branch: <code>&quot;pause_resume&quot; in printer</code>. Only a true branch emits its commands. |
+| [197](../../../config/options/lcd/sovol-menu-moonraker.cfg#L197) | <code>PAUSE</code> | Run [PAUSE](../../mainsail.cfg.md#gcode_macro-pause), which is evaluated separately when reached. Use its default arguments. |
+| [198](../../../config/options/lcd/sovol-menu-moonraker.cfg#L198) | <code>{% else %}</code> | Otherwise use this branch. |
+| [199](../../../config/options/lcd/sovol-menu-moonraker.cfg#L199) | <code>M25</code> | Pause virtual SD printing through the native SD command. |
+| [200](../../../config/options/lcd/sovol-menu-moonraker.cfg#L200) | <code>{% endif %}</code> | End this conditional block. |
+| [201](../../../config/options/lcd/sovol-menu-moonraker.cfg#L201) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__cancel"></a>
 
@@ -517,29 +517,29 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [223](../../../config/options/lcd/sovol-menu-moonraker.cfg#L223) | <code>[menu __main __cancel]</code> | Declare this configuration section. |
-| [224](../../../config/options/lcd/sovol-menu-moonraker.cfg#L224) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [225](../../../config/options/lcd/sovol-menu-moonraker.cfg#L225) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and (printer.print_stats.state == &quot;printing&quot; or printer.print_stats.state == &quot;paused&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and (the print state  equals  &quot;printing&quot; or the print state  equals  &quot;paused&quot;)}</code>. |
-| [226](../../../config/options/lcd/sovol-menu-moonraker.cfg#L226) | <code>name: Cancel printing</code> | Set the LCD label: <code>Cancel printing</code>. |
-| [227](../../../config/options/lcd/sovol-menu-moonraker.cfg#L227) | <code>index: 3</code> | Set the item ordering: <code>3</code>. |
-| [228](../../../config/options/lcd/sovol-menu-moonraker.cfg#L228) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [229](../../../config/options/lcd/sovol-menu-moonraker.cfg#L229) | <code># clear_last_file</code> | Comment only; Klipper does not execute this line. |
-| [230](../../../config/options/lcd/sovol-menu-moonraker.cfg#L230) | <code># SAVE_VARIABLE VARIABLE=was_interrupted VALUE=False</code> | Comment only; Klipper does not execute this line. |
-| [231](../../../config/options/lcd/sovol-menu-moonraker.cfg#L231) | <code># RUN_SHELL_COMMAND CMD=clear_plr</code> | Comment only; Klipper does not execute this line. |
-| [232](../../../config/options/lcd/sovol-menu-moonraker.cfg#L232) | <code>{% if &#x27;pause_resume&#x27; in printer %}</code> | Start a conditional branch: <code>&#x27;pause_resume&#x27; in printer</code>. Only a true branch emits its commands. |
-| [233](../../../config/options/lcd/sovol-menu-moonraker.cfg#L233) | <code>CANCEL_PRINT</code> | Run [CANCEL_PRINT](../../mainsail.cfg.md#gcode_macro-cancel_print), which is evaluated separately when reached. Use its default arguments. |
-| [234](../../../config/options/lcd/sovol-menu-moonraker.cfg#L234) | <code>{% else %}</code> | Otherwise use this branch. |
-| [235](../../../config/options/lcd/sovol-menu-moonraker.cfg#L235) | <code>M25</code> | Pause virtual SD printing through the native SD command. |
-| [236](../../../config/options/lcd/sovol-menu-moonraker.cfg#L236) | <code>M27</code> | Report virtual SD printing status. |
-| [237](../../../config/options/lcd/sovol-menu-moonraker.cfg#L237) | <code>M26 S0</code> | Set the virtual SD file position using S; zero rewinds to the beginning. |
-| [238](../../../config/options/lcd/sovol-menu-moonraker.cfg#L238) | <code>TURN_OFF_HEATERS</code> | Set all heater targets to zero. Actual temperatures fall gradually; motors and fans are not disabled by this command. |
-| [239](../../../config/options/lcd/sovol-menu-moonraker.cfg#L239) | <code>{% if printer.toolhead.position.z &lt;= printer.toolhead.axis_maximum.z - 5 %}</code> | Start a conditional branch: <code>printer.toolhead.position.z  is at most  the maximum axis positions.z - 5</code>. Only a true branch emits its commands. |
-| [240](../../../config/options/lcd/sovol-menu-moonraker.cfg#L240) | <code>G91</code> | Use relative coordinates for following moves; in Klipper this also makes E moves relative while G91 remains active. |
-| [241](../../../config/options/lcd/sovol-menu-moonraker.cfg#L241) | <code>G0 Z5 F1000</code> | command Z=<code>5</code> mm; use feed rate 16.6667 mm/s (1000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [242](../../../config/options/lcd/sovol-menu-moonraker.cfg#L242) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [243](../../../config/options/lcd/sovol-menu-moonraker.cfg#L243) | <code>{% endif %}</code> | End this conditional block. |
-| [244](../../../config/options/lcd/sovol-menu-moonraker.cfg#L244) | <code>{% endif %}</code> | End this conditional block. |
-| [245](../../../config/options/lcd/sovol-menu-moonraker.cfg#L245) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [203](../../../config/options/lcd/sovol-menu-moonraker.cfg#L203) | <code>[menu __main __cancel]</code> | Declare this configuration section. |
+| [204](../../../config/options/lcd/sovol-menu-moonraker.cfg#L204) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [205](../../../config/options/lcd/sovol-menu-moonraker.cfg#L205) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and (printer.print_stats.state == &quot;printing&quot; or printer.print_stats.state == &quot;paused&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and (the print state  equals  &quot;printing&quot; or the print state  equals  &quot;paused&quot;)}</code>. |
+| [206](../../../config/options/lcd/sovol-menu-moonraker.cfg#L206) | <code>name: Cancel printing</code> | Set the LCD label: <code>Cancel printing</code>. |
+| [207](../../../config/options/lcd/sovol-menu-moonraker.cfg#L207) | <code>index: 3</code> | Set the item ordering: <code>3</code>. |
+| [208](../../../config/options/lcd/sovol-menu-moonraker.cfg#L208) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [209](../../../config/options/lcd/sovol-menu-moonraker.cfg#L209) | <code># clear_last_file</code> | Comment only; Klipper does not execute this line. |
+| [210](../../../config/options/lcd/sovol-menu-moonraker.cfg#L210) | <code># SAVE_VARIABLE VARIABLE=was_interrupted VALUE=False</code> | Comment only; Klipper does not execute this line. |
+| [211](../../../config/options/lcd/sovol-menu-moonraker.cfg#L211) | <code># RUN_SHELL_COMMAND CMD=clear_plr</code> | Comment only; Klipper does not execute this line. |
+| [212](../../../config/options/lcd/sovol-menu-moonraker.cfg#L212) | <code>{% if &#x27;pause_resume&#x27; in printer %}</code> | Start a conditional branch: <code>&#x27;pause_resume&#x27; in printer</code>. Only a true branch emits its commands. |
+| [213](../../../config/options/lcd/sovol-menu-moonraker.cfg#L213) | <code>CANCEL_PRINT</code> | Run [CANCEL_PRINT](../../mainsail.cfg.md#gcode_macro-cancel_print), which is evaluated separately when reached. Use its default arguments. |
+| [214](../../../config/options/lcd/sovol-menu-moonraker.cfg#L214) | <code>{% else %}</code> | Otherwise use this branch. |
+| [215](../../../config/options/lcd/sovol-menu-moonraker.cfg#L215) | <code>M25</code> | Pause virtual SD printing through the native SD command. |
+| [216](../../../config/options/lcd/sovol-menu-moonraker.cfg#L216) | <code>M27</code> | Report virtual SD printing status. |
+| [217](../../../config/options/lcd/sovol-menu-moonraker.cfg#L217) | <code>M26 S0</code> | Set the virtual SD file position using S; zero rewinds to the beginning. |
+| [218](../../../config/options/lcd/sovol-menu-moonraker.cfg#L218) | <code>TURN_OFF_HEATERS</code> | Set all heater targets to zero. Actual temperatures fall gradually; motors and fans are not disabled by this command. |
+| [219](../../../config/options/lcd/sovol-menu-moonraker.cfg#L219) | <code>{% if printer.toolhead.position.z &lt;= printer.toolhead.axis_maximum.z - 5 %}</code> | Start a conditional branch: <code>printer.toolhead.position.z  is at most  the maximum axis positions.z - 5</code>. Only a true branch emits its commands. |
+| [220](../../../config/options/lcd/sovol-menu-moonraker.cfg#L220) | <code>G91</code> | Use relative coordinates for following moves; in Klipper this also makes E moves relative while G91 remains active. |
+| [221](../../../config/options/lcd/sovol-menu-moonraker.cfg#L221) | <code>G0 Z5 F1000</code> | command Z=<code>5</code> mm; use feed rate 16.6667 mm/s (1000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [222](../../../config/options/lcd/sovol-menu-moonraker.cfg#L222) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [223](../../../config/options/lcd/sovol-menu-moonraker.cfg#L223) | <code>{% endif %}</code> | End this conditional block. |
+| [224](../../../config/options/lcd/sovol-menu-moonraker.cfg#L224) | <code>{% endif %}</code> | End this conditional block. |
+| [225](../../../config/options/lcd/sovol-menu-moonraker.cfg#L225) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__prepare"></a>
 
@@ -549,8 +549,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [248](../../../config/options/lcd/sovol-menu-moonraker.cfg#L248) | <code>[menu __main __prepare]</code> | Declare this configuration section. |
-| [249](../../../config/options/lcd/sovol-menu-moonraker.cfg#L249) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [228](../../../config/options/lcd/sovol-menu-moonraker.cfg#L228) | <code>[menu __main __prepare]</code> | Declare this configuration section. |
+| [229](../../../config/options/lcd/sovol-menu-moonraker.cfg#L229) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__prepare-__home"></a>
 
@@ -562,10 +562,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [251](../../../config/options/lcd/sovol-menu-moonraker.cfg#L251) | <code>[menu __main __prepare __home]</code> | Declare this configuration section. |
-| [252](../../../config/options/lcd/sovol-menu-moonraker.cfg#L252) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [253](../../../config/options/lcd/sovol-menu-moonraker.cfg#L253) | <code>name: Auto Home</code> | Set the LCD label: <code>Auto Home</code>. |
-| [254](../../../config/options/lcd/sovol-menu-moonraker.cfg#L254) | <code>gcode: HOME_ALL</code> | Begin the command template. Run [HOME_ALL](../../macros/homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
+| [231](../../../config/options/lcd/sovol-menu-moonraker.cfg#L231) | <code>[menu __main __prepare __home]</code> | Declare this configuration section. |
+| [232](../../../config/options/lcd/sovol-menu-moonraker.cfg#L232) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [233](../../../config/options/lcd/sovol-menu-moonraker.cfg#L233) | <code>name: Auto Home</code> | Set the LCD label: <code>Auto Home</code>. |
+| [234](../../../config/options/lcd/sovol-menu-moonraker.cfg#L234) | <code>gcode: HOME_ALL</code> | Begin the command template. Run [HOME_ALL](../../macros/homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
 
 <a id="menu-__main-__prepare-__preheat_pla"></a>
 
@@ -575,15 +575,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [256](../../../config/options/lcd/sovol-menu-moonraker.cfg#L256) | <code>[menu __main __prepare __preheat_pla]</code> | Declare this configuration section. |
-| [257](../../../config/options/lcd/sovol-menu-moonraker.cfg#L257) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [258](../../../config/options/lcd/sovol-menu-moonraker.cfg#L258) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
-| [259](../../../config/options/lcd/sovol-menu-moonraker.cfg#L259) | <code>name: Preheat PLA</code> | Set the LCD label: <code>Preheat PLA</code>. |
-| [260](../../../config/options/lcd/sovol-menu-moonraker.cfg#L260) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [261](../../../config/options/lcd/sovol-menu-moonraker.cfg#L261) | <code>M117 Preheat PLA</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [262](../../../config/options/lcd/sovol-menu-moonraker.cfg#L262) | <code>M140 S65</code> | Set the bed target using <code>65</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [263](../../../config/options/lcd/sovol-menu-moonraker.cfg#L263) | <code>M104 S200</code> | Set the nozzle target using <code>200</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [264](../../../config/options/lcd/sovol-menu-moonraker.cfg#L264) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
+| [236](../../../config/options/lcd/sovol-menu-moonraker.cfg#L236) | <code>[menu __main __prepare __preheat_pla]</code> | Declare this configuration section. |
+| [237](../../../config/options/lcd/sovol-menu-moonraker.cfg#L237) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [238](../../../config/options/lcd/sovol-menu-moonraker.cfg#L238) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
+| [239](../../../config/options/lcd/sovol-menu-moonraker.cfg#L239) | <code>name: Preheat PLA</code> | Set the LCD label: <code>Preheat PLA</code>. |
+| [240](../../../config/options/lcd/sovol-menu-moonraker.cfg#L240) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [241](../../../config/options/lcd/sovol-menu-moonraker.cfg#L241) | <code>M117 Preheat PLA</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [242](../../../config/options/lcd/sovol-menu-moonraker.cfg#L242) | <code>M140 S65</code> | Set the bed target using <code>65</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [243](../../../config/options/lcd/sovol-menu-moonraker.cfg#L243) | <code>M104 S200</code> | Set the nozzle target using <code>200</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [244](../../../config/options/lcd/sovol-menu-moonraker.cfg#L244) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
 
 <a id="menu-__main-__prepare-__preheat_petg"></a>
 
@@ -593,15 +593,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [266](../../../config/options/lcd/sovol-menu-moonraker.cfg#L266) | <code>[menu __main __prepare __preheat_petg]</code> | Declare this configuration section. |
-| [267](../../../config/options/lcd/sovol-menu-moonraker.cfg#L267) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [268](../../../config/options/lcd/sovol-menu-moonraker.cfg#L268) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
-| [269](../../../config/options/lcd/sovol-menu-moonraker.cfg#L269) | <code>name: Preheat PETG</code> | Set the LCD label: <code>Preheat PETG</code>. |
-| [270](../../../config/options/lcd/sovol-menu-moonraker.cfg#L270) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [271](../../../config/options/lcd/sovol-menu-moonraker.cfg#L271) | <code>M117 Preheat PETG</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [272](../../../config/options/lcd/sovol-menu-moonraker.cfg#L272) | <code>M140 S75</code> | Set the bed target using <code>75</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [273](../../../config/options/lcd/sovol-menu-moonraker.cfg#L273) | <code>M104 S230</code> | Set the nozzle target using <code>230</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [274](../../../config/options/lcd/sovol-menu-moonraker.cfg#L274) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
+| [246](../../../config/options/lcd/sovol-menu-moonraker.cfg#L246) | <code>[menu __main __prepare __preheat_petg]</code> | Declare this configuration section. |
+| [247](../../../config/options/lcd/sovol-menu-moonraker.cfg#L247) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [248](../../../config/options/lcd/sovol-menu-moonraker.cfg#L248) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
+| [249](../../../config/options/lcd/sovol-menu-moonraker.cfg#L249) | <code>name: Preheat PETG</code> | Set the LCD label: <code>Preheat PETG</code>. |
+| [250](../../../config/options/lcd/sovol-menu-moonraker.cfg#L250) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [251](../../../config/options/lcd/sovol-menu-moonraker.cfg#L251) | <code>M117 Preheat PETG</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [252](../../../config/options/lcd/sovol-menu-moonraker.cfg#L252) | <code>M140 S75</code> | Set the bed target using <code>75</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [253](../../../config/options/lcd/sovol-menu-moonraker.cfg#L253) | <code>M104 S230</code> | Set the nozzle target using <code>230</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [254](../../../config/options/lcd/sovol-menu-moonraker.cfg#L254) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
 
 <a id="menu-__main-__prepare-__preheat_abs"></a>
 
@@ -611,15 +611,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [276](../../../config/options/lcd/sovol-menu-moonraker.cfg#L276) | <code>[menu __main __prepare __preheat_abs]</code> | Declare this configuration section. |
-| [277](../../../config/options/lcd/sovol-menu-moonraker.cfg#L277) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [278](../../../config/options/lcd/sovol-menu-moonraker.cfg#L278) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
-| [279](../../../config/options/lcd/sovol-menu-moonraker.cfg#L279) | <code>name: Preheat ABS</code> | Set the LCD label: <code>Preheat ABS</code>. |
-| [280](../../../config/options/lcd/sovol-menu-moonraker.cfg#L280) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [281](../../../config/options/lcd/sovol-menu-moonraker.cfg#L281) | <code>M117 Preheat ABS</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [282](../../../config/options/lcd/sovol-menu-moonraker.cfg#L282) | <code>M140 S90</code> | Set the bed target using <code>90</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [283](../../../config/options/lcd/sovol-menu-moonraker.cfg#L283) | <code>M104 S260</code> | Set the nozzle target using <code>260</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [284](../../../config/options/lcd/sovol-menu-moonraker.cfg#L284) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
+| [256](../../../config/options/lcd/sovol-menu-moonraker.cfg#L256) | <code>[menu __main __prepare __preheat_abs]</code> | Declare this configuration section. |
+| [257](../../../config/options/lcd/sovol-menu-moonraker.cfg#L257) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [258](../../../config/options/lcd/sovol-menu-moonraker.cfg#L258) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
+| [259](../../../config/options/lcd/sovol-menu-moonraker.cfg#L259) | <code>name: Preheat ABS</code> | Set the LCD label: <code>Preheat ABS</code>. |
+| [260](../../../config/options/lcd/sovol-menu-moonraker.cfg#L260) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [261](../../../config/options/lcd/sovol-menu-moonraker.cfg#L261) | <code>M117 Preheat ABS</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [262](../../../config/options/lcd/sovol-menu-moonraker.cfg#L262) | <code>M140 S90</code> | Set the bed target using <code>90</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [263](../../../config/options/lcd/sovol-menu-moonraker.cfg#L263) | <code>M104 S260</code> | Set the nozzle target using <code>260</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [264](../../../config/options/lcd/sovol-menu-moonraker.cfg#L264) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
 
 <a id="menu-__main-__prepare-__cooldown"></a>
 
@@ -629,15 +629,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [286](../../../config/options/lcd/sovol-menu-moonraker.cfg#L286) | <code>[menu __main __prepare __cooldown]</code> | Declare this configuration section. |
-| [287](../../../config/options/lcd/sovol-menu-moonraker.cfg#L287) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [288](../../../config/options/lcd/sovol-menu-moonraker.cfg#L288) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
-| [289](../../../config/options/lcd/sovol-menu-moonraker.cfg#L289) | <code>name: Cooldown</code> | Set the LCD label: <code>Cooldown</code>. |
-| [290](../../../config/options/lcd/sovol-menu-moonraker.cfg#L290) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [291](../../../config/options/lcd/sovol-menu-moonraker.cfg#L291) | <code>M117 Cooldown</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [292](../../../config/options/lcd/sovol-menu-moonraker.cfg#L292) | <code>M104 S0</code> | Set the nozzle target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [293](../../../config/options/lcd/sovol-menu-moonraker.cfg#L293) | <code>M140 S0</code> | Set the bed target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [294](../../../config/options/lcd/sovol-menu-moonraker.cfg#L294) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
+| [266](../../../config/options/lcd/sovol-menu-moonraker.cfg#L266) | <code>[menu __main __prepare __cooldown]</code> | Declare this configuration section. |
+| [267](../../../config/options/lcd/sovol-menu-moonraker.cfg#L267) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [268](../../../config/options/lcd/sovol-menu-moonraker.cfg#L268) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;heater_bed&#x27; in printer)}</code>. |
+| [269](../../../config/options/lcd/sovol-menu-moonraker.cfg#L269) | <code>name: Cooldown</code> | Set the LCD label: <code>Cooldown</code>. |
+| [270](../../../config/options/lcd/sovol-menu-moonraker.cfg#L270) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [271](../../../config/options/lcd/sovol-menu-moonraker.cfg#L271) | <code>M117 Cooldown</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [272](../../../config/options/lcd/sovol-menu-moonraker.cfg#L272) | <code>M104 S0</code> | Set the nozzle target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [273](../../../config/options/lcd/sovol-menu-moonraker.cfg#L273) | <code>M140 S0</code> | Set the bed target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [274](../../../config/options/lcd/sovol-menu-moonraker.cfg#L274) | <code>{menu.back()}</code> | Return to the previous LCD menu. |
 
 <a id="menu-__main-__prepare-__hotend0_target"></a>
 
@@ -647,16 +647,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [297](../../../config/options/lcd/sovol-menu-moonraker.cfg#L297) | <code>[menu __main __prepare __hotend0_target]</code> | Declare this configuration section. |
-| [298](../../../config/options/lcd/sovol-menu-moonraker.cfg#L298) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [299](../../../config/options/lcd/sovol-menu-moonraker.cfg#L299) | <code>enable: {&#x27;extruder&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;extruder&#x27; in printer}</code>. |
-| [300](../../../config/options/lcd/sovol-menu-moonraker.cfg#L300) | <code>name: {&quot;Ex0:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder.temperature)}</code> | Set the LCD label: <code>{&quot;Ex0:%3.0f (%4.0f)&quot; % (the value selected on the LCD, the measured nozzle temperature)}</code>. |
-| [301](../../../config/options/lcd/sovol-menu-moonraker.cfg#L301) | <code>input: {printer.extruder.target}</code> | Read the current editable LCD value: <code>{the nozzle temperature target}</code>. |
-| [302](../../../config/options/lcd/sovol-menu-moonraker.cfg#L302) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [303](../../../config/options/lcd/sovol-menu-moonraker.cfg#L303) | <code>input_max: {printer.configfile.config.extruder.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_temp}</code>. |
-| [304](../../../config/options/lcd/sovol-menu-moonraker.cfg#L304) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
-| [305](../../../config/options/lcd/sovol-menu-moonraker.cfg#L305) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [306](../../../config/options/lcd/sovol-menu-moonraker.cfg#L306) | <code>M104 T0 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [277](../../../config/options/lcd/sovol-menu-moonraker.cfg#L277) | <code>[menu __main __prepare __hotend0_target]</code> | Declare this configuration section. |
+| [278](../../../config/options/lcd/sovol-menu-moonraker.cfg#L278) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [279](../../../config/options/lcd/sovol-menu-moonraker.cfg#L279) | <code>enable: {&#x27;extruder&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;extruder&#x27; in printer}</code>. |
+| [280](../../../config/options/lcd/sovol-menu-moonraker.cfg#L280) | <code>name: {&quot;Ex0:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder.temperature)}</code> | Set the LCD label: <code>{&quot;Ex0:%3.0f (%4.0f)&quot; % (the value selected on the LCD, the measured nozzle temperature)}</code>. |
+| [281](../../../config/options/lcd/sovol-menu-moonraker.cfg#L281) | <code>input: {printer.extruder.target}</code> | Read the current editable LCD value: <code>{the nozzle temperature target}</code>. |
+| [282](../../../config/options/lcd/sovol-menu-moonraker.cfg#L282) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [283](../../../config/options/lcd/sovol-menu-moonraker.cfg#L283) | <code>input_max: {printer.configfile.config.extruder.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_temp}</code>. |
+| [284](../../../config/options/lcd/sovol-menu-moonraker.cfg#L284) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [285](../../../config/options/lcd/sovol-menu-moonraker.cfg#L285) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [286](../../../config/options/lcd/sovol-menu-moonraker.cfg#L286) | <code>M104 T0 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
 
 <a id="menu-__main-__levelling"></a>
 
@@ -666,11 +666,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [309](../../../config/options/lcd/sovol-menu-moonraker.cfg#L309) | <code>[menu __main __levelling]</code> | Declare this configuration section. |
-| [310](../../../config/options/lcd/sovol-menu-moonraker.cfg#L310) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [311](../../../config/options/lcd/sovol-menu-moonraker.cfg#L311) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [312](../../../config/options/lcd/sovol-menu-moonraker.cfg#L312) | <code>name: Levelling</code> | Set the LCD label: <code>Levelling</code>. |
-| [313](../../../config/options/lcd/sovol-menu-moonraker.cfg#L313) | <code>index: 5</code> | Set the item ordering: <code>5</code>. |
+| [289](../../../config/options/lcd/sovol-menu-moonraker.cfg#L289) | <code>[menu __main __levelling]</code> | Declare this configuration section. |
+| [290](../../../config/options/lcd/sovol-menu-moonraker.cfg#L290) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [291](../../../config/options/lcd/sovol-menu-moonraker.cfg#L291) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [292](../../../config/options/lcd/sovol-menu-moonraker.cfg#L292) | <code>name: Levelling</code> | Set the LCD label: <code>Levelling</code>. |
+| [293](../../../config/options/lcd/sovol-menu-moonraker.cfg#L293) | <code>index: 5</code> | Set the item ordering: <code>5</code>. |
 
 <a id="menu-__main-__levelling-__autooffsetz"></a>
 
@@ -680,8 +680,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [315](../../../config/options/lcd/sovol-menu-moonraker.cfg#L315) | <code>[menu __main __levelling __autooffsetz]</code> | Declare this configuration section. |
-| [316](../../../config/options/lcd/sovol-menu-moonraker.cfg#L316) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [295](../../../config/options/lcd/sovol-menu-moonraker.cfg#L295) | <code>[menu __main __levelling __autooffsetz]</code> | Declare this configuration section. |
+| [296](../../../config/options/lcd/sovol-menu-moonraker.cfg#L296) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__levelling-__quad_gantry_level"></a>
 
@@ -693,14 +693,14 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [318](../../../config/options/lcd/sovol-menu-moonraker.cfg#L318) | <code>[menu __main __levelling __quad_gantry_level]</code> | Declare this configuration section. |
-| [319](../../../config/options/lcd/sovol-menu-moonraker.cfg#L319) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [320](../../../config/options/lcd/sovol-menu-moonraker.cfg#L320) | <code>enable: {(&#x27;quad_gantry_level&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;quad_gantry_level&#x27; in printer)}</code>. |
-| [321](../../../config/options/lcd/sovol-menu-moonraker.cfg#L321) | <code>name: Quad Gantry Lvl</code> | Set the LCD label: <code>Quad Gantry Lvl</code>. |
-| [322](../../../config/options/lcd/sovol-menu-moonraker.cfg#L322) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [323](../../../config/options/lcd/sovol-menu-moonraker.cfg#L323) | <code>M117 Quad Gantry Lvl</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [324](../../../config/options/lcd/sovol-menu-moonraker.cfg#L324) | <code>PREPARE_QGL</code> | Run [PREPARE_QGL](../../macros/preparation.cfg.md#gcode_macro-prepare_qgl), which is evaluated separately when reached. Use its default arguments. |
-| [325](../../../config/options/lcd/sovol-menu-moonraker.cfg#L325) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [298](../../../config/options/lcd/sovol-menu-moonraker.cfg#L298) | <code>[menu __main __levelling __quad_gantry_level]</code> | Declare this configuration section. |
+| [299](../../../config/options/lcd/sovol-menu-moonraker.cfg#L299) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [300](../../../config/options/lcd/sovol-menu-moonraker.cfg#L300) | <code>enable: {(&#x27;quad_gantry_level&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;quad_gantry_level&#x27; in printer)}</code>. |
+| [301](../../../config/options/lcd/sovol-menu-moonraker.cfg#L301) | <code>name: Quad Gantry Lvl</code> | Set the LCD label: <code>Quad Gantry Lvl</code>. |
+| [302](../../../config/options/lcd/sovol-menu-moonraker.cfg#L302) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [303](../../../config/options/lcd/sovol-menu-moonraker.cfg#L303) | <code>M117 Quad Gantry Lvl</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [304](../../../config/options/lcd/sovol-menu-moonraker.cfg#L304) | <code>PREPARE_QGL</code> | Run [PREPARE_QGL](../../macros/preparation.cfg.md#gcode_macro-prepare_qgl), which is evaluated separately when reached. Use its default arguments. |
+| [305](../../../config/options/lcd/sovol-menu-moonraker.cfg#L305) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__levelling-__bed_mesh"></a>
 
@@ -712,15 +712,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [327](../../../config/options/lcd/sovol-menu-moonraker.cfg#L327) | <code>[menu __main __levelling __bed_mesh]</code> | Declare this configuration section. |
-| [328](../../../config/options/lcd/sovol-menu-moonraker.cfg#L328) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [329](../../../config/options/lcd/sovol-menu-moonraker.cfg#L329) | <code>enable: {(&#x27;bed_mesh&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;bed_mesh&#x27; in printer)}</code>. |
-| [330](../../../config/options/lcd/sovol-menu-moonraker.cfg#L330) | <code>name: Bed Mesh</code> | Set the LCD label: <code>Bed Mesh</code>. |
-| [331](../../../config/options/lcd/sovol-menu-moonraker.cfg#L331) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [332](../../../config/options/lcd/sovol-menu-moonraker.cfg#L332) | <code>M117 Bed Mesh</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [333](../../../config/options/lcd/sovol-menu-moonraker.cfg#L333) | <code>HOME_ALL</code> | Run [HOME_ALL](../../macros/homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
-| [334](../../../config/options/lcd/sovol-menu-moonraker.cfg#L334) | <code>GENERATE_PRINT_MESH ADAPTIVE=0</code> | Run [GENERATE_PRINT_MESH](../../macros/preparation.cfg.md#gcode_macro-generate_print_mesh), which is evaluated separately when reached. Forward <code>ADAPTIVE=0</code>. |
-| [335](../../../config/options/lcd/sovol-menu-moonraker.cfg#L335) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [307](../../../config/options/lcd/sovol-menu-moonraker.cfg#L307) | <code>[menu __main __levelling __bed_mesh]</code> | Declare this configuration section. |
+| [308](../../../config/options/lcd/sovol-menu-moonraker.cfg#L308) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [309](../../../config/options/lcd/sovol-menu-moonraker.cfg#L309) | <code>enable: {(&#x27;bed_mesh&#x27; in printer)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;bed_mesh&#x27; in printer)}</code>. |
+| [310](../../../config/options/lcd/sovol-menu-moonraker.cfg#L310) | <code>name: Bed Mesh</code> | Set the LCD label: <code>Bed Mesh</code>. |
+| [311](../../../config/options/lcd/sovol-menu-moonraker.cfg#L311) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [312](../../../config/options/lcd/sovol-menu-moonraker.cfg#L312) | <code>M117 Bed Mesh</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [313](../../../config/options/lcd/sovol-menu-moonraker.cfg#L313) | <code>HOME_ALL</code> | Run [HOME_ALL](../../macros/homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
+| [314](../../../config/options/lcd/sovol-menu-moonraker.cfg#L314) | <code>GENERATE_PRINT_MESH ADAPTIVE=0</code> | Run [GENERATE_PRINT_MESH](../../macros/preparation.cfg.md#gcode_macro-generate_print_mesh), which is evaluated separately when reached. Forward <code>ADAPTIVE=0</code>. |
+| [315](../../../config/options/lcd/sovol-menu-moonraker.cfg#L315) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__sdcard"></a>
 
@@ -730,11 +730,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [338](../../../config/options/lcd/sovol-menu-moonraker.cfg#L338) | <code>[menu __main __sdcard]</code> | Declare this configuration section. |
-| [339](../../../config/options/lcd/sovol-menu-moonraker.cfg#L339) | <code>type: vsdlist</code> | Select the LCD item type (disabled hides the item): <code>vsdlist</code>. |
-| [340](../../../config/options/lcd/sovol-menu-moonraker.cfg#L340) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [341](../../../config/options/lcd/sovol-menu-moonraker.cfg#L341) | <code>name: Print</code> | Set the LCD label: <code>Print</code>. |
-| [342](../../../config/options/lcd/sovol-menu-moonraker.cfg#L342) | <code>index: 6</code> | Set the item ordering: <code>6</code>. |
+| [318](../../../config/options/lcd/sovol-menu-moonraker.cfg#L318) | <code>[menu __main __sdcard]</code> | Declare this configuration section. |
+| [319](../../../config/options/lcd/sovol-menu-moonraker.cfg#L319) | <code>type: vsdlist</code> | Select the LCD item type (disabled hides the item): <code>vsdlist</code>. |
+| [320](../../../config/options/lcd/sovol-menu-moonraker.cfg#L320) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [321](../../../config/options/lcd/sovol-menu-moonraker.cfg#L321) | <code>name: Print</code> | Set the LCD label: <code>Print</code>. |
+| [322](../../../config/options/lcd/sovol-menu-moonraker.cfg#L322) | <code>index: 6</code> | Set the item ordering: <code>6</code>. |
 
 <a id="menu-__main-__sdcard-__start"></a>
 
@@ -744,17 +744,17 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [346](../../../config/options/lcd/sovol-menu-moonraker.cfg#L346) | <code>[menu __main __sdcard __start]</code> | Declare this configuration section. |
-| [347](../../../config/options/lcd/sovol-menu-moonraker.cfg#L347) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [348](../../../config/options/lcd/sovol-menu-moonraker.cfg#L348) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and not printer.virtual_sdcard.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and not printer.virtual_sdcard.is_active}</code>. |
-| [349](../../../config/options/lcd/sovol-menu-moonraker.cfg#L349) | <code>name: {&#x27;Start printing&#x27; if printer.virtual_sdcard.file_path else &#x27;Select file first&#x27;}</code> | Set the LCD label: <code>{&#x27;Start printing&#x27; if printer.virtual_sdcard.file_path else &#x27;Select file first&#x27;}</code>. |
-| [350](../../../config/options/lcd/sovol-menu-moonraker.cfg#L350) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [351](../../../config/options/lcd/sovol-menu-moonraker.cfg#L351) | <code>{% if printer.virtual_sdcard.file_path %}</code> | Start a conditional branch: <code>printer.virtual_sdcard.file_path</code>. Only a true branch emits its commands. |
-| [352](../../../config/options/lcd/sovol-menu-moonraker.cfg#L352) | <code>M24</code> | Start or resume virtual SD printing through the native SD command. |
-| [353](../../../config/options/lcd/sovol-menu-moonraker.cfg#L353) | <code>{menu.exit()}</code> | Exit the LCD menu. |
-| [354](../../../config/options/lcd/sovol-menu-moonraker.cfg#L354) | <code>{% else %}</code> | Otherwise use this branch. |
-| [355](../../../config/options/lcd/sovol-menu-moonraker.cfg#L355) | <code>M117 Select a file first</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [356](../../../config/options/lcd/sovol-menu-moonraker.cfg#L356) | <code>{% endif %}</code> | End this conditional block. |
+| [326](../../../config/options/lcd/sovol-menu-moonraker.cfg#L326) | <code>[menu __main __sdcard __start]</code> | Declare this configuration section. |
+| [327](../../../config/options/lcd/sovol-menu-moonraker.cfg#L327) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [328](../../../config/options/lcd/sovol-menu-moonraker.cfg#L328) | <code>enable: {(&#x27;virtual_sdcard&#x27; in printer) and not printer.virtual_sdcard.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;virtual_sdcard&#x27; in printer) and not printer.virtual_sdcard.is_active}</code>. |
+| [329](../../../config/options/lcd/sovol-menu-moonraker.cfg#L329) | <code>name: {&#x27;Start printing&#x27; if printer.virtual_sdcard.file_path else &#x27;Select file first&#x27;}</code> | Set the LCD label: <code>{&#x27;Start printing&#x27; if printer.virtual_sdcard.file_path else &#x27;Select file first&#x27;}</code>. |
+| [330](../../../config/options/lcd/sovol-menu-moonraker.cfg#L330) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [331](../../../config/options/lcd/sovol-menu-moonraker.cfg#L331) | <code>{% if printer.virtual_sdcard.file_path %}</code> | Start a conditional branch: <code>printer.virtual_sdcard.file_path</code>. Only a true branch emits its commands. |
+| [332](../../../config/options/lcd/sovol-menu-moonraker.cfg#L332) | <code>M24</code> | Start or resume virtual SD printing through the native SD command. |
+| [333](../../../config/options/lcd/sovol-menu-moonraker.cfg#L333) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [334](../../../config/options/lcd/sovol-menu-moonraker.cfg#L334) | <code>{% else %}</code> | Otherwise use this branch. |
+| [335](../../../config/options/lcd/sovol-menu-moonraker.cfg#L335) | <code>M117 Select a file first</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [336](../../../config/options/lcd/sovol-menu-moonraker.cfg#L336) | <code>{% endif %}</code> | End this conditional block. |
 
 <a id="menu-__main-__control2"></a>
 
@@ -764,11 +764,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [359](../../../config/options/lcd/sovol-menu-moonraker.cfg#L359) | <code>[menu __main __control2]</code> | Declare this configuration section. |
-| [360](../../../config/options/lcd/sovol-menu-moonraker.cfg#L360) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [361](../../../config/options/lcd/sovol-menu-moonraker.cfg#L361) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [362](../../../config/options/lcd/sovol-menu-moonraker.cfg#L362) | <code>name: Control</code> | Set the LCD label: <code>Control</code>. |
-| [363](../../../config/options/lcd/sovol-menu-moonraker.cfg#L363) | <code>index: 7</code> | Set the item ordering: <code>7</code>. |
+| [339](../../../config/options/lcd/sovol-menu-moonraker.cfg#L339) | <code>[menu __main __control2]</code> | Declare this configuration section. |
+| [340](../../../config/options/lcd/sovol-menu-moonraker.cfg#L340) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [341](../../../config/options/lcd/sovol-menu-moonraker.cfg#L341) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [342](../../../config/options/lcd/sovol-menu-moonraker.cfg#L342) | <code>name: Control</code> | Set the LCD label: <code>Control</code>. |
+| [343](../../../config/options/lcd/sovol-menu-moonraker.cfg#L343) | <code>index: 7</code> | Set the item ordering: <code>7</code>. |
 
 <a id="menu-__main-__control2-__hotend0_target"></a>
 
@@ -778,16 +778,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [365](../../../config/options/lcd/sovol-menu-moonraker.cfg#L365) | <code>[menu __main __control2 __hotend0_target]</code> | Declare this configuration section. |
-| [366](../../../config/options/lcd/sovol-menu-moonraker.cfg#L366) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [367](../../../config/options/lcd/sovol-menu-moonraker.cfg#L367) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code>. |
-| [368](../../../config/options/lcd/sovol-menu-moonraker.cfg#L368) | <code>name: {&quot;Ex0:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder.temperature)}</code> | Set the LCD label: <code>{&quot;Ex0:%3.0f (%4.0f)&quot; % (the value selected on the LCD, the measured nozzle temperature)}</code>. |
-| [369](../../../config/options/lcd/sovol-menu-moonraker.cfg#L369) | <code>input: {printer.extruder.target}</code> | Read the current editable LCD value: <code>{the nozzle temperature target}</code>. |
-| [370](../../../config/options/lcd/sovol-menu-moonraker.cfg#L370) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [371](../../../config/options/lcd/sovol-menu-moonraker.cfg#L371) | <code>input_max: {printer.configfile.config.extruder.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_temp}</code>. |
-| [372](../../../config/options/lcd/sovol-menu-moonraker.cfg#L372) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
-| [373](../../../config/options/lcd/sovol-menu-moonraker.cfg#L373) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [374](../../../config/options/lcd/sovol-menu-moonraker.cfg#L374) | <code>M104 T0 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [345](../../../config/options/lcd/sovol-menu-moonraker.cfg#L345) | <code>[menu __main __control2 __hotend0_target]</code> | Declare this configuration section. |
+| [346](../../../config/options/lcd/sovol-menu-moonraker.cfg#L346) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [347](../../../config/options/lcd/sovol-menu-moonraker.cfg#L347) | <code>enable: {(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code> | Show/enable this LCD item only when this expression is true: <code>{(&#x27;extruder&#x27; in printer) and (&#x27;extruder&#x27; in printer.heaters.available_heaters)}</code>. |
+| [348](../../../config/options/lcd/sovol-menu-moonraker.cfg#L348) | <code>name: {&quot;Ex0:%3.0f (%4.0f)&quot; % (menu.input, printer.extruder.temperature)}</code> | Set the LCD label: <code>{&quot;Ex0:%3.0f (%4.0f)&quot; % (the value selected on the LCD, the measured nozzle temperature)}</code>. |
+| [349](../../../config/options/lcd/sovol-menu-moonraker.cfg#L349) | <code>input: {printer.extruder.target}</code> | Read the current editable LCD value: <code>{the nozzle temperature target}</code>. |
+| [350](../../../config/options/lcd/sovol-menu-moonraker.cfg#L350) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [351](../../../config/options/lcd/sovol-menu-moonraker.cfg#L351) | <code>input_max: {printer.configfile.config.extruder.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_temp}</code>. |
+| [352](../../../config/options/lcd/sovol-menu-moonraker.cfg#L352) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [353](../../../config/options/lcd/sovol-menu-moonraker.cfg#L353) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [354](../../../config/options/lcd/sovol-menu-moonraker.cfg#L354) | <code>M104 T0 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the nozzle target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
 
 <a id="menu-__main-__control2-__hotbed_target"></a>
 
@@ -797,16 +797,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [376](../../../config/options/lcd/sovol-menu-moonraker.cfg#L376) | <code>[menu __main __control2 __hotbed_target]</code> | Declare this configuration section. |
-| [377](../../../config/options/lcd/sovol-menu-moonraker.cfg#L377) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [378](../../../config/options/lcd/sovol-menu-moonraker.cfg#L378) | <code>enable: {&#x27;heater_bed&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;heater_bed&#x27; in printer}</code>. |
-| [379](../../../config/options/lcd/sovol-menu-moonraker.cfg#L379) | <code>name: {&quot;Bed:%3.0f (%4.0f)&quot; % (menu.input, printer.heater_bed.temperature)}</code> | Set the LCD label: <code>{&quot;Bed:%3.0f (%4.0f)&quot; % (the value selected on the LCD, printer.heater_bed.temperature)}</code>. |
-| [380](../../../config/options/lcd/sovol-menu-moonraker.cfg#L380) | <code>input: {printer.heater_bed.target}</code> | Read the current editable LCD value: <code>{printer.heater_bed.target}</code>. |
-| [381](../../../config/options/lcd/sovol-menu-moonraker.cfg#L381) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [382](../../../config/options/lcd/sovol-menu-moonraker.cfg#L382) | <code>input_max: {printer.configfile.config.heater_bed.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.heater_bed.max_temp}</code>. |
-| [383](../../../config/options/lcd/sovol-menu-moonraker.cfg#L383) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
-| [384](../../../config/options/lcd/sovol-menu-moonraker.cfg#L384) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [385](../../../config/options/lcd/sovol-menu-moonraker.cfg#L385) | <code>M140 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the bed target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [356](../../../config/options/lcd/sovol-menu-moonraker.cfg#L356) | <code>[menu __main __control2 __hotbed_target]</code> | Declare this configuration section. |
+| [357](../../../config/options/lcd/sovol-menu-moonraker.cfg#L357) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [358](../../../config/options/lcd/sovol-menu-moonraker.cfg#L358) | <code>enable: {&#x27;heater_bed&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;heater_bed&#x27; in printer}</code>. |
+| [359](../../../config/options/lcd/sovol-menu-moonraker.cfg#L359) | <code>name: {&quot;Bed:%3.0f (%4.0f)&quot; % (menu.input, printer.heater_bed.temperature)}</code> | Set the LCD label: <code>{&quot;Bed:%3.0f (%4.0f)&quot; % (the value selected on the LCD, printer.heater_bed.temperature)}</code>. |
+| [360](../../../config/options/lcd/sovol-menu-moonraker.cfg#L360) | <code>input: {printer.heater_bed.target}</code> | Read the current editable LCD value: <code>{printer.heater_bed.target}</code>. |
+| [361](../../../config/options/lcd/sovol-menu-moonraker.cfg#L361) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [362](../../../config/options/lcd/sovol-menu-moonraker.cfg#L362) | <code>input_max: {printer.configfile.config.heater_bed.max_temp}</code> | Set the maximum editable value: <code>{the raw loaded settings.heater_bed.max_temp}</code>. |
+| [363](../../../config/options/lcd/sovol-menu-moonraker.cfg#L363) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [364](../../../config/options/lcd/sovol-menu-moonraker.cfg#L364) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [365](../../../config/options/lcd/sovol-menu-moonraker.cfg#L365) | <code>M140 S{&#x27;%.0f&#x27; % menu.input}</code> | Set the bed target using <code>{&#x27;%.0f&#x27; % menu.input}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
 
 <a id="menu-__main-__control2-__fanspeed"></a>
 
@@ -816,15 +816,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [387](../../../config/options/lcd/sovol-menu-moonraker.cfg#L387) | <code>[menu __main __control2 __fanspeed]</code> | Declare this configuration section. |
-| [388](../../../config/options/lcd/sovol-menu-moonraker.cfg#L388) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [389](../../../config/options/lcd/sovol-menu-moonraker.cfg#L389) | <code>name: Fan speed: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Fan speed: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
-| [390](../../../config/options/lcd/sovol-menu-moonraker.cfg#L390) | <code>input: {printer[&quot;fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan&quot;].speed}</code>. |
-| [391](../../../config/options/lcd/sovol-menu-moonraker.cfg#L391) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [392](../../../config/options/lcd/sovol-menu-moonraker.cfg#L392) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
-| [393](../../../config/options/lcd/sovol-menu-moonraker.cfg#L393) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [394](../../../config/options/lcd/sovol-menu-moonraker.cfg#L394) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [395](../../../config/options/lcd/sovol-menu-moonraker.cfg#L395) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
+| [367](../../../config/options/lcd/sovol-menu-moonraker.cfg#L367) | <code>[menu __main __control2 __fanspeed]</code> | Declare this configuration section. |
+| [368](../../../config/options/lcd/sovol-menu-moonraker.cfg#L368) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [369](../../../config/options/lcd/sovol-menu-moonraker.cfg#L369) | <code>name: Fan speed: {&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Fan speed: {&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
+| [370](../../../config/options/lcd/sovol-menu-moonraker.cfg#L370) | <code>input: {printer[&quot;fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan&quot;].speed}</code>. |
+| [371](../../../config/options/lcd/sovol-menu-moonraker.cfg#L371) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [372](../../../config/options/lcd/sovol-menu-moonraker.cfg#L372) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
+| [373](../../../config/options/lcd/sovol-menu-moonraker.cfg#L373) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [374](../../../config/options/lcd/sovol-menu-moonraker.cfg#L374) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [375](../../../config/options/lcd/sovol-menu-moonraker.cfg#L375) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
 
 <a id="menu-__main-__control2-__exhaustfanonoff"></a>
 
@@ -834,16 +834,16 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [397](../../../config/options/lcd/sovol-menu-moonraker.cfg#L397) | <code>[menu __main __control2 __exhaustfanonoff]</code> | Declare this configuration section. |
-| [398](../../../config/options/lcd/sovol-menu-moonraker.cfg#L398) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [399](../../../config/options/lcd/sovol-menu-moonraker.cfg#L399) | <code>name: Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code>. |
-| [400](../../../config/options/lcd/sovol-menu-moonraker.cfg#L400) | <code>enable: {&#x27;fan_generic exhaust_fan&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;fan_generic exhaust_fan&#x27; in printer}</code>. |
-| [401](../../../config/options/lcd/sovol-menu-moonraker.cfg#L401) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [402](../../../config/options/lcd/sovol-menu-moonraker.cfg#L402) | <code>{% if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 %}</code> | Start a conditional branch: <code>printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0</code>. Only a true branch emits its commands. |
-| [403](../../../config/options/lcd/sovol-menu-moonraker.cfg#L403) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=0</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
-| [404](../../../config/options/lcd/sovol-menu-moonraker.cfg#L404) | <code>{% else %}</code> | Otherwise use this branch. |
-| [405](../../../config/options/lcd/sovol-menu-moonraker.cfg#L405) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=1</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
-| [406](../../../config/options/lcd/sovol-menu-moonraker.cfg#L406) | <code>{% endif %}</code> | End this conditional block. |
+| [377](../../../config/options/lcd/sovol-menu-moonraker.cfg#L377) | <code>[menu __main __control2 __exhaustfanonoff]</code> | Declare this configuration section. |
+| [378](../../../config/options/lcd/sovol-menu-moonraker.cfg#L378) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [379](../../../config/options/lcd/sovol-menu-moonraker.cfg#L379) | <code>name: Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Exhaust Fan {&#x27;ON&#x27; if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 else &#x27;OFF&#x27;}</code>. |
+| [380](../../../config/options/lcd/sovol-menu-moonraker.cfg#L380) | <code>enable: {&#x27;fan_generic exhaust_fan&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;fan_generic exhaust_fan&#x27; in printer}</code>. |
+| [381](../../../config/options/lcd/sovol-menu-moonraker.cfg#L381) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [382](../../../config/options/lcd/sovol-menu-moonraker.cfg#L382) | <code>{% if printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0 %}</code> | Start a conditional branch: <code>printer[&#x27;fan_generic exhaust_fan&#x27;].speed &gt; 0</code>. Only a true branch emits its commands. |
+| [383](../../../config/options/lcd/sovol-menu-moonraker.cfg#L383) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=0</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
+| [384](../../../config/options/lcd/sovol-menu-moonraker.cfg#L384) | <code>{% else %}</code> | Otherwise use this branch. |
+| [385](../../../config/options/lcd/sovol-menu-moonraker.cfg#L385) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=1</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
+| [386](../../../config/options/lcd/sovol-menu-moonraker.cfg#L386) | <code>{% endif %}</code> | End this conditional block. |
 
 <a id="menu-__main-__control2-__exhaustfanspeed"></a>
 
@@ -853,15 +853,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [408](../../../config/options/lcd/sovol-menu-moonraker.cfg#L408) | <code>[menu __main __control2 __exhaustfanspeed]</code> | Declare this configuration section. |
-| [409](../../../config/options/lcd/sovol-menu-moonraker.cfg#L409) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [410](../../../config/options/lcd/sovol-menu-moonraker.cfg#L410) | <code>name: Exhaust Fan:{&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Exhaust Fan:{&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
-| [411](../../../config/options/lcd/sovol-menu-moonraker.cfg#L411) | <code>input: {printer[&quot;fan_generic exhaust_fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan_generic exhaust_fan&quot;].speed}</code>. |
-| [412](../../../config/options/lcd/sovol-menu-moonraker.cfg#L412) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [413](../../../config/options/lcd/sovol-menu-moonraker.cfg#L413) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
-| [414](../../../config/options/lcd/sovol-menu-moonraker.cfg#L414) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [415](../../../config/options/lcd/sovol-menu-moonraker.cfg#L415) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [416](../../../config/options/lcd/sovol-menu-moonraker.cfg#L416) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED={menu.input}</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
+| [388](../../../config/options/lcd/sovol-menu-moonraker.cfg#L388) | <code>[menu __main __control2 __exhaustfanspeed]</code> | Declare this configuration section. |
+| [389](../../../config/options/lcd/sovol-menu-moonraker.cfg#L389) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [390](../../../config/options/lcd/sovol-menu-moonraker.cfg#L390) | <code>name: Exhaust Fan:{&#x27;%3d&#x27; % (menu.input*100)}%</code> | Set the LCD label: <code>Exhaust Fan:{&#x27;%3d&#x27; % (the value selected on the LCD*100)}%</code>. |
+| [391](../../../config/options/lcd/sovol-menu-moonraker.cfg#L391) | <code>input: {printer[&quot;fan_generic exhaust_fan&quot;].speed}</code> | Read the current editable LCD value: <code>{printer[&quot;fan_generic exhaust_fan&quot;].speed}</code>. |
+| [392](../../../config/options/lcd/sovol-menu-moonraker.cfg#L392) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [393](../../../config/options/lcd/sovol-menu-moonraker.cfg#L393) | <code>input_max: 1</code> | Set the maximum editable value: <code>1</code>. |
+| [394](../../../config/options/lcd/sovol-menu-moonraker.cfg#L394) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [395](../../../config/options/lcd/sovol-menu-moonraker.cfg#L395) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [396](../../../config/options/lcd/sovol-menu-moonraker.cfg#L396) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED={menu.input}</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
 
 <a id="menu-__main-__control2-__ledonoff"></a>
 
@@ -871,15 +871,15 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [419](../../../config/options/lcd/sovol-menu-moonraker.cfg#L419) | <code>[menu __main __control2 __ledonoff]</code> | Declare this configuration section. |
-| [420](../../../config/options/lcd/sovol-menu-moonraker.cfg#L420) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [421](../../../config/options/lcd/sovol-menu-moonraker.cfg#L421) | <code>enable: {&#x27;led main_led&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;led main_led&#x27; in printer}</code>. |
-| [422](../../../config/options/lcd/sovol-menu-moonraker.cfg#L422) | <code>name: Dim LED:    {&#x27;%3d%s&#x27; % (menu.input*100,&#x27;%&#x27;) if menu.input else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Dim LED: {&#x27;%3d%s&#x27; % (the value selected on the LCD*100,&#x27;%&#x27;) if the value selected on the LCD else &#x27;OFF&#x27;}</code>. |
-| [423](../../../config/options/lcd/sovol-menu-moonraker.cfg#L423) | <code>input: {printer[&#x27;led main_led&#x27;].color_data[0][3]}</code> | Read the current editable LCD value: <code>{printer[&#x27;led main_led&#x27;].color_data[0][3]}</code>. |
-| [424](../../../config/options/lcd/sovol-menu-moonraker.cfg#L424) | <code>input_min: 0.0</code> | Set the minimum editable value: <code>0.0</code>. |
-| [425](../../../config/options/lcd/sovol-menu-moonraker.cfg#L425) | <code>input_max: 1.0</code> | Set the maximum editable value: <code>1.0</code>. |
-| [426](../../../config/options/lcd/sovol-menu-moonraker.cfg#L426) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [427](../../../config/options/lcd/sovol-menu-moonraker.cfg#L427) | <code>gcode: SET_LED LED=main_led WHITE={menu.input}</code> | Begin the command template. Set the named LED channel brightness on a 0..1 scale. WHITE selects the white channel. SYNC=0 applies without synchronizing to queued motion; otherwise synchronization is enabled by default. |
+| [399](../../../config/options/lcd/sovol-menu-moonraker.cfg#L399) | <code>[menu __main __control2 __ledonoff]</code> | Declare this configuration section. |
+| [400](../../../config/options/lcd/sovol-menu-moonraker.cfg#L400) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [401](../../../config/options/lcd/sovol-menu-moonraker.cfg#L401) | <code>enable: {&#x27;led main_led&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;led main_led&#x27; in printer}</code>. |
+| [402](../../../config/options/lcd/sovol-menu-moonraker.cfg#L402) | <code>name: Dim LED:    {&#x27;%3d%s&#x27; % (menu.input*100,&#x27;%&#x27;) if menu.input else &#x27;OFF&#x27;}</code> | Set the LCD label: <code>Dim LED: {&#x27;%3d%s&#x27; % (the value selected on the LCD*100,&#x27;%&#x27;) if the value selected on the LCD else &#x27;OFF&#x27;}</code>. |
+| [403](../../../config/options/lcd/sovol-menu-moonraker.cfg#L403) | <code>input: {printer[&#x27;led main_led&#x27;].color_data[0][3]}</code> | Read the current editable LCD value: <code>{printer[&#x27;led main_led&#x27;].color_data[0][3]}</code>. |
+| [404](../../../config/options/lcd/sovol-menu-moonraker.cfg#L404) | <code>input_min: 0.0</code> | Set the minimum editable value: <code>0.0</code>. |
+| [405](../../../config/options/lcd/sovol-menu-moonraker.cfg#L405) | <code>input_max: 1.0</code> | Set the maximum editable value: <code>1.0</code>. |
+| [406](../../../config/options/lcd/sovol-menu-moonraker.cfg#L406) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
+| [407](../../../config/options/lcd/sovol-menu-moonraker.cfg#L407) | <code>gcode: SET_LED LED=main_led WHITE={menu.input}</code> | Begin the command template. Set the named LED channel brightness on a 0..1 scale. WHITE selects the white channel. SYNC=0 applies without synchronizing to queued motion; otherwise synchronization is enabled by default. |
 
 <a id="menu-__main-__control"></a>
 
@@ -889,11 +889,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [430](../../../config/options/lcd/sovol-menu-moonraker.cfg#L430) | <code>[menu __main __control]</code> | Declare this configuration section. |
-| [431](../../../config/options/lcd/sovol-menu-moonraker.cfg#L431) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [432](../../../config/options/lcd/sovol-menu-moonraker.cfg#L432) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [433](../../../config/options/lcd/sovol-menu-moonraker.cfg#L433) | <code>name: Move</code> | Set the LCD label: <code>Move</code>. |
-| [434](../../../config/options/lcd/sovol-menu-moonraker.cfg#L434) | <code>index: 8</code> | Set the item ordering: <code>8</code>. |
+| [410](../../../config/options/lcd/sovol-menu-moonraker.cfg#L410) | <code>[menu __main __control]</code> | Declare this configuration section. |
+| [411](../../../config/options/lcd/sovol-menu-moonraker.cfg#L411) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [412](../../../config/options/lcd/sovol-menu-moonraker.cfg#L412) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [413](../../../config/options/lcd/sovol-menu-moonraker.cfg#L413) | <code>name: Move</code> | Set the LCD label: <code>Move</code>. |
+| [414](../../../config/options/lcd/sovol-menu-moonraker.cfg#L414) | <code>index: 8</code> | Set the item ordering: <code>8</code>. |
 
 <a id="menu-__main-__control-__disable"></a>
 
@@ -903,13 +903,13 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [436](../../../config/options/lcd/sovol-menu-moonraker.cfg#L436) | <code>[menu __main __control __disable]</code> | Declare this configuration section. |
-| [437](../../../config/options/lcd/sovol-menu-moonraker.cfg#L437) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [438](../../../config/options/lcd/sovol-menu-moonraker.cfg#L438) | <code>name: Steppers off</code> | Set the LCD label: <code>Steppers off</code>. |
-| [439](../../../config/options/lcd/sovol-menu-moonraker.cfg#L439) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [440](../../../config/options/lcd/sovol-menu-moonraker.cfg#L440) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
-| [441](../../../config/options/lcd/sovol-menu-moonraker.cfg#L441) | <code>M18</code> | Disable all stepper motors, including the extruder. |
-| [442](../../../config/options/lcd/sovol-menu-moonraker.cfg#L442) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [416](../../../config/options/lcd/sovol-menu-moonraker.cfg#L416) | <code>[menu __main __control __disable]</code> | Declare this configuration section. |
+| [417](../../../config/options/lcd/sovol-menu-moonraker.cfg#L417) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [418](../../../config/options/lcd/sovol-menu-moonraker.cfg#L418) | <code>name: Steppers off</code> | Set the LCD label: <code>Steppers off</code>. |
+| [419](../../../config/options/lcd/sovol-menu-moonraker.cfg#L419) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [420](../../../config/options/lcd/sovol-menu-moonraker.cfg#L420) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
+| [421](../../../config/options/lcd/sovol-menu-moonraker.cfg#L421) | <code>M18</code> | Disable all stepper motors, including the extruder. |
+| [422](../../../config/options/lcd/sovol-menu-moonraker.cfg#L422) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__control-__home"></a>
 
@@ -921,12 +921,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [444](../../../config/options/lcd/sovol-menu-moonraker.cfg#L444) | <code>[menu __main __control __home]</code> | Declare this configuration section. |
-| [445](../../../config/options/lcd/sovol-menu-moonraker.cfg#L445) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [446](../../../config/options/lcd/sovol-menu-moonraker.cfg#L446) | <code>name: Auto Home</code> | Set the LCD label: <code>Auto Home</code>. |
-| [447](../../../config/options/lcd/sovol-menu-moonraker.cfg#L447) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [448](../../../config/options/lcd/sovol-menu-moonraker.cfg#L448) | <code>HOME_ALL</code> | Run [HOME_ALL](../../macros/homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
-| [449](../../../config/options/lcd/sovol-menu-moonraker.cfg#L449) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [424](../../../config/options/lcd/sovol-menu-moonraker.cfg#L424) | <code>[menu __main __control __home]</code> | Declare this configuration section. |
+| [425](../../../config/options/lcd/sovol-menu-moonraker.cfg#L425) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [426](../../../config/options/lcd/sovol-menu-moonraker.cfg#L426) | <code>name: Auto Home</code> | Set the LCD label: <code>Auto Home</code>. |
+| [427](../../../config/options/lcd/sovol-menu-moonraker.cfg#L427) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [428](../../../config/options/lcd/sovol-menu-moonraker.cfg#L428) | <code>HOME_ALL</code> | Run [HOME_ALL](../../macros/homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
+| [429](../../../config/options/lcd/sovol-menu-moonraker.cfg#L429) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__control-__move_10mm"></a>
 
@@ -936,9 +936,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [452](../../../config/options/lcd/sovol-menu-moonraker.cfg#L452) | <code>[menu __main __control __move_10mm]</code> | Declare this configuration section. |
-| [453](../../../config/options/lcd/sovol-menu-moonraker.cfg#L453) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [454](../../../config/options/lcd/sovol-menu-moonraker.cfg#L454) | <code>name: Move 10mm</code> | Set the LCD label: <code>Move 10mm</code>. |
+| [432](../../../config/options/lcd/sovol-menu-moonraker.cfg#L432) | <code>[menu __main __control __move_10mm]</code> | Declare this configuration section. |
+| [433](../../../config/options/lcd/sovol-menu-moonraker.cfg#L433) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [434](../../../config/options/lcd/sovol-menu-moonraker.cfg#L434) | <code>name: Move 10mm</code> | Set the LCD label: <code>Move 10mm</code>. |
 
 <a id="menu-__main-__control-__move_10mm-__axis_x"></a>
 
@@ -948,22 +948,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [456](../../../config/options/lcd/sovol-menu-moonraker.cfg#L456) | <code>[menu __main __control __move_10mm __axis_x]</code> | Declare this configuration section. |
-| [457](../../../config/options/lcd/sovol-menu-moonraker.cfg#L457) | <code>enable: {&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [458](../../../config/options/lcd/sovol-menu-moonraker.cfg#L458) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [459](../../../config/options/lcd/sovol-menu-moonraker.cfg#L459) | <code>name: Move X:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move X:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [460](../../../config/options/lcd/sovol-menu-moonraker.cfg#L460) | <code>input: {printer.gcode_move.gcode_position.x}</code> | Read the current editable LCD value: <code>{the current G-code position.x}</code>. |
-| [461](../../../config/options/lcd/sovol-menu-moonraker.cfg#L461) | <code>input_min: {printer.toolhead.axis_minimum.x}</code> | Set the minimum editable value: <code>{the minimum axis positions.x}</code>. |
-| [462](../../../config/options/lcd/sovol-menu-moonraker.cfg#L462) | <code>input_max: {printer.toolhead.axis_maximum.x}</code> | Set the maximum editable value: <code>{the maximum axis positions.x}</code>. |
-| [463](../../../config/options/lcd/sovol-menu-moonraker.cfg#L463) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
-| [464](../../../config/options/lcd/sovol-menu-moonraker.cfg#L464) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [465](../../../config/options/lcd/sovol-menu-moonraker.cfg#L465) | <code>{% if not (&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [466](../../../config/options/lcd/sovol-menu-moonraker.cfg#L466) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [467](../../../config/options/lcd/sovol-menu-moonraker.cfg#L467) | <code>{% endif %}</code> | End this conditional block. |
-| [468](../../../config/options/lcd/sovol-menu-moonraker.cfg#L468) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [469](../../../config/options/lcd/sovol-menu-moonraker.cfg#L469) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [470](../../../config/options/lcd/sovol-menu-moonraker.cfg#L470) | <code>G1 X{menu.input}</code> | command X=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [471](../../../config/options/lcd/sovol-menu-moonraker.cfg#L471) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [436](../../../config/options/lcd/sovol-menu-moonraker.cfg#L436) | <code>[menu __main __control __move_10mm __axis_x]</code> | Declare this configuration section. |
+| [437](../../../config/options/lcd/sovol-menu-moonraker.cfg#L437) | <code>enable: {&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [438](../../../config/options/lcd/sovol-menu-moonraker.cfg#L438) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [439](../../../config/options/lcd/sovol-menu-moonraker.cfg#L439) | <code>name: Move X:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move X:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [440](../../../config/options/lcd/sovol-menu-moonraker.cfg#L440) | <code>input: {printer.gcode_move.gcode_position.x}</code> | Read the current editable LCD value: <code>{the current G-code position.x}</code>. |
+| [441](../../../config/options/lcd/sovol-menu-moonraker.cfg#L441) | <code>input_min: {printer.toolhead.axis_minimum.x}</code> | Set the minimum editable value: <code>{the minimum axis positions.x}</code>. |
+| [442](../../../config/options/lcd/sovol-menu-moonraker.cfg#L442) | <code>input_max: {printer.toolhead.axis_maximum.x}</code> | Set the maximum editable value: <code>{the maximum axis positions.x}</code>. |
+| [443](../../../config/options/lcd/sovol-menu-moonraker.cfg#L443) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
+| [444](../../../config/options/lcd/sovol-menu-moonraker.cfg#L444) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [445](../../../config/options/lcd/sovol-menu-moonraker.cfg#L445) | <code>{% if not (&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [446](../../../config/options/lcd/sovol-menu-moonraker.cfg#L446) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [447](../../../config/options/lcd/sovol-menu-moonraker.cfg#L447) | <code>{% endif %}</code> | End this conditional block. |
+| [448](../../../config/options/lcd/sovol-menu-moonraker.cfg#L448) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [449](../../../config/options/lcd/sovol-menu-moonraker.cfg#L449) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [450](../../../config/options/lcd/sovol-menu-moonraker.cfg#L450) | <code>G1 X{menu.input}</code> | command X=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [451](../../../config/options/lcd/sovol-menu-moonraker.cfg#L451) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_10mm-__axis_y"></a>
 
@@ -973,22 +973,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [473](../../../config/options/lcd/sovol-menu-moonraker.cfg#L473) | <code>[menu __main __control __move_10mm __axis_y]</code> | Declare this configuration section. |
-| [474](../../../config/options/lcd/sovol-menu-moonraker.cfg#L474) | <code>enable: {&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [475](../../../config/options/lcd/sovol-menu-moonraker.cfg#L475) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [476](../../../config/options/lcd/sovol-menu-moonraker.cfg#L476) | <code>name: Move Y:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Y:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [477](../../../config/options/lcd/sovol-menu-moonraker.cfg#L477) | <code>input: {printer.gcode_move.gcode_position.y}</code> | Read the current editable LCD value: <code>{the current G-code position.y}</code>. |
-| [478](../../../config/options/lcd/sovol-menu-moonraker.cfg#L478) | <code>input_min: {printer.toolhead.axis_minimum.y}</code> | Set the minimum editable value: <code>{the minimum axis positions.y}</code>. |
-| [479](../../../config/options/lcd/sovol-menu-moonraker.cfg#L479) | <code>input_max: {printer.toolhead.axis_maximum.y}</code> | Set the maximum editable value: <code>{the maximum axis positions.y}</code>. |
-| [480](../../../config/options/lcd/sovol-menu-moonraker.cfg#L480) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
-| [481](../../../config/options/lcd/sovol-menu-moonraker.cfg#L481) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [482](../../../config/options/lcd/sovol-menu-moonraker.cfg#L482) | <code>{% if not (&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [483](../../../config/options/lcd/sovol-menu-moonraker.cfg#L483) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [484](../../../config/options/lcd/sovol-menu-moonraker.cfg#L484) | <code>{% endif %}</code> | End this conditional block. |
-| [485](../../../config/options/lcd/sovol-menu-moonraker.cfg#L485) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [486](../../../config/options/lcd/sovol-menu-moonraker.cfg#L486) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [487](../../../config/options/lcd/sovol-menu-moonraker.cfg#L487) | <code>G1 Y{menu.input}</code> | command Y=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [488](../../../config/options/lcd/sovol-menu-moonraker.cfg#L488) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [453](../../../config/options/lcd/sovol-menu-moonraker.cfg#L453) | <code>[menu __main __control __move_10mm __axis_y]</code> | Declare this configuration section. |
+| [454](../../../config/options/lcd/sovol-menu-moonraker.cfg#L454) | <code>enable: {&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [455](../../../config/options/lcd/sovol-menu-moonraker.cfg#L455) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [456](../../../config/options/lcd/sovol-menu-moonraker.cfg#L456) | <code>name: Move Y:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Y:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [457](../../../config/options/lcd/sovol-menu-moonraker.cfg#L457) | <code>input: {printer.gcode_move.gcode_position.y}</code> | Read the current editable LCD value: <code>{the current G-code position.y}</code>. |
+| [458](../../../config/options/lcd/sovol-menu-moonraker.cfg#L458) | <code>input_min: {printer.toolhead.axis_minimum.y}</code> | Set the minimum editable value: <code>{the minimum axis positions.y}</code>. |
+| [459](../../../config/options/lcd/sovol-menu-moonraker.cfg#L459) | <code>input_max: {printer.toolhead.axis_maximum.y}</code> | Set the maximum editable value: <code>{the maximum axis positions.y}</code>. |
+| [460](../../../config/options/lcd/sovol-menu-moonraker.cfg#L460) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
+| [461](../../../config/options/lcd/sovol-menu-moonraker.cfg#L461) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [462](../../../config/options/lcd/sovol-menu-moonraker.cfg#L462) | <code>{% if not (&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [463](../../../config/options/lcd/sovol-menu-moonraker.cfg#L463) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [464](../../../config/options/lcd/sovol-menu-moonraker.cfg#L464) | <code>{% endif %}</code> | End this conditional block. |
+| [465](../../../config/options/lcd/sovol-menu-moonraker.cfg#L465) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [466](../../../config/options/lcd/sovol-menu-moonraker.cfg#L466) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [467](../../../config/options/lcd/sovol-menu-moonraker.cfg#L467) | <code>G1 Y{menu.input}</code> | command Y=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [468](../../../config/options/lcd/sovol-menu-moonraker.cfg#L468) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_10mm-__axis_z"></a>
 
@@ -998,22 +998,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [490](../../../config/options/lcd/sovol-menu-moonraker.cfg#L490) | <code>[menu __main __control __move_10mm __axis_z]</code> | Declare this configuration section. |
-| [491](../../../config/options/lcd/sovol-menu-moonraker.cfg#L491) | <code>enable: {&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [492](../../../config/options/lcd/sovol-menu-moonraker.cfg#L492) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [493](../../../config/options/lcd/sovol-menu-moonraker.cfg#L493) | <code>name: Move Z:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Z:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [494](../../../config/options/lcd/sovol-menu-moonraker.cfg#L494) | <code>input: {printer.gcode_move.gcode_position.z}</code> | Read the current editable LCD value: <code>{the current G-code position.z}</code>. |
-| [495](../../../config/options/lcd/sovol-menu-moonraker.cfg#L495) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [496](../../../config/options/lcd/sovol-menu-moonraker.cfg#L496) | <code>input_max: {printer.toolhead.axis_maximum.z}</code> | Set the maximum editable value: <code>{the maximum axis positions.z}</code>. |
-| [497](../../../config/options/lcd/sovol-menu-moonraker.cfg#L497) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
-| [498](../../../config/options/lcd/sovol-menu-moonraker.cfg#L498) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [499](../../../config/options/lcd/sovol-menu-moonraker.cfg#L499) | <code>{% if not (&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [500](../../../config/options/lcd/sovol-menu-moonraker.cfg#L500) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [501](../../../config/options/lcd/sovol-menu-moonraker.cfg#L501) | <code>{% endif %}</code> | End this conditional block. |
-| [502](../../../config/options/lcd/sovol-menu-moonraker.cfg#L502) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [503](../../../config/options/lcd/sovol-menu-moonraker.cfg#L503) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [504](../../../config/options/lcd/sovol-menu-moonraker.cfg#L504) | <code>G1 Z{menu.input}</code> | command Z=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [505](../../../config/options/lcd/sovol-menu-moonraker.cfg#L505) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [470](../../../config/options/lcd/sovol-menu-moonraker.cfg#L470) | <code>[menu __main __control __move_10mm __axis_z]</code> | Declare this configuration section. |
+| [471](../../../config/options/lcd/sovol-menu-moonraker.cfg#L471) | <code>enable: {&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [472](../../../config/options/lcd/sovol-menu-moonraker.cfg#L472) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [473](../../../config/options/lcd/sovol-menu-moonraker.cfg#L473) | <code>name: Move Z:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Z:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [474](../../../config/options/lcd/sovol-menu-moonraker.cfg#L474) | <code>input: {printer.gcode_move.gcode_position.z}</code> | Read the current editable LCD value: <code>{the current G-code position.z}</code>. |
+| [475](../../../config/options/lcd/sovol-menu-moonraker.cfg#L475) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [476](../../../config/options/lcd/sovol-menu-moonraker.cfg#L476) | <code>input_max: {printer.toolhead.axis_maximum.z}</code> | Set the maximum editable value: <code>{the maximum axis positions.z}</code>. |
+| [477](../../../config/options/lcd/sovol-menu-moonraker.cfg#L477) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
+| [478](../../../config/options/lcd/sovol-menu-moonraker.cfg#L478) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [479](../../../config/options/lcd/sovol-menu-moonraker.cfg#L479) | <code>{% if not (&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [480](../../../config/options/lcd/sovol-menu-moonraker.cfg#L480) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [481](../../../config/options/lcd/sovol-menu-moonraker.cfg#L481) | <code>{% endif %}</code> | End this conditional block. |
+| [482](../../../config/options/lcd/sovol-menu-moonraker.cfg#L482) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [483](../../../config/options/lcd/sovol-menu-moonraker.cfg#L483) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [484](../../../config/options/lcd/sovol-menu-moonraker.cfg#L484) | <code>G1 Z{menu.input}</code> | command Z=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [485](../../../config/options/lcd/sovol-menu-moonraker.cfg#L485) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_10mm-__axis_e"></a>
 
@@ -1023,22 +1023,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [507](../../../config/options/lcd/sovol-menu-moonraker.cfg#L507) | <code>[menu __main __control __move_10mm __axis_e]</code> | Declare this configuration section. |
-| [508](../../../config/options/lcd/sovol-menu-moonraker.cfg#L508) | <code>enable: {printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [509](../../../config/options/lcd/sovol-menu-moonraker.cfg#L509) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [510](../../../config/options/lcd/sovol-menu-moonraker.cfg#L510) | <code>name: Move E:{&#x27;%+06.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move E:{&#x27;%+06.1f&#x27; % the value selected on the LCD}</code>. |
-| [511](../../../config/options/lcd/sovol-menu-moonraker.cfg#L511) | <code>input: 0</code> | Read the current editable LCD value: <code>0</code>. |
-| [512](../../../config/options/lcd/sovol-menu-moonraker.cfg#L512) | <code>input_min: -{printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the minimum editable value: <code>-{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
-| [513](../../../config/options/lcd/sovol-menu-moonraker.cfg#L513) | <code>input_max: {printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
-| [514](../../../config/options/lcd/sovol-menu-moonraker.cfg#L514) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
-| [515](../../../config/options/lcd/sovol-menu-moonraker.cfg#L515) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [516](../../../config/options/lcd/sovol-menu-moonraker.cfg#L516) | <code>{% if not (printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [517](../../../config/options/lcd/sovol-menu-moonraker.cfg#L517) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [518](../../../config/options/lcd/sovol-menu-moonraker.cfg#L518) | <code>{% endif %}</code> | End this conditional block. |
-| [519](../../../config/options/lcd/sovol-menu-moonraker.cfg#L519) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [520](../../../config/options/lcd/sovol-menu-moonraker.cfg#L520) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
-| [521](../../../config/options/lcd/sovol-menu-moonraker.cfg#L521) | <code>G1 E{menu.input} F240</code> | command filament E=<code>{menu.input}</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 4 mm/s (240 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [522](../../../config/options/lcd/sovol-menu-moonraker.cfg#L522) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [487](../../../config/options/lcd/sovol-menu-moonraker.cfg#L487) | <code>[menu __main __control __move_10mm __axis_e]</code> | Declare this configuration section. |
+| [488](../../../config/options/lcd/sovol-menu-moonraker.cfg#L488) | <code>enable: {printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [489](../../../config/options/lcd/sovol-menu-moonraker.cfg#L489) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [490](../../../config/options/lcd/sovol-menu-moonraker.cfg#L490) | <code>name: Move E:{&#x27;%+06.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move E:{&#x27;%+06.1f&#x27; % the value selected on the LCD}</code>. |
+| [491](../../../config/options/lcd/sovol-menu-moonraker.cfg#L491) | <code>input: 0</code> | Read the current editable LCD value: <code>0</code>. |
+| [492](../../../config/options/lcd/sovol-menu-moonraker.cfg#L492) | <code>input_min: -{printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the minimum editable value: <code>-{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
+| [493](../../../config/options/lcd/sovol-menu-moonraker.cfg#L493) | <code>input_max: {printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
+| [494](../../../config/options/lcd/sovol-menu-moonraker.cfg#L494) | <code>input_step: 10.0</code> | Set the amount changed per encoder step: <code>10.0</code>. |
+| [495](../../../config/options/lcd/sovol-menu-moonraker.cfg#L495) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [496](../../../config/options/lcd/sovol-menu-moonraker.cfg#L496) | <code>{% if not (printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [497](../../../config/options/lcd/sovol-menu-moonraker.cfg#L497) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [498](../../../config/options/lcd/sovol-menu-moonraker.cfg#L498) | <code>{% endif %}</code> | End this conditional block. |
+| [499](../../../config/options/lcd/sovol-menu-moonraker.cfg#L499) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [500](../../../config/options/lcd/sovol-menu-moonraker.cfg#L500) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
+| [501](../../../config/options/lcd/sovol-menu-moonraker.cfg#L501) | <code>G1 E{menu.input} F240</code> | command filament E=<code>{menu.input}</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 4 mm/s (240 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [502](../../../config/options/lcd/sovol-menu-moonraker.cfg#L502) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_1mm"></a>
 
@@ -1048,9 +1048,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [525](../../../config/options/lcd/sovol-menu-moonraker.cfg#L525) | <code>[menu __main __control __move_1mm]</code> | Declare this configuration section. |
-| [526](../../../config/options/lcd/sovol-menu-moonraker.cfg#L526) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [527](../../../config/options/lcd/sovol-menu-moonraker.cfg#L527) | <code>name: Move 1mm</code> | Set the LCD label: <code>Move 1mm</code>. |
+| [505](../../../config/options/lcd/sovol-menu-moonraker.cfg#L505) | <code>[menu __main __control __move_1mm]</code> | Declare this configuration section. |
+| [506](../../../config/options/lcd/sovol-menu-moonraker.cfg#L506) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [507](../../../config/options/lcd/sovol-menu-moonraker.cfg#L507) | <code>name: Move 1mm</code> | Set the LCD label: <code>Move 1mm</code>. |
 
 <a id="menu-__main-__control-__move_1mm-__axis_x"></a>
 
@@ -1060,22 +1060,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [529](../../../config/options/lcd/sovol-menu-moonraker.cfg#L529) | <code>[menu __main __control __move_1mm __axis_x]</code> | Declare this configuration section. |
-| [530](../../../config/options/lcd/sovol-menu-moonraker.cfg#L530) | <code>enable: {&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [531](../../../config/options/lcd/sovol-menu-moonraker.cfg#L531) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [532](../../../config/options/lcd/sovol-menu-moonraker.cfg#L532) | <code>name: Move X:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move X:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [533](../../../config/options/lcd/sovol-menu-moonraker.cfg#L533) | <code>input: {printer.gcode_move.gcode_position.x}</code> | Read the current editable LCD value: <code>{the current G-code position.x}</code>. |
-| [534](../../../config/options/lcd/sovol-menu-moonraker.cfg#L534) | <code>input_min: {printer.toolhead.axis_minimum.x}</code> | Set the minimum editable value: <code>{the minimum axis positions.x}</code>. |
-| [535](../../../config/options/lcd/sovol-menu-moonraker.cfg#L535) | <code>input_max: {printer.toolhead.axis_maximum.x}</code> | Set the maximum editable value: <code>{the maximum axis positions.x}</code>. |
-| [536](../../../config/options/lcd/sovol-menu-moonraker.cfg#L536) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
-| [537](../../../config/options/lcd/sovol-menu-moonraker.cfg#L537) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [538](../../../config/options/lcd/sovol-menu-moonraker.cfg#L538) | <code>{% if not (&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [539](../../../config/options/lcd/sovol-menu-moonraker.cfg#L539) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [540](../../../config/options/lcd/sovol-menu-moonraker.cfg#L540) | <code>{% endif %}</code> | End this conditional block. |
-| [541](../../../config/options/lcd/sovol-menu-moonraker.cfg#L541) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [542](../../../config/options/lcd/sovol-menu-moonraker.cfg#L542) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [543](../../../config/options/lcd/sovol-menu-moonraker.cfg#L543) | <code>G1 X{menu.input}</code> | command X=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [544](../../../config/options/lcd/sovol-menu-moonraker.cfg#L544) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [509](../../../config/options/lcd/sovol-menu-moonraker.cfg#L509) | <code>[menu __main __control __move_1mm __axis_x]</code> | Declare this configuration section. |
+| [510](../../../config/options/lcd/sovol-menu-moonraker.cfg#L510) | <code>enable: {&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [511](../../../config/options/lcd/sovol-menu-moonraker.cfg#L511) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [512](../../../config/options/lcd/sovol-menu-moonraker.cfg#L512) | <code>name: Move X:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move X:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [513](../../../config/options/lcd/sovol-menu-moonraker.cfg#L513) | <code>input: {printer.gcode_move.gcode_position.x}</code> | Read the current editable LCD value: <code>{the current G-code position.x}</code>. |
+| [514](../../../config/options/lcd/sovol-menu-moonraker.cfg#L514) | <code>input_min: {printer.toolhead.axis_minimum.x}</code> | Set the minimum editable value: <code>{the minimum axis positions.x}</code>. |
+| [515](../../../config/options/lcd/sovol-menu-moonraker.cfg#L515) | <code>input_max: {printer.toolhead.axis_maximum.x}</code> | Set the maximum editable value: <code>{the maximum axis positions.x}</code>. |
+| [516](../../../config/options/lcd/sovol-menu-moonraker.cfg#L516) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
+| [517](../../../config/options/lcd/sovol-menu-moonraker.cfg#L517) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [518](../../../config/options/lcd/sovol-menu-moonraker.cfg#L518) | <code>{% if not (&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [519](../../../config/options/lcd/sovol-menu-moonraker.cfg#L519) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [520](../../../config/options/lcd/sovol-menu-moonraker.cfg#L520) | <code>{% endif %}</code> | End this conditional block. |
+| [521](../../../config/options/lcd/sovol-menu-moonraker.cfg#L521) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [522](../../../config/options/lcd/sovol-menu-moonraker.cfg#L522) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [523](../../../config/options/lcd/sovol-menu-moonraker.cfg#L523) | <code>G1 X{menu.input}</code> | command X=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [524](../../../config/options/lcd/sovol-menu-moonraker.cfg#L524) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_1mm-__axis_y"></a>
 
@@ -1085,22 +1085,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [546](../../../config/options/lcd/sovol-menu-moonraker.cfg#L546) | <code>[menu __main __control __move_1mm __axis_y]</code> | Declare this configuration section. |
-| [547](../../../config/options/lcd/sovol-menu-moonraker.cfg#L547) | <code>enable: {&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [548](../../../config/options/lcd/sovol-menu-moonraker.cfg#L548) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [549](../../../config/options/lcd/sovol-menu-moonraker.cfg#L549) | <code>name: Move Y:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Y:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [550](../../../config/options/lcd/sovol-menu-moonraker.cfg#L550) | <code>input: {printer.gcode_move.gcode_position.y}</code> | Read the current editable LCD value: <code>{the current G-code position.y}</code>. |
-| [551](../../../config/options/lcd/sovol-menu-moonraker.cfg#L551) | <code>input_min: {printer.toolhead.axis_minimum.y}</code> | Set the minimum editable value: <code>{the minimum axis positions.y}</code>. |
-| [552](../../../config/options/lcd/sovol-menu-moonraker.cfg#L552) | <code>input_max: {printer.toolhead.axis_maximum.y}</code> | Set the maximum editable value: <code>{the maximum axis positions.y}</code>. |
-| [553](../../../config/options/lcd/sovol-menu-moonraker.cfg#L553) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
-| [554](../../../config/options/lcd/sovol-menu-moonraker.cfg#L554) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [555](../../../config/options/lcd/sovol-menu-moonraker.cfg#L555) | <code>{% if not (&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [556](../../../config/options/lcd/sovol-menu-moonraker.cfg#L556) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [557](../../../config/options/lcd/sovol-menu-moonraker.cfg#L557) | <code>{% endif %}</code> | End this conditional block. |
-| [558](../../../config/options/lcd/sovol-menu-moonraker.cfg#L558) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [559](../../../config/options/lcd/sovol-menu-moonraker.cfg#L559) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [560](../../../config/options/lcd/sovol-menu-moonraker.cfg#L560) | <code>G1 Y{menu.input}</code> | command Y=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [561](../../../config/options/lcd/sovol-menu-moonraker.cfg#L561) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [526](../../../config/options/lcd/sovol-menu-moonraker.cfg#L526) | <code>[menu __main __control __move_1mm __axis_y]</code> | Declare this configuration section. |
+| [527](../../../config/options/lcd/sovol-menu-moonraker.cfg#L527) | <code>enable: {&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [528](../../../config/options/lcd/sovol-menu-moonraker.cfg#L528) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [529](../../../config/options/lcd/sovol-menu-moonraker.cfg#L529) | <code>name: Move Y:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Y:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [530](../../../config/options/lcd/sovol-menu-moonraker.cfg#L530) | <code>input: {printer.gcode_move.gcode_position.y}</code> | Read the current editable LCD value: <code>{the current G-code position.y}</code>. |
+| [531](../../../config/options/lcd/sovol-menu-moonraker.cfg#L531) | <code>input_min: {printer.toolhead.axis_minimum.y}</code> | Set the minimum editable value: <code>{the minimum axis positions.y}</code>. |
+| [532](../../../config/options/lcd/sovol-menu-moonraker.cfg#L532) | <code>input_max: {printer.toolhead.axis_maximum.y}</code> | Set the maximum editable value: <code>{the maximum axis positions.y}</code>. |
+| [533](../../../config/options/lcd/sovol-menu-moonraker.cfg#L533) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
+| [534](../../../config/options/lcd/sovol-menu-moonraker.cfg#L534) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [535](../../../config/options/lcd/sovol-menu-moonraker.cfg#L535) | <code>{% if not (&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [536](../../../config/options/lcd/sovol-menu-moonraker.cfg#L536) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [537](../../../config/options/lcd/sovol-menu-moonraker.cfg#L537) | <code>{% endif %}</code> | End this conditional block. |
+| [538](../../../config/options/lcd/sovol-menu-moonraker.cfg#L538) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [539](../../../config/options/lcd/sovol-menu-moonraker.cfg#L539) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [540](../../../config/options/lcd/sovol-menu-moonraker.cfg#L540) | <code>G1 Y{menu.input}</code> | command Y=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [541](../../../config/options/lcd/sovol-menu-moonraker.cfg#L541) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_1mm-__axis_z"></a>
 
@@ -1110,22 +1110,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [563](../../../config/options/lcd/sovol-menu-moonraker.cfg#L563) | <code>[menu __main __control __move_1mm __axis_z]</code> | Declare this configuration section. |
-| [564](../../../config/options/lcd/sovol-menu-moonraker.cfg#L564) | <code>enable: {&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [565](../../../config/options/lcd/sovol-menu-moonraker.cfg#L565) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [566](../../../config/options/lcd/sovol-menu-moonraker.cfg#L566) | <code>name: Move Z:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Z:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [567](../../../config/options/lcd/sovol-menu-moonraker.cfg#L567) | <code>input: {printer.gcode_move.gcode_position.z}</code> | Read the current editable LCD value: <code>{the current G-code position.z}</code>. |
-| [568](../../../config/options/lcd/sovol-menu-moonraker.cfg#L568) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [569](../../../config/options/lcd/sovol-menu-moonraker.cfg#L569) | <code>input_max: {printer.toolhead.axis_maximum.z}</code> | Set the maximum editable value: <code>{the maximum axis positions.z}</code>. |
-| [570](../../../config/options/lcd/sovol-menu-moonraker.cfg#L570) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
-| [571](../../../config/options/lcd/sovol-menu-moonraker.cfg#L571) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [572](../../../config/options/lcd/sovol-menu-moonraker.cfg#L572) | <code>{% if not (&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [573](../../../config/options/lcd/sovol-menu-moonraker.cfg#L573) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [574](../../../config/options/lcd/sovol-menu-moonraker.cfg#L574) | <code>{% endif %}</code> | End this conditional block. |
-| [575](../../../config/options/lcd/sovol-menu-moonraker.cfg#L575) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [576](../../../config/options/lcd/sovol-menu-moonraker.cfg#L576) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [577](../../../config/options/lcd/sovol-menu-moonraker.cfg#L577) | <code>G1 Z{menu.input}</code> | command Z=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [578](../../../config/options/lcd/sovol-menu-moonraker.cfg#L578) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [543](../../../config/options/lcd/sovol-menu-moonraker.cfg#L543) | <code>[menu __main __control __move_1mm __axis_z]</code> | Declare this configuration section. |
+| [544](../../../config/options/lcd/sovol-menu-moonraker.cfg#L544) | <code>enable: {&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [545](../../../config/options/lcd/sovol-menu-moonraker.cfg#L545) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [546](../../../config/options/lcd/sovol-menu-moonraker.cfg#L546) | <code>name: Move Z:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Z:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [547](../../../config/options/lcd/sovol-menu-moonraker.cfg#L547) | <code>input: {printer.gcode_move.gcode_position.z}</code> | Read the current editable LCD value: <code>{the current G-code position.z}</code>. |
+| [548](../../../config/options/lcd/sovol-menu-moonraker.cfg#L548) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [549](../../../config/options/lcd/sovol-menu-moonraker.cfg#L549) | <code>input_max: {printer.toolhead.axis_maximum.z}</code> | Set the maximum editable value: <code>{the maximum axis positions.z}</code>. |
+| [550](../../../config/options/lcd/sovol-menu-moonraker.cfg#L550) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
+| [551](../../../config/options/lcd/sovol-menu-moonraker.cfg#L551) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [552](../../../config/options/lcd/sovol-menu-moonraker.cfg#L552) | <code>{% if not (&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [553](../../../config/options/lcd/sovol-menu-moonraker.cfg#L553) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [554](../../../config/options/lcd/sovol-menu-moonraker.cfg#L554) | <code>{% endif %}</code> | End this conditional block. |
+| [555](../../../config/options/lcd/sovol-menu-moonraker.cfg#L555) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [556](../../../config/options/lcd/sovol-menu-moonraker.cfg#L556) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [557](../../../config/options/lcd/sovol-menu-moonraker.cfg#L557) | <code>G1 Z{menu.input}</code> | command Z=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [558](../../../config/options/lcd/sovol-menu-moonraker.cfg#L558) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_1mm-__axis_e"></a>
 
@@ -1135,22 +1135,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [580](../../../config/options/lcd/sovol-menu-moonraker.cfg#L580) | <code>[menu __main __control __move_1mm __axis_e]</code> | Declare this configuration section. |
-| [581](../../../config/options/lcd/sovol-menu-moonraker.cfg#L581) | <code>enable: {printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [582](../../../config/options/lcd/sovol-menu-moonraker.cfg#L582) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [583](../../../config/options/lcd/sovol-menu-moonraker.cfg#L583) | <code>name: Move E:{&#x27;%+06.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move E:{&#x27;%+06.1f&#x27; % the value selected on the LCD}</code>. |
-| [584](../../../config/options/lcd/sovol-menu-moonraker.cfg#L584) | <code>input: 0</code> | Read the current editable LCD value: <code>0</code>. |
-| [585](../../../config/options/lcd/sovol-menu-moonraker.cfg#L585) | <code>input_min: -{printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the minimum editable value: <code>-{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
-| [586](../../../config/options/lcd/sovol-menu-moonraker.cfg#L586) | <code>input_max: {printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
-| [587](../../../config/options/lcd/sovol-menu-moonraker.cfg#L587) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
-| [588](../../../config/options/lcd/sovol-menu-moonraker.cfg#L588) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [589](../../../config/options/lcd/sovol-menu-moonraker.cfg#L589) | <code>{% if not (printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [590](../../../config/options/lcd/sovol-menu-moonraker.cfg#L590) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [591](../../../config/options/lcd/sovol-menu-moonraker.cfg#L591) | <code>{% endif %}</code> | End this conditional block. |
-| [592](../../../config/options/lcd/sovol-menu-moonraker.cfg#L592) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [593](../../../config/options/lcd/sovol-menu-moonraker.cfg#L593) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
-| [594](../../../config/options/lcd/sovol-menu-moonraker.cfg#L594) | <code>G1 E{menu.input} F240</code> | command filament E=<code>{menu.input}</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 4 mm/s (240 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [595](../../../config/options/lcd/sovol-menu-moonraker.cfg#L595) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [560](../../../config/options/lcd/sovol-menu-moonraker.cfg#L560) | <code>[menu __main __control __move_1mm __axis_e]</code> | Declare this configuration section. |
+| [561](../../../config/options/lcd/sovol-menu-moonraker.cfg#L561) | <code>enable: {printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [562](../../../config/options/lcd/sovol-menu-moonraker.cfg#L562) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [563](../../../config/options/lcd/sovol-menu-moonraker.cfg#L563) | <code>name: Move E:{&#x27;%+06.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move E:{&#x27;%+06.1f&#x27; % the value selected on the LCD}</code>. |
+| [564](../../../config/options/lcd/sovol-menu-moonraker.cfg#L564) | <code>input: 0</code> | Read the current editable LCD value: <code>0</code>. |
+| [565](../../../config/options/lcd/sovol-menu-moonraker.cfg#L565) | <code>input_min: -{printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the minimum editable value: <code>-{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
+| [566](../../../config/options/lcd/sovol-menu-moonraker.cfg#L566) | <code>input_max: {printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
+| [567](../../../config/options/lcd/sovol-menu-moonraker.cfg#L567) | <code>input_step: 1.0</code> | Set the amount changed per encoder step: <code>1.0</code>. |
+| [568](../../../config/options/lcd/sovol-menu-moonraker.cfg#L568) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [569](../../../config/options/lcd/sovol-menu-moonraker.cfg#L569) | <code>{% if not (printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [570](../../../config/options/lcd/sovol-menu-moonraker.cfg#L570) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [571](../../../config/options/lcd/sovol-menu-moonraker.cfg#L571) | <code>{% endif %}</code> | End this conditional block. |
+| [572](../../../config/options/lcd/sovol-menu-moonraker.cfg#L572) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [573](../../../config/options/lcd/sovol-menu-moonraker.cfg#L573) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
+| [574](../../../config/options/lcd/sovol-menu-moonraker.cfg#L574) | <code>G1 E{menu.input} F240</code> | command filament E=<code>{menu.input}</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 4 mm/s (240 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [575](../../../config/options/lcd/sovol-menu-moonraker.cfg#L575) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_01mm"></a>
 
@@ -1160,10 +1160,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [598](../../../config/options/lcd/sovol-menu-moonraker.cfg#L598) | <code>[menu __main __control __move_01mm]</code> | Declare this configuration section. |
-| [599](../../../config/options/lcd/sovol-menu-moonraker.cfg#L599) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [600](../../../config/options/lcd/sovol-menu-moonraker.cfg#L600) | <code>enable: {not printer.idle_timeout.state == &quot;Printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{not the idle-timeout state  equals  &quot;Printing&quot;}</code>. |
-| [601](../../../config/options/lcd/sovol-menu-moonraker.cfg#L601) | <code>name: Move 0.1mm</code> | Set the LCD label: <code>Move 0.1mm</code>. |
+| [578](../../../config/options/lcd/sovol-menu-moonraker.cfg#L578) | <code>[menu __main __control __move_01mm]</code> | Declare this configuration section. |
+| [579](../../../config/options/lcd/sovol-menu-moonraker.cfg#L579) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [580](../../../config/options/lcd/sovol-menu-moonraker.cfg#L580) | <code>enable: {not printer.idle_timeout.state == &quot;Printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{not the idle-timeout state  equals  &quot;Printing&quot;}</code>. |
+| [581](../../../config/options/lcd/sovol-menu-moonraker.cfg#L581) | <code>name: Move 0.1mm</code> | Set the LCD label: <code>Move 0.1mm</code>. |
 
 <a id="menu-__main-__control-__move_01mm-__axis_x"></a>
 
@@ -1173,22 +1173,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [603](../../../config/options/lcd/sovol-menu-moonraker.cfg#L603) | <code>[menu __main __control __move_01mm __axis_x]</code> | Declare this configuration section. |
-| [604](../../../config/options/lcd/sovol-menu-moonraker.cfg#L604) | <code>enable: {&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [605](../../../config/options/lcd/sovol-menu-moonraker.cfg#L605) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [606](../../../config/options/lcd/sovol-menu-moonraker.cfg#L606) | <code>name: Move X:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move X:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [607](../../../config/options/lcd/sovol-menu-moonraker.cfg#L607) | <code>input: {printer.gcode_move.gcode_position.x}</code> | Read the current editable LCD value: <code>{the current G-code position.x}</code>. |
-| [608](../../../config/options/lcd/sovol-menu-moonraker.cfg#L608) | <code>input_min: {printer.toolhead.axis_minimum.x}</code> | Set the minimum editable value: <code>{the minimum axis positions.x}</code>. |
-| [609](../../../config/options/lcd/sovol-menu-moonraker.cfg#L609) | <code>input_max: {printer.toolhead.axis_maximum.x}</code> | Set the maximum editable value: <code>{the maximum axis positions.x}</code>. |
-| [610](../../../config/options/lcd/sovol-menu-moonraker.cfg#L610) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
-| [611](../../../config/options/lcd/sovol-menu-moonraker.cfg#L611) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [612](../../../config/options/lcd/sovol-menu-moonraker.cfg#L612) | <code>{% if not (&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [613](../../../config/options/lcd/sovol-menu-moonraker.cfg#L613) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [614](../../../config/options/lcd/sovol-menu-moonraker.cfg#L614) | <code>{% endif %}</code> | End this conditional block. |
-| [615](../../../config/options/lcd/sovol-menu-moonraker.cfg#L615) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [616](../../../config/options/lcd/sovol-menu-moonraker.cfg#L616) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [617](../../../config/options/lcd/sovol-menu-moonraker.cfg#L617) | <code>G1 X{menu.input}</code> | command X=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [618](../../../config/options/lcd/sovol-menu-moonraker.cfg#L618) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [583](../../../config/options/lcd/sovol-menu-moonraker.cfg#L583) | <code>[menu __main __control __move_01mm __axis_x]</code> | Declare this configuration section. |
+| [584](../../../config/options/lcd/sovol-menu-moonraker.cfg#L584) | <code>enable: {&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [585](../../../config/options/lcd/sovol-menu-moonraker.cfg#L585) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [586](../../../config/options/lcd/sovol-menu-moonraker.cfg#L586) | <code>name: Move X:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move X:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [587](../../../config/options/lcd/sovol-menu-moonraker.cfg#L587) | <code>input: {printer.gcode_move.gcode_position.x}</code> | Read the current editable LCD value: <code>{the current G-code position.x}</code>. |
+| [588](../../../config/options/lcd/sovol-menu-moonraker.cfg#L588) | <code>input_min: {printer.toolhead.axis_minimum.x}</code> | Set the minimum editable value: <code>{the minimum axis positions.x}</code>. |
+| [589](../../../config/options/lcd/sovol-menu-moonraker.cfg#L589) | <code>input_max: {printer.toolhead.axis_maximum.x}</code> | Set the maximum editable value: <code>{the maximum axis positions.x}</code>. |
+| [590](../../../config/options/lcd/sovol-menu-moonraker.cfg#L590) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
+| [591](../../../config/options/lcd/sovol-menu-moonraker.cfg#L591) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [592](../../../config/options/lcd/sovol-menu-moonraker.cfg#L592) | <code>{% if not (&#x27;x&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;x&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [593](../../../config/options/lcd/sovol-menu-moonraker.cfg#L593) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [594](../../../config/options/lcd/sovol-menu-moonraker.cfg#L594) | <code>{% endif %}</code> | End this conditional block. |
+| [595](../../../config/options/lcd/sovol-menu-moonraker.cfg#L595) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [596](../../../config/options/lcd/sovol-menu-moonraker.cfg#L596) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [597](../../../config/options/lcd/sovol-menu-moonraker.cfg#L597) | <code>G1 X{menu.input}</code> | command X=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [598](../../../config/options/lcd/sovol-menu-moonraker.cfg#L598) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_01mm-__axis_y"></a>
 
@@ -1198,22 +1198,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [620](../../../config/options/lcd/sovol-menu-moonraker.cfg#L620) | <code>[menu __main __control __move_01mm __axis_y]</code> | Declare this configuration section. |
-| [621](../../../config/options/lcd/sovol-menu-moonraker.cfg#L621) | <code>enable: {&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [622](../../../config/options/lcd/sovol-menu-moonraker.cfg#L622) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [623](../../../config/options/lcd/sovol-menu-moonraker.cfg#L623) | <code>name: Move Y:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Y:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [624](../../../config/options/lcd/sovol-menu-moonraker.cfg#L624) | <code>input: {printer.gcode_move.gcode_position.y}</code> | Read the current editable LCD value: <code>{the current G-code position.y}</code>. |
-| [625](../../../config/options/lcd/sovol-menu-moonraker.cfg#L625) | <code>input_min: {printer.toolhead.axis_minimum.y}</code> | Set the minimum editable value: <code>{the minimum axis positions.y}</code>. |
-| [626](../../../config/options/lcd/sovol-menu-moonraker.cfg#L626) | <code>input_max: {printer.toolhead.axis_maximum.y}</code> | Set the maximum editable value: <code>{the maximum axis positions.y}</code>. |
-| [627](../../../config/options/lcd/sovol-menu-moonraker.cfg#L627) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
-| [628](../../../config/options/lcd/sovol-menu-moonraker.cfg#L628) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [629](../../../config/options/lcd/sovol-menu-moonraker.cfg#L629) | <code>{% if not (&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [630](../../../config/options/lcd/sovol-menu-moonraker.cfg#L630) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [631](../../../config/options/lcd/sovol-menu-moonraker.cfg#L631) | <code>{% endif %}</code> | End this conditional block. |
-| [632](../../../config/options/lcd/sovol-menu-moonraker.cfg#L632) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [633](../../../config/options/lcd/sovol-menu-moonraker.cfg#L633) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [634](../../../config/options/lcd/sovol-menu-moonraker.cfg#L634) | <code>G1 Y{menu.input}</code> | command Y=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [635](../../../config/options/lcd/sovol-menu-moonraker.cfg#L635) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [600](../../../config/options/lcd/sovol-menu-moonraker.cfg#L600) | <code>[menu __main __control __move_01mm __axis_y]</code> | Declare this configuration section. |
+| [601](../../../config/options/lcd/sovol-menu-moonraker.cfg#L601) | <code>enable: {&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [602](../../../config/options/lcd/sovol-menu-moonraker.cfg#L602) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [603](../../../config/options/lcd/sovol-menu-moonraker.cfg#L603) | <code>name: Move Y:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Y:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [604](../../../config/options/lcd/sovol-menu-moonraker.cfg#L604) | <code>input: {printer.gcode_move.gcode_position.y}</code> | Read the current editable LCD value: <code>{the current G-code position.y}</code>. |
+| [605](../../../config/options/lcd/sovol-menu-moonraker.cfg#L605) | <code>input_min: {printer.toolhead.axis_minimum.y}</code> | Set the minimum editable value: <code>{the minimum axis positions.y}</code>. |
+| [606](../../../config/options/lcd/sovol-menu-moonraker.cfg#L606) | <code>input_max: {printer.toolhead.axis_maximum.y}</code> | Set the maximum editable value: <code>{the maximum axis positions.y}</code>. |
+| [607](../../../config/options/lcd/sovol-menu-moonraker.cfg#L607) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
+| [608](../../../config/options/lcd/sovol-menu-moonraker.cfg#L608) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [609](../../../config/options/lcd/sovol-menu-moonraker.cfg#L609) | <code>{% if not (&#x27;y&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;y&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [610](../../../config/options/lcd/sovol-menu-moonraker.cfg#L610) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [611](../../../config/options/lcd/sovol-menu-moonraker.cfg#L611) | <code>{% endif %}</code> | End this conditional block. |
+| [612](../../../config/options/lcd/sovol-menu-moonraker.cfg#L612) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [613](../../../config/options/lcd/sovol-menu-moonraker.cfg#L613) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [614](../../../config/options/lcd/sovol-menu-moonraker.cfg#L614) | <code>G1 Y{menu.input}</code> | command Y=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [615](../../../config/options/lcd/sovol-menu-moonraker.cfg#L615) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_01mm-__axis_z"></a>
 
@@ -1223,22 +1223,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [637](../../../config/options/lcd/sovol-menu-moonraker.cfg#L637) | <code>[menu __main __control __move_01mm __axis_z]</code> | Declare this configuration section. |
-| [638](../../../config/options/lcd/sovol-menu-moonraker.cfg#L638) | <code>enable: {&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [639](../../../config/options/lcd/sovol-menu-moonraker.cfg#L639) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [640](../../../config/options/lcd/sovol-menu-moonraker.cfg#L640) | <code>name: Move Z:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Z:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
-| [641](../../../config/options/lcd/sovol-menu-moonraker.cfg#L641) | <code>input: {printer.gcode_move.gcode_position.z}</code> | Read the current editable LCD value: <code>{the current G-code position.z}</code>. |
-| [642](../../../config/options/lcd/sovol-menu-moonraker.cfg#L642) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
-| [643](../../../config/options/lcd/sovol-menu-moonraker.cfg#L643) | <code>input_max: {printer.toolhead.axis_maximum.z}</code> | Set the maximum editable value: <code>{the maximum axis positions.z}</code>. |
-| [644](../../../config/options/lcd/sovol-menu-moonraker.cfg#L644) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
-| [645](../../../config/options/lcd/sovol-menu-moonraker.cfg#L645) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [646](../../../config/options/lcd/sovol-menu-moonraker.cfg#L646) | <code>{% if not (&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [647](../../../config/options/lcd/sovol-menu-moonraker.cfg#L647) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [648](../../../config/options/lcd/sovol-menu-moonraker.cfg#L648) | <code>{% endif %}</code> | End this conditional block. |
-| [649](../../../config/options/lcd/sovol-menu-moonraker.cfg#L649) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [650](../../../config/options/lcd/sovol-menu-moonraker.cfg#L650) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [651](../../../config/options/lcd/sovol-menu-moonraker.cfg#L651) | <code>G1 Z{menu.input}</code> | command Z=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [652](../../../config/options/lcd/sovol-menu-moonraker.cfg#L652) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [617](../../../config/options/lcd/sovol-menu-moonraker.cfg#L617) | <code>[menu __main __control __move_01mm __axis_z]</code> | Declare this configuration section. |
+| [618](../../../config/options/lcd/sovol-menu-moonraker.cfg#L618) | <code>enable: {&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [619](../../../config/options/lcd/sovol-menu-moonraker.cfg#L619) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [620](../../../config/options/lcd/sovol-menu-moonraker.cfg#L620) | <code>name: Move Z:{&#x27;%05.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move Z:{&#x27;%05.1f&#x27; % the value selected on the LCD}</code>. |
+| [621](../../../config/options/lcd/sovol-menu-moonraker.cfg#L621) | <code>input: {printer.gcode_move.gcode_position.z}</code> | Read the current editable LCD value: <code>{the current G-code position.z}</code>. |
+| [622](../../../config/options/lcd/sovol-menu-moonraker.cfg#L622) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [623](../../../config/options/lcd/sovol-menu-moonraker.cfg#L623) | <code>input_max: {printer.toolhead.axis_maximum.z}</code> | Set the maximum editable value: <code>{the maximum axis positions.z}</code>. |
+| [624](../../../config/options/lcd/sovol-menu-moonraker.cfg#L624) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
+| [625](../../../config/options/lcd/sovol-menu-moonraker.cfg#L625) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [626](../../../config/options/lcd/sovol-menu-moonraker.cfg#L626) | <code>{% if not (&#x27;z&#x27; in printer.toolhead.homed_axes and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (&#x27;z&#x27; in the set of homed axes and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [627](../../../config/options/lcd/sovol-menu-moonraker.cfg#L627) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [628](../../../config/options/lcd/sovol-menu-moonraker.cfg#L628) | <code>{% endif %}</code> | End this conditional block. |
+| [629](../../../config/options/lcd/sovol-menu-moonraker.cfg#L629) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [630](../../../config/options/lcd/sovol-menu-moonraker.cfg#L630) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [631](../../../config/options/lcd/sovol-menu-moonraker.cfg#L631) | <code>G1 Z{menu.input}</code> | command Z=<code>{menu.input}</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [632](../../../config/options/lcd/sovol-menu-moonraker.cfg#L632) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__control-__move_01mm-__axis_e"></a>
 
@@ -1248,22 +1248,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [654](../../../config/options/lcd/sovol-menu-moonraker.cfg#L654) | <code>[menu __main __control __move_01mm __axis_e]</code> | Declare this configuration section. |
-| [655](../../../config/options/lcd/sovol-menu-moonraker.cfg#L655) | <code>enable: {printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
-| [656](../../../config/options/lcd/sovol-menu-moonraker.cfg#L656) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [657](../../../config/options/lcd/sovol-menu-moonraker.cfg#L657) | <code>name: Move E:{&#x27;%+06.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move E:{&#x27;%+06.1f&#x27; % the value selected on the LCD}</code>. |
-| [658](../../../config/options/lcd/sovol-menu-moonraker.cfg#L658) | <code>input: 0</code> | Read the current editable LCD value: <code>0</code>. |
-| [659](../../../config/options/lcd/sovol-menu-moonraker.cfg#L659) | <code>input_min: -{printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the minimum editable value: <code>-{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
-| [660](../../../config/options/lcd/sovol-menu-moonraker.cfg#L660) | <code>input_max: {printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
-| [661](../../../config/options/lcd/sovol-menu-moonraker.cfg#L661) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
-| [662](../../../config/options/lcd/sovol-menu-moonraker.cfg#L662) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [663](../../../config/options/lcd/sovol-menu-moonraker.cfg#L663) | <code>{% if not (printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
-| [664](../../../config/options/lcd/sovol-menu-moonraker.cfg#L664) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [665](../../../config/options/lcd/sovol-menu-moonraker.cfg#L665) | <code>{% endif %}</code> | End this conditional block. |
-| [666](../../../config/options/lcd/sovol-menu-moonraker.cfg#L666) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [667](../../../config/options/lcd/sovol-menu-moonraker.cfg#L667) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
-| [668](../../../config/options/lcd/sovol-menu-moonraker.cfg#L668) | <code>G1 E{menu.input} F240</code> | command filament E=<code>{menu.input}</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 4 mm/s (240 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [669](../../../config/options/lcd/sovol-menu-moonraker.cfg#L669) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [634](../../../config/options/lcd/sovol-menu-moonraker.cfg#L634) | <code>[menu __main __control __move_01mm __axis_e]</code> | Declare this configuration section. |
+| [635](../../../config/options/lcd/sovol-menu-moonraker.cfg#L635) | <code>enable: {printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;}</code>. |
+| [636](../../../config/options/lcd/sovol-menu-moonraker.cfg#L636) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [637](../../../config/options/lcd/sovol-menu-moonraker.cfg#L637) | <code>name: Move E:{&#x27;%+06.1f&#x27; % menu.input}</code> | Set the LCD label: <code>Move E:{&#x27;%+06.1f&#x27; % the value selected on the LCD}</code>. |
+| [638](../../../config/options/lcd/sovol-menu-moonraker.cfg#L638) | <code>input: 0</code> | Read the current editable LCD value: <code>0</code>. |
+| [639](../../../config/options/lcd/sovol-menu-moonraker.cfg#L639) | <code>input_min: -{printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the minimum editable value: <code>-{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
+| [640](../../../config/options/lcd/sovol-menu-moonraker.cfg#L640) | <code>input_max: {printer.configfile.config.extruder.max_extrude_only_distance&#124;default(50)}</code> | Set the maximum editable value: <code>{the raw loaded settings.extruder.max_extrude_only_distance (use 50 if absent)}</code>. |
+| [641](../../../config/options/lcd/sovol-menu-moonraker.cfg#L641) | <code>input_step: 0.1</code> | Set the amount changed per encoder step: <code>0.1</code>. |
+| [642](../../../config/options/lcd/sovol-menu-moonraker.cfg#L642) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [643](../../../config/options/lcd/sovol-menu-moonraker.cfg#L643) | <code>{% if not (printer.extruder.can_extrude and not printer.pause_resume.is_paused and printer.print_stats.state != &quot;printing&quot;) %}</code> | Start a conditional branch: <code>not (the nozzle is hot enough to extrude and not the printer is paused and the print state  differs from  &quot;printing&quot;)</code>. Only a true branch emits its commands. |
+| [644](../../../config/options/lcd/sovol-menu-moonraker.cfg#L644) | <code>{action_raise_error(&quot;Manual movement unavailable in the current state.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [645](../../../config/options/lcd/sovol-menu-moonraker.cfg#L645) | <code>{% endif %}</code> | End this conditional block. |
+| [646](../../../config/options/lcd/sovol-menu-moonraker.cfg#L646) | <code>SAVE_GCODE_STATE NAME=__move__axis</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [647](../../../config/options/lcd/sovol-menu-moonraker.cfg#L647) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
+| [648](../../../config/options/lcd/sovol-menu-moonraker.cfg#L648) | <code>G1 E{menu.input} F240</code> | command filament E=<code>{menu.input}</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 4 mm/s (240 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [649](../../../config/options/lcd/sovol-menu-moonraker.cfg#L649) | <code>RESTORE_GCODE_STATE NAME=__move__axis</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__filament"></a>
 
@@ -1273,11 +1273,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [672](../../../config/options/lcd/sovol-menu-moonraker.cfg#L672) | <code>[menu __main __filament]</code> | Declare this configuration section. |
-| [673](../../../config/options/lcd/sovol-menu-moonraker.cfg#L673) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [674](../../../config/options/lcd/sovol-menu-moonraker.cfg#L674) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [675](../../../config/options/lcd/sovol-menu-moonraker.cfg#L675) | <code>name: Filament</code> | Set the LCD label: <code>Filament</code>. |
-| [676](../../../config/options/lcd/sovol-menu-moonraker.cfg#L676) | <code>index: 9</code> | Set the item ordering: <code>9</code>. |
+| [652](../../../config/options/lcd/sovol-menu-moonraker.cfg#L652) | <code>[menu __main __filament]</code> | Declare this configuration section. |
+| [653](../../../config/options/lcd/sovol-menu-moonraker.cfg#L653) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [654](../../../config/options/lcd/sovol-menu-moonraker.cfg#L654) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [655](../../../config/options/lcd/sovol-menu-moonraker.cfg#L655) | <code>name: Filament</code> | Set the LCD label: <code>Filament</code>. |
+| [656](../../../config/options/lcd/sovol-menu-moonraker.cfg#L656) | <code>index: 9</code> | Set the item ordering: <code>9</code>. |
 
 <a id="menu-__main-__filament-__load"></a>
 
@@ -1289,14 +1289,14 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [678](../../../config/options/lcd/sovol-menu-moonraker.cfg#L678) | <code>[menu __main __filament __load]</code> | Declare this configuration section. |
-| [679](../../../config/options/lcd/sovol-menu-moonraker.cfg#L679) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [680](../../../config/options/lcd/sovol-menu-moonraker.cfg#L680) | <code>name: Load Filament</code> | Set the LCD label: <code>Load Filament</code>. |
-| [681](../../../config/options/lcd/sovol-menu-moonraker.cfg#L681) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [682](../../../config/options/lcd/sovol-menu-moonraker.cfg#L682) | <code>{menu.exit()}</code> | Exit the LCD menu. |
-| [683](../../../config/options/lcd/sovol-menu-moonraker.cfg#L683) | <code>SAVE_GCODE_STATE NAME=__filament__load</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [684](../../../config/options/lcd/sovol-menu-moonraker.cfg#L684) | <code>LOAD_FILAMENT</code> | Run [LOAD_FILAMENT](../../macros/filament.cfg.md#gcode_macro-load_filament), which is evaluated separately when reached. Use its default arguments. |
-| [685](../../../config/options/lcd/sovol-menu-moonraker.cfg#L685) | <code>RESTORE_GCODE_STATE NAME=__filament__load</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [658](../../../config/options/lcd/sovol-menu-moonraker.cfg#L658) | <code>[menu __main __filament __load]</code> | Declare this configuration section. |
+| [659](../../../config/options/lcd/sovol-menu-moonraker.cfg#L659) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [660](../../../config/options/lcd/sovol-menu-moonraker.cfg#L660) | <code>name: Load Filament</code> | Set the LCD label: <code>Load Filament</code>. |
+| [661](../../../config/options/lcd/sovol-menu-moonraker.cfg#L661) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [662](../../../config/options/lcd/sovol-menu-moonraker.cfg#L662) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [663](../../../config/options/lcd/sovol-menu-moonraker.cfg#L663) | <code>SAVE_GCODE_STATE NAME=__filament__load</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [664](../../../config/options/lcd/sovol-menu-moonraker.cfg#L664) | <code>LOAD_FILAMENT</code> | Run [LOAD_FILAMENT](../../macros/filament.cfg.md#gcode_macro-load_filament), which is evaluated separately when reached. Use its default arguments. |
+| [665](../../../config/options/lcd/sovol-menu-moonraker.cfg#L665) | <code>RESTORE_GCODE_STATE NAME=__filament__load</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__filament-__unload"></a>
 
@@ -1308,14 +1308,14 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [687](../../../config/options/lcd/sovol-menu-moonraker.cfg#L687) | <code>[menu __main __filament __unload]</code> | Declare this configuration section. |
-| [688](../../../config/options/lcd/sovol-menu-moonraker.cfg#L688) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [689](../../../config/options/lcd/sovol-menu-moonraker.cfg#L689) | <code>name: Unload Filament</code> | Set the LCD label: <code>Unload Filament</code>. |
-| [690](../../../config/options/lcd/sovol-menu-moonraker.cfg#L690) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [691](../../../config/options/lcd/sovol-menu-moonraker.cfg#L691) | <code>{menu.exit()}</code> | Exit the LCD menu. |
-| [692](../../../config/options/lcd/sovol-menu-moonraker.cfg#L692) | <code>SAVE_GCODE_STATE NAME=__filament__load</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [693](../../../config/options/lcd/sovol-menu-moonraker.cfg#L693) | <code>UNLOAD_FILAMENT</code> | Run [UNLOAD_FILAMENT](../../macros/filament.cfg.md#gcode_macro-unload_filament), which is evaluated separately when reached. Use its default arguments. |
-| [694](../../../config/options/lcd/sovol-menu-moonraker.cfg#L694) | <code>RESTORE_GCODE_STATE NAME=__filament__load</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [667](../../../config/options/lcd/sovol-menu-moonraker.cfg#L667) | <code>[menu __main __filament __unload]</code> | Declare this configuration section. |
+| [668](../../../config/options/lcd/sovol-menu-moonraker.cfg#L668) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [669](../../../config/options/lcd/sovol-menu-moonraker.cfg#L669) | <code>name: Unload Filament</code> | Set the LCD label: <code>Unload Filament</code>. |
+| [670](../../../config/options/lcd/sovol-menu-moonraker.cfg#L670) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [671](../../../config/options/lcd/sovol-menu-moonraker.cfg#L671) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [672](../../../config/options/lcd/sovol-menu-moonraker.cfg#L672) | <code>SAVE_GCODE_STATE NAME=__filament__load</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [673](../../../config/options/lcd/sovol-menu-moonraker.cfg#L673) | <code>UNLOAD_FILAMENT</code> | Run [UNLOAD_FILAMENT](../../macros/filament.cfg.md#gcode_macro-unload_filament), which is evaluated separately when reached. Use its default arguments. |
+| [674](../../../config/options/lcd/sovol-menu-moonraker.cfg#L674) | <code>RESTORE_GCODE_STATE NAME=__filament__load</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
 
 <a id="menu-__main-__setup"></a>
 
@@ -1325,11 +1325,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [697](../../../config/options/lcd/sovol-menu-moonraker.cfg#L697) | <code>[menu __main __setup]</code> | Declare this configuration section. |
-| [698](../../../config/options/lcd/sovol-menu-moonraker.cfg#L698) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [699](../../../config/options/lcd/sovol-menu-moonraker.cfg#L699) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [700](../../../config/options/lcd/sovol-menu-moonraker.cfg#L700) | <code>name: Advanced</code> | Set the LCD label: <code>Advanced</code>. |
-| [701](../../../config/options/lcd/sovol-menu-moonraker.cfg#L701) | <code>index: 10</code> | Set the item ordering: <code>10</code>. |
+| [677](../../../config/options/lcd/sovol-menu-moonraker.cfg#L677) | <code>[menu __main __setup]</code> | Declare this configuration section. |
+| [678](../../../config/options/lcd/sovol-menu-moonraker.cfg#L678) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [679](../../../config/options/lcd/sovol-menu-moonraker.cfg#L679) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [680](../../../config/options/lcd/sovol-menu-moonraker.cfg#L680) | <code>name: Advanced</code> | Set the LCD label: <code>Advanced</code>. |
+| [681](../../../config/options/lcd/sovol-menu-moonraker.cfg#L681) | <code>index: 10</code> | Set the item ordering: <code>10</code>. |
 
 <a id="menu-__main-__setup-__calib"></a>
 
@@ -1339,9 +1339,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [703](../../../config/options/lcd/sovol-menu-moonraker.cfg#L703) | <code>[menu __main __setup __calib]</code> | Declare this configuration section. |
-| [704](../../../config/options/lcd/sovol-menu-moonraker.cfg#L704) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [705](../../../config/options/lcd/sovol-menu-moonraker.cfg#L705) | <code>name: Calibration</code> | Set the LCD label: <code>Calibration</code>. |
+| [683](../../../config/options/lcd/sovol-menu-moonraker.cfg#L683) | <code>[menu __main __setup __calib]</code> | Declare this configuration section. |
+| [684](../../../config/options/lcd/sovol-menu-moonraker.cfg#L684) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [685](../../../config/options/lcd/sovol-menu-moonraker.cfg#L685) | <code>name: Calibration</code> | Set the LCD label: <code>Calibration</code>. |
 
 <a id="menu-__main-__setup-__calib-__bedprobe"></a>
 
@@ -1351,8 +1351,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [707](../../../config/options/lcd/sovol-menu-moonraker.cfg#L707) | <code>[menu __main __setup __calib __bedprobe]</code> | Declare this configuration section. |
-| [708](../../../config/options/lcd/sovol-menu-moonraker.cfg#L708) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [687](../../../config/options/lcd/sovol-menu-moonraker.cfg#L687) | <code>[menu __main __setup __calib __bedprobe]</code> | Declare this configuration section. |
+| [688](../../../config/options/lcd/sovol-menu-moonraker.cfg#L688) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__setup-__calib-__autocalib"></a>
 
@@ -1364,12 +1364,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [710](../../../config/options/lcd/sovol-menu-moonraker.cfg#L710) | <code>[menu __main __setup __calib __autocalib]</code> | Declare this configuration section. |
-| [711](../../../config/options/lcd/sovol-menu-moonraker.cfg#L711) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [712](../../../config/options/lcd/sovol-menu-moonraker.cfg#L712) | <code>name: Auto-calibration</code> | Set the LCD label: <code>Auto-calibration</code>. |
-| [713](../../../config/options/lcd/sovol-menu-moonraker.cfg#L713) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [714](../../../config/options/lcd/sovol-menu-moonraker.cfg#L714) | <code>AUTO_CALIBRATE</code> | Run [AUTO_CALIBRATE](../../macros/calibration.cfg.md#gcode_macro-auto_calibrate), which is evaluated separately when reached. Use its default arguments. |
-| [715](../../../config/options/lcd/sovol-menu-moonraker.cfg#L715) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [690](../../../config/options/lcd/sovol-menu-moonraker.cfg#L690) | <code>[menu __main __setup __calib __autocalib]</code> | Declare this configuration section. |
+| [691](../../../config/options/lcd/sovol-menu-moonraker.cfg#L691) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [692](../../../config/options/lcd/sovol-menu-moonraker.cfg#L692) | <code>name: Auto-calibration</code> | Set the LCD label: <code>Auto-calibration</code>. |
+| [693](../../../config/options/lcd/sovol-menu-moonraker.cfg#L693) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [694](../../../config/options/lcd/sovol-menu-moonraker.cfg#L694) | <code>AUTO_CALIBRATE</code> | Run [AUTO_CALIBRATE](../../macros/calibration.cfg.md#gcode_macro-auto_calibrate), which is evaluated separately when reached. Use its default arguments. |
+| [695](../../../config/options/lcd/sovol-menu-moonraker.cfg#L695) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__setup-__calib-__belt_test"></a>
 
@@ -1381,12 +1381,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [717](../../../config/options/lcd/sovol-menu-moonraker.cfg#L717) | <code>[menu __main __setup __calib __belt_test]</code> | Declare this configuration section. |
-| [718](../../../config/options/lcd/sovol-menu-moonraker.cfg#L718) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [719](../../../config/options/lcd/sovol-menu-moonraker.cfg#L719) | <code>name: Belt resonance</code> | Set the LCD label: <code>Belt resonance</code>. |
-| [720](../../../config/options/lcd/sovol-menu-moonraker.cfg#L720) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [721](../../../config/options/lcd/sovol-menu-moonraker.cfg#L721) | <code>BELT_RESONANCES</code> | Run [BELT_RESONANCES](../../macros/calibration.cfg.md#gcode_macro-belt_resonances), which is evaluated separately when reached. Use its default arguments. |
-| [722](../../../config/options/lcd/sovol-menu-moonraker.cfg#L722) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [697](../../../config/options/lcd/sovol-menu-moonraker.cfg#L697) | <code>[menu __main __setup __calib __belt_test]</code> | Declare this configuration section. |
+| [698](../../../config/options/lcd/sovol-menu-moonraker.cfg#L698) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [699](../../../config/options/lcd/sovol-menu-moonraker.cfg#L699) | <code>name: Belt resonance</code> | Set the LCD label: <code>Belt resonance</code>. |
+| [700](../../../config/options/lcd/sovol-menu-moonraker.cfg#L700) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [701](../../../config/options/lcd/sovol-menu-moonraker.cfg#L701) | <code>BELT_RESONANCES</code> | Run [BELT_RESONANCES](../../macros/calibration.cfg.md#gcode_macro-belt_resonances), which is evaluated separately when reached. Use its default arguments. |
+| [702](../../../config/options/lcd/sovol-menu-moonraker.cfg#L702) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__setup-__calib-__multi_pid"></a>
 
@@ -1398,12 +1398,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [724](../../../config/options/lcd/sovol-menu-moonraker.cfg#L724) | <code>[menu __main __setup __calib __multi_pid]</code> | Declare this configuration section. |
-| [725](../../../config/options/lcd/sovol-menu-moonraker.cfg#L725) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [726](../../../config/options/lcd/sovol-menu-moonraker.cfg#L726) | <code>name: Multi PID Calibrate</code> | Set the LCD label: <code>Multi PID Calibrate</code>. |
-| [727](../../../config/options/lcd/sovol-menu-moonraker.cfg#L727) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [728](../../../config/options/lcd/sovol-menu-moonraker.cfg#L728) | <code>MULTI_PID_CALIBRATE</code> | Run [MULTI_PID_CALIBRATE](../../macros/custom-macros.cfg.md#gcode_macro-multi_pid_calibrate), which is evaluated separately when reached. Use its default arguments. |
-| [729](../../../config/options/lcd/sovol-menu-moonraker.cfg#L729) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [704](../../../config/options/lcd/sovol-menu-moonraker.cfg#L704) | <code>[menu __main __setup __calib __multi_pid]</code> | Declare this configuration section. |
+| [705](../../../config/options/lcd/sovol-menu-moonraker.cfg#L705) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [706](../../../config/options/lcd/sovol-menu-moonraker.cfg#L706) | <code>name: Multi PID Calibrate</code> | Set the LCD label: <code>Multi PID Calibrate</code>. |
+| [707](../../../config/options/lcd/sovol-menu-moonraker.cfg#L707) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [708](../../../config/options/lcd/sovol-menu-moonraker.cfg#L708) | <code>MULTI_PID_CALIBRATE</code> | Run [MULTI_PID_CALIBRATE](../../macros/custom-macros.cfg.md#gcode_macro-multi_pid_calibrate), which is evaluated separately when reached. Use its default arguments. |
+| [709](../../../config/options/lcd/sovol-menu-moonraker.cfg#L709) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__setup-__calib-__eddy"></a>
 
@@ -1413,10 +1413,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [734](../../../config/options/lcd/sovol-menu-moonraker.cfg#L734) | <code>[menu __main __setup __calib __eddy]</code> | Declare this configuration section. |
-| [735](../../../config/options/lcd/sovol-menu-moonraker.cfg#L735) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [736](../../../config/options/lcd/sovol-menu-moonraker.cfg#L736) | <code>enable: {&#x27;probe_eddy_current eddy&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;probe_eddy_current eddy&#x27; in printer}</code>. |
-| [737](../../../config/options/lcd/sovol-menu-moonraker.cfg#L737) | <code>name: Eddy</code> | Set the LCD label: <code>Eddy</code>. |
+| [714](../../../config/options/lcd/sovol-menu-moonraker.cfg#L714) | <code>[menu __main __setup __calib __eddy]</code> | Declare this configuration section. |
+| [715](../../../config/options/lcd/sovol-menu-moonraker.cfg#L715) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [716](../../../config/options/lcd/sovol-menu-moonraker.cfg#L716) | <code>enable: {&#x27;probe_eddy_current eddy&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;probe_eddy_current eddy&#x27; in printer}</code>. |
+| [717](../../../config/options/lcd/sovol-menu-moonraker.cfg#L717) | <code>name: Eddy</code> | Set the LCD label: <code>Eddy</code>. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__frequency"></a>
 
@@ -1426,12 +1426,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [739](../../../config/options/lcd/sovol-menu-moonraker.cfg#L739) | <code>[menu __main __setup __calib __eddy __frequency]</code> | Declare this configuration section. |
-| [740](../../../config/options/lcd/sovol-menu-moonraker.cfg#L740) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [741](../../../config/options/lcd/sovol-menu-moonraker.cfg#L741) | <code>name: Frequency calibration</code> | Set the LCD label: <code>Frequency calibration</code>. |
-| [742](../../../config/options/lcd/sovol-menu-moonraker.cfg#L742) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [743](../../../config/options/lcd/sovol-menu-moonraker.cfg#L743) | <code>PROBE_EDDY_CURRENT_CALIBRATE CHIP=eddy</code> | Start native Eddy frequency-to-height calibration for CHIP. Follow the manual calibration procedure; results need SAVE_CONFIG to persist. |
-| [744](../../../config/options/lcd/sovol-menu-moonraker.cfg#L744) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [719](../../../config/options/lcd/sovol-menu-moonraker.cfg#L719) | <code>[menu __main __setup __calib __eddy __frequency]</code> | Declare this configuration section. |
+| [720](../../../config/options/lcd/sovol-menu-moonraker.cfg#L720) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [721](../../../config/options/lcd/sovol-menu-moonraker.cfg#L721) | <code>name: Frequency calibration</code> | Set the LCD label: <code>Frequency calibration</code>. |
+| [722](../../../config/options/lcd/sovol-menu-moonraker.cfg#L722) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [723](../../../config/options/lcd/sovol-menu-moonraker.cfg#L723) | <code>PROBE_EDDY_CURRENT_CALIBRATE CHIP=eddy</code> | Start native Eddy frequency-to-height calibration for CHIP. Follow the manual calibration procedure; results need SAVE_CONFIG to persist. |
+| [724](../../../config/options/lcd/sovol-menu-moonraker.cfg#L724) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__tap_guess"></a>
 
@@ -1441,12 +1441,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [746](../../../config/options/lcd/sovol-menu-moonraker.cfg#L746) | <code>[menu __main __setup __calib __eddy __tap_guess]</code> | Declare this configuration section. |
-| [747](../../../config/options/lcd/sovol-menu-moonraker.cfg#L747) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [748](../../../config/options/lcd/sovol-menu-moonraker.cfg#L748) | <code>name: Tap guess</code> | Set the LCD label: <code>Tap guess</code>. |
-| [749](../../../config/options/lcd/sovol-menu-moonraker.cfg#L749) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [750](../../../config/options/lcd/sovol-menu-moonraker.cfg#L750) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=guess</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
-| [751](../../../config/options/lcd/sovol-menu-moonraker.cfg#L751) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [726](../../../config/options/lcd/sovol-menu-moonraker.cfg#L726) | <code>[menu __main __setup __calib __eddy __tap_guess]</code> | Declare this configuration section. |
+| [727](../../../config/options/lcd/sovol-menu-moonraker.cfg#L727) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [728](../../../config/options/lcd/sovol-menu-moonraker.cfg#L728) | <code>name: Tap guess</code> | Set the LCD label: <code>Tap guess</code>. |
+| [729](../../../config/options/lcd/sovol-menu-moonraker.cfg#L729) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [730](../../../config/options/lcd/sovol-menu-moonraker.cfg#L730) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=guess</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
+| [731](../../../config/options/lcd/sovol-menu-moonraker.cfg#L731) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__tap_refine"></a>
 
@@ -1456,12 +1456,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [753](../../../config/options/lcd/sovol-menu-moonraker.cfg#L753) | <code>[menu __main __setup __calib __eddy __tap_refine]</code> | Declare this configuration section. |
-| [754](../../../config/options/lcd/sovol-menu-moonraker.cfg#L754) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [755](../../../config/options/lcd/sovol-menu-moonraker.cfg#L755) | <code>name: Tap refine</code> | Set the LCD label: <code>Tap refine</code>. |
-| [756](../../../config/options/lcd/sovol-menu-moonraker.cfg#L756) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [757](../../../config/options/lcd/sovol-menu-moonraker.cfg#L757) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=refine</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
-| [758](../../../config/options/lcd/sovol-menu-moonraker.cfg#L758) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [733](../../../config/options/lcd/sovol-menu-moonraker.cfg#L733) | <code>[menu __main __setup __calib __eddy __tap_refine]</code> | Declare this configuration section. |
+| [734](../../../config/options/lcd/sovol-menu-moonraker.cfg#L734) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [735](../../../config/options/lcd/sovol-menu-moonraker.cfg#L735) | <code>name: Tap refine</code> | Set the LCD label: <code>Tap refine</code>. |
+| [736](../../../config/options/lcd/sovol-menu-moonraker.cfg#L736) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [737](../../../config/options/lcd/sovol-menu-moonraker.cfg#L737) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=refine</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
+| [738](../../../config/options/lcd/sovol-menu-moonraker.cfg#L738) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__tap_verify"></a>
 
@@ -1471,12 +1471,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [760](../../../config/options/lcd/sovol-menu-moonraker.cfg#L760) | <code>[menu __main __setup __calib __eddy __tap_verify]</code> | Declare this configuration section. |
-| [761](../../../config/options/lcd/sovol-menu-moonraker.cfg#L761) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [762](../../../config/options/lcd/sovol-menu-moonraker.cfg#L762) | <code>name: Tap verify</code> | Set the LCD label: <code>Tap verify</code>. |
-| [763](../../../config/options/lcd/sovol-menu-moonraker.cfg#L763) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [764](../../../config/options/lcd/sovol-menu-moonraker.cfg#L764) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=verify</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
-| [765](../../../config/options/lcd/sovol-menu-moonraker.cfg#L765) | <code>{menu.exit()}</code> | Exit the LCD menu. |
+| [740](../../../config/options/lcd/sovol-menu-moonraker.cfg#L740) | <code>[menu __main __setup __calib __eddy __tap_verify]</code> | Declare this configuration section. |
+| [741](../../../config/options/lcd/sovol-menu-moonraker.cfg#L741) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [742](../../../config/options/lcd/sovol-menu-moonraker.cfg#L742) | <code>name: Tap verify</code> | Set the LCD label: <code>Tap verify</code>. |
+| [743](../../../config/options/lcd/sovol-menu-moonraker.cfg#L743) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [744](../../../config/options/lcd/sovol-menu-moonraker.cfg#L744) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=verify</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
+| [745](../../../config/options/lcd/sovol-menu-moonraker.cfg#L745) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
 <a id="menu-__main-__setup-__restart"></a>
 
@@ -1486,9 +1486,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [768](../../../config/options/lcd/sovol-menu-moonraker.cfg#L768) | <code>[menu __main __setup __restart]</code> | Declare this configuration section. |
-| [769](../../../config/options/lcd/sovol-menu-moonraker.cfg#L769) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [770](../../../config/options/lcd/sovol-menu-moonraker.cfg#L770) | <code>name: Restart &amp; Shutdown</code> | Set the LCD label: <code>Restart &amp; Shutdown</code>. |
+| [748](../../../config/options/lcd/sovol-menu-moonraker.cfg#L748) | <code>[menu __main __setup __restart]</code> | Declare this configuration section. |
+| [749](../../../config/options/lcd/sovol-menu-moonraker.cfg#L749) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [750](../../../config/options/lcd/sovol-menu-moonraker.cfg#L750) | <code>name: Restart &amp; Shutdown</code> | Set the LCD label: <code>Restart &amp; Shutdown</code>. |
 
 <a id="menu-__main-__setup-__restart-__host_shutdown"></a>
 
@@ -1498,12 +1498,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [773](../../../config/options/lcd/sovol-menu-moonraker.cfg#L773) | <code>[menu __main __setup __restart __host_shutdown]</code> | Declare this configuration section. |
-| [774](../../../config/options/lcd/sovol-menu-moonraker.cfg#L774) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [775](../../../config/options/lcd/sovol-menu-moonraker.cfg#L775) | <code>enable: {not printer.idle_timeout.state == &quot;Printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{not the idle-timeout state  equals  &quot;Printing&quot;}</code>. |
-| [776](../../../config/options/lcd/sovol-menu-moonraker.cfg#L776) | <code>name: Shutdown host</code> | Set the LCD label: <code>Shutdown host</code>. |
-| [777](../../../config/options/lcd/sovol-menu-moonraker.cfg#L777) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [778](../../../config/options/lcd/sovol-menu-moonraker.cfg#L778) | <code>{action_call_remote_method(&quot;shutdown_machine&quot;)}</code> | Ask the connected service (normally Moonraker) to run the named remote operation during template evaluation. |
+| [753](../../../config/options/lcd/sovol-menu-moonraker.cfg#L753) | <code>[menu __main __setup __restart __host_shutdown]</code> | Declare this configuration section. |
+| [754](../../../config/options/lcd/sovol-menu-moonraker.cfg#L754) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [755](../../../config/options/lcd/sovol-menu-moonraker.cfg#L755) | <code>enable: {not printer.idle_timeout.state == &quot;Printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{not the idle-timeout state  equals  &quot;Printing&quot;}</code>. |
+| [756](../../../config/options/lcd/sovol-menu-moonraker.cfg#L756) | <code>name: Shutdown host</code> | Set the LCD label: <code>Shutdown host</code>. |
+| [757](../../../config/options/lcd/sovol-menu-moonraker.cfg#L757) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [758](../../../config/options/lcd/sovol-menu-moonraker.cfg#L758) | <code>{action_call_remote_method(&quot;shutdown_machine&quot;)}</code> | Ask the connected service (normally Moonraker) to run the named remote operation during template evaluation. |
 
 <a id="menu-__main-__info"></a>
 
@@ -1513,10 +1513,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [780](../../../config/options/lcd/sovol-menu-moonraker.cfg#L780) | <code>[menu __main __info]</code> | Declare this configuration section. |
-| [781](../../../config/options/lcd/sovol-menu-moonraker.cfg#L781) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [782](../../../config/options/lcd/sovol-menu-moonraker.cfg#L782) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [783](../../../config/options/lcd/sovol-menu-moonraker.cfg#L783) | <code>name: Information</code> | Set the LCD label: <code>Information</code>. |
+| [760](../../../config/options/lcd/sovol-menu-moonraker.cfg#L760) | <code>[menu __main __info]</code> | Declare this configuration section. |
+| [761](../../../config/options/lcd/sovol-menu-moonraker.cfg#L761) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [762](../../../config/options/lcd/sovol-menu-moonraker.cfg#L762) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [763](../../../config/options/lcd/sovol-menu-moonraker.cfg#L763) | <code>name: Information</code> | Set the LCD label: <code>Information</code>. |
 
 <a id="menu-__main-__info-__version_name"></a>
 
@@ -1526,10 +1526,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [785](../../../config/options/lcd/sovol-menu-moonraker.cfg#L785) | <code>[menu __main __info __version_name]</code> | Declare this configuration section. |
-| [786](../../../config/options/lcd/sovol-menu-moonraker.cfg#L786) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [787](../../../config/options/lcd/sovol-menu-moonraker.cfg#L787) | <code>name: SV08 Mainline Klipper</code> | Set the LCD label: <code>SV08 Mainline Klipper</code>. |
-| [788](../../../config/options/lcd/sovol-menu-moonraker.cfg#L788) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [765](../../../config/options/lcd/sovol-menu-moonraker.cfg#L765) | <code>[menu __main __info __version_name]</code> | Declare this configuration section. |
+| [766](../../../config/options/lcd/sovol-menu-moonraker.cfg#L766) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [767](../../../config/options/lcd/sovol-menu-moonraker.cfg#L767) | <code>name: SV08 Mainline Klipper</code> | Set the LCD label: <code>SV08 Mainline Klipper</code>. |
+| [768](../../../config/options/lcd/sovol-menu-moonraker.cfg#L768) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__menu_version"></a>
 
@@ -1539,10 +1539,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [790](../../../config/options/lcd/sovol-menu-moonraker.cfg#L790) | <code>[menu __main __info __menu_version]</code> | Declare this configuration section. |
-| [791](../../../config/options/lcd/sovol-menu-moonraker.cfg#L791) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [792](../../../config/options/lcd/sovol-menu-moonraker.cfg#L792) | <code>name: Menu cfg: v0.1b</code> | Set the LCD label: <code>Menu cfg: v0.1b</code>. |
-| [793](../../../config/options/lcd/sovol-menu-moonraker.cfg#L793) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [770](../../../config/options/lcd/sovol-menu-moonraker.cfg#L770) | <code>[menu __main __info __menu_version]</code> | Declare this configuration section. |
+| [771](../../../config/options/lcd/sovol-menu-moonraker.cfg#L771) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [772](../../../config/options/lcd/sovol-menu-moonraker.cfg#L772) | <code>name: Menu cfg: v0.1b</code> | Set the LCD label: <code>Menu cfg: v0.1b</code>. |
+| [773](../../../config/options/lcd/sovol-menu-moonraker.cfg#L773) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__hostname"></a>
 
@@ -1552,10 +1552,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [795](../../../config/options/lcd/sovol-menu-moonraker.cfg#L795) | <code>[menu __main __info __hostname]</code> | Declare this configuration section. |
-| [796](../../../config/options/lcd/sovol-menu-moonraker.cfg#L796) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [797](../../../config/options/lcd/sovol-menu-moonraker.cfg#L797) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
-| [798](../../../config/options/lcd/sovol-menu-moonraker.cfg#L798) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [775](../../../config/options/lcd/sovol-menu-moonraker.cfg#L775) | <code>[menu __main __info __hostname]</code> | Declare this configuration section. |
+| [776](../../../config/options/lcd/sovol-menu-moonraker.cfg#L776) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [777](../../../config/options/lcd/sovol-menu-moonraker.cfg#L777) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
+| [778](../../../config/options/lcd/sovol-menu-moonraker.cfg#L778) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__klipper_version"></a>
 
@@ -1565,10 +1565,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [800](../../../config/options/lcd/sovol-menu-moonraker.cfg#L800) | <code>[menu __main __info __klipper_version]</code> | Declare this configuration section. |
-| [801](../../../config/options/lcd/sovol-menu-moonraker.cfg#L801) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [802](../../../config/options/lcd/sovol-menu-moonraker.cfg#L802) | <code>name: Klipper: {printer.network_status.klipper_version}</code> | Set the LCD label: <code>Klipper: {printer.network_status.klipper_version}</code>. |
-| [803](../../../config/options/lcd/sovol-menu-moonraker.cfg#L803) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [780](../../../config/options/lcd/sovol-menu-moonraker.cfg#L780) | <code>[menu __main __info __klipper_version]</code> | Declare this configuration section. |
+| [781](../../../config/options/lcd/sovol-menu-moonraker.cfg#L781) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [782](../../../config/options/lcd/sovol-menu-moonraker.cfg#L782) | <code>name: Klipper: {printer.network_status.klipper_version}</code> | Set the LCD label: <code>Klipper: {printer.network_status.klipper_version}</code>. |
+| [783](../../../config/options/lcd/sovol-menu-moonraker.cfg#L783) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__mcu_version"></a>
 
@@ -1578,10 +1578,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [805](../../../config/options/lcd/sovol-menu-moonraker.cfg#L805) | <code>[menu __main __info __mcu_version]</code> | Declare this configuration section. |
-| [806](../../../config/options/lcd/sovol-menu-moonraker.cfg#L806) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [807](../../../config/options/lcd/sovol-menu-moonraker.cfg#L807) | <code>name: MCU: {printer.network_status.mcu_version}</code> | Set the LCD label: <code>MCU: {printer.network_status.mcu_version}</code>. |
-| [808](../../../config/options/lcd/sovol-menu-moonraker.cfg#L808) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [785](../../../config/options/lcd/sovol-menu-moonraker.cfg#L785) | <code>[menu __main __info __mcu_version]</code> | Declare this configuration section. |
+| [786](../../../config/options/lcd/sovol-menu-moonraker.cfg#L786) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [787](../../../config/options/lcd/sovol-menu-moonraker.cfg#L787) | <code>name: MCU: {printer.network_status.mcu_version}</code> | Set the LCD label: <code>MCU: {printer.network_status.mcu_version}</code>. |
+| [788](../../../config/options/lcd/sovol-menu-moonraker.cfg#L788) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__extra_mcu_version"></a>
 
@@ -1591,10 +1591,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [810](../../../config/options/lcd/sovol-menu-moonraker.cfg#L810) | <code>[menu __main __info __extra_mcu_version]</code> | Declare this configuration section. |
-| [811](../../../config/options/lcd/sovol-menu-moonraker.cfg#L811) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [812](../../../config/options/lcd/sovol-menu-moonraker.cfg#L812) | <code>name: Extra MCU: {printer.network_status.extra_mcu_version}</code> | Set the LCD label: <code>Extra MCU: {printer.network_status.extra_mcu_version}</code>. |
-| [813](../../../config/options/lcd/sovol-menu-moonraker.cfg#L813) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [790](../../../config/options/lcd/sovol-menu-moonraker.cfg#L790) | <code>[menu __main __info __extra_mcu_version]</code> | Declare this configuration section. |
+| [791](../../../config/options/lcd/sovol-menu-moonraker.cfg#L791) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [792](../../../config/options/lcd/sovol-menu-moonraker.cfg#L792) | <code>name: Extra MCU: {printer.network_status.extra_mcu_version}</code> | Set the LCD label: <code>Extra MCU: {printer.network_status.extra_mcu_version}</code>. |
+| [793](../../../config/options/lcd/sovol-menu-moonraker.cfg#L793) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network"></a>
 
@@ -1604,9 +1604,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [817](../../../config/options/lcd/sovol-menu-moonraker.cfg#L817) | <code>[menu __main __network]</code> | Declare this configuration section. |
-| [818](../../../config/options/lcd/sovol-menu-moonraker.cfg#L818) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [819](../../../config/options/lcd/sovol-menu-moonraker.cfg#L819) | <code>name: Network</code> | Set the LCD label: <code>Network</code>. |
+| [797](../../../config/options/lcd/sovol-menu-moonraker.cfg#L797) | <code>[menu __main __network]</code> | Declare this configuration section. |
+| [798](../../../config/options/lcd/sovol-menu-moonraker.cfg#L798) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [799](../../../config/options/lcd/sovol-menu-moonraker.cfg#L799) | <code>name: Network</code> | Set the LCD label: <code>Network</code>. |
 
 <a id="menu-__main-__network-__status"></a>
 
@@ -1616,10 +1616,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [821](../../../config/options/lcd/sovol-menu-moonraker.cfg#L821) | <code>[menu __main __network __status]</code> | Declare this configuration section. |
-| [822](../../../config/options/lcd/sovol-menu-moonraker.cfg#L822) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [823](../../../config/options/lcd/sovol-menu-moonraker.cfg#L823) | <code>name: {&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code> | Set the LCD label: <code>{&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code>. |
-| [824](../../../config/options/lcd/sovol-menu-moonraker.cfg#L824) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [801](../../../config/options/lcd/sovol-menu-moonraker.cfg#L801) | <code>[menu __main __network __status]</code> | Declare this configuration section. |
+| [802](../../../config/options/lcd/sovol-menu-moonraker.cfg#L802) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [803](../../../config/options/lcd/sovol-menu-moonraker.cfg#L803) | <code>name: {&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code> | Set the LCD label: <code>{&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code>. |
+| [804](../../../config/options/lcd/sovol-menu-moonraker.cfg#L804) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__hostname"></a>
 
@@ -1629,10 +1629,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [826](../../../config/options/lcd/sovol-menu-moonraker.cfg#L826) | <code>[menu __main __network __hostname]</code> | Declare this configuration section. |
-| [827](../../../config/options/lcd/sovol-menu-moonraker.cfg#L827) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [828](../../../config/options/lcd/sovol-menu-moonraker.cfg#L828) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
-| [829](../../../config/options/lcd/sovol-menu-moonraker.cfg#L829) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [806](../../../config/options/lcd/sovol-menu-moonraker.cfg#L806) | <code>[menu __main __network __hostname]</code> | Declare this configuration section. |
+| [807](../../../config/options/lcd/sovol-menu-moonraker.cfg#L807) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [808](../../../config/options/lcd/sovol-menu-moonraker.cfg#L808) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
+| [809](../../../config/options/lcd/sovol-menu-moonraker.cfg#L809) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__mdns"></a>
 
@@ -1642,10 +1642,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [831](../../../config/options/lcd/sovol-menu-moonraker.cfg#L831) | <code>[menu __main __network __mdns]</code> | Declare this configuration section. |
-| [832](../../../config/options/lcd/sovol-menu-moonraker.cfg#L832) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [833](../../../config/options/lcd/sovol-menu-moonraker.cfg#L833) | <code>name: mDNS: {printer.network_status.mdns}</code> | Set the LCD label: <code>mDNS: {printer.network_status.mdns}</code>. |
-| [834](../../../config/options/lcd/sovol-menu-moonraker.cfg#L834) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [811](../../../config/options/lcd/sovol-menu-moonraker.cfg#L811) | <code>[menu __main __network __mdns]</code> | Declare this configuration section. |
+| [812](../../../config/options/lcd/sovol-menu-moonraker.cfg#L812) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [813](../../../config/options/lcd/sovol-menu-moonraker.cfg#L813) | <code>name: mDNS: {printer.network_status.mdns}</code> | Set the LCD label: <code>mDNS: {printer.network_status.mdns}</code>. |
+| [814](../../../config/options/lcd/sovol-menu-moonraker.cfg#L814) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__active"></a>
 
@@ -1655,10 +1655,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [836](../../../config/options/lcd/sovol-menu-moonraker.cfg#L836) | <code>[menu __main __network __active]</code> | Declare this configuration section. |
-| [837](../../../config/options/lcd/sovol-menu-moonraker.cfg#L837) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [838](../../../config/options/lcd/sovol-menu-moonraker.cfg#L838) | <code>name: Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code> | Set the LCD label: <code>Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code>. |
-| [839](../../../config/options/lcd/sovol-menu-moonraker.cfg#L839) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [816](../../../config/options/lcd/sovol-menu-moonraker.cfg#L816) | <code>[menu __main __network __active]</code> | Declare this configuration section. |
+| [817](../../../config/options/lcd/sovol-menu-moonraker.cfg#L817) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [818](../../../config/options/lcd/sovol-menu-moonraker.cfg#L818) | <code>name: Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code> | Set the LCD label: <code>Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code>. |
+| [819](../../../config/options/lcd/sovol-menu-moonraker.cfg#L819) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__ethip"></a>
 
@@ -1668,10 +1668,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [841](../../../config/options/lcd/sovol-menu-moonraker.cfg#L841) | <code>[menu __main __network __ethip]</code> | Declare this configuration section. |
-| [842](../../../config/options/lcd/sovol-menu-moonraker.cfg#L842) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [843](../../../config/options/lcd/sovol-menu-moonraker.cfg#L843) | <code>name: Eth IP: {printer.network_status.ethip}</code> | Set the LCD label: <code>Eth IP: {printer.network_status.ethip}</code>. |
-| [844](../../../config/options/lcd/sovol-menu-moonraker.cfg#L844) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [821](../../../config/options/lcd/sovol-menu-moonraker.cfg#L821) | <code>[menu __main __network __ethip]</code> | Declare this configuration section. |
+| [822](../../../config/options/lcd/sovol-menu-moonraker.cfg#L822) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [823](../../../config/options/lcd/sovol-menu-moonraker.cfg#L823) | <code>name: Eth IP: {printer.network_status.ethip}</code> | Set the LCD label: <code>Eth IP: {printer.network_status.ethip}</code>. |
+| [824](../../../config/options/lcd/sovol-menu-moonraker.cfg#L824) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__ethmac"></a>
 
@@ -1681,10 +1681,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [846](../../../config/options/lcd/sovol-menu-moonraker.cfg#L846) | <code>[menu __main __network __ethmac]</code> | Declare this configuration section. |
-| [847](../../../config/options/lcd/sovol-menu-moonraker.cfg#L847) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [848](../../../config/options/lcd/sovol-menu-moonraker.cfg#L848) | <code>name: Eth MAC: {printer.network_status.ethmac}</code> | Set the LCD label: <code>Eth MAC: {printer.network_status.ethmac}</code>. |
-| [849](../../../config/options/lcd/sovol-menu-moonraker.cfg#L849) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [826](../../../config/options/lcd/sovol-menu-moonraker.cfg#L826) | <code>[menu __main __network __ethmac]</code> | Declare this configuration section. |
+| [827](../../../config/options/lcd/sovol-menu-moonraker.cfg#L827) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [828](../../../config/options/lcd/sovol-menu-moonraker.cfg#L828) | <code>name: Eth MAC: {printer.network_status.ethmac}</code> | Set the LCD label: <code>Eth MAC: {printer.network_status.ethmac}</code>. |
+| [829](../../../config/options/lcd/sovol-menu-moonraker.cfg#L829) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__wifissid"></a>
 
@@ -1694,10 +1694,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [851](../../../config/options/lcd/sovol-menu-moonraker.cfg#L851) | <code>[menu __main __network __wifissid]</code> | Declare this configuration section. |
-| [852](../../../config/options/lcd/sovol-menu-moonraker.cfg#L852) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [853](../../../config/options/lcd/sovol-menu-moonraker.cfg#L853) | <code>name: WiFi SSID: {printer.network_status.wifissid}</code> | Set the LCD label: <code>WiFi SSID: {printer.network_status.wifissid}</code>. |
-| [854](../../../config/options/lcd/sovol-menu-moonraker.cfg#L854) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [831](../../../config/options/lcd/sovol-menu-moonraker.cfg#L831) | <code>[menu __main __network __wifissid]</code> | Declare this configuration section. |
+| [832](../../../config/options/lcd/sovol-menu-moonraker.cfg#L832) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [833](../../../config/options/lcd/sovol-menu-moonraker.cfg#L833) | <code>name: WiFi SSID: {printer.network_status.wifissid}</code> | Set the LCD label: <code>WiFi SSID: {printer.network_status.wifissid}</code>. |
+| [834](../../../config/options/lcd/sovol-menu-moonraker.cfg#L834) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__wifiip"></a>
 
@@ -1707,10 +1707,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [856](../../../config/options/lcd/sovol-menu-moonraker.cfg#L856) | <code>[menu __main __network __wifiip]</code> | Declare this configuration section. |
-| [857](../../../config/options/lcd/sovol-menu-moonraker.cfg#L857) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [858](../../../config/options/lcd/sovol-menu-moonraker.cfg#L858) | <code>name: WiFi IP: {printer.network_status.wifiip}</code> | Set the LCD label: <code>WiFi IP: {printer.network_status.wifiip}</code>. |
-| [859](../../../config/options/lcd/sovol-menu-moonraker.cfg#L859) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [836](../../../config/options/lcd/sovol-menu-moonraker.cfg#L836) | <code>[menu __main __network __wifiip]</code> | Declare this configuration section. |
+| [837](../../../config/options/lcd/sovol-menu-moonraker.cfg#L837) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [838](../../../config/options/lcd/sovol-menu-moonraker.cfg#L838) | <code>name: WiFi IP: {printer.network_status.wifiip}</code> | Set the LCD label: <code>WiFi IP: {printer.network_status.wifiip}</code>. |
+| [839](../../../config/options/lcd/sovol-menu-moonraker.cfg#L839) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__wifimac"></a>
 
@@ -1720,10 +1720,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [861](../../../config/options/lcd/sovol-menu-moonraker.cfg#L861) | <code>[menu __main __network __wifimac]</code> | Declare this configuration section. |
-| [862](../../../config/options/lcd/sovol-menu-moonraker.cfg#L862) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [863](../../../config/options/lcd/sovol-menu-moonraker.cfg#L863) | <code>name: WiFi MAC: {printer.network_status.wifimac}</code> | Set the LCD label: <code>WiFi MAC: {printer.network_status.wifimac}</code>. |
-| [864](../../../config/options/lcd/sovol-menu-moonraker.cfg#L864) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [841](../../../config/options/lcd/sovol-menu-moonraker.cfg#L841) | <code>[menu __main __network __wifimac]</code> | Declare this configuration section. |
+| [842](../../../config/options/lcd/sovol-menu-moonraker.cfg#L842) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [843](../../../config/options/lcd/sovol-menu-moonraker.cfg#L843) | <code>name: WiFi MAC: {printer.network_status.wifimac}</code> | Set the LCD label: <code>WiFi MAC: {printer.network_status.wifimac}</code>. |
+| [844](../../../config/options/lcd/sovol-menu-moonraker.cfg#L844) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__moonraker"></a>
 
@@ -1733,10 +1733,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [866](../../../config/options/lcd/sovol-menu-moonraker.cfg#L866) | <code>[menu __main __network __moonraker]</code> | Declare this configuration section. |
-| [867](../../../config/options/lcd/sovol-menu-moonraker.cfg#L867) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [868](../../../config/options/lcd/sovol-menu-moonraker.cfg#L868) | <code>name: Moonraker: {printer.network_status.moonraker_version}</code> | Set the LCD label: <code>Moonraker: {printer.network_status.moonraker_version}</code>. |
-| [869](../../../config/options/lcd/sovol-menu-moonraker.cfg#L869) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [846](../../../config/options/lcd/sovol-menu-moonraker.cfg#L846) | <code>[menu __main __network __moonraker]</code> | Declare this configuration section. |
+| [847](../../../config/options/lcd/sovol-menu-moonraker.cfg#L847) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [848](../../../config/options/lcd/sovol-menu-moonraker.cfg#L848) | <code>name: Moonraker: {printer.network_status.moonraker_version}</code> | Set the LCD label: <code>Moonraker: {printer.network_status.moonraker_version}</code>. |
+| [849](../../../config/options/lcd/sovol-menu-moonraker.cfg#L849) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__refresh"></a>
 
@@ -1746,11 +1746,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [871](../../../config/options/lcd/sovol-menu-moonraker.cfg#L871) | <code>[menu __main __network __refresh]</code> | Declare this configuration section. |
-| [872](../../../config/options/lcd/sovol-menu-moonraker.cfg#L872) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [873](../../../config/options/lcd/sovol-menu-moonraker.cfg#L873) | <code>name: Refresh network</code> | Set the LCD label: <code>Refresh network</code>. |
-| [874](../../../config/options/lcd/sovol-menu-moonraker.cfg#L874) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [875](../../../config/options/lcd/sovol-menu-moonraker.cfg#L875) | <code>NETWORK_STATUS_REFRESH</code> | Ask the project's network_status extension to refresh network information. The extension implementation is external to these config files; this command alone does not prove its network behavior. |
+| [851](../../../config/options/lcd/sovol-menu-moonraker.cfg#L851) | <code>[menu __main __network __refresh]</code> | Declare this configuration section. |
+| [852](../../../config/options/lcd/sovol-menu-moonraker.cfg#L852) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [853](../../../config/options/lcd/sovol-menu-moonraker.cfg#L853) | <code>name: Refresh network</code> | Set the LCD label: <code>Refresh network</code>. |
+| [854](../../../config/options/lcd/sovol-menu-moonraker.cfg#L854) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [855](../../../config/options/lcd/sovol-menu-moonraker.cfg#L855) | <code>NETWORK_STATUS_REFRESH</code> | Ask the project's network_status extension to refresh network information. The extension implementation is external to these config files; this command alone does not prove its network behavior. |
 
 <a id="menu-__main-__octoprint"></a>
 
@@ -1760,8 +1760,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [879](../../../config/options/lcd/sovol-menu-moonraker.cfg#L879) | <code>[menu __main __octoprint]</code> | Declare this configuration section. |
-| [880](../../../config/options/lcd/sovol-menu-moonraker.cfg#L880) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [859](../../../config/options/lcd/sovol-menu-moonraker.cfg#L859) | <code>[menu __main __octoprint]</code> | Declare this configuration section. |
+| [860](../../../config/options/lcd/sovol-menu-moonraker.cfg#L860) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__temp"></a>
 
@@ -1771,8 +1771,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [882](../../../config/options/lcd/sovol-menu-moonraker.cfg#L882) | <code>[menu __main __temp]</code> | Declare this configuration section. |
-| [883](../../../config/options/lcd/sovol-menu-moonraker.cfg#L883) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [862](../../../config/options/lcd/sovol-menu-moonraker.cfg#L862) | <code>[menu __main __temp]</code> | Declare this configuration section. |
+| [863](../../../config/options/lcd/sovol-menu-moonraker.cfg#L863) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__hotend0_target"></a>
 
@@ -1782,8 +1782,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [885](../../../config/options/lcd/sovol-menu-moonraker.cfg#L885) | <code>[menu __main __filament __hotend0_target]</code> | Declare this configuration section. |
-| [886](../../../config/options/lcd/sovol-menu-moonraker.cfg#L886) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [865](../../../config/options/lcd/sovol-menu-moonraker.cfg#L865) | <code>[menu __main __filament __hotend0_target]</code> | Declare this configuration section. |
+| [866](../../../config/options/lcd/sovol-menu-moonraker.cfg#L866) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__loadf"></a>
 
@@ -1793,8 +1793,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [888](../../../config/options/lcd/sovol-menu-moonraker.cfg#L888) | <code>[menu __main __filament __loadf]</code> | Declare this configuration section. |
-| [889](../../../config/options/lcd/sovol-menu-moonraker.cfg#L889) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [868](../../../config/options/lcd/sovol-menu-moonraker.cfg#L868) | <code>[menu __main __filament __loadf]</code> | Declare this configuration section. |
+| [869](../../../config/options/lcd/sovol-menu-moonraker.cfg#L869) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__loads"></a>
 
@@ -1804,8 +1804,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [891](../../../config/options/lcd/sovol-menu-moonraker.cfg#L891) | <code>[menu __main __filament __loads]</code> | Declare this configuration section. |
-| [892](../../../config/options/lcd/sovol-menu-moonraker.cfg#L892) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [871](../../../config/options/lcd/sovol-menu-moonraker.cfg#L871) | <code>[menu __main __filament __loads]</code> | Declare this configuration section. |
+| [872](../../../config/options/lcd/sovol-menu-moonraker.cfg#L872) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__unloadf"></a>
 
@@ -1815,8 +1815,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [894](../../../config/options/lcd/sovol-menu-moonraker.cfg#L894) | <code>[menu __main __filament __unloadf]</code> | Declare this configuration section. |
-| [895](../../../config/options/lcd/sovol-menu-moonraker.cfg#L895) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [874](../../../config/options/lcd/sovol-menu-moonraker.cfg#L874) | <code>[menu __main __filament __unloadf]</code> | Declare this configuration section. |
+| [875](../../../config/options/lcd/sovol-menu-moonraker.cfg#L875) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__unloads"></a>
 
@@ -1826,8 +1826,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [897](../../../config/options/lcd/sovol-menu-moonraker.cfg#L897) | <code>[menu __main __filament __unloads]</code> | Declare this configuration section. |
-| [898](../../../config/options/lcd/sovol-menu-moonraker.cfg#L898) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [877](../../../config/options/lcd/sovol-menu-moonraker.cfg#L877) | <code>[menu __main __filament __unloads]</code> | Declare this configuration section. |
+| [878](../../../config/options/lcd/sovol-menu-moonraker.cfg#L878) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__feed"></a>
 
@@ -1837,5 +1837,5 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [900](../../../config/options/lcd/sovol-menu-moonraker.cfg#L900) | <code>[menu __main __filament __feed]</code> | Declare this configuration section. |
-| [901](../../../config/options/lcd/sovol-menu-moonraker.cfg#L901) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [880](../../../config/options/lcd/sovol-menu-moonraker.cfg#L880) | <code>[menu __main __filament __feed]</code> | Declare this configuration section. |
+| [881](../../../config/options/lcd/sovol-menu-moonraker.cfg#L881) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |

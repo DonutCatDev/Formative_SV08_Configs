@@ -13,7 +13,7 @@ Source text SHA256 (LF-normalized): `50e7eb916e845a49ef8e90af21164607bc399210dbf
 - <code>macros/*.cfg</code>: [macros/calibration.cfg](macros/calibration.cfg.md), [macros/cleaning.cfg](macros/cleaning.cfg.md), [macros/client.cfg](macros/client.cfg.md), [macros/custom-macros.cfg](macros/custom-macros.cfg.md), [macros/filament.cfg](macros/filament.cfg.md), [macros/homing.cfg](macros/homing.cfg.md), [macros/preparation.cfg](macros/preparation.cfg.md), [macros/shell_command.cfg](macros/shell_command.cfg.md), [macros/sovol-macros.cfg](macros/sovol-macros.cfg.md)
 - <code>timelapse.cfg</code>: [timelapse.cfg](timelapse.cfg.md)
 - <code>custom_plugins/*.cfg</code>: No matching file in this tree; this entry is not an active resolved include.
-- <code>options/lcd/*.cfg</code>: [options/lcd/lcd.cfg](options/lcd/lcd.cfg.md), [options/lcd/macros.cfg](options/lcd/macros.cfg.md), [options/lcd/sovol-menu-moonraker.cfg](options/lcd/sovol-menu-moonraker.cfg.md)
+- <code>options/lcd/*.cfg</code>: [options/lcd/home-screen.cfg](options/lcd/home-screen.cfg.md), [options/lcd/lcd.cfg](options/lcd/lcd.cfg.md), [options/lcd/macros.cfg](options/lcd/macros.cfg.md), [options/lcd/sovol-menu-moonraker.cfg](options/lcd/sovol-menu-moonraker.cfg.md)
 - <code>options/probe/eddy-sovol.cfg</code>: [options/probe/eddy-sovol.cfg](options/probe/eddy-sovol.cfg.md)
 
 ## Macro and action index

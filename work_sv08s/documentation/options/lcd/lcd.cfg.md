@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../../config/options/lcd/lcd.cfg) · [All files](../../README.md) · [Reading guide](../../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `6718c6bbe54525c836ffdded5c724d43985edad63badecc03ec04d1de2540f16`.
+Source text SHA256 (LF-normalized): `a98e6ad0ad1c3b786788ca7018e4658def0c54ccf0f69eeff72198118e65b140`.
 
 ## Macro and action index
 
@@ -15,5 +15,5 @@ No macros or command templates are defined in this file.
 
 - <code>board_pins</code> — [source line 1](../../../config/options/lcd/lcd.cfg#L1).
 - <code>display</code> — [source line 17](../../../config/options/lcd/lcd.cfg#L17).
-- <code>output_pin beeper</code> — [source line 29](../../../config/options/lcd/lcd.cfg#L29).
-- <code>neopixel Screen_Colour</code> — [source line 34](../../../config/options/lcd/lcd.cfg#L34).
+- <code>output_pin beeper</code> — [source line 31](../../../config/options/lcd/lcd.cfg#L31).
+- <code>neopixel Screen_Colour</code> — [source line 36](../../../config/options/lcd/lcd.cfg#L36).

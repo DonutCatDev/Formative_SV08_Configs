@@ -23,6 +23,7 @@ These pages explain the saved candidate, including inactive files. They do not c
 - [macros/sovol-macros.cfg](macros/sovol-macros.cfg.md) — active
 - [mainsail.cfg](mainsail.cfg.md) — active
 - [moonraker.conf](moonraker.conf.md) — separate/inactive
+- [options/lcd/home-screen.cfg](options/lcd/home-screen.cfg.md) — active
 - [options/lcd/lcd.cfg](options/lcd/lcd.cfg.md) — active
 - [options/lcd/macros.cfg](options/lcd/macros.cfg.md) — active
 - [options/lcd/sovol-menu-moonraker.cfg](options/lcd/sovol-menu-moonraker.cfg.md) — active
