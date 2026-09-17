@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/preparation.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `c27b6fcc2eb75e6a26de3712c0b935ff81441a3717a47747f4b339a603a5634c`.
+Source text SHA256 (LF-normalized): `e467cac53587c711a9bba2d3ebc5596d0670b18a19b943a1b96396713cea8baa`.
 
 ## Macro and action index
 
@@ -219,7 +219,7 @@ Final pre-print purge: prime 15mm at front-left Z5, then deposit 39.9mm across t
 | [138](../../config/macros/preparation.cfg#L138) | <code>G1 Z0.6 F500</code> | command Z=<code>0.6</code> mm; use feed rate 8.33333 mm/s (500 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [139](../../config/macros/preparation.cfg#L139) | <code># Split 39.9mm over two 100mm strokes for the 0.4mm nozzle limit.</code> | Comment only; Klipper does not execute this line. |
 | [140](../../config/macros/preparation.cfg#L140) | <code>G1 X100.5 E19.95 F900</code> | command X=<code>100.5</code> mm; command filament E=<code>19.95</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 15 mm/s (900 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [141](../../config/macros/preparation.cfg#L141) | <code>G1 Y2.5 F900</code> | command Y=<code>2.5</code> mm; use feed rate 15 mm/s (900 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [141](../../config/macros/preparation.cfg#L141) | <code>G1 Y1 F900</code> | command Y=<code>1</code> mm; use feed rate 15 mm/s (900 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [142](../../config/macros/preparation.cfg#L142) | <code>G1 X0.5 E19.95 F900</code> | command X=<code>0.5</code> mm; command filament E=<code>19.95</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 15 mm/s (900 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [143](../../config/macros/preparation.cfg#L143) | <code>G1 Z5 F1200</code> | command Z=<code>5</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [144](../../config/macros/preparation.cfg#L144) | <code>M400</code> | Wait until queued movement has completed before continuing. |
