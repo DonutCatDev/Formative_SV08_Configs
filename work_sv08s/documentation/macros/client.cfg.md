@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/client.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `a68dd89f73c6cb79e4275c1d6a80ae0aef44935b509bb0da623e0cc2d81952cd`.
+Source text SHA256 (LF-normalized): `0079f1dcd24544dd781c149460110dd60efebdda9498e1c235cdb923b98cd12f`.
 
 ## Macro and action index
 
@@ -88,7 +88,7 @@ Mainsail resume hook: reject missing pause, lost homing, absent filament or an u
 | [35](../../config/macros/client.cfg#L35) | <code>{action_raise_error(&quot;Resume unavailable: position was lost. Cancel the print.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
 | [36](../../config/macros/client.cfg#L36) | <code>{% endif %}</code> | End this conditional block. |
 | [37](../../config/macros/client.cfg#L37) | <code>{% set sensor = printer[&#x27;filament_switch_sensor filament_sensor&#x27;] %}</code> | Calculate local <code>sensor</code> from <code>printer[&#x27;filament_switch_sensor filament_sensor&#x27;]</code>. It lasts for this evaluation only. |
-| [38](../../config/macros/client.cfg#L38) | <code>{% if sensor.enabled and not sensor.filament_detected %}</code> | If filament monitoring is enabled but no filament is detected, enter the error branch. A deliberately disabled sensor does not block startup. |
+| [38](../../config/macros/client.cfg#L38) | <code>{% if sensor.enabled and not sensor.filament_detected %}</code> | If filament monitoring is enabled but no filament is detected, enter the error branch. A deliberately disabled sensor does not block this resume or confirmation check. |
 | [39](../../config/macros/client.cfg#L39) | <code>{action_raise_error(&quot;Resume blocked: load filament and confirm it before resuming.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
 | [40](../../config/macros/client.cfg#L40) | <code>{% endif %}</code> | End this conditional block. |
 | [41](../../config/macros/client.cfg#L41) | <code>{% if printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active %}</code> | Start a conditional branch: <code>the stored state of _FILAMENT_LOAD.active</code>. Only a true branch emits its commands. |
@@ -111,7 +111,7 @@ Mainsail resume hook: reject missing pause, lost homing, absent filament or an u
 
 ## gcode_macro _SV_CANCEL_CLEANUP
 
-Mainsail calls this after disabling its generic retract and switching heater targets off. It sets the LCD red, waits for queued motion, performs the same guarded 15mm hot retract as END_PRINT unless M600 already unloaded, parks if homed, stops part/exhaust fans, clears mesh and filament-change state, then disables motors. Virtual-SD errors route through cancellation and therefore also set red when Klipper can still execute macros.
+Mainsail calls this after disabling its generic retract and switching heater targets off. It disables filament runout event handling for subsequent idle motion, sets the LCD red, waits for queued motion, performs the same guarded 15mm hot retract as END_PRINT unless M600 already unloaded, parks if homed, stops part/exhaust fans, clears mesh and filament-change state, then disables motors. Virtual-SD errors route through cancellation and therefore also set red when Klipper can still execute macros.
 
 **Calls and state references:** [_ALL_FAN_OFF](sovol-macros.cfg.md#gcode_macro-_all_fan_off), [_CLIENT_RETRACT](../mainsail.cfg.md#gcode_macro-_client_retract), [_END_PRINT_PARK](client.cfg.md#gcode_macro-_end_print_park), [_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_filament_change), [_LCD_STATUS_ERROR](../options/lcd/macros.cfg.md#gcode_macro-_lcd_status_error), [_RESET_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_reset_filament_change). Conditional references are not necessarily executed.
 
@@ -119,16 +119,17 @@ Mainsail calls this after disabling its generic retract and switching heater tar
 | --- | --- | --- |
 | [57](../../config/macros/client.cfg#L57) | <code>[gcode_macro _SV_CANCEL_CLEANUP]</code> | Declare this callable macro. |
 | [58](../../config/macros/client.cfg#L58) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [59](../../config/macros/client.cfg#L59) | <code>_LCD_STATUS_ERROR</code> | Run [_LCD_STATUS_ERROR](../options/lcd/macros.cfg.md#gcode_macro-_lcd_status_error), which is evaluated separately when reached. Use its default arguments. |
-| [60](../../config/macros/client.cfg#L60) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [61](../../config/macros/client.cfg#L61) | <code>{% if not printer[&#x27;gcode_macro _FILAMENT_CHANGE&#x27;].active %}</code> | Select this branch when an M600 unload has not already completed, avoiding an additional end-of-print retract after unloading. |
-| [62](../../config/macros/client.cfg#L62) | <code>_CLIENT_RETRACT LENGTH=15 SPEED=45</code> | Run [_CLIENT_RETRACT](../mainsail.cfg.md#gcode_macro-_client_retract), which is evaluated separately when reached. Forward <code>LENGTH=15 SPEED=45</code>. |
-| [63](../../config/macros/client.cfg#L63) | <code>{% endif %}</code> | End this conditional block. |
-| [64](../../config/macros/client.cfg#L64) | <code>_END_PRINT_PARK</code> | Run [_END_PRINT_PARK](client.cfg.md#gcode_macro-_end_print_park), which is evaluated separately when reached. Use its default arguments. |
-| [65](../../config/macros/client.cfg#L65) | <code>_ALL_FAN_OFF</code> | Run [_ALL_FAN_OFF](sovol-macros.cfg.md#gcode_macro-_all_fan_off), which is evaluated separately when reached. Use its default arguments. |
-| [66](../../config/macros/client.cfg#L66) | <code>BED_MESH_CLEAR</code> | Remove the currently applied bed mesh from movement compensation; do not erase saved profiles. |
-| [67](../../config/macros/client.cfg#L67) | <code>_RESET_FILAMENT_CHANGE</code> | Run [_RESET_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_reset_filament_change), which is evaluated separately when reached. Use its default arguments. |
-| [68](../../config/macros/client.cfg#L68) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
+| [59](../../config/macros/client.cfg#L59) | <code>SET_FILAMENT_SENSOR SENSOR=filament_sensor ENABLE=0</code> | Enable or disable event handling for the named filament sensor. Detection status continues updating while disabled; this project disables events while idle and enables them only for a validated print lifecycle. |
+| [60](../../config/macros/client.cfg#L60) | <code>_LCD_STATUS_ERROR</code> | Run [_LCD_STATUS_ERROR](../options/lcd/macros.cfg.md#gcode_macro-_lcd_status_error), which is evaluated separately when reached. Use its default arguments. |
+| [61](../../config/macros/client.cfg#L61) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [62](../../config/macros/client.cfg#L62) | <code>{% if not printer[&#x27;gcode_macro _FILAMENT_CHANGE&#x27;].active %}</code> | Select this branch when an M600 unload has not already completed, avoiding an additional end-of-print retract after unloading. |
+| [63](../../config/macros/client.cfg#L63) | <code>_CLIENT_RETRACT LENGTH=15 SPEED=45</code> | Run [_CLIENT_RETRACT](../mainsail.cfg.md#gcode_macro-_client_retract), which is evaluated separately when reached. Forward <code>LENGTH=15 SPEED=45</code>. |
+| [64](../../config/macros/client.cfg#L64) | <code>{% endif %}</code> | End this conditional block. |
+| [65](../../config/macros/client.cfg#L65) | <code>_END_PRINT_PARK</code> | Run [_END_PRINT_PARK](client.cfg.md#gcode_macro-_end_print_park), which is evaluated separately when reached. Use its default arguments. |
+| [66](../../config/macros/client.cfg#L66) | <code>_ALL_FAN_OFF</code> | Run [_ALL_FAN_OFF](sovol-macros.cfg.md#gcode_macro-_all_fan_off), which is evaluated separately when reached. Use its default arguments. |
+| [67](../../config/macros/client.cfg#L67) | <code>BED_MESH_CLEAR</code> | Remove the currently applied bed mesh from movement compensation; do not erase saved profiles. |
+| [68](../../config/macros/client.cfg#L68) | <code>_RESET_FILAMENT_CHANGE</code> | Run [_RESET_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_reset_filament_change), which is evaluated separately when reached. Use its default arguments. |
+| [69](../../config/macros/client.cfg#L69) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
 
 <a id="gcode_macro-_idle_timeout"></a>
 
@@ -138,18 +139,18 @@ After the extended pause timeout, keep the bed target and all motors energized, 
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [70](../../config/macros/client.cfg#L70) | <code>[gcode_macro _IDLE_TIMEOUT]</code> | Declare this callable macro. |
-| [71](../../config/macros/client.cfg#L71) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [72](../../config/macros/client.cfg#L72) | <code>{% if printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>the printer is paused</code>. Only a true branch emits its commands. |
-| [73](../../config/macros/client.cfg#L73) | <code># Preserve the bed and trusted XYZ position during an extended pause.</code> | Comment only; Klipper does not execute this line. |
-| [74](../../config/macros/client.cfg#L74) | <code># The pause hook preserved the print target; the resume hook restores</code> | Comment only; Klipper does not execute this line. |
-| [75](../../config/macros/client.cfg#L75) | <code># it with M109 after filament and load-confirmation checks.</code> | Comment only; Klipper does not execute this line. |
-| [76](../../config/macros/client.cfg#L76) | <code>M104 S175</code> | Set the nozzle target using <code>175</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [77](../../config/macros/client.cfg#L77) | <code>RESPOND TYPE=echo MSG=&quot;Pause standby: bed and motors remain on; nozzle target reduced to 175C.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [78](../../config/macros/client.cfg#L78) | <code>{% else %}</code> | Otherwise use this branch. |
-| [79](../../config/macros/client.cfg#L79) | <code>TURN_OFF_HEATERS</code> | Set all heater targets to zero. Actual temperatures fall gradually; motors and fans are not disabled by this command. |
-| [80](../../config/macros/client.cfg#L80) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
-| [81](../../config/macros/client.cfg#L81) | <code>{% endif %}</code> | End this conditional block. |
+| [71](../../config/macros/client.cfg#L71) | <code>[gcode_macro _IDLE_TIMEOUT]</code> | Declare this callable macro. |
+| [72](../../config/macros/client.cfg#L72) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [73](../../config/macros/client.cfg#L73) | <code>{% if printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>the printer is paused</code>. Only a true branch emits its commands. |
+| [74](../../config/macros/client.cfg#L74) | <code># Preserve the bed and trusted XYZ position during an extended pause.</code> | Comment only; Klipper does not execute this line. |
+| [75](../../config/macros/client.cfg#L75) | <code># The pause hook preserved the print target; the resume hook restores</code> | Comment only; Klipper does not execute this line. |
+| [76](../../config/macros/client.cfg#L76) | <code># it with M109 after filament and load-confirmation checks.</code> | Comment only; Klipper does not execute this line. |
+| [77](../../config/macros/client.cfg#L77) | <code>M104 S175</code> | Set the nozzle target using <code>175</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [78](../../config/macros/client.cfg#L78) | <code>RESPOND TYPE=echo MSG=&quot;Pause standby: bed and motors remain on; nozzle target reduced to 175C.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [79](../../config/macros/client.cfg#L79) | <code>{% else %}</code> | Otherwise use this branch. |
+| [80](../../config/macros/client.cfg#L80) | <code>TURN_OFF_HEATERS</code> | Set all heater targets to zero. Actual temperatures fall gradually; motors and fans are not disabled by this command. |
+| [81](../../config/macros/client.cfg#L81) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
+| [82](../../config/macros/client.cfg#L82) | <code>{% endif %}</code> | End this conditional block. |
 
 <a id="gcode_macro-m600"></a>
 
@@ -161,54 +162,55 @@ Rejects repeated changes and unhomed use. Suppresses the ordinary pause retract 
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [83](../../config/macros/client.cfg#L83) | <code>[gcode_macro M600]</code> | Declare this callable macro. |
-| [84](../../config/macros/client.cfg#L84) | <code>description: Pause, unload hot and release E for manual feeding and purging</code> | Set the help text: <code>Pause, unload hot and release E for manual feeding and purging</code>. |
-| [85](../../config/macros/client.cfg#L85) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [86](../../config/macros/client.cfg#L86) | <code>{% if printer[&#x27;gcode_macro _FILAMENT_CHANGE&#x27;].active %}</code> | Select the filament-change branch only after the M600 unload helper has recorded completion. |
-| [87](../../config/macros/client.cfg#L87) | <code>{action_raise_error(&quot;Filament change already active; manually load and purge, then RESUME.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [88](../../config/macros/client.cfg#L88) | <code>{% endif %}</code> | End this conditional block. |
-| [89](../../config/macros/client.cfg#L89) | <code>{% if &#x27;xyz&#x27; not in printer.toolhead.homed_axes %}</code> | Start a conditional branch: <code>&#x27;xyz&#x27; not in the set of homed axes</code>. Only a true branch emits its commands. |
-| [90](../../config/macros/client.cfg#L90) | <code>{action_raise_error(&quot;M600 requires homed axes.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [91](../../config/macros/client.cfg#L91) | <code>{% endif %}</code> | End this conditional block. |
-| [92](../../config/macros/client.cfg#L92) | <code># Suppress the ordinary park retract; unload owns the full 53mm.</code> | Comment only; Klipper does not execute this line. |
-| [93](../../config/macros/client.cfg#L93) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=retract VALUE=0.0</code> | Store <code>0.0</code> in the named macro's <code>retract</code> variable for later calls. This changes runtime state, not the config file. |
-| [94](../../config/macros/client.cfg#L94) | <code>{% if not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>not the printer is paused</code>. Only a true branch emits its commands. |
-| [95](../../config/macros/client.cfg#L95) | <code>PAUSE {rawparams}</code> | Run [PAUSE](../mainsail.cfg.md#gcode_macro-pause), which is evaluated separately when reached. Forward <code>{rawparams}</code>. |
-| [96](../../config/macros/client.cfg#L96) | <code>{% endif %}</code> | End this conditional block. |
-| [97](../../config/macros/client.cfg#L97) | <code>_FILAMENT_HEAT</code> | Run [_FILAMENT_HEAT](filament.cfg.md#gcode_macro-_filament_heat), which is evaluated separately when reached. Use its default arguments. |
-| [98](../../config/macros/client.cfg#L98) | <code>_FILAMENT_CHANGE_UNLOAD</code> | Run [_FILAMENT_CHANGE_UNLOAD](filament.cfg.md#gcode_macro-_filament_change_unload), which is evaluated separately when reached. Use its default arguments. |
+| [84](../../config/macros/client.cfg#L84) | <code>[gcode_macro M600]</code> | Declare this callable macro. |
+| [85](../../config/macros/client.cfg#L85) | <code>description: Pause, unload hot and release E for manual feeding and purging</code> | Set the help text: <code>Pause, unload hot and release E for manual feeding and purging</code>. |
+| [86](../../config/macros/client.cfg#L86) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [87](../../config/macros/client.cfg#L87) | <code>{% if printer[&#x27;gcode_macro _FILAMENT_CHANGE&#x27;].active %}</code> | Select the filament-change branch only after the M600 unload helper has recorded completion. |
+| [88](../../config/macros/client.cfg#L88) | <code>{action_raise_error(&quot;Filament change already active; manually load and purge, then RESUME.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [89](../../config/macros/client.cfg#L89) | <code>{% endif %}</code> | End this conditional block. |
+| [90](../../config/macros/client.cfg#L90) | <code>{% if &#x27;xyz&#x27; not in printer.toolhead.homed_axes %}</code> | Start a conditional branch: <code>&#x27;xyz&#x27; not in the set of homed axes</code>. Only a true branch emits its commands. |
+| [91](../../config/macros/client.cfg#L91) | <code>{action_raise_error(&quot;M600 requires homed axes.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [92](../../config/macros/client.cfg#L92) | <code>{% endif %}</code> | End this conditional block. |
+| [93](../../config/macros/client.cfg#L93) | <code># Suppress the ordinary park retract; unload owns the full 53mm.</code> | Comment only; Klipper does not execute this line. |
+| [94](../../config/macros/client.cfg#L94) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=retract VALUE=0.0</code> | Store <code>0.0</code> in the named macro's <code>retract</code> variable for later calls. This changes runtime state, not the config file. |
+| [95](../../config/macros/client.cfg#L95) | <code>{% if not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>not the printer is paused</code>. Only a true branch emits its commands. |
+| [96](../../config/macros/client.cfg#L96) | <code>PAUSE {rawparams}</code> | Run [PAUSE](../mainsail.cfg.md#gcode_macro-pause), which is evaluated separately when reached. Forward <code>{rawparams}</code>. |
+| [97](../../config/macros/client.cfg#L97) | <code>{% endif %}</code> | End this conditional block. |
+| [98](../../config/macros/client.cfg#L98) | <code>_FILAMENT_HEAT</code> | Run [_FILAMENT_HEAT](filament.cfg.md#gcode_macro-_filament_heat), which is evaluated separately when reached. Use its default arguments. |
+| [99](../../config/macros/client.cfg#L99) | <code>_FILAMENT_CHANGE_UNLOAD</code> | Run [_FILAMENT_CHANGE_UNLOAD](filament.cfg.md#gcode_macro-_filament_change_unload), which is evaluated separately when reached. Use its default arguments. |
 
 <a id="gcode_macro-end_print"></a>
 
 ## gcode_macro END_PRINT
 
-When not already unloaded by M600, retracts 15mm if hot. Parks when homed, shuts down heaters/fans, clears print-related states and disables motors. Restores normal speed and extrusion multipliers, then sets the LCD green for successful completion.
+Disables filament runout event handling before terminal motion. When not already unloaded by M600, it retracts 15mm if hot, parks when homed, shuts down heaters/fans, clears print-related states and disables motors. It restores normal speed and extrusion multipliers, then sets the LCD green for successful completion.
 
 **Calls and state references:** [SET_PAUSE_AT_LAYER](../mainsail.cfg.md#gcode_macro-set_pause_at_layer), [SET_PAUSE_NEXT_LAYER](../mainsail.cfg.md#gcode_macro-set_pause_next_layer), [_ALL_FAN_OFF](sovol-macros.cfg.md#gcode_macro-_all_fan_off), [_CLIENT_RETRACT](../mainsail.cfg.md#gcode_macro-_client_retract), [_END_PRINT_PARK](client.cfg.md#gcode_macro-_end_print_park), [_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_filament_change), [_LCD_STATUS_COMPLETE](../options/lcd/macros.cfg.md#gcode_macro-_lcd_status_complete), [_RESET_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_reset_filament_change). Conditional references are not necessarily executed.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [100](../../config/macros/client.cfg#L100) | <code>[gcode_macro END_PRINT]</code> | Declare this callable macro. |
-| [101](../../config/macros/client.cfg#L101) | <code>description: Retract when hot, park when homed, and shut down</code> | Set the help text: <code>Retract when hot, park when homed, and shut down</code>. |
-| [102](../../config/macros/client.cfg#L102) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [103](../../config/macros/client.cfg#L103) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [104](../../config/macros/client.cfg#L104) | <code>{% if not printer[&#x27;gcode_macro _FILAMENT_CHANGE&#x27;].active %}</code> | Select this branch when an M600 unload has not already completed, avoiding an additional end-of-print retract after unloading. |
-| [105](../../config/macros/client.cfg#L105) | <code>_CLIENT_RETRACT LENGTH=15 SPEED=45</code> | Run [_CLIENT_RETRACT](../mainsail.cfg.md#gcode_macro-_client_retract), which is evaluated separately when reached. Forward <code>LENGTH=15 SPEED=45</code>. |
-| [106](../../config/macros/client.cfg#L106) | <code>{% endif %}</code> | End this conditional block. |
-| [107](../../config/macros/client.cfg#L107) | <code>_END_PRINT_PARK</code> | Run [_END_PRINT_PARK](client.cfg.md#gcode_macro-_end_print_park), which is evaluated separately when reached. Use its default arguments. |
-| [108](../../config/macros/client.cfg#L108) | <code>TURN_OFF_HEATERS</code> | Set all heater targets to zero. Actual temperatures fall gradually; motors and fans are not disabled by this command. |
-| [109](../../config/macros/client.cfg#L109) | <code>_ALL_FAN_OFF</code> | Run [_ALL_FAN_OFF](sovol-macros.cfg.md#gcode_macro-_all_fan_off), which is evaluated separately when reached. Use its default arguments. |
-| [110](../../config/macros/client.cfg#L110) | <code>BED_MESH_CLEAR</code> | Remove the currently applied bed mesh from movement compensation; do not erase saved profiles. |
-| [111](../../config/macros/client.cfg#L111) | <code>CLEAR_PAUSE</code> | Clear Klipper's paused state; it does not restore position or resume extrusion. |
-| [112](../../config/macros/client.cfg#L112) | <code>_RESET_FILAMENT_CHANGE</code> | Run [_RESET_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_reset_filament_change), which is evaluated separately when reached. Use its default arguments. |
-| [113](../../config/macros/client.cfg#L113) | <code>SET_PAUSE_NEXT_LAYER ENABLE=0</code> | Run [SET_PAUSE_NEXT_LAYER](../mainsail.cfg.md#gcode_macro-set_pause_next_layer), which is evaluated separately when reached. Forward <code>ENABLE=0</code>. |
-| [114](../../config/macros/client.cfg#L114) | <code>SET_PAUSE_AT_LAYER ENABLE=0 LAYER=0</code> | Run [SET_PAUSE_AT_LAYER](../mainsail.cfg.md#gcode_macro-set_pause_at_layer), which is evaluated separately when reached. Forward <code>ENABLE=0 LAYER=0</code>. |
-| [115](../../config/macros/client.cfg#L115) | <code>SET_IDLE_TIMEOUT TIMEOUT={printer.configfile.settings.idle_timeout.timeout}</code> | Set the inactivity timeout to TIMEOUT seconds for this session; the configured idle handler decides what happens when it expires. |
-| [116](../../config/macros/client.cfg#L116) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
-| [117](../../config/macros/client.cfg#L117) | <code>M220 S100</code> | Set the movement feed-rate multiplier to S percent; 100 restores normal speed. |
-| [118](../../config/macros/client.cfg#L118) | <code>M221 S100</code> | Set the extrusion multiplier to S percent; 100 restores normal filament flow. |
-| [119](../../config/macros/client.cfg#L119) | <code>_LCD_STATUS_COMPLETE</code> | Run [_LCD_STATUS_COMPLETE](../options/lcd/macros.cfg.md#gcode_macro-_lcd_status_complete), which is evaluated separately when reached. Use its default arguments. |
-| [120](../../config/macros/client.cfg#L120) | <code>M117 Print complete</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [101](../../config/macros/client.cfg#L101) | <code>[gcode_macro END_PRINT]</code> | Declare this callable macro. |
+| [102](../../config/macros/client.cfg#L102) | <code>description: Retract when hot, park when homed, and shut down</code> | Set the help text: <code>Retract when hot, park when homed, and shut down</code>. |
+| [103](../../config/macros/client.cfg#L103) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [104](../../config/macros/client.cfg#L104) | <code>SET_FILAMENT_SENSOR SENSOR=filament_sensor ENABLE=0</code> | Enable or disable event handling for the named filament sensor. Detection status continues updating while disabled; this project disables events while idle and enables them only for a validated print lifecycle. |
+| [105](../../config/macros/client.cfg#L105) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [106](../../config/macros/client.cfg#L106) | <code>{% if not printer[&#x27;gcode_macro _FILAMENT_CHANGE&#x27;].active %}</code> | Select this branch when an M600 unload has not already completed, avoiding an additional end-of-print retract after unloading. |
+| [107](../../config/macros/client.cfg#L107) | <code>_CLIENT_RETRACT LENGTH=15 SPEED=45</code> | Run [_CLIENT_RETRACT](../mainsail.cfg.md#gcode_macro-_client_retract), which is evaluated separately when reached. Forward <code>LENGTH=15 SPEED=45</code>. |
+| [108](../../config/macros/client.cfg#L108) | <code>{% endif %}</code> | End this conditional block. |
+| [109](../../config/macros/client.cfg#L109) | <code>_END_PRINT_PARK</code> | Run [_END_PRINT_PARK](client.cfg.md#gcode_macro-_end_print_park), which is evaluated separately when reached. Use its default arguments. |
+| [110](../../config/macros/client.cfg#L110) | <code>TURN_OFF_HEATERS</code> | Set all heater targets to zero. Actual temperatures fall gradually; motors and fans are not disabled by this command. |
+| [111](../../config/macros/client.cfg#L111) | <code>_ALL_FAN_OFF</code> | Run [_ALL_FAN_OFF](sovol-macros.cfg.md#gcode_macro-_all_fan_off), which is evaluated separately when reached. Use its default arguments. |
+| [112](../../config/macros/client.cfg#L112) | <code>BED_MESH_CLEAR</code> | Remove the currently applied bed mesh from movement compensation; do not erase saved profiles. |
+| [113](../../config/macros/client.cfg#L113) | <code>CLEAR_PAUSE</code> | Clear Klipper's paused state; it does not restore position or resume extrusion. |
+| [114](../../config/macros/client.cfg#L114) | <code>_RESET_FILAMENT_CHANGE</code> | Run [_RESET_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_reset_filament_change), which is evaluated separately when reached. Use its default arguments. |
+| [115](../../config/macros/client.cfg#L115) | <code>SET_PAUSE_NEXT_LAYER ENABLE=0</code> | Run [SET_PAUSE_NEXT_LAYER](../mainsail.cfg.md#gcode_macro-set_pause_next_layer), which is evaluated separately when reached. Forward <code>ENABLE=0</code>. |
+| [116](../../config/macros/client.cfg#L116) | <code>SET_PAUSE_AT_LAYER ENABLE=0 LAYER=0</code> | Run [SET_PAUSE_AT_LAYER](../mainsail.cfg.md#gcode_macro-set_pause_at_layer), which is evaluated separately when reached. Forward <code>ENABLE=0 LAYER=0</code>. |
+| [117](../../config/macros/client.cfg#L117) | <code>SET_IDLE_TIMEOUT TIMEOUT={printer.configfile.settings.idle_timeout.timeout}</code> | Set the inactivity timeout to TIMEOUT seconds for this session; the configured idle handler decides what happens when it expires. |
+| [118](../../config/macros/client.cfg#L118) | <code>M84</code> | Disable all stepper motors, including the extruder; XYZ position can no longer be trusted as homed. |
+| [119](../../config/macros/client.cfg#L119) | <code>M220 S100</code> | Set the movement feed-rate multiplier to S percent; 100 restores normal speed. |
+| [120](../../config/macros/client.cfg#L120) | <code>M221 S100</code> | Set the extrusion multiplier to S percent; 100 restores normal filament flow. |
+| [121](../../config/macros/client.cfg#L121) | <code>_LCD_STATUS_COMPLETE</code> | Run [_LCD_STATUS_COMPLETE](../options/lcd/macros.cfg.md#gcode_macro-_lcd_status_complete), which is evaluated separately when reached. Use its default arguments. |
+| [122](../../config/macros/client.cfg#L122) | <code>M117 Print complete</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
 
 <a id="gcode_macro-_end_print_park"></a>
 
@@ -218,12 +220,12 @@ If XYZ is homed, raise up to 25mm without exceeding the configured Z ceiling, th
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [122](../../config/macros/client.cfg#L122) | <code>[gcode_macro _END_PRINT_PARK]</code> | Declare this callable macro. |
-| [123](../../config/macros/client.cfg#L123) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [124](../../config/macros/client.cfg#L124) | <code>{% if &#x27;xyz&#x27; in printer.toolhead.homed_axes %}</code> | Start a conditional branch: <code>&#x27;xyz&#x27; in the set of homed axes</code>. Only a true branch emits its commands. |
-| [125](../../config/macros/client.cfg#L125) | <code>{% set z = [printer.gcode_move.gcode_position.z + 25,</code> | Begin a multi-line template expression: <code>set z = [the current G-code position.z + 25,</code>. Its continuation lines complete the same expression before any commands execute. |
-| [126](../../config/macros/client.cfg#L126) | <code>printer.toolhead.axis_maximum.z - printer.gcode_move.homing_origin.z]&#124;min %}</code> | Continue the expression or value started above: <code>the maximum axis positions.z - the coordinate offsets.z]&#124;min %}</code>. This is not a separate G-code command. |
-| [127](../../config/macros/client.cfg#L127) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [128](../../config/macros/client.cfg#L128) | <code>G1 Z{z} F1200</code> | command Z=<code>{z}</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [129](../../config/macros/client.cfg#L129) | <code>G1 X0 Y360 F9000</code> | command X=<code>0</code> mm; command Y=<code>360</code> mm; use feed rate 150 mm/s (9000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [130](../../config/macros/client.cfg#L130) | <code>{% endif %}</code> | End this conditional block. |
+| [124](../../config/macros/client.cfg#L124) | <code>[gcode_macro _END_PRINT_PARK]</code> | Declare this callable macro. |
+| [125](../../config/macros/client.cfg#L125) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [126](../../config/macros/client.cfg#L126) | <code>{% if &#x27;xyz&#x27; in printer.toolhead.homed_axes %}</code> | Start a conditional branch: <code>&#x27;xyz&#x27; in the set of homed axes</code>. Only a true branch emits its commands. |
+| [127](../../config/macros/client.cfg#L127) | <code>{% set z = [printer.gcode_move.gcode_position.z + 25,</code> | Begin a multi-line template expression: <code>set z = [the current G-code position.z + 25,</code>. Its continuation lines complete the same expression before any commands execute. |
+| [128](../../config/macros/client.cfg#L128) | <code>printer.toolhead.axis_maximum.z - printer.gcode_move.homing_origin.z]&#124;min %}</code> | Continue the expression or value started above: <code>the maximum axis positions.z - the coordinate offsets.z]&#124;min %}</code>. This is not a separate G-code command. |
+| [129](../../config/macros/client.cfg#L129) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [130](../../config/macros/client.cfg#L130) | <code>G1 Z{z} F1200</code> | command Z=<code>{z}</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [131](../../config/macros/client.cfg#L131) | <code>G1 X0 Y360 F9000</code> | command X=<code>0</code> mm; command Y=<code>360</code> mm; use feed rate 150 mm/s (9000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [132](../../config/macros/client.cfg#L132) | <code>{% endif %}</code> | End this conditional block. |

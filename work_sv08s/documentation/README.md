@@ -3,7 +3,7 @@
 
 Shared `.cfg`, `.conf`, and `.conf.backup` files have individual reference pages. Numbered printer entry points are condensed into one template page.
 
-Resolved printer entry points: <code>printer-01.cfg</code>, <code>printer-02.cfg</code>, <code>printer-03.cfg</code>, <code>printer-04.cfg</code>, <code>printer-05.cfg</code>, <code>printer-06.cfg</code>, <code>printer-07.cfg</code>, <code>printer-08.cfg</code>, <code>printer-09.cfg</code>, <code>printer-10.cfg</code>, <code>printer-11.cfg</code>, <code>printer-13.cfg</code>. Shared files are active when reachable from any of these entry points.
+Resolved printer entry points: <code>printer-01.cfg</code>, <code>printer-02.cfg</code>, <code>printer-03.cfg</code>, <code>printer-04.cfg</code>, <code>printer-05.cfg</code>, <code>printer-06.cfg</code>, <code>printer-07.cfg</code>, <code>printer-08.cfg</code>, <code>printer-09.cfg</code>, <code>printer-10.cfg</code>, <code>printer-11.cfg</code>, <code>printer-12.cfg</code>, <code>printer-13.cfg</code>. Shared files are active when reachable from any of these entry points.
 
 [Reading guide](READING_GUIDE.md) · [Update workflow](WORKFLOW.md)
 
@@ -29,7 +29,7 @@ These pages explain the saved candidate, including inactive files. They do not c
 - [options/lcd/sovol-menu-moonraker.cfg](options/lcd/sovol-menu-moonraker.cfg.md) — active
 - [options/probe/eddy-sovol.cfg](options/probe/eddy-sovol.cfg.md) — active
 - [options/thermistor/pico.cfg](options/thermistor/pico.cfg.md) — separate/inactive
-- [printer-XX.cfg entry-point template](printer-template.cfg.md) — active; covers printer-01.cfg, printer-02.cfg, printer-03.cfg, printer-04.cfg, printer-05.cfg, printer-06.cfg, printer-07.cfg, printer-08.cfg, printer-09.cfg, printer-10.cfg, printer-11.cfg, printer-13.cfg
+- [printer-XX.cfg entry-point template](printer-template.cfg.md) — active; covers printer-01.cfg, printer-02.cfg, printer-03.cfg, printer-04.cfg, printer-05.cfg, printer-06.cfg, printer-07.cfg, printer-08.cfg, printer-09.cfg, printer-10.cfg, printer-11.cfg, printer-12.cfg, printer-13.cfg
 - [timelapse.cfg](timelapse.cfg.md) — active
 
 ## Macro lookup
@@ -79,6 +79,7 @@ These pages explain the saved candidate, including inactive files. They do not c
 - [_CLIENT_RETRACT](mainsail.cfg.md#gcode_macro-_client_retract)
 - [_CLIENT_VARIABLE](macros/client.cfg.md#gcode_macro-_client_variable)
 - [_COMMIT_TAP_REFERENCE](macros/preparation.cfg.md#gcode_macro-_commit_tap_reference)
+- [_DISABLE_FILAMENT_SENSOR_AT_READY](macros/filament.cfg.md#delayed_gcode-_disable_filament_sensor_at_ready) — delayed callback
 - [_END_PRINT_PARK](macros/client.cfg.md#gcode_macro-_end_print_park)
 - [_FILAMENT_CHANGE](macros/filament.cfg.md#gcode_macro-_filament_change)
 - [_FILAMENT_CHANGE_UNLOAD](macros/filament.cfg.md#gcode_macro-_filament_change_unload)

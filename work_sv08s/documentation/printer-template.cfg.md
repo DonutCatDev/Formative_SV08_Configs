@@ -26,4 +26,5 @@ The active section layout is checked across all numbered entry points whenever t
 - [printer-09.cfg](../config/printer-09.cfg) — LF-normalized SHA256 `26352839684e0caecf3b5780fe466d6791620628a2b3f53f9ca99773b4063811`
 - [printer-10.cfg](../config/printer-10.cfg) — LF-normalized SHA256 `3d465226f2b8e6f988151772602f15fc9c1bf42774811c498b30c02b43e2ec97`
 - [printer-11.cfg](../config/printer-11.cfg) — LF-normalized SHA256 `454663bd54c0adc6830749c74c587a47743d3b63132d7fbbdf70456f99d3d8fe`
+- [printer-12.cfg](../config/printer-12.cfg) — LF-normalized SHA256 `76316d039b3f23050e5c90cdd38f6ab8976f3f068907bc6e7e86b3411c093a0d`
 - [printer-13.cfg](../config/printer-13.cfg) — LF-normalized SHA256 `c9c926ed3c44112337a83fd561ce22f2b75314c78c209cb3e27e552cf707df4a`
