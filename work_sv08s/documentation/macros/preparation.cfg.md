@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/preparation.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `e467cac53587c711a9bba2d3ebc5596d0670b18a19b943a1b96396713cea8baa`.
+Source text SHA256 (LF-normalized): `31f9d2d88386f2a02875dd62529dc6a87ee0c06a3ba8206c682f2cc7a78db602`.
 
 ## Macro and action index
 
@@ -314,7 +314,7 @@ Checks the print commissioning flag, positive native tap threshold, enabled kine
 
 ## gcode_macro TAP_REFERENCE
 
-For a previously cleaned nozzle, require ready configuration, homed XYZ, completed QGL, no pause/mesh/coordinate shift. Raise and wait at tap temperature without changing XY, then move to nozzle X175 Y175 Z10, sample and apply the measured reference. During START_PRINT this cools above the brush instead of over bed center. Leaves absolute XYZ mode, tap temperature and Z10; does not heat for extrusion or save calibration. Standalone use permits supervised commissioning while START_PRINT remains gated.
+For a previously cleaned nozzle, require ready configuration, homed XYZ, completed QGL, no pause/mesh/coordinate shift. Raise, run the part-cooling fan at full duty while waiting at tap temperature without changing XY, then stop that fan before moving to nozzle X175 Y175 Z10 to sample and apply the measured reference. During START_PRINT this actively cools above the brush instead of over bed center. Leaves absolute XYZ mode, the part-cooling fan off, tap temperature and Z10; does not heat for extrusion or save calibration. Standalone use permits supervised commissioning while START_PRINT remains gated.
 
 **Calls and state references:** [_CHECK_TAP_READY](preparation.cfg.md#gcode_macro-_check_tap_ready), [_CHECK_TAP_STATE](preparation.cfg.md#gcode_macro-_check_tap_state), [_PILOT_SETTINGS](preparation.cfg.md#gcode_macro-_pilot_settings), [_PROBE_TAP_REFERENCE](preparation.cfg.md#gcode_macro-_probe_tap_reference). Conditional references are not necessarily executed.
 
@@ -328,10 +328,12 @@ For a previously cleaned nozzle, require ready configuration, homed XYZ, complet
 | [197](../../config/macros/preparation.cfg#L197) | <code>_CHECK_TAP_STATE</code> | Run [_CHECK_TAP_STATE](preparation.cfg.md#gcode_macro-_check_tap_state), which is evaluated separately when reached. Use its default arguments. |
 | [198](../../config/macros/preparation.cfg#L198) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
 | [199](../../config/macros/preparation.cfg#L199) | <code>G1 Z{[printer.gcode_move.position.z, 10]&#124;max} F1200</code> | command Z=<code>{[printer.gcode_move.position.z, 10]&#124;max}</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [200](../../config/macros/preparation.cfg#L200) | <code>M109 S{printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].tap_temperature}</code> | Set the nozzle target using <code>{printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].tap_temperature}</code> °C; zero turns its heater off. Wait for the requested temperature. |
-| [201](../../config/macros/preparation.cfg#L201) | <code>G1 X175 Y175 F6000</code> | command X=<code>175</code> mm; command Y=<code>175</code> mm; use feed rate 100 mm/s (6000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [202](../../config/macros/preparation.cfg#L202) | <code>G1 Z10 F1200</code> | command Z=<code>10</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [203](../../config/macros/preparation.cfg#L203) | <code>_PROBE_TAP_REFERENCE</code> | Run [_PROBE_TAP_REFERENCE](preparation.cfg.md#gcode_macro-_probe_tap_reference), which is evaluated separately when reached. Use its default arguments. |
+| [200](../../config/macros/preparation.cfg#L200) | <code>M106 S255</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
+| [201](../../config/macros/preparation.cfg#L201) | <code>M109 S{printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].tap_temperature}</code> | Set the nozzle target using <code>{printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].tap_temperature}</code> °C; zero turns its heater off. Wait for the requested temperature. |
+| [202](../../config/macros/preparation.cfg#L202) | <code>M107</code> | Turn off the part-cooling fan. |
+| [203](../../config/macros/preparation.cfg#L203) | <code>G1 X175 Y175 F6000</code> | command X=<code>175</code> mm; command Y=<code>175</code> mm; use feed rate 100 mm/s (6000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [204](../../config/macros/preparation.cfg#L204) | <code>G1 Z10 F1200</code> | command Z=<code>10</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [205](../../config/macros/preparation.cfg#L205) | <code>_PROBE_TAP_REFERENCE</code> | Run [_PROBE_TAP_REFERENCE](preparation.cfg.md#gcode_macro-_probe_tap_reference), which is evaluated separately when reached. Use its default arguments. |
 
 <a id="gcode_macro-_check_tap_state"></a>
 
@@ -341,23 +343,23 @@ Reject tap reference with lost homing, pause, mesh or shifted coordinates.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [205](../../config/macros/preparation.cfg#L205) | <code>[gcode_macro _CHECK_TAP_STATE]</code> | Declare this callable macro. |
-| [206](../../config/macros/preparation.cfg#L206) | <code>description: Reject tap reference with lost homing, pause, mesh or shifted coordinates</code> | Set the help text: <code>Reject tap reference with lost homing, pause, mesh or shifted coordinates</code>. |
-| [207](../../config/macros/preparation.cfg#L207) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [208](../../config/macros/preparation.cfg#L208) | <code>{% if &#x27;xyz&#x27; not in printer.toolhead.homed_axes or not printer.quad_gantry_level.applied %}</code> | Start a conditional branch: <code>&#x27;xyz&#x27; not in the set of homed axes or not printer.quad_gantry_level.applied</code>. Only a true branch emits its commands. |
-| [209](../../config/macros/preparation.cfg#L209) | <code>{action_raise_error(&quot;Tap reference requires homed XYZ and completed QGL.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [210](../../config/macros/preparation.cfg#L210) | <code>{% endif %}</code> | End this conditional block. |
-| [211](../../config/macros/preparation.cfg#L211) | <code>{% if printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>the printer is paused</code>. Only a true branch emits its commands. |
-| [212](../../config/macros/preparation.cfg#L212) | <code>{action_raise_error(&quot;Tap reference is not allowed during a pause.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [213](../../config/macros/preparation.cfg#L213) | <code>{% endif %}</code> | End this conditional block. |
-| [214](../../config/macros/preparation.cfg#L214) | <code>{% if printer.bed_mesh.profile_name %}</code> | Start a conditional branch: <code>printer.bed_mesh.profile_name</code>. Only a true branch emits its commands. |
-| [215](../../config/macros/preparation.cfg#L215) | <code>{action_raise_error(&quot;Clear the bed mesh before tap reference.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [216](../../config/macros/preparation.cfg#L216) | <code>{% endif %}</code> | End this conditional block. |
-| [217](../../config/macros/preparation.cfg#L217) | <code>{% for axis in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] %}</code> | Repeat for each <code>axis in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;]</code>. |
-| [218](../../config/macros/preparation.cfg#L218) | <code>{% if (printer.gcode_move.position[axis] - printer.gcode_move.gcode_position[axis])&#124;abs &gt; 0.0001 %}</code> | Start a conditional branch: <code>(printer.gcode_move.position[axis] - the current G-code position[axis]) as a positive magnitude &gt; 0.0001</code>. Only a true branch emits its commands. |
-| [219](../../config/macros/preparation.cfg#L219) | <code>{action_raise_error(&quot;Tap reference requires unshifted XYZ G-code coordinates.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [220](../../config/macros/preparation.cfg#L220) | <code>{% endif %}</code> | End this conditional block. |
-| [221](../../config/macros/preparation.cfg#L221) | <code>{% endfor %}</code> | End the repeated block. |
+| [207](../../config/macros/preparation.cfg#L207) | <code>[gcode_macro _CHECK_TAP_STATE]</code> | Declare this callable macro. |
+| [208](../../config/macros/preparation.cfg#L208) | <code>description: Reject tap reference with lost homing, pause, mesh or shifted coordinates</code> | Set the help text: <code>Reject tap reference with lost homing, pause, mesh or shifted coordinates</code>. |
+| [209](../../config/macros/preparation.cfg#L209) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [210](../../config/macros/preparation.cfg#L210) | <code>{% if &#x27;xyz&#x27; not in printer.toolhead.homed_axes or not printer.quad_gantry_level.applied %}</code> | Start a conditional branch: <code>&#x27;xyz&#x27; not in the set of homed axes or not printer.quad_gantry_level.applied</code>. Only a true branch emits its commands. |
+| [211](../../config/macros/preparation.cfg#L211) | <code>{action_raise_error(&quot;Tap reference requires homed XYZ and completed QGL.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [212](../../config/macros/preparation.cfg#L212) | <code>{% endif %}</code> | End this conditional block. |
+| [213](../../config/macros/preparation.cfg#L213) | <code>{% if printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>the printer is paused</code>. Only a true branch emits its commands. |
+| [214](../../config/macros/preparation.cfg#L214) | <code>{action_raise_error(&quot;Tap reference is not allowed during a pause.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [215](../../config/macros/preparation.cfg#L215) | <code>{% endif %}</code> | End this conditional block. |
+| [216](../../config/macros/preparation.cfg#L216) | <code>{% if printer.bed_mesh.profile_name %}</code> | Start a conditional branch: <code>printer.bed_mesh.profile_name</code>. Only a true branch emits its commands. |
+| [217](../../config/macros/preparation.cfg#L217) | <code>{action_raise_error(&quot;Clear the bed mesh before tap reference.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [218](../../config/macros/preparation.cfg#L218) | <code>{% endif %}</code> | End this conditional block. |
+| [219](../../config/macros/preparation.cfg#L219) | <code>{% for axis in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] %}</code> | Repeat for each <code>axis in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;]</code>. |
+| [220](../../config/macros/preparation.cfg#L220) | <code>{% if (printer.gcode_move.position[axis] - printer.gcode_move.gcode_position[axis])&#124;abs &gt; 0.0001 %}</code> | Start a conditional branch: <code>(printer.gcode_move.position[axis] - the current G-code position[axis]) as a positive magnitude &gt; 0.0001</code>. Only a true branch emits its commands. |
+| [221](../../config/macros/preparation.cfg#L221) | <code>{action_raise_error(&quot;Tap reference requires unshifted XYZ G-code coordinates.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [222](../../config/macros/preparation.cfg#L222) | <code>{% endif %}</code> | End this conditional block. |
+| [223](../../config/macros/preparation.cfg#L223) | <code>{% endfor %}</code> | End the repeated block. |
 
 <a id="gcode_macro-_probe_tap_reference"></a>
 
@@ -369,23 +371,23 @@ Check cooled tap position, sample contact and apply only a successful result.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [223](../../config/macros/preparation.cfg#L223) | <code>[gcode_macro _PROBE_TAP_REFERENCE]</code> | Declare this callable macro. |
-| [224](../../config/macros/preparation.cfg#L224) | <code>description: Check cooled tap position, sample contact and apply only a successful result</code> | Set the help text: <code>Check cooled tap position, sample contact and apply only a successful result</code>. |
-| [225](../../config/macros/preparation.cfg#L225) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [226](../../config/macros/preparation.cfg#L226) | <code>{% set position = printer.gcode_move.position %}</code> | Calculate local <code>position</code> from <code>printer.gcode_move.position</code>. It lasts for this evaluation only. |
-| [227](../../config/macros/preparation.cfg#L227) | <code>{% set temperature = printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].tap_temperature&#124;float %}</code> | Calculate local <code>temperature</code> from <code>the stored state of _PILOT_SETTINGS.tap_temperature as a decimal</code>. It lasts for this evaluation only. |
-| [228](../../config/macros/preparation.cfg#L228) | <code>{% if (position.x - 175)&#124;abs &gt; 0.01 or (position.y - 175)&#124;abs &gt; 0.01 or (position.z - 10)&#124;abs &gt; 0.01 %}</code> | Start a conditional branch: <code>(position.x - 175) as a positive magnitude &gt; 0.01 or (position.y - 175) as a positive magnitude &gt; 0.01 or (position.z - 10) as a positive magnitude &gt; 0.01</code>. Only a true branch emits its commands. |
-| [229](../../config/macros/preparation.cfg#L229) | <code>{action_raise_error(&quot;Tap must start at nozzle X175 Y175 Z10.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [230](../../config/macros/preparation.cfg#L230) | <code>{% endif %}</code> | End this conditional block. |
-| [231](../../config/macros/preparation.cfg#L231) | <code>{% if not (temperature - 2 &lt;= printer.extruder.temperature &lt;= temperature + 2) %}</code> | Start a conditional branch: <code>not (temperature - 2  is at most  the measured nozzle temperature  is at most  temperature + 2)</code>. Only a true branch emits its commands. |
-| [232](../../config/macros/preparation.cfg#L232) | <code>{action_raise_error(&quot;Nozzle has not reached the tap temperature window.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [233](../../config/macros/preparation.cfg#L233) | <code>{% endif %}</code> | End this conditional block. |
-| [234](../../config/macros/preparation.cfg#L234) | <code>_CHECK_TAP_STATE</code> | Run [_CHECK_TAP_STATE](preparation.cfg.md#gcode_macro-_check_tap_state), which is evaluated separately when reached. Use its default arguments. |
-| [235](../../config/macros/preparation.cfg#L235) | <code># Native sampling rejects disagreement; do not retry a failed contact automatically.</code> | Comment only; Klipper does not execute this line. |
-| [236](../../config/macros/preparation.cfg#L236) | <code>SET_GCODE_VARIABLE MACRO=_APPLY_TAP_REFERENCE VARIABLE=ready VALUE=False</code> | Store <code>False</code> in the named macro's <code>ready</code> variable for later calls. This changes runtime state, not the config file. |
-| [237](../../config/macros/preparation.cfg#L237) | <code>PROBE METHOD=tap SAMPLES=3 SAMPLE_RETRACT_DIST=5 SAMPLES_TOLERANCE=0.025 SAMPLES_TOLERANCE_RETRIES=0</code> | Run a native probe measurement. Here METHOD=tap takes three nozzle-contact samples, retracting 5mm between samples; reject spread over 0.025mm with no automatic tolerance retries. A following macro reads the completed result; this command alone does not establish a new Z reference. |
-| [238](../../config/macros/preparation.cfg#L238) | <code>SET_GCODE_VARIABLE MACRO=_APPLY_TAP_REFERENCE VARIABLE=ready VALUE=True</code> | Store <code>True</code> in the named macro's <code>ready</code> variable for later calls. This changes runtime state, not the config file. |
-| [239](../../config/macros/preparation.cfg#L239) | <code>_APPLY_TAP_REFERENCE</code> | Run [_APPLY_TAP_REFERENCE](preparation.cfg.md#gcode_macro-_apply_tap_reference), which is evaluated separately when reached. Use its default arguments. |
+| [225](../../config/macros/preparation.cfg#L225) | <code>[gcode_macro _PROBE_TAP_REFERENCE]</code> | Declare this callable macro. |
+| [226](../../config/macros/preparation.cfg#L226) | <code>description: Check cooled tap position, sample contact and apply only a successful result</code> | Set the help text: <code>Check cooled tap position, sample contact and apply only a successful result</code>. |
+| [227](../../config/macros/preparation.cfg#L227) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [228](../../config/macros/preparation.cfg#L228) | <code>{% set position = printer.gcode_move.position %}</code> | Calculate local <code>position</code> from <code>printer.gcode_move.position</code>. It lasts for this evaluation only. |
+| [229](../../config/macros/preparation.cfg#L229) | <code>{% set temperature = printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].tap_temperature&#124;float %}</code> | Calculate local <code>temperature</code> from <code>the stored state of _PILOT_SETTINGS.tap_temperature as a decimal</code>. It lasts for this evaluation only. |
+| [230](../../config/macros/preparation.cfg#L230) | <code>{% if (position.x - 175)&#124;abs &gt; 0.01 or (position.y - 175)&#124;abs &gt; 0.01 or (position.z - 10)&#124;abs &gt; 0.01 %}</code> | Start a conditional branch: <code>(position.x - 175) as a positive magnitude &gt; 0.01 or (position.y - 175) as a positive magnitude &gt; 0.01 or (position.z - 10) as a positive magnitude &gt; 0.01</code>. Only a true branch emits its commands. |
+| [231](../../config/macros/preparation.cfg#L231) | <code>{action_raise_error(&quot;Tap must start at nozzle X175 Y175 Z10.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [232](../../config/macros/preparation.cfg#L232) | <code>{% endif %}</code> | End this conditional block. |
+| [233](../../config/macros/preparation.cfg#L233) | <code>{% if not (temperature - 2 &lt;= printer.extruder.temperature &lt;= temperature + 2) %}</code> | Start a conditional branch: <code>not (temperature - 2  is at most  the measured nozzle temperature  is at most  temperature + 2)</code>. Only a true branch emits its commands. |
+| [234](../../config/macros/preparation.cfg#L234) | <code>{action_raise_error(&quot;Nozzle has not reached the tap temperature window.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [235](../../config/macros/preparation.cfg#L235) | <code>{% endif %}</code> | End this conditional block. |
+| [236](../../config/macros/preparation.cfg#L236) | <code>_CHECK_TAP_STATE</code> | Run [_CHECK_TAP_STATE](preparation.cfg.md#gcode_macro-_check_tap_state), which is evaluated separately when reached. Use its default arguments. |
+| [237](../../config/macros/preparation.cfg#L237) | <code># Native sampling rejects disagreement; do not retry a failed contact automatically.</code> | Comment only; Klipper does not execute this line. |
+| [238](../../config/macros/preparation.cfg#L238) | <code>SET_GCODE_VARIABLE MACRO=_APPLY_TAP_REFERENCE VARIABLE=ready VALUE=False</code> | Store <code>False</code> in the named macro's <code>ready</code> variable for later calls. This changes runtime state, not the config file. |
+| [239](../../config/macros/preparation.cfg#L239) | <code>PROBE METHOD=tap SAMPLES=3 SAMPLE_RETRACT_DIST=5 SAMPLES_TOLERANCE=0.025 SAMPLES_TOLERANCE_RETRIES=0</code> | Run a native probe measurement. Here METHOD=tap takes three nozzle-contact samples, retracting 5mm between samples; reject spread over 0.025mm with no automatic tolerance retries. A following macro reads the completed result; this command alone does not establish a new Z reference. |
+| [240](../../config/macros/preparation.cfg#L240) | <code>SET_GCODE_VARIABLE MACRO=_APPLY_TAP_REFERENCE VARIABLE=ready VALUE=True</code> | Store <code>True</code> in the named macro's <code>ready</code> variable for later calls. This changes runtime state, not the config file. |
+| [241](../../config/macros/preparation.cfg#L241) | <code>_APPLY_TAP_REFERENCE</code> | Run [_APPLY_TAP_REFERENCE](preparation.cfg.md#gcode_macro-_apply_tap_reference), which is evaluated separately when reached. Use its default arguments. |
 
 <a id="gcode_macro-_apply_tap_reference"></a>
 
@@ -397,16 +399,16 @@ Consume one successful tap before evaluating its Z correction.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [241](../../config/macros/preparation.cfg#L241) | <code>[gcode_macro _APPLY_TAP_REFERENCE]</code> | Declare this callable macro. |
-| [242](../../config/macros/preparation.cfg#L242) | <code>description: Consume one successful tap before evaluating its Z correction</code> | Set the help text: <code>Consume one successful tap before evaluating its Z correction</code>. |
-| [243](../../config/macros/preparation.cfg#L243) | <code>variable_ready: False</code> | Initialize <code>ready</code> (ready) to <code>False</code> at restart; later calls may change it. |
-| [244](../../config/macros/preparation.cfg#L244) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [245](../../config/macros/preparation.cfg#L245) | <code>{% if not ready %}</code> | Start a conditional branch: <code>not ready</code>. Only a true branch emits its commands. |
-| [246](../../config/macros/preparation.cfg#L246) | <code>{action_raise_error(&quot;No fresh tap result is available; run TAP_REFERENCE.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [247](../../config/macros/preparation.cfg#L247) | <code>{% endif %}</code> | End this conditional block. |
-| [248](../../config/macros/preparation.cfg#L248) | <code># Consume first, so a rejected result cannot be applied by retrying this helper.</code> | Comment only; Klipper does not execute this line. |
-| [249](../../config/macros/preparation.cfg#L249) | <code>SET_GCODE_VARIABLE MACRO=_APPLY_TAP_REFERENCE VARIABLE=ready VALUE=False</code> | Store <code>False</code> in the named macro's <code>ready</code> variable for later calls. This changes runtime state, not the config file. |
-| [250](../../config/macros/preparation.cfg#L250) | <code>_COMMIT_TAP_REFERENCE</code> | Run [_COMMIT_TAP_REFERENCE](preparation.cfg.md#gcode_macro-_commit_tap_reference), which is evaluated separately when reached. Use its default arguments. |
+| [243](../../config/macros/preparation.cfg#L243) | <code>[gcode_macro _APPLY_TAP_REFERENCE]</code> | Declare this callable macro. |
+| [244](../../config/macros/preparation.cfg#L244) | <code>description: Consume one successful tap before evaluating its Z correction</code> | Set the help text: <code>Consume one successful tap before evaluating its Z correction</code>. |
+| [245](../../config/macros/preparation.cfg#L245) | <code>variable_ready: False</code> | Initialize <code>ready</code> (ready) to <code>False</code> at restart; later calls may change it. |
+| [246](../../config/macros/preparation.cfg#L246) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [247](../../config/macros/preparation.cfg#L247) | <code>{% if not ready %}</code> | Start a conditional branch: <code>not ready</code>. Only a true branch emits its commands. |
+| [248](../../config/macros/preparation.cfg#L248) | <code>{action_raise_error(&quot;No fresh tap result is available; run TAP_REFERENCE.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [249](../../config/macros/preparation.cfg#L249) | <code>{% endif %}</code> | End this conditional block. |
+| [250](../../config/macros/preparation.cfg#L250) | <code># Consume first, so a rejected result cannot be applied by retrying this helper.</code> | Comment only; Klipper does not execute this line. |
+| [251](../../config/macros/preparation.cfg#L251) | <code>SET_GCODE_VARIABLE MACRO=_APPLY_TAP_REFERENCE VARIABLE=ready VALUE=False</code> | Store <code>False</code> in the named macro's <code>ready</code> variable for later calls. This changes runtime state, not the config file. |
+| [252](../../config/macros/preparation.cfg#L252) | <code>_COMMIT_TAP_REFERENCE</code> | Run [_COMMIT_TAP_REFERENCE](preparation.cfg.md#gcode_macro-_commit_tap_reference), which is evaluated separately when reached. Use its default arguments. |
 
 <a id="gcode_macro-_commit_tap_reference"></a>
 
@@ -418,24 +420,24 @@ Apply the preceding tap measurement to Z without declaring any axes homed.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [252](../../config/macros/preparation.cfg#L252) | <code>[gcode_macro _COMMIT_TAP_REFERENCE]</code> | Declare this callable macro. |
-| [253](../../config/macros/preparation.cfg#L253) | <code>description: Apply the preceding tap measurement to Z without declaring any axes homed</code> | Set the help text: <code>Apply the preceding tap measurement to Z without declaring any axes homed</code>. |
-| [254](../../config/macros/preparation.cfg#L254) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [255](../../config/macros/preparation.cfg#L255) | <code>{% set result = printer.probe.last_probe_position %}</code> | Read the completed native PROBE result in machine coordinates. The preceding helper runs after tapping; the native result already includes tap_z_offset. |
-| [256](../../config/macros/preparation.cfg#L256) | <code>{% set position = printer.gcode_move.position %}</code> | Calculate local <code>position</code> from <code>printer.gcode_move.position</code>. It lasts for this evaluation only. |
-| [257](../../config/macros/preparation.cfg#L257) | <code>{% set corrected_z = position.z - result.z %}</code> | Subtract the measured bed-reference Z from the current machine Z. For example, current Z5.2 and bed Z0.2 become Z5.0; this relabels the current height without moving the nozzle to the bed. |
-| [258](../../config/macros/preparation.cfg#L258) | <code>{% if not (-1 &lt;= result.z &lt;= 1) %}</code> | Reject a correction outside minus one to plus one millimeter, including non-finite values. This project-selected bound catches surprising results after probing; it cannot prevent a physical contact failure. |
-| [259](../../config/macros/preparation.cfg#L259) | <code>{action_raise_error(&quot;Tap correction exceeds the pilot +/-1mm acceptance bound; inspect calibration and nozzle cleanliness.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [260](../../config/macros/preparation.cfg#L260) | <code>{% endif %}</code> | End this conditional block. |
-| [261](../../config/macros/preparation.cfg#L261) | <code>{% if (result.x - 175)&#124;abs &gt; 0.01 or (result.y - 175)&#124;abs &gt; 0.01 or (position.x - 175)&#124;abs &gt; 0.01 or (position.y - 175)&#124;abs &gt; 0.01 %}</code> | Start a conditional branch: <code>(result.x - 175) as a positive magnitude &gt; 0.01 or (result.y - 175) as a positive magnitude &gt; 0.01 or (position.x - 175) as a positive magnitude &gt; 0.01 or (position.y - 175) as a positive magnitude &gt; 0.01</code>. Only a true branch emits its commands. |
-| [262](../../config/macros/preparation.cfg#L262) | <code>{action_raise_error(&quot;Tap result and current nozzle must be at the reference point.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [263](../../config/macros/preparation.cfg#L263) | <code>{% endif %}</code> | End this conditional block. |
-| [264](../../config/macros/preparation.cfg#L264) | <code>{% if not (0 &lt; corrected_z &lt;= printer.toolhead.axis_maximum.z) %}</code> | Start a conditional branch: <code>not (0 &lt; corrected_z  is at most  the maximum axis positions.z)</code>. Only a true branch emits its commands. |
-| [265](../../config/macros/preparation.cfg#L265) | <code>{action_raise_error(&quot;Tap produced an invalid corrected toolhead height.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [266](../../config/macros/preparation.cfg#L266) | <code>{% endif %}</code> | End this conditional block. |
-| [267](../../config/macros/preparation.cfg#L267) | <code>_CHECK_TAP_STATE</code> | Run [_CHECK_TAP_STATE](preparation.cfg.md#gcode_macro-_check_tap_state), which is evaluated separately when reached. Use its default arguments. |
-| [268](../../config/macros/preparation.cfg#L268) | <code># last_probe_position already includes calibrated tap_z_offset. Do not add it again.</code> | Comment only; Klipper does not execute this line. |
-| [269](../../config/macros/preparation.cfg#L269) | <code>SET_KINEMATIC_POSITION Z={corrected_z} SET_HOMED=</code> | Assign the requested machine position without moving. Initial setup uses SET_HOMED=Z; measured tap reference uses an empty SET_HOMED= to preserve all homing flags and changes only Z. The user authorized these two guarded uses only. |
-| [270](../../config/macros/preparation.cfg#L270) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [271](../../config/macros/preparation.cfg#L271) | <code>G1 Z10 F1200</code> | command Z=<code>10</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [272](../../config/macros/preparation.cfg#L272) | <code>M117 Tap reference applied</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [254](../../config/macros/preparation.cfg#L254) | <code>[gcode_macro _COMMIT_TAP_REFERENCE]</code> | Declare this callable macro. |
+| [255](../../config/macros/preparation.cfg#L255) | <code>description: Apply the preceding tap measurement to Z without declaring any axes homed</code> | Set the help text: <code>Apply the preceding tap measurement to Z without declaring any axes homed</code>. |
+| [256](../../config/macros/preparation.cfg#L256) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [257](../../config/macros/preparation.cfg#L257) | <code>{% set result = printer.probe.last_probe_position %}</code> | Read the completed native PROBE result in machine coordinates. The preceding helper runs after tapping; the native result already includes tap_z_offset. |
+| [258](../../config/macros/preparation.cfg#L258) | <code>{% set position = printer.gcode_move.position %}</code> | Calculate local <code>position</code> from <code>printer.gcode_move.position</code>. It lasts for this evaluation only. |
+| [259](../../config/macros/preparation.cfg#L259) | <code>{% set corrected_z = position.z - result.z %}</code> | Subtract the measured bed-reference Z from the current machine Z. For example, current Z5.2 and bed Z0.2 become Z5.0; this relabels the current height without moving the nozzle to the bed. |
+| [260](../../config/macros/preparation.cfg#L260) | <code>{% if not (-1 &lt;= result.z &lt;= 1) %}</code> | Reject a correction outside minus one to plus one millimeter, including non-finite values. This project-selected bound catches surprising results after probing; it cannot prevent a physical contact failure. |
+| [261](../../config/macros/preparation.cfg#L261) | <code>{action_raise_error(&quot;Tap correction exceeds the pilot +/-1mm acceptance bound; inspect calibration and nozzle cleanliness.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [262](../../config/macros/preparation.cfg#L262) | <code>{% endif %}</code> | End this conditional block. |
+| [263](../../config/macros/preparation.cfg#L263) | <code>{% if (result.x - 175)&#124;abs &gt; 0.01 or (result.y - 175)&#124;abs &gt; 0.01 or (position.x - 175)&#124;abs &gt; 0.01 or (position.y - 175)&#124;abs &gt; 0.01 %}</code> | Start a conditional branch: <code>(result.x - 175) as a positive magnitude &gt; 0.01 or (result.y - 175) as a positive magnitude &gt; 0.01 or (position.x - 175) as a positive magnitude &gt; 0.01 or (position.y - 175) as a positive magnitude &gt; 0.01</code>. Only a true branch emits its commands. |
+| [264](../../config/macros/preparation.cfg#L264) | <code>{action_raise_error(&quot;Tap result and current nozzle must be at the reference point.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [265](../../config/macros/preparation.cfg#L265) | <code>{% endif %}</code> | End this conditional block. |
+| [266](../../config/macros/preparation.cfg#L266) | <code>{% if not (0 &lt; corrected_z &lt;= printer.toolhead.axis_maximum.z) %}</code> | Start a conditional branch: <code>not (0 &lt; corrected_z  is at most  the maximum axis positions.z)</code>. Only a true branch emits its commands. |
+| [267](../../config/macros/preparation.cfg#L267) | <code>{action_raise_error(&quot;Tap produced an invalid corrected toolhead height.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [268](../../config/macros/preparation.cfg#L268) | <code>{% endif %}</code> | End this conditional block. |
+| [269](../../config/macros/preparation.cfg#L269) | <code>_CHECK_TAP_STATE</code> | Run [_CHECK_TAP_STATE](preparation.cfg.md#gcode_macro-_check_tap_state), which is evaluated separately when reached. Use its default arguments. |
+| [270](../../config/macros/preparation.cfg#L270) | <code># last_probe_position already includes calibrated tap_z_offset. Do not add it again.</code> | Comment only; Klipper does not execute this line. |
+| [271](../../config/macros/preparation.cfg#L271) | <code>SET_KINEMATIC_POSITION Z={corrected_z} SET_HOMED=</code> | Assign the requested machine position without moving. Initial setup uses SET_HOMED=Z; measured tap reference uses an empty SET_HOMED= to preserve all homing flags and changes only Z. The user authorized these two guarded uses only. |
+| [272](../../config/macros/preparation.cfg#L272) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [273](../../config/macros/preparation.cfg#L273) | <code>G1 Z10 F1200</code> | command Z=<code>10</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [274](../../config/macros/preparation.cfg#L274) | <code>M117 Tap reference applied</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
