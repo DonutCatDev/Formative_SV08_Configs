@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../../config/options/lcd/home-screen.cfg) · [All files](../../README.md) · [Reading guide](../../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `049991a5be007ce0f4cf151e77f9674e0dc26594f5112218fc4f97f64f737fdd`.
+Source text SHA256 (LF-normalized): `4ff858b3671a4153cefa6bec9641bf8fbbf6fbf4a281eedd5884b9a57a214f85`.
 
 ## Macro and action index
 
@@ -17,7 +17,7 @@ No macros or command templates are defined in this file.
 - <code>display_data sv08_home fan</code> — [source line 22](../../../config/options/lcd/home-screen.cfg#L22).
 - <code>display_data sv08_home heater_bed</code> — [source line 27](../../../config/options/lcd/home-screen.cfg#L27).
 - <code>display_data sv08_home eta</code> — [source line 33](../../../config/options/lcd/home-screen.cfg#L33).
-- <code>display_data sv08_home print_progress</code> — [source line 38](../../../config/options/lcd/home-screen.cfg#L38).
-- <code>display_data sv08_home progress_bar</code> — [source line 42](../../../config/options/lcd/home-screen.cfg#L42).
-- <code>display_data sv08_home printing_time</code> — [source line 47](../../../config/options/lcd/home-screen.cfg#L47).
-- <code>display_data sv08_home print_status</code> — [source line 53](../../../config/options/lcd/home-screen.cfg#L53).
+- <code>display_data sv08_home print_progress</code> — [source line 40](../../../config/options/lcd/home-screen.cfg#L40).
+- <code>display_data sv08_home progress_bar</code> — [source line 44](../../../config/options/lcd/home-screen.cfg#L44).
+- <code>display_data sv08_home printing_time</code> — [source line 49](../../../config/options/lcd/home-screen.cfg#L49).
+- <code>display_data sv08_home print_status</code> — [source line 55](../../../config/options/lcd/home-screen.cfg#L55).
