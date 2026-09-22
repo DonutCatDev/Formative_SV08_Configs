@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/filament.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `0f11d04e6c05a74f20a0a413428fd4b455e9cdad90c7411578997e261177ccbe`.
+Source text SHA256 (LF-normalized): `23d05048d3ca01cc725051dd3882ee99cab757f3a915184469de519ca1c8b95a`.
 
 ## Macro and action index
 
@@ -75,9 +75,9 @@ Clears the completed-change and pending-load flags, restores the ordinary 1mm pa
 
 ## gcode_macro _FILAMENT_CHANGE_UNLOAD
 
-Requires a hot paused printer, retracts 53mm, completes the moves, and releases only E for manual feeding/purging. Records completion and suppresses a second unload on cancel. Leaves nozzle heating and XYZ holding intact.
+Requires a hot paused printer, retracts 53mm, waits for the withdrawal to complete, restores the caller's G-code modes, then calls RELEASE_EXTRUDER so only E is disengaged for the manual swap. Records completion and suppresses a second unload on cancel. Leaves nozzle heating and XYZ holding intact.
 
-**Calls and state references:** [_CLIENT_VARIABLE](client.cfg.md#gcode_macro-_client_variable), [_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_filament_change). Conditional references are not necessarily executed.
+**Calls and state references:** [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), [_CLIENT_VARIABLE](client.cfg.md#gcode_macro-_client_variable), [_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_filament_change). Conditional references are not necessarily executed.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
@@ -92,7 +92,7 @@ Requires a hot paused printer, retracts 53mm, completes the moves, and releases 
 | [27](../../config/macros/filament.cfg#L27) | <code>G1 E-50 F3000</code> | command filament E=<code>-50</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 50 mm/s (3000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [28](../../config/macros/filament.cfg#L28) | <code>M400</code> | Wait until queued movement has completed before continuing. |
 | [29](../../config/macros/filament.cfg#L29) | <code>RESTORE_GCODE_STATE NAME=m600_unload_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
-| [30](../../config/macros/filament.cfg#L30) | <code>SET_STEPPER_ENABLE STEPPER=extruder ENABLE=0</code> | Release the selected motor so it can be turned manually; this does not disable the other motors. |
+| [30](../../config/macros/filament.cfg#L30) | <code>RELEASE_EXTRUDER</code> | Run [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), which is evaluated separately when reached. Use its default arguments. |
 | [31](../../config/macros/filament.cfg#L31) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_CHANGE VARIABLE=active VALUE=True</code> | Store <code>True</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
 | [32](../../config/macros/filament.cfg#L32) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=retract VALUE=1.0</code> | Store <code>1.0</code> in the named macro's <code>retract</code> variable for later calls. This changes runtime state, not the config file. |
 | [33](../../config/macros/filament.cfg#L33) | <code># Already unloaded: cancellation must not pull another 15mm.</code> | Comment only; Klipper does not execute this line. |
@@ -120,7 +120,7 @@ Waits for queued moves, then releases only the extruder motor for manual handlin
 
 ## gcode_macro LOAD_FILAMENT
 
-Reject a second pending load, remember the incoming nozzle target, and heat only when extrusion is currently unsafe. It performs no filament movement. After heating, a separate helper records the prior target and asks the operator to load and purge manually before confirming.
+Reject a second pending load, remember the incoming nozzle target, and heat to the configured loading temperature. It performs no filament movement and does not change motor enable state. After heating, a separate helper records the prior target and asks the operator to load and purge manually before confirming.
 
 **Calls and state references:** [_BEGIN_FILAMENT_LOAD](filament.cfg.md#gcode_macro-_begin_filament_load), [_FILAMENT_HEAT](filament.cfg.md#gcode_macro-_filament_heat), [_FILAMENT_LOAD](filament.cfg.md#gcode_macro-_filament_load). Conditional references are not necessarily executed.
 
@@ -153,7 +153,7 @@ Stores whether manual loading awaits confirmation and the nozzle target that mus
 
 ## gcode_macro _BEGIN_FILAMENT_LOAD
 
-After any required heating completes, mark manual loading active, store the incoming nozzle target, and show instructions with confirm and cancel actions. It performs no extrusion and leaves the loading temperature active pending a response.
+After the loading-temperature wait completes, mark manual loading active, store the incoming nozzle target, and show instructions with confirm and cancel actions. It performs no extrusion, does not change motor enable state and leaves the loading temperature active pending a response.
 
 **Calls and state references:** [_FILAMENT_LOAD](filament.cfg.md#gcode_macro-_filament_load). Conditional references are not necessarily executed.
 
