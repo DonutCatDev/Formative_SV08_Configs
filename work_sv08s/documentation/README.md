@@ -80,6 +80,7 @@ These pages explain the saved candidate, including inactive files. They do not c
 - [_CLIENT_VARIABLE](macros/client.cfg.md#gcode_macro-_client_variable)
 - [_COMMIT_TAP_REFERENCE](macros/preparation.cfg.md#gcode_macro-_commit_tap_reference)
 - [_DISABLE_FILAMENT_SENSOR_AT_READY](macros/filament.cfg.md#delayed_gcode-_disable_filament_sensor_at_ready) — delayed callback
+- [_EDDY_FREQUENCY_LCD](options/lcd/sovol-menu-moonraker.cfg.md#gcode_macro-_eddy_frequency_lcd)
 - [_END_PRINT_EXHAUST_OFF](macros/client.cfg.md#delayed_gcode-_end_print_exhaust_off) — delayed callback
 - [_END_PRINT_PARK](macros/client.cfg.md#gcode_macro-_end_print_park)
 - [_FILAMENT_CHANGE](macros/filament.cfg.md#gcode_macro-_filament_change)

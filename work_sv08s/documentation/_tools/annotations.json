@@ -1,5 +1,6 @@
 {
   "macros": {
+    "_EDDY_FREQUENCY_LCD": "Stores the LCD Eddy frequency-calibration Z increment and scroll cursor. Its empty command body performs no movement; the adjacent menu controls update these variables and issue TESTZ only while the separate Move Z item is being edited.",
     "HELLO_WORLD": "Run the pilot's hello_world shell command, which prints a test message. It performs no printer motion or heater action.",
     "BELT_RESONANCES": "Home through the canonical sensorless sequence, measure accelerometer noise, collect the two CoreXY belt-direction raw datasets and synchronously generate scripts/outputs/belt_resonances.png. It does not calibrate or save input-shaper settings.",
     "AUTO_CALIBRATE": "Home through the canonical sensorless sequence, measure accelerometer noise, calibrate both input-shaper axes under the fixed auto_calibrate run name and synchronously generate scripts/outputs/input_shaper_x.png and input_shaper_y.png. SHAPER_CALIBRATE applies the recommendations for the session; this macro does not issue SAVE_CONFIG.",
@@ -107,7 +108,7 @@
     "SET_KINEMATIC_POSITION": "Assign the requested machine position without moving. Initial setup uses SET_HOMED=Z; measured tap reference uses an empty SET_HOMED= to preserve all homing flags and changes only Z. The user authorized these two guarded uses only.",
     "PROBE": "Run a native probe measurement. Here METHOD=tap takes three nozzle-contact samples, retracting 5mm between samples; reject spread over 0.025mm with no automatic tolerance retries. A following macro reads the completed result; this command alone does not establish a new Z reference.",
     "PROBE_EDDY_CURRENT_CALIBRATE": "Start native Eddy frequency-to-height calibration for CHIP. Follow the manual calibration procedure; results need SAVE_CONFIG to persist.",
-    "TESTZ": "Move Z within an active native manual-probe session by the requested numeric delta. The LCD input starts at the probe's reported Z position, ignores its initial zero-delta change event, and converts subsequent encoder-selected absolute positions into relative TESTZ moves.",
+    "TESTZ": "Move Z within an active native manual-probe session. In the Eddy LCD workflow, the separate Move Z item converts encoder ticks into signed moves using the increment selected in the adjacent Z increment item.",
     "ACCEPT": "Accept the current Z position and finish the active native manual-probe step. During Eddy frequency calibration, Klipper then runs its automatic frequency-to-height measurements; SAVE_CONFIG remains separate.",
     "ABORT": "Cancel the active native manual-probe session without accepting its current Z position.",
     "PID_CALIBRATE": "Run heater PID tuning for HEATER at TARGET temperature. Results are machine-specific and are not saved merely by issuing this command.",
@@ -221,6 +222,7 @@
     "{% set y_park = params.Y       if params.Y is defined %}": "Begin choosing the parking Y coordinate. An explicit Y argument takes priority; the following lines supply custom-client or generic-printer fallbacks."
   },
   "reviews": {
+    "options/lcd/sovol-menu-moonraker.cfg::gcode_macro _EDDY_FREQUENCY_LCD": "ce14d812ff308698699a42bcc78197cf7efcde3ed0ff7a1d2a2677c53a7eb8de",
     "macros/calibration.cfg::gcode_macro AUTO_CALIBRATE": "bb2037197f5e5f826b69f714e9a0b93d3d73466b97b33347269f92fcab96d096",
     "macros/calibration.cfg::gcode_macro BELT_RESONANCES": "1537d3e74cd35be2548202549e15892b324d41d83362927611b7c599ffe8c119",
     "macros/shell_command.cfg::gcode_macro HELLO_WORLD": "31354a5d0f5b65967296221cc2efe49ed303dbbdf298ef73b0eb1fad9bb5360b",

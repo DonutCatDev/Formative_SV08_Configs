@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../../config/options/lcd/sovol-menu-moonraker.cfg) · [All files](../../README.md) · [Reading guide](../../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `05093816a3c70143a397f43c45a3aa61ca2286608e63a987c96a14618514291e`.
+Source text SHA256 (LF-normalized): `efdfa82147b9a25404d47d362f43b3ffba832bd53bebc5664741ec46219df352`.
 
 ## Macro and action index
 
@@ -81,10 +81,12 @@ Source text SHA256 (LF-normalized): `05093816a3c70143a397f43c45a3aa61ca2286608e6
 - [menu __main __setup __calib __autocalib](#menu-__main-__setup-__calib-__autocalib)
 - [menu __main __setup __calib __belt_test](#menu-__main-__setup-__calib-__belt_test)
 - [menu __main __setup __calib __multi_pid](#menu-__main-__setup-__calib-__multi_pid)
+- [gcode_macro _EDDY_FREQUENCY_LCD](#gcode_macro-_eddy_frequency_lcd)
 - [menu __main __setup __calib __eddy](#menu-__main-__setup-__calib-__eddy)
 - [menu __main __setup __calib __eddy __frequency](#menu-__main-__setup-__calib-__eddy-__frequency)
 - [menu __main __setup __calib __eddy __frequency __start](#menu-__main-__setup-__calib-__eddy-__frequency-__start)
 - [menu __main __setup __calib __eddy __frequency __test_z](#menu-__main-__setup-__calib-__eddy-__frequency-__test_z)
+- [menu __main __setup __calib __eddy __frequency __move_z](#menu-__main-__setup-__calib-__eddy-__frequency-__move_z)
 - [menu __main __setup __calib __eddy __frequency __accept](#menu-__main-__setup-__calib-__eddy-__frequency-__accept)
 - [menu __main __setup __calib __eddy __frequency __abort](#menu-__main-__setup-__calib-__eddy-__frequency-__abort)
 - [menu __main __setup __calib __eddy __tap_guess](#menu-__main-__setup-__calib-__eddy-__tap_guess)
@@ -1423,6 +1425,22 @@ LCD item: its type and enable expression below determine whether it is visible a
 | [715](../../../config/options/lcd/sovol-menu-moonraker.cfg#L715) | <code>MULTI_PID_CALIBRATE</code> | Run [MULTI_PID_CALIBRATE](../../macros/custom-macros.cfg.md#gcode_macro-multi_pid_calibrate), which is evaluated separately when reached. Use its default arguments. |
 | [716](../../../config/options/lcd/sovol-menu-moonraker.cfg#L716) | <code>{menu.exit()}</code> | Exit the LCD menu. |
 
+<a id="gcode_macro-_eddy_frequency_lcd"></a>
+
+## gcode_macro _EDDY_FREQUENCY_LCD
+
+Stores the LCD Eddy frequency-calibration Z increment and scroll cursor. Its empty command body performs no movement; the adjacent menu controls update these variables and issue TESTZ only while the separate Move Z item is being edited.
+
+| Source line | Code | Plain explanation |
+| --- | --- | --- |
+| [721](../../../config/options/lcd/sovol-menu-moonraker.cfg#L721) | <code>[gcode_macro _EDDY_FREQUENCY_LCD]</code> | Declare this callable macro. |
+| [722](../../../config/options/lcd/sovol-menu-moonraker.cfg#L722) | <code>description: Stores the LCD frequency-calibration Z increment and scroll position</code> | Set the help text: <code>Stores the LCD frequency-calibration Z increment and scroll position</code>. |
+| [723](../../../config/options/lcd/sovol-menu-moonraker.cfg#L723) | <code>variable_step_index: 0</code> | Initialize <code>step_index</code> (step index) to <code>0</code> at restart; later calls may change it. |
+| [724](../../../config/options/lcd/sovol-menu-moonraker.cfg#L724) | <code>variable_z_step: 0.01</code> | Initialize <code>z_step</code> (z step) to <code>0.01</code> at restart; later calls may change it. |
+| [725](../../../config/options/lcd/sovol-menu-moonraker.cfg#L725) | <code>variable_z_cursor: 0</code> | Initialize <code>z_cursor</code> (z cursor) to <code>0</code> at restart; later calls may change it. |
+| [726](../../../config/options/lcd/sovol-menu-moonraker.cfg#L726) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [727](../../../config/options/lcd/sovol-menu-moonraker.cfg#L727) | <code>{% set _ = 0 %}</code> | Calculate local <code>_</code> from <code>0</code>. It lasts for this evaluation only. |
+
 <a id="menu-__main-__setup-__calib-__eddy"></a>
 
 ## menu __main __setup __calib __eddy
@@ -1431,10 +1449,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [721](../../../config/options/lcd/sovol-menu-moonraker.cfg#L721) | <code>[menu __main __setup __calib __eddy]</code> | Declare this configuration section. |
-| [722](../../../config/options/lcd/sovol-menu-moonraker.cfg#L722) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [723](../../../config/options/lcd/sovol-menu-moonraker.cfg#L723) | <code>enable: {&#x27;probe_eddy_current eddy&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;probe_eddy_current eddy&#x27; in printer}</code>. |
-| [724](../../../config/options/lcd/sovol-menu-moonraker.cfg#L724) | <code>name: Eddy</code> | Set the LCD label: <code>Eddy</code>. |
+| [729](../../../config/options/lcd/sovol-menu-moonraker.cfg#L729) | <code>[menu __main __setup __calib __eddy]</code> | Declare this configuration section. |
+| [730](../../../config/options/lcd/sovol-menu-moonraker.cfg#L730) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [731](../../../config/options/lcd/sovol-menu-moonraker.cfg#L731) | <code>enable: {&#x27;probe_eddy_current eddy&#x27; in printer}</code> | Show/enable this LCD item only when this expression is true: <code>{&#x27;probe_eddy_current eddy&#x27; in printer}</code>. |
+| [732](../../../config/options/lcd/sovol-menu-moonraker.cfg#L732) | <code>name: Eddy</code> | Set the LCD label: <code>Eddy</code>. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__frequency"></a>
 
@@ -1444,9 +1462,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [726](../../../config/options/lcd/sovol-menu-moonraker.cfg#L726) | <code>[menu __main __setup __calib __eddy __frequency]</code> | Declare this configuration section. |
-| [727](../../../config/options/lcd/sovol-menu-moonraker.cfg#L727) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [728](../../../config/options/lcd/sovol-menu-moonraker.cfg#L728) | <code>name: Frequency calibration</code> | Set the LCD label: <code>Frequency calibration</code>. |
+| [734](../../../config/options/lcd/sovol-menu-moonraker.cfg#L734) | <code>[menu __main __setup __calib __eddy __frequency]</code> | Declare this configuration section. |
+| [735](../../../config/options/lcd/sovol-menu-moonraker.cfg#L735) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [736](../../../config/options/lcd/sovol-menu-moonraker.cfg#L736) | <code>name: Frequency calibration</code> | Set the LCD label: <code>Frequency calibration</code>. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__frequency-__start"></a>
 
@@ -1456,12 +1474,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [730](../../../config/options/lcd/sovol-menu-moonraker.cfg#L730) | <code>[menu __main __setup __calib __eddy __frequency __start]</code> | Declare this configuration section. |
-| [731](../../../config/options/lcd/sovol-menu-moonraker.cfg#L731) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [732](../../../config/options/lcd/sovol-menu-moonraker.cfg#L732) | <code>enable: {not printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{not printer.manual_probe.is_active}</code>. |
-| [733](../../../config/options/lcd/sovol-menu-moonraker.cfg#L733) | <code>name: Start paper test</code> | Set the LCD label: <code>Start paper test</code>. |
-| [734](../../../config/options/lcd/sovol-menu-moonraker.cfg#L734) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [735](../../../config/options/lcd/sovol-menu-moonraker.cfg#L735) | <code>PROBE_EDDY_CURRENT_CALIBRATE CHIP=eddy</code> | Start native Eddy frequency-to-height calibration for CHIP. Follow the manual calibration procedure; results need SAVE_CONFIG to persist. |
+| [738](../../../config/options/lcd/sovol-menu-moonraker.cfg#L738) | <code>[menu __main __setup __calib __eddy __frequency __start]</code> | Declare this configuration section. |
+| [739](../../../config/options/lcd/sovol-menu-moonraker.cfg#L739) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [740](../../../config/options/lcd/sovol-menu-moonraker.cfg#L740) | <code>enable: {not printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{not printer.manual_probe.is_active}</code>. |
+| [741](../../../config/options/lcd/sovol-menu-moonraker.cfg#L741) | <code>name: Start paper test</code> | Set the LCD label: <code>Start paper test</code>. |
+| [742](../../../config/options/lcd/sovol-menu-moonraker.cfg#L742) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [743](../../../config/options/lcd/sovol-menu-moonraker.cfg#L743) | <code>PROBE_EDDY_CURRENT_CALIBRATE CHIP=eddy</code> | Start native Eddy frequency-to-height calibration for CHIP. Follow the manual calibration procedure; results need SAVE_CONFIG to persist. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__frequency-__test_z"></a>
 
@@ -1469,22 +1487,51 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 LCD item: its type and enable expression below determine whether it is visible and what selecting/editing it does.
 
+**Calls and state references:** [_EDDY_FREQUENCY_LCD](sovol-menu-moonraker.cfg.md#gcode_macro-_eddy_frequency_lcd). Conditional references are not necessarily executed.
+
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [737](../../../config/options/lcd/sovol-menu-moonraker.cfg#L737) | <code>[menu __main __setup __calib __eddy __frequency __test_z]</code> | Declare this configuration section. |
-| [738](../../../config/options/lcd/sovol-menu-moonraker.cfg#L738) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
-| [739](../../../config/options/lcd/sovol-menu-moonraker.cfg#L739) | <code>enable: {printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{printer.manual_probe.is_active}</code>. |
-| [740](../../../config/options/lcd/sovol-menu-moonraker.cfg#L740) | <code>name: Test Z: {&#x27;%06.3f&#x27; % menu.input}</code> | Set the LCD label: <code>Test Z: {&#x27;%06.3f&#x27; % the value selected on the LCD}</code>. |
-| [741](../../../config/options/lcd/sovol-menu-moonraker.cfg#L741) | <code>input: {printer.manual_probe.z_position}</code> | Read the current editable LCD value: <code>{printer.manual_probe.z_position}</code>. |
-| [742](../../../config/options/lcd/sovol-menu-moonraker.cfg#L742) | <code>input_min: {printer.toolhead.axis_minimum.z}</code> | Set the minimum editable value: <code>{the minimum axis positions.z}</code>. |
-| [743](../../../config/options/lcd/sovol-menu-moonraker.cfg#L743) | <code>input_max: {printer.toolhead.axis_maximum.z}</code> | Set the maximum editable value: <code>{the maximum axis positions.z}</code>. |
-| [744](../../../config/options/lcd/sovol-menu-moonraker.cfg#L744) | <code>input_step: 0.01</code> | Set the amount changed per encoder step: <code>0.01</code>. |
-| [745](../../../config/options/lcd/sovol-menu-moonraker.cfg#L745) | <code>realtime: True</code> | Choose whether editing immediately applies changes: <code>True</code>. |
-| [746](../../../config/options/lcd/sovol-menu-moonraker.cfg#L746) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [747](../../../config/options/lcd/sovol-menu-moonraker.cfg#L747) | <code>{% set delta = menu.input - printer.manual_probe.z_position %}</code> | Calculate local <code>delta</code> from <code>the value selected on the LCD - printer.manual_probe.z_position</code>. It lasts for this evaluation only. |
-| [748](../../../config/options/lcd/sovol-menu-moonraker.cfg#L748) | <code>{% if menu.event == &#x27;change&#x27; and delta&#124;abs &gt; 0.0001 %}</code> | Start a conditional branch: <code>menu.event  equals  &#x27;change&#x27; and delta as a positive magnitude &gt; 0.0001</code>. Only a true branch emits its commands. |
-| [749](../../../config/options/lcd/sovol-menu-moonraker.cfg#L749) | <code>TESTZ Z={&#x27;%.3f&#x27; % delta}</code> | Move Z within an active native manual-probe session by the requested numeric delta. The LCD input starts at the probe's reported Z position, ignores its initial zero-delta change event, and converts subsequent encoder-selected absolute positions into relative TESTZ moves. |
-| [750](../../../config/options/lcd/sovol-menu-moonraker.cfg#L750) | <code>{% endif %}</code> | End this conditional block. |
+| [745](../../../config/options/lcd/sovol-menu-moonraker.cfg#L745) | <code>[menu __main __setup __calib __eddy __frequency __test_z]</code> | Declare this configuration section. |
+| [746](../../../config/options/lcd/sovol-menu-moonraker.cfg#L746) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [747](../../../config/options/lcd/sovol-menu-moonraker.cfg#L747) | <code>enable: {printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{printer.manual_probe.is_active}</code>. |
+| [748](../../../config/options/lcd/sovol-menu-moonraker.cfg#L748) | <code>name: Z increment: {[&#x27;0.01&#x27;,&#x27;0.05&#x27;,&#x27;0.10&#x27;,&#x27;0.50&#x27;][menu.input&#124;int]}</code> | Set the LCD label: <code>Z increment: {[&#x27;0.01&#x27;,&#x27;0.05&#x27;,&#x27;0.10&#x27;,&#x27;0.50&#x27;][the value selected on the LCD as an integer]}</code>. |
+| [749](../../../config/options/lcd/sovol-menu-moonraker.cfg#L749) | <code>input: {printer[&#x27;gcode_macro _EDDY_FREQUENCY_LCD&#x27;].step_index}</code> | Read the current editable LCD value: <code>{the stored state of _EDDY_FREQUENCY_LCD.step_index}</code>. |
+| [750](../../../config/options/lcd/sovol-menu-moonraker.cfg#L750) | <code>input_min: 0</code> | Set the minimum editable value: <code>0</code>. |
+| [751](../../../config/options/lcd/sovol-menu-moonraker.cfg#L751) | <code>input_max: 3</code> | Set the maximum editable value: <code>3</code>. |
+| [752](../../../config/options/lcd/sovol-menu-moonraker.cfg#L752) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [753](../../../config/options/lcd/sovol-menu-moonraker.cfg#L753) | <code>realtime: True</code> | Choose whether editing immediately applies changes: <code>True</code>. |
+| [754](../../../config/options/lcd/sovol-menu-moonraker.cfg#L754) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [755](../../../config/options/lcd/sovol-menu-moonraker.cfg#L755) | <code>{% if menu.event == &#x27;change&#x27; %}</code> | Start a conditional branch: <code>menu.event  equals  &#x27;change&#x27;</code>. Only a true branch emits its commands. |
+| [756](../../../config/options/lcd/sovol-menu-moonraker.cfg#L756) | <code>SET_GCODE_VARIABLE MACRO=_EDDY_FREQUENCY_LCD VARIABLE=step_index VALUE={menu.input&#124;int}</code> | Store <code>{menu.input&#124;int}</code> in the named macro's <code>step_index</code> variable for later calls. This changes runtime state, not the config file. |
+| [757](../../../config/options/lcd/sovol-menu-moonraker.cfg#L757) | <code>SET_GCODE_VARIABLE MACRO=_EDDY_FREQUENCY_LCD VARIABLE=z_step VALUE={[&#x27;0.01&#x27;,&#x27;0.05&#x27;,&#x27;0.10&#x27;,&#x27;0.50&#x27;][menu.input&#124;int]}</code> | Store <code>{[&#x27;0.01&#x27;,&#x27;0.05&#x27;,&#x27;0.10&#x27;,&#x27;0.50&#x27;][menu.input&#124;int]}</code> in the named macro's <code>z_step</code> variable for later calls. This changes runtime state, not the config file. |
+| [758](../../../config/options/lcd/sovol-menu-moonraker.cfg#L758) | <code>{% endif %}</code> | End this conditional block. |
+
+<a id="menu-__main-__setup-__calib-__eddy-__frequency-__move_z"></a>
+
+## menu __main __setup __calib __eddy __frequency __move_z
+
+LCD item: its type and enable expression below determine whether it is visible and what selecting/editing it does.
+
+**Calls and state references:** [_EDDY_FREQUENCY_LCD](sovol-menu-moonraker.cfg.md#gcode_macro-_eddy_frequency_lcd). Conditional references are not necessarily executed.
+
+| Source line | Code | Plain explanation |
+| --- | --- | --- |
+| [760](../../../config/options/lcd/sovol-menu-moonraker.cfg#L760) | <code>[menu __main __setup __calib __eddy __frequency __move_z]</code> | Declare this configuration section. |
+| [761](../../../config/options/lcd/sovol-menu-moonraker.cfg#L761) | <code>type: input</code> | Select the LCD item type (disabled hides the item): <code>input</code>. |
+| [762](../../../config/options/lcd/sovol-menu-moonraker.cfg#L762) | <code>enable: {printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{printer.manual_probe.is_active}</code>. |
+| [763](../../../config/options/lcd/sovol-menu-moonraker.cfg#L763) | <code>name: Move Z: {&#x27;%06.3f&#x27; % printer.manual_probe.z_position}</code> | Set the LCD label: <code>Move Z: {&#x27;%06.3f&#x27; % printer.manual_probe.z_position}</code>. |
+| [764](../../../config/options/lcd/sovol-menu-moonraker.cfg#L764) | <code>input: {printer[&#x27;gcode_macro _EDDY_FREQUENCY_LCD&#x27;].z_cursor}</code> | Read the current editable LCD value: <code>{the stored state of _EDDY_FREQUENCY_LCD.z_cursor}</code>. |
+| [765](../../../config/options/lcd/sovol-menu-moonraker.cfg#L765) | <code>input_min: {printer[&#x27;gcode_macro _EDDY_FREQUENCY_LCD&#x27;].z_cursor - 50}</code> | Set the minimum editable value: <code>{the stored state of _EDDY_FREQUENCY_LCD.z_cursor - 50}</code>. |
+| [766](../../../config/options/lcd/sovol-menu-moonraker.cfg#L766) | <code>input_max: {printer[&#x27;gcode_macro _EDDY_FREQUENCY_LCD&#x27;].z_cursor + 50}</code> | Set the maximum editable value: <code>{the stored state of _EDDY_FREQUENCY_LCD.z_cursor + 50}</code>. |
+| [767](../../../config/options/lcd/sovol-menu-moonraker.cfg#L767) | <code>input_step: 1</code> | Set the amount changed per encoder step: <code>1</code>. |
+| [768](../../../config/options/lcd/sovol-menu-moonraker.cfg#L768) | <code>realtime: True</code> | Choose whether editing immediately applies changes: <code>True</code>. |
+| [769](../../../config/options/lcd/sovol-menu-moonraker.cfg#L769) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [770](../../../config/options/lcd/sovol-menu-moonraker.cfg#L770) | <code>{% set state = printer[&#x27;gcode_macro _EDDY_FREQUENCY_LCD&#x27;] %}</code> | Calculate local <code>state</code> from <code>the stored state of _EDDY_FREQUENCY_LCD</code>. It lasts for this evaluation only. |
+| [771](../../../config/options/lcd/sovol-menu-moonraker.cfg#L771) | <code>{% set ticks = (menu.input - state.z_cursor)&#124;int %}</code> | Calculate local <code>ticks</code> from <code>(the value selected on the LCD - state.z_cursor) as an integer</code>. It lasts for this evaluation only. |
+| [772](../../../config/options/lcd/sovol-menu-moonraker.cfg#L772) | <code>{% if menu.event == &#x27;change&#x27; and ticks != 0 %}</code> | Start a conditional branch: <code>menu.event  equals  &#x27;change&#x27; and ticks  differs from  0</code>. Only a true branch emits its commands. |
+| [773](../../../config/options/lcd/sovol-menu-moonraker.cfg#L773) | <code>TESTZ Z={&#x27;%.3f&#x27; % (ticks * state.z_step)}</code> | Move Z within an active native manual-probe session. In the Eddy LCD workflow, the separate Move Z item converts encoder ticks into signed moves using the increment selected in the adjacent Z increment item. |
+| [774](../../../config/options/lcd/sovol-menu-moonraker.cfg#L774) | <code>SET_GCODE_VARIABLE MACRO=_EDDY_FREQUENCY_LCD VARIABLE=z_cursor VALUE={menu.input&#124;int}</code> | Store <code>{menu.input&#124;int}</code> in the named macro's <code>z_cursor</code> variable for later calls. This changes runtime state, not the config file. |
+| [775](../../../config/options/lcd/sovol-menu-moonraker.cfg#L775) | <code>{% endif %}</code> | End this conditional block. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__frequency-__accept"></a>
 
@@ -1494,12 +1541,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [752](../../../config/options/lcd/sovol-menu-moonraker.cfg#L752) | <code>[menu __main __setup __calib __eddy __frequency __accept]</code> | Declare this configuration section. |
-| [753](../../../config/options/lcd/sovol-menu-moonraker.cfg#L753) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [754](../../../config/options/lcd/sovol-menu-moonraker.cfg#L754) | <code>enable: {printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{printer.manual_probe.is_active}</code>. |
-| [755](../../../config/options/lcd/sovol-menu-moonraker.cfg#L755) | <code>name: Accept</code> | Set the LCD label: <code>Accept</code>. |
-| [756](../../../config/options/lcd/sovol-menu-moonraker.cfg#L756) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [757](../../../config/options/lcd/sovol-menu-moonraker.cfg#L757) | <code>ACCEPT</code> | Accept the current Z position and finish the active native manual-probe step. During Eddy frequency calibration, Klipper then runs its automatic frequency-to-height measurements; SAVE_CONFIG remains separate. |
+| [777](../../../config/options/lcd/sovol-menu-moonraker.cfg#L777) | <code>[menu __main __setup __calib __eddy __frequency __accept]</code> | Declare this configuration section. |
+| [778](../../../config/options/lcd/sovol-menu-moonraker.cfg#L778) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [779](../../../config/options/lcd/sovol-menu-moonraker.cfg#L779) | <code>enable: {printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{printer.manual_probe.is_active}</code>. |
+| [780](../../../config/options/lcd/sovol-menu-moonraker.cfg#L780) | <code>name: Accept</code> | Set the LCD label: <code>Accept</code>. |
+| [781](../../../config/options/lcd/sovol-menu-moonraker.cfg#L781) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [782](../../../config/options/lcd/sovol-menu-moonraker.cfg#L782) | <code>ACCEPT</code> | Accept the current Z position and finish the active native manual-probe step. During Eddy frequency calibration, Klipper then runs its automatic frequency-to-height measurements; SAVE_CONFIG remains separate. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__frequency-__abort"></a>
 
@@ -1509,12 +1556,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [759](../../../config/options/lcd/sovol-menu-moonraker.cfg#L759) | <code>[menu __main __setup __calib __eddy __frequency __abort]</code> | Declare this configuration section. |
-| [760](../../../config/options/lcd/sovol-menu-moonraker.cfg#L760) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [761](../../../config/options/lcd/sovol-menu-moonraker.cfg#L761) | <code>enable: {printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{printer.manual_probe.is_active}</code>. |
-| [762](../../../config/options/lcd/sovol-menu-moonraker.cfg#L762) | <code>name: Abort</code> | Set the LCD label: <code>Abort</code>. |
-| [763](../../../config/options/lcd/sovol-menu-moonraker.cfg#L763) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [764](../../../config/options/lcd/sovol-menu-moonraker.cfg#L764) | <code>ABORT</code> | Cancel the active native manual-probe session without accepting its current Z position. |
+| [784](../../../config/options/lcd/sovol-menu-moonraker.cfg#L784) | <code>[menu __main __setup __calib __eddy __frequency __abort]</code> | Declare this configuration section. |
+| [785](../../../config/options/lcd/sovol-menu-moonraker.cfg#L785) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [786](../../../config/options/lcd/sovol-menu-moonraker.cfg#L786) | <code>enable: {printer.manual_probe.is_active}</code> | Show/enable this LCD item only when this expression is true: <code>{printer.manual_probe.is_active}</code>. |
+| [787](../../../config/options/lcd/sovol-menu-moonraker.cfg#L787) | <code>name: Abort</code> | Set the LCD label: <code>Abort</code>. |
+| [788](../../../config/options/lcd/sovol-menu-moonraker.cfg#L788) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [789](../../../config/options/lcd/sovol-menu-moonraker.cfg#L789) | <code>ABORT</code> | Cancel the active native manual-probe session without accepting its current Z position. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__tap_guess"></a>
 
@@ -1524,11 +1571,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [766](../../../config/options/lcd/sovol-menu-moonraker.cfg#L766) | <code>[menu __main __setup __calib __eddy __tap_guess]</code> | Declare this configuration section. |
-| [767](../../../config/options/lcd/sovol-menu-moonraker.cfg#L767) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [768](../../../config/options/lcd/sovol-menu-moonraker.cfg#L768) | <code>name: Tap guess</code> | Set the LCD label: <code>Tap guess</code>. |
-| [769](../../../config/options/lcd/sovol-menu-moonraker.cfg#L769) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [770](../../../config/options/lcd/sovol-menu-moonraker.cfg#L770) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=guess</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
+| [791](../../../config/options/lcd/sovol-menu-moonraker.cfg#L791) | <code>[menu __main __setup __calib __eddy __tap_guess]</code> | Declare this configuration section. |
+| [792](../../../config/options/lcd/sovol-menu-moonraker.cfg#L792) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [793](../../../config/options/lcd/sovol-menu-moonraker.cfg#L793) | <code>name: Tap guess</code> | Set the LCD label: <code>Tap guess</code>. |
+| [794](../../../config/options/lcd/sovol-menu-moonraker.cfg#L794) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [795](../../../config/options/lcd/sovol-menu-moonraker.cfg#L795) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=guess</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__tap_refine"></a>
 
@@ -1538,11 +1585,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [772](../../../config/options/lcd/sovol-menu-moonraker.cfg#L772) | <code>[menu __main __setup __calib __eddy __tap_refine]</code> | Declare this configuration section. |
-| [773](../../../config/options/lcd/sovol-menu-moonraker.cfg#L773) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [774](../../../config/options/lcd/sovol-menu-moonraker.cfg#L774) | <code>name: Tap refine</code> | Set the LCD label: <code>Tap refine</code>. |
-| [775](../../../config/options/lcd/sovol-menu-moonraker.cfg#L775) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [776](../../../config/options/lcd/sovol-menu-moonraker.cfg#L776) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=refine</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
+| [797](../../../config/options/lcd/sovol-menu-moonraker.cfg#L797) | <code>[menu __main __setup __calib __eddy __tap_refine]</code> | Declare this configuration section. |
+| [798](../../../config/options/lcd/sovol-menu-moonraker.cfg#L798) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [799](../../../config/options/lcd/sovol-menu-moonraker.cfg#L799) | <code>name: Tap refine</code> | Set the LCD label: <code>Tap refine</code>. |
+| [800](../../../config/options/lcd/sovol-menu-moonraker.cfg#L800) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [801](../../../config/options/lcd/sovol-menu-moonraker.cfg#L801) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=refine</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
 
 <a id="menu-__main-__setup-__calib-__eddy-__tap_verify"></a>
 
@@ -1552,11 +1599,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [778](../../../config/options/lcd/sovol-menu-moonraker.cfg#L778) | <code>[menu __main __setup __calib __eddy __tap_verify]</code> | Declare this configuration section. |
-| [779](../../../config/options/lcd/sovol-menu-moonraker.cfg#L779) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [780](../../../config/options/lcd/sovol-menu-moonraker.cfg#L780) | <code>name: Tap verify</code> | Set the LCD label: <code>Tap verify</code>. |
-| [781](../../../config/options/lcd/sovol-menu-moonraker.cfg#L781) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [782](../../../config/options/lcd/sovol-menu-moonraker.cfg#L782) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=verify</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
+| [803](../../../config/options/lcd/sovol-menu-moonraker.cfg#L803) | <code>[menu __main __setup __calib __eddy __tap_verify]</code> | Declare this configuration section. |
+| [804](../../../config/options/lcd/sovol-menu-moonraker.cfg#L804) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [805](../../../config/options/lcd/sovol-menu-moonraker.cfg#L805) | <code>name: Tap verify</code> | Set the LCD label: <code>Tap verify</code>. |
+| [806](../../../config/options/lcd/sovol-menu-moonraker.cfg#L806) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [807](../../../config/options/lcd/sovol-menu-moonraker.cfg#L807) | <code>PROBE_EDDY_CURRENT_TAP_CALIBRATE TAP=verify</code> | Run the native Eddy tap-threshold calibration tool with TAP=guess, refine, or verify. Requires a manually prepared clean/cool nozzle near bed center, 3-10mm above the bed. Guess estimates an initial threshold, refine tunes it, and verify checks repeatability. Save accepted calibration separately with SAVE_CONFIG; results are machine-specific. |
 
 <a id="menu-__main-__setup-__restart"></a>
 
@@ -1566,9 +1613,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [785](../../../config/options/lcd/sovol-menu-moonraker.cfg#L785) | <code>[menu __main __setup __restart]</code> | Declare this configuration section. |
-| [786](../../../config/options/lcd/sovol-menu-moonraker.cfg#L786) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [787](../../../config/options/lcd/sovol-menu-moonraker.cfg#L787) | <code>name: Restart &amp; Shutdown</code> | Set the LCD label: <code>Restart &amp; Shutdown</code>. |
+| [810](../../../config/options/lcd/sovol-menu-moonraker.cfg#L810) | <code>[menu __main __setup __restart]</code> | Declare this configuration section. |
+| [811](../../../config/options/lcd/sovol-menu-moonraker.cfg#L811) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [812](../../../config/options/lcd/sovol-menu-moonraker.cfg#L812) | <code>name: Restart &amp; Shutdown</code> | Set the LCD label: <code>Restart &amp; Shutdown</code>. |
 
 <a id="menu-__main-__setup-__restart-__host_shutdown"></a>
 
@@ -1578,12 +1625,12 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [790](../../../config/options/lcd/sovol-menu-moonraker.cfg#L790) | <code>[menu __main __setup __restart __host_shutdown]</code> | Declare this configuration section. |
-| [791](../../../config/options/lcd/sovol-menu-moonraker.cfg#L791) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [792](../../../config/options/lcd/sovol-menu-moonraker.cfg#L792) | <code>enable: {not printer.idle_timeout.state == &quot;Printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{not the idle-timeout state  equals  &quot;Printing&quot;}</code>. |
-| [793](../../../config/options/lcd/sovol-menu-moonraker.cfg#L793) | <code>name: Shutdown host</code> | Set the LCD label: <code>Shutdown host</code>. |
-| [794](../../../config/options/lcd/sovol-menu-moonraker.cfg#L794) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [795](../../../config/options/lcd/sovol-menu-moonraker.cfg#L795) | <code>{action_call_remote_method(&quot;shutdown_machine&quot;)}</code> | Ask the connected service (normally Moonraker) to run the named remote operation during template evaluation. |
+| [815](../../../config/options/lcd/sovol-menu-moonraker.cfg#L815) | <code>[menu __main __setup __restart __host_shutdown]</code> | Declare this configuration section. |
+| [816](../../../config/options/lcd/sovol-menu-moonraker.cfg#L816) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [817](../../../config/options/lcd/sovol-menu-moonraker.cfg#L817) | <code>enable: {not printer.idle_timeout.state == &quot;Printing&quot;}</code> | Show/enable this LCD item only when this expression is true: <code>{not the idle-timeout state  equals  &quot;Printing&quot;}</code>. |
+| [818](../../../config/options/lcd/sovol-menu-moonraker.cfg#L818) | <code>name: Shutdown host</code> | Set the LCD label: <code>Shutdown host</code>. |
+| [819](../../../config/options/lcd/sovol-menu-moonraker.cfg#L819) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [820](../../../config/options/lcd/sovol-menu-moonraker.cfg#L820) | <code>{action_call_remote_method(&quot;shutdown_machine&quot;)}</code> | Ask the connected service (normally Moonraker) to run the named remote operation during template evaluation. |
 
 <a id="menu-__main-__info"></a>
 
@@ -1593,10 +1640,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [797](../../../config/options/lcd/sovol-menu-moonraker.cfg#L797) | <code>[menu __main __info]</code> | Declare this configuration section. |
-| [798](../../../config/options/lcd/sovol-menu-moonraker.cfg#L798) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [799](../../../config/options/lcd/sovol-menu-moonraker.cfg#L799) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
-| [800](../../../config/options/lcd/sovol-menu-moonraker.cfg#L800) | <code>name: Information</code> | Set the LCD label: <code>Information</code>. |
+| [822](../../../config/options/lcd/sovol-menu-moonraker.cfg#L822) | <code>[menu __main __info]</code> | Declare this configuration section. |
+| [823](../../../config/options/lcd/sovol-menu-moonraker.cfg#L823) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [824](../../../config/options/lcd/sovol-menu-moonraker.cfg#L824) | <code>enable: {not (printer.print_stats.state == &quot;paused&quot; or printer.idle_timeout.state == &quot;Printing&quot;)}</code> | Show/enable this LCD item only when this expression is true: <code>{not (the print state  equals  &quot;paused&quot; or the idle-timeout state  equals  &quot;Printing&quot;)}</code>. |
+| [825](../../../config/options/lcd/sovol-menu-moonraker.cfg#L825) | <code>name: Information</code> | Set the LCD label: <code>Information</code>. |
 
 <a id="menu-__main-__info-__version_name"></a>
 
@@ -1606,10 +1653,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [802](../../../config/options/lcd/sovol-menu-moonraker.cfg#L802) | <code>[menu __main __info __version_name]</code> | Declare this configuration section. |
-| [803](../../../config/options/lcd/sovol-menu-moonraker.cfg#L803) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [804](../../../config/options/lcd/sovol-menu-moonraker.cfg#L804) | <code>name: SV08 Mainline Klipper</code> | Set the LCD label: <code>SV08 Mainline Klipper</code>. |
-| [805](../../../config/options/lcd/sovol-menu-moonraker.cfg#L805) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [827](../../../config/options/lcd/sovol-menu-moonraker.cfg#L827) | <code>[menu __main __info __version_name]</code> | Declare this configuration section. |
+| [828](../../../config/options/lcd/sovol-menu-moonraker.cfg#L828) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [829](../../../config/options/lcd/sovol-menu-moonraker.cfg#L829) | <code>name: SV08 Mainline Klipper</code> | Set the LCD label: <code>SV08 Mainline Klipper</code>. |
+| [830](../../../config/options/lcd/sovol-menu-moonraker.cfg#L830) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__menu_version"></a>
 
@@ -1619,10 +1666,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [807](../../../config/options/lcd/sovol-menu-moonraker.cfg#L807) | <code>[menu __main __info __menu_version]</code> | Declare this configuration section. |
-| [808](../../../config/options/lcd/sovol-menu-moonraker.cfg#L808) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [809](../../../config/options/lcd/sovol-menu-moonraker.cfg#L809) | <code>name: Menu cfg: v0.1b</code> | Set the LCD label: <code>Menu cfg: v0.1b</code>. |
-| [810](../../../config/options/lcd/sovol-menu-moonraker.cfg#L810) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [832](../../../config/options/lcd/sovol-menu-moonraker.cfg#L832) | <code>[menu __main __info __menu_version]</code> | Declare this configuration section. |
+| [833](../../../config/options/lcd/sovol-menu-moonraker.cfg#L833) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [834](../../../config/options/lcd/sovol-menu-moonraker.cfg#L834) | <code>name: Menu cfg: v0.1b</code> | Set the LCD label: <code>Menu cfg: v0.1b</code>. |
+| [835](../../../config/options/lcd/sovol-menu-moonraker.cfg#L835) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__hostname"></a>
 
@@ -1632,10 +1679,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [812](../../../config/options/lcd/sovol-menu-moonraker.cfg#L812) | <code>[menu __main __info __hostname]</code> | Declare this configuration section. |
-| [813](../../../config/options/lcd/sovol-menu-moonraker.cfg#L813) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [814](../../../config/options/lcd/sovol-menu-moonraker.cfg#L814) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
-| [815](../../../config/options/lcd/sovol-menu-moonraker.cfg#L815) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [837](../../../config/options/lcd/sovol-menu-moonraker.cfg#L837) | <code>[menu __main __info __hostname]</code> | Declare this configuration section. |
+| [838](../../../config/options/lcd/sovol-menu-moonraker.cfg#L838) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [839](../../../config/options/lcd/sovol-menu-moonraker.cfg#L839) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
+| [840](../../../config/options/lcd/sovol-menu-moonraker.cfg#L840) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__klipper_version"></a>
 
@@ -1645,10 +1692,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [817](../../../config/options/lcd/sovol-menu-moonraker.cfg#L817) | <code>[menu __main __info __klipper_version]</code> | Declare this configuration section. |
-| [818](../../../config/options/lcd/sovol-menu-moonraker.cfg#L818) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [819](../../../config/options/lcd/sovol-menu-moonraker.cfg#L819) | <code>name: Klipper: {printer.network_status.klipper_version}</code> | Set the LCD label: <code>Klipper: {printer.network_status.klipper_version}</code>. |
-| [820](../../../config/options/lcd/sovol-menu-moonraker.cfg#L820) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [842](../../../config/options/lcd/sovol-menu-moonraker.cfg#L842) | <code>[menu __main __info __klipper_version]</code> | Declare this configuration section. |
+| [843](../../../config/options/lcd/sovol-menu-moonraker.cfg#L843) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [844](../../../config/options/lcd/sovol-menu-moonraker.cfg#L844) | <code>name: Klipper: {printer.network_status.klipper_version}</code> | Set the LCD label: <code>Klipper: {printer.network_status.klipper_version}</code>. |
+| [845](../../../config/options/lcd/sovol-menu-moonraker.cfg#L845) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__mcu_version"></a>
 
@@ -1658,10 +1705,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [822](../../../config/options/lcd/sovol-menu-moonraker.cfg#L822) | <code>[menu __main __info __mcu_version]</code> | Declare this configuration section. |
-| [823](../../../config/options/lcd/sovol-menu-moonraker.cfg#L823) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [824](../../../config/options/lcd/sovol-menu-moonraker.cfg#L824) | <code>name: MCU: {printer.network_status.mcu_version}</code> | Set the LCD label: <code>MCU: {printer.network_status.mcu_version}</code>. |
-| [825](../../../config/options/lcd/sovol-menu-moonraker.cfg#L825) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [847](../../../config/options/lcd/sovol-menu-moonraker.cfg#L847) | <code>[menu __main __info __mcu_version]</code> | Declare this configuration section. |
+| [848](../../../config/options/lcd/sovol-menu-moonraker.cfg#L848) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [849](../../../config/options/lcd/sovol-menu-moonraker.cfg#L849) | <code>name: MCU: {printer.network_status.mcu_version}</code> | Set the LCD label: <code>MCU: {printer.network_status.mcu_version}</code>. |
+| [850](../../../config/options/lcd/sovol-menu-moonraker.cfg#L850) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__info-__extra_mcu_version"></a>
 
@@ -1671,10 +1718,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [827](../../../config/options/lcd/sovol-menu-moonraker.cfg#L827) | <code>[menu __main __info __extra_mcu_version]</code> | Declare this configuration section. |
-| [828](../../../config/options/lcd/sovol-menu-moonraker.cfg#L828) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [829](../../../config/options/lcd/sovol-menu-moonraker.cfg#L829) | <code>name: Extra MCU: {printer.network_status.extra_mcu_version}</code> | Set the LCD label: <code>Extra MCU: {printer.network_status.extra_mcu_version}</code>. |
-| [830](../../../config/options/lcd/sovol-menu-moonraker.cfg#L830) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [852](../../../config/options/lcd/sovol-menu-moonraker.cfg#L852) | <code>[menu __main __info __extra_mcu_version]</code> | Declare this configuration section. |
+| [853](../../../config/options/lcd/sovol-menu-moonraker.cfg#L853) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [854](../../../config/options/lcd/sovol-menu-moonraker.cfg#L854) | <code>name: Extra MCU: {printer.network_status.extra_mcu_version}</code> | Set the LCD label: <code>Extra MCU: {printer.network_status.extra_mcu_version}</code>. |
+| [855](../../../config/options/lcd/sovol-menu-moonraker.cfg#L855) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network"></a>
 
@@ -1684,9 +1731,9 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [834](../../../config/options/lcd/sovol-menu-moonraker.cfg#L834) | <code>[menu __main __network]</code> | Declare this configuration section. |
-| [835](../../../config/options/lcd/sovol-menu-moonraker.cfg#L835) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
-| [836](../../../config/options/lcd/sovol-menu-moonraker.cfg#L836) | <code>name: Network</code> | Set the LCD label: <code>Network</code>. |
+| [859](../../../config/options/lcd/sovol-menu-moonraker.cfg#L859) | <code>[menu __main __network]</code> | Declare this configuration section. |
+| [860](../../../config/options/lcd/sovol-menu-moonraker.cfg#L860) | <code>type: list</code> | Select the LCD item type (disabled hides the item): <code>list</code>. |
+| [861](../../../config/options/lcd/sovol-menu-moonraker.cfg#L861) | <code>name: Network</code> | Set the LCD label: <code>Network</code>. |
 
 <a id="menu-__main-__network-__status"></a>
 
@@ -1696,10 +1743,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [838](../../../config/options/lcd/sovol-menu-moonraker.cfg#L838) | <code>[menu __main __network __status]</code> | Declare this configuration section. |
-| [839](../../../config/options/lcd/sovol-menu-moonraker.cfg#L839) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [840](../../../config/options/lcd/sovol-menu-moonraker.cfg#L840) | <code>name: {&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code> | Set the LCD label: <code>{&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code>. |
-| [841](../../../config/options/lcd/sovol-menu-moonraker.cfg#L841) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [863](../../../config/options/lcd/sovol-menu-moonraker.cfg#L863) | <code>[menu __main __network __status]</code> | Declare this configuration section. |
+| [864](../../../config/options/lcd/sovol-menu-moonraker.cfg#L864) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [865](../../../config/options/lcd/sovol-menu-moonraker.cfg#L865) | <code>name: {&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code> | Set the LCD label: <code>{&#x27;Updating...&#x27; if printer.network_status.refreshing else (&#x27;Moonraker: OK&#x27; if printer.network_status.moonraker_ok else &#x27;Moonraker: stale&#x27;)}</code>. |
+| [866](../../../config/options/lcd/sovol-menu-moonraker.cfg#L866) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__hostname"></a>
 
@@ -1709,10 +1756,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [843](../../../config/options/lcd/sovol-menu-moonraker.cfg#L843) | <code>[menu __main __network __hostname]</code> | Declare this configuration section. |
-| [844](../../../config/options/lcd/sovol-menu-moonraker.cfg#L844) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [845](../../../config/options/lcd/sovol-menu-moonraker.cfg#L845) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
-| [846](../../../config/options/lcd/sovol-menu-moonraker.cfg#L846) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [868](../../../config/options/lcd/sovol-menu-moonraker.cfg#L868) | <code>[menu __main __network __hostname]</code> | Declare this configuration section. |
+| [869](../../../config/options/lcd/sovol-menu-moonraker.cfg#L869) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [870](../../../config/options/lcd/sovol-menu-moonraker.cfg#L870) | <code>name: Host: {printer.network_status.hostname}</code> | Set the LCD label: <code>Host: {printer.network_status.hostname}</code>. |
+| [871](../../../config/options/lcd/sovol-menu-moonraker.cfg#L871) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__mdns"></a>
 
@@ -1722,10 +1769,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [848](../../../config/options/lcd/sovol-menu-moonraker.cfg#L848) | <code>[menu __main __network __mdns]</code> | Declare this configuration section. |
-| [849](../../../config/options/lcd/sovol-menu-moonraker.cfg#L849) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [850](../../../config/options/lcd/sovol-menu-moonraker.cfg#L850) | <code>name: mDNS: {printer.network_status.mdns}</code> | Set the LCD label: <code>mDNS: {printer.network_status.mdns}</code>. |
-| [851](../../../config/options/lcd/sovol-menu-moonraker.cfg#L851) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [873](../../../config/options/lcd/sovol-menu-moonraker.cfg#L873) | <code>[menu __main __network __mdns]</code> | Declare this configuration section. |
+| [874](../../../config/options/lcd/sovol-menu-moonraker.cfg#L874) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [875](../../../config/options/lcd/sovol-menu-moonraker.cfg#L875) | <code>name: mDNS: {printer.network_status.mdns}</code> | Set the LCD label: <code>mDNS: {printer.network_status.mdns}</code>. |
+| [876](../../../config/options/lcd/sovol-menu-moonraker.cfg#L876) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__active"></a>
 
@@ -1735,10 +1782,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [853](../../../config/options/lcd/sovol-menu-moonraker.cfg#L853) | <code>[menu __main __network __active]</code> | Declare this configuration section. |
-| [854](../../../config/options/lcd/sovol-menu-moonraker.cfg#L854) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [855](../../../config/options/lcd/sovol-menu-moonraker.cfg#L855) | <code>name: Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code> | Set the LCD label: <code>Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code>. |
-| [856](../../../config/options/lcd/sovol-menu-moonraker.cfg#L856) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [878](../../../config/options/lcd/sovol-menu-moonraker.cfg#L878) | <code>[menu __main __network __active]</code> | Declare this configuration section. |
+| [879](../../../config/options/lcd/sovol-menu-moonraker.cfg#L879) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [880](../../../config/options/lcd/sovol-menu-moonraker.cfg#L880) | <code>name: Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code> | Set the LCD label: <code>Active: {printer.network_status.active_interface} {printer.network_status.active_ip}</code>. |
+| [881](../../../config/options/lcd/sovol-menu-moonraker.cfg#L881) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__ethip"></a>
 
@@ -1748,10 +1795,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [858](../../../config/options/lcd/sovol-menu-moonraker.cfg#L858) | <code>[menu __main __network __ethip]</code> | Declare this configuration section. |
-| [859](../../../config/options/lcd/sovol-menu-moonraker.cfg#L859) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [860](../../../config/options/lcd/sovol-menu-moonraker.cfg#L860) | <code>name: Eth IP: {printer.network_status.ethip}</code> | Set the LCD label: <code>Eth IP: {printer.network_status.ethip}</code>. |
-| [861](../../../config/options/lcd/sovol-menu-moonraker.cfg#L861) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [883](../../../config/options/lcd/sovol-menu-moonraker.cfg#L883) | <code>[menu __main __network __ethip]</code> | Declare this configuration section. |
+| [884](../../../config/options/lcd/sovol-menu-moonraker.cfg#L884) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [885](../../../config/options/lcd/sovol-menu-moonraker.cfg#L885) | <code>name: Eth IP: {printer.network_status.ethip}</code> | Set the LCD label: <code>Eth IP: {printer.network_status.ethip}</code>. |
+| [886](../../../config/options/lcd/sovol-menu-moonraker.cfg#L886) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__ethmac"></a>
 
@@ -1761,10 +1808,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [863](../../../config/options/lcd/sovol-menu-moonraker.cfg#L863) | <code>[menu __main __network __ethmac]</code> | Declare this configuration section. |
-| [864](../../../config/options/lcd/sovol-menu-moonraker.cfg#L864) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [865](../../../config/options/lcd/sovol-menu-moonraker.cfg#L865) | <code>name: Eth MAC: {printer.network_status.ethmac}</code> | Set the LCD label: <code>Eth MAC: {printer.network_status.ethmac}</code>. |
-| [866](../../../config/options/lcd/sovol-menu-moonraker.cfg#L866) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [888](../../../config/options/lcd/sovol-menu-moonraker.cfg#L888) | <code>[menu __main __network __ethmac]</code> | Declare this configuration section. |
+| [889](../../../config/options/lcd/sovol-menu-moonraker.cfg#L889) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [890](../../../config/options/lcd/sovol-menu-moonraker.cfg#L890) | <code>name: Eth MAC: {printer.network_status.ethmac}</code> | Set the LCD label: <code>Eth MAC: {printer.network_status.ethmac}</code>. |
+| [891](../../../config/options/lcd/sovol-menu-moonraker.cfg#L891) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__wifissid"></a>
 
@@ -1774,10 +1821,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [868](../../../config/options/lcd/sovol-menu-moonraker.cfg#L868) | <code>[menu __main __network __wifissid]</code> | Declare this configuration section. |
-| [869](../../../config/options/lcd/sovol-menu-moonraker.cfg#L869) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [870](../../../config/options/lcd/sovol-menu-moonraker.cfg#L870) | <code>name: WiFi SSID: {printer.network_status.wifissid}</code> | Set the LCD label: <code>WiFi SSID: {printer.network_status.wifissid}</code>. |
-| [871](../../../config/options/lcd/sovol-menu-moonraker.cfg#L871) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [893](../../../config/options/lcd/sovol-menu-moonraker.cfg#L893) | <code>[menu __main __network __wifissid]</code> | Declare this configuration section. |
+| [894](../../../config/options/lcd/sovol-menu-moonraker.cfg#L894) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [895](../../../config/options/lcd/sovol-menu-moonraker.cfg#L895) | <code>name: WiFi SSID: {printer.network_status.wifissid}</code> | Set the LCD label: <code>WiFi SSID: {printer.network_status.wifissid}</code>. |
+| [896](../../../config/options/lcd/sovol-menu-moonraker.cfg#L896) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__wifiip"></a>
 
@@ -1787,10 +1834,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [873](../../../config/options/lcd/sovol-menu-moonraker.cfg#L873) | <code>[menu __main __network __wifiip]</code> | Declare this configuration section. |
-| [874](../../../config/options/lcd/sovol-menu-moonraker.cfg#L874) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [875](../../../config/options/lcd/sovol-menu-moonraker.cfg#L875) | <code>name: WiFi IP: {printer.network_status.wifiip}</code> | Set the LCD label: <code>WiFi IP: {printer.network_status.wifiip}</code>. |
-| [876](../../../config/options/lcd/sovol-menu-moonraker.cfg#L876) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [898](../../../config/options/lcd/sovol-menu-moonraker.cfg#L898) | <code>[menu __main __network __wifiip]</code> | Declare this configuration section. |
+| [899](../../../config/options/lcd/sovol-menu-moonraker.cfg#L899) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [900](../../../config/options/lcd/sovol-menu-moonraker.cfg#L900) | <code>name: WiFi IP: {printer.network_status.wifiip}</code> | Set the LCD label: <code>WiFi IP: {printer.network_status.wifiip}</code>. |
+| [901](../../../config/options/lcd/sovol-menu-moonraker.cfg#L901) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__wifimac"></a>
 
@@ -1800,10 +1847,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [878](../../../config/options/lcd/sovol-menu-moonraker.cfg#L878) | <code>[menu __main __network __wifimac]</code> | Declare this configuration section. |
-| [879](../../../config/options/lcd/sovol-menu-moonraker.cfg#L879) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [880](../../../config/options/lcd/sovol-menu-moonraker.cfg#L880) | <code>name: WiFi MAC: {printer.network_status.wifimac}</code> | Set the LCD label: <code>WiFi MAC: {printer.network_status.wifimac}</code>. |
-| [881](../../../config/options/lcd/sovol-menu-moonraker.cfg#L881) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [903](../../../config/options/lcd/sovol-menu-moonraker.cfg#L903) | <code>[menu __main __network __wifimac]</code> | Declare this configuration section. |
+| [904](../../../config/options/lcd/sovol-menu-moonraker.cfg#L904) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [905](../../../config/options/lcd/sovol-menu-moonraker.cfg#L905) | <code>name: WiFi MAC: {printer.network_status.wifimac}</code> | Set the LCD label: <code>WiFi MAC: {printer.network_status.wifimac}</code>. |
+| [906](../../../config/options/lcd/sovol-menu-moonraker.cfg#L906) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__moonraker"></a>
 
@@ -1813,10 +1860,10 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [883](../../../config/options/lcd/sovol-menu-moonraker.cfg#L883) | <code>[menu __main __network __moonraker]</code> | Declare this configuration section. |
-| [884](../../../config/options/lcd/sovol-menu-moonraker.cfg#L884) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [885](../../../config/options/lcd/sovol-menu-moonraker.cfg#L885) | <code>name: Moonraker: {printer.network_status.moonraker_version}</code> | Set the LCD label: <code>Moonraker: {printer.network_status.moonraker_version}</code>. |
-| [886](../../../config/options/lcd/sovol-menu-moonraker.cfg#L886) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [908](../../../config/options/lcd/sovol-menu-moonraker.cfg#L908) | <code>[menu __main __network __moonraker]</code> | Declare this configuration section. |
+| [909](../../../config/options/lcd/sovol-menu-moonraker.cfg#L909) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [910](../../../config/options/lcd/sovol-menu-moonraker.cfg#L910) | <code>name: Moonraker: {printer.network_status.moonraker_version}</code> | Set the LCD label: <code>Moonraker: {printer.network_status.moonraker_version}</code>. |
+| [911](../../../config/options/lcd/sovol-menu-moonraker.cfg#L911) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="menu-__main-__network-__refresh"></a>
 
@@ -1826,11 +1873,11 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [888](../../../config/options/lcd/sovol-menu-moonraker.cfg#L888) | <code>[menu __main __network __refresh]</code> | Declare this configuration section. |
-| [889](../../../config/options/lcd/sovol-menu-moonraker.cfg#L889) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
-| [890](../../../config/options/lcd/sovol-menu-moonraker.cfg#L890) | <code>name: Refresh network</code> | Set the LCD label: <code>Refresh network</code>. |
-| [891](../../../config/options/lcd/sovol-menu-moonraker.cfg#L891) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [892](../../../config/options/lcd/sovol-menu-moonraker.cfg#L892) | <code>NETWORK_STATUS_REFRESH</code> | Ask the project's network_status extension to refresh network information. The extension implementation is external to these config files; this command alone does not prove its network behavior. |
+| [913](../../../config/options/lcd/sovol-menu-moonraker.cfg#L913) | <code>[menu __main __network __refresh]</code> | Declare this configuration section. |
+| [914](../../../config/options/lcd/sovol-menu-moonraker.cfg#L914) | <code>type: command</code> | Select the LCD item type (disabled hides the item): <code>command</code>. |
+| [915](../../../config/options/lcd/sovol-menu-moonraker.cfg#L915) | <code>name: Refresh network</code> | Set the LCD label: <code>Refresh network</code>. |
+| [916](../../../config/options/lcd/sovol-menu-moonraker.cfg#L916) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [917](../../../config/options/lcd/sovol-menu-moonraker.cfg#L917) | <code>NETWORK_STATUS_REFRESH</code> | Ask the project's network_status extension to refresh network information. The extension implementation is external to these config files; this command alone does not prove its network behavior. |
 
 <a id="menu-__main-__octoprint"></a>
 
@@ -1840,8 +1887,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [896](../../../config/options/lcd/sovol-menu-moonraker.cfg#L896) | <code>[menu __main __octoprint]</code> | Declare this configuration section. |
-| [897](../../../config/options/lcd/sovol-menu-moonraker.cfg#L897) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [921](../../../config/options/lcd/sovol-menu-moonraker.cfg#L921) | <code>[menu __main __octoprint]</code> | Declare this configuration section. |
+| [922](../../../config/options/lcd/sovol-menu-moonraker.cfg#L922) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__temp"></a>
 
@@ -1851,8 +1898,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [899](../../../config/options/lcd/sovol-menu-moonraker.cfg#L899) | <code>[menu __main __temp]</code> | Declare this configuration section. |
-| [900](../../../config/options/lcd/sovol-menu-moonraker.cfg#L900) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [924](../../../config/options/lcd/sovol-menu-moonraker.cfg#L924) | <code>[menu __main __temp]</code> | Declare this configuration section. |
+| [925](../../../config/options/lcd/sovol-menu-moonraker.cfg#L925) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__hotend0_target"></a>
 
@@ -1862,8 +1909,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [902](../../../config/options/lcd/sovol-menu-moonraker.cfg#L902) | <code>[menu __main __filament __hotend0_target]</code> | Declare this configuration section. |
-| [903](../../../config/options/lcd/sovol-menu-moonraker.cfg#L903) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [927](../../../config/options/lcd/sovol-menu-moonraker.cfg#L927) | <code>[menu __main __filament __hotend0_target]</code> | Declare this configuration section. |
+| [928](../../../config/options/lcd/sovol-menu-moonraker.cfg#L928) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__loadf"></a>
 
@@ -1873,8 +1920,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [905](../../../config/options/lcd/sovol-menu-moonraker.cfg#L905) | <code>[menu __main __filament __loadf]</code> | Declare this configuration section. |
-| [906](../../../config/options/lcd/sovol-menu-moonraker.cfg#L906) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [930](../../../config/options/lcd/sovol-menu-moonraker.cfg#L930) | <code>[menu __main __filament __loadf]</code> | Declare this configuration section. |
+| [931](../../../config/options/lcd/sovol-menu-moonraker.cfg#L931) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__loads"></a>
 
@@ -1884,8 +1931,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [908](../../../config/options/lcd/sovol-menu-moonraker.cfg#L908) | <code>[menu __main __filament __loads]</code> | Declare this configuration section. |
-| [909](../../../config/options/lcd/sovol-menu-moonraker.cfg#L909) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [933](../../../config/options/lcd/sovol-menu-moonraker.cfg#L933) | <code>[menu __main __filament __loads]</code> | Declare this configuration section. |
+| [934](../../../config/options/lcd/sovol-menu-moonraker.cfg#L934) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__unloadf"></a>
 
@@ -1895,8 +1942,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [911](../../../config/options/lcd/sovol-menu-moonraker.cfg#L911) | <code>[menu __main __filament __unloadf]</code> | Declare this configuration section. |
-| [912](../../../config/options/lcd/sovol-menu-moonraker.cfg#L912) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [936](../../../config/options/lcd/sovol-menu-moonraker.cfg#L936) | <code>[menu __main __filament __unloadf]</code> | Declare this configuration section. |
+| [937](../../../config/options/lcd/sovol-menu-moonraker.cfg#L937) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__unloads"></a>
 
@@ -1906,8 +1953,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [914](../../../config/options/lcd/sovol-menu-moonraker.cfg#L914) | <code>[menu __main __filament __unloads]</code> | Declare this configuration section. |
-| [915](../../../config/options/lcd/sovol-menu-moonraker.cfg#L915) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [939](../../../config/options/lcd/sovol-menu-moonraker.cfg#L939) | <code>[menu __main __filament __unloads]</code> | Declare this configuration section. |
+| [940](../../../config/options/lcd/sovol-menu-moonraker.cfg#L940) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
 
 <a id="menu-__main-__filament-__feed"></a>
 
@@ -1917,5 +1964,5 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [917](../../../config/options/lcd/sovol-menu-moonraker.cfg#L917) | <code>[menu __main __filament __feed]</code> | Declare this configuration section. |
-| [918](../../../config/options/lcd/sovol-menu-moonraker.cfg#L918) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
+| [942](../../../config/options/lcd/sovol-menu-moonraker.cfg#L942) | <code>[menu __main __filament __feed]</code> | Declare this configuration section. |
+| [943](../../../config/options/lcd/sovol-menu-moonraker.cfg#L943) | <code>type: disabled</code> | Select the LCD item type (disabled hides the item): <code>disabled</code>. |
