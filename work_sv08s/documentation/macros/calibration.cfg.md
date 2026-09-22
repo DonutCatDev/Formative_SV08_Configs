@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/calibration.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `1161cd8d4d946107a012a08bdfa643ec80866929ce7bb774dd5f6f3530bc4634`.
+Source text SHA256 (LF-normalized): `130bf67563df674430e66eaa626f06bbfbbaa13c4bb04642c716ab2b9a270225`.
 
 ## Macro and action index
 
@@ -20,7 +20,7 @@ None.
 
 ## gcode_macro BELT_RESONANCES
 
-Home through the canonical sensorless sequence, measure accelerometer noise, collect the two CoreXY belt-direction raw datasets and synchronously generate scripts/outputs/belt_resonances.png. It does not calibrate or save input-shaper settings.
+Record a calibration-history start, home through the canonical sensorless sequence, measure accelerometer noise, collect the two CoreXY belt-direction raw datasets and synchronously generate scripts/outputs/belt_resonances.png. Record completion only after graph generation succeeds. It does not calibrate or save input-shaper settings; a start without completion indicates interruption or failure.
 
 **Calls and state references:** [HOME_ALL](homing.cfg.md#gcode_macro-home_all). Conditional references are not necessarily executed.
 
@@ -29,32 +29,36 @@ Home through the canonical sensorless sequence, measure accelerometer noise, col
 | [1](../../config/macros/calibration.cfg#L1) | <code>[gcode_macro BELT_RESONANCES]</code> | Declare this callable macro. |
 | [2](../../config/macros/calibration.cfg#L2) | <code>description: Measure CoreXY belt resonances and generate a comparison graph</code> | Set the help text: <code>Measure CoreXY belt resonances and generate a comparison graph</code>. |
 | [3](../../config/macros/calibration.cfg#L3) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [4](../../config/macros/calibration.cfg#L4) | <code>M117 Belt resonance tests</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [5](../../config/macros/calibration.cfg#L5) | <code>HOME_ALL</code> | Run [HOME_ALL](homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
-| [6](../../config/macros/calibration.cfg#L6) | <code>MEASURE_AXES_NOISE</code> | Measure accelerometer noise before resonance testing. |
-| [7](../../config/macros/calibration.cfg#L7) | <code>TEST_RESONANCES AXIS=1,1 OUTPUT=raw_data NAME=belt_a</code> | Run a resonance test for the selected AXIS; this generates measurement data rather than directly choosing production limits. |
-| [8](../../config/macros/calibration.cfg#L8) | <code>TEST_RESONANCES AXIS=1,-1 OUTPUT=raw_data NAME=belt_b</code> | Run a resonance test for the selected AXIS; this generates measurement data rather than directly choosing production limits. |
-| [9](../../config/macros/calibration.cfg#L9) | <code>M117 Generating belt graph</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [10](../../config/macros/calibration.cfg#L10) | <code>RUN_SHELL_COMMAND CMD=generate_belt_resonance_graph</code> | Run the configured host-side plotting script after both belt measurements finish. It writes scripts/outputs/belt_resonances.png and blocks this LCD action until the command finishes or reaches its 120-second timeout. |
-| [11](../../config/macros/calibration.cfg#L11) | <code>M117 Belt graph complete</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [4](../../config/macros/calibration.cfg#L4) | <code>CALIBRATION_RECORD TYPE=belt_resonances STATUS=started</code> | Append a durable start event for the belt-resonance run before homing or measurement begins. |
+| [5](../../config/macros/calibration.cfg#L5) | <code>M117 Belt resonance tests</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [6](../../config/macros/calibration.cfg#L6) | <code>HOME_ALL</code> | Run [HOME_ALL](homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
+| [7](../../config/macros/calibration.cfg#L7) | <code>MEASURE_AXES_NOISE</code> | Measure accelerometer noise before resonance testing. |
+| [8](../../config/macros/calibration.cfg#L8) | <code>TEST_RESONANCES AXIS=1,1 OUTPUT=raw_data NAME=belt_a</code> | Run a resonance test for the selected AXIS; this generates measurement data rather than directly choosing production limits. |
+| [9](../../config/macros/calibration.cfg#L9) | <code>TEST_RESONANCES AXIS=1,-1 OUTPUT=raw_data NAME=belt_b</code> | Run a resonance test for the selected AXIS; this generates measurement data rather than directly choosing production limits. |
+| [10](../../config/macros/calibration.cfg#L10) | <code>M117 Generating belt graph</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [11](../../config/macros/calibration.cfg#L11) | <code>RUN_SHELL_COMMAND CMD=generate_belt_resonance_graph</code> | Run the configured host-side plotting script after both belt measurements finish. It writes scripts/outputs/belt_resonances.png and blocks this LCD action until the command finishes or reaches its 120-second timeout. |
+| [12](../../config/macros/calibration.cfg#L12) | <code>CALIBRATION_RECORD TYPE=belt_resonances STATUS=completed DETAILS=graph_generated</code> | Append completion only after both belt datasets and the comparison graph are generated successfully. |
+| [13](../../config/macros/calibration.cfg#L13) | <code>M117 Belt graph complete</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
 
 <a id="gcode_macro-auto_calibrate"></a>
 
 ## gcode_macro AUTO_CALIBRATE
 
-Home through the canonical sensorless sequence, measure accelerometer noise, calibrate both input-shaper axes under the fixed auto_calibrate run name and synchronously generate scripts/outputs/input_shaper_x.png and input_shaper_y.png. SHAPER_CALIBRATE applies the recommendations for the session; this macro does not issue SAVE_CONFIG.
+Record a calibration-history start, home through the canonical sensorless sequence, measure accelerometer noise, calibrate both input-shaper axes under the fixed auto_calibrate run name and synchronously generate scripts/outputs/input_shaper_x.png and input_shaper_y.png. Record completion only after graph generation succeeds and label the result unsaved. SHAPER_CALIBRATE applies the recommendations for the session; this macro does not issue SAVE_CONFIG, and a start without completion indicates interruption or failure.
 
 **Calls and state references:** [HOME_ALL](homing.cfg.md#gcode_macro-home_all). Conditional references are not necessarily executed.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [13](../../config/macros/calibration.cfg#L13) | <code>[gcode_macro AUTO_CALIBRATE]</code> | Declare this callable macro. |
-| [14](../../config/macros/calibration.cfg#L14) | <code>description: Calibrate both input-shaper axes and generate X/Y graphs</code> | Set the help text: <code>Calibrate both input-shaper axes and generate X/Y graphs</code>. |
-| [15](../../config/macros/calibration.cfg#L15) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [16](../../config/macros/calibration.cfg#L16) | <code>M117 Input shaper calibration</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [17](../../config/macros/calibration.cfg#L17) | <code>HOME_ALL</code> | Run [HOME_ALL](homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
-| [18](../../config/macros/calibration.cfg#L18) | <code>MEASURE_AXES_NOISE</code> | Measure accelerometer noise before resonance testing. |
-| [19](../../config/macros/calibration.cfg#L19) | <code>SHAPER_CALIBRATE NAME=auto_calibrate</code> | Measure resonance and calculate input-shaper settings. Requires a working accelerometer and suitable homed/clear geometry; saving is separate. |
-| [20](../../config/macros/calibration.cfg#L20) | <code>M117 Generating shaper graphs</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [21](../../config/macros/calibration.cfg#L21) | <code>RUN_SHELL_COMMAND CMD=generate_input_shaper_graphs</code> | Run the configured host-side input-shaper plotting script after both axis calibrations finish. It writes scripts/outputs/input_shaper_x.png and input_shaper_y.png, blocking until completion or the 120-second timeout. |
-| [22](../../config/macros/calibration.cfg#L22) | <code>M117 Shaper calibration complete</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [15](../../config/macros/calibration.cfg#L15) | <code>[gcode_macro AUTO_CALIBRATE]</code> | Declare this callable macro. |
+| [16](../../config/macros/calibration.cfg#L16) | <code>description: Calibrate both input-shaper axes and generate X/Y graphs</code> | Set the help text: <code>Calibrate both input-shaper axes and generate X/Y graphs</code>. |
+| [17](../../config/macros/calibration.cfg#L17) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [18](../../config/macros/calibration.cfg#L18) | <code>CALIBRATION_RECORD TYPE=auto_calibrate STATUS=started</code> | Append a durable start event for input-shaper auto-calibration before homing or measurement begins. |
+| [19](../../config/macros/calibration.cfg#L19) | <code>M117 Input shaper calibration</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [20](../../config/macros/calibration.cfg#L20) | <code>HOME_ALL</code> | Run [HOME_ALL](homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
+| [21](../../config/macros/calibration.cfg#L21) | <code>MEASURE_AXES_NOISE</code> | Measure accelerometer noise before resonance testing. |
+| [22](../../config/macros/calibration.cfg#L22) | <code>SHAPER_CALIBRATE NAME=auto_calibrate</code> | Measure resonance and calculate input-shaper settings. Requires a working accelerometer and suitable homed/clear geometry; saving is separate. |
+| [23](../../config/macros/calibration.cfg#L23) | <code>M117 Generating shaper graphs</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [24](../../config/macros/calibration.cfg#L24) | <code>RUN_SHELL_COMMAND CMD=generate_input_shaper_graphs</code> | Run the configured host-side input-shaper plotting script after both axis calibrations finish. It writes scripts/outputs/input_shaper_x.png and input_shaper_y.png, blocking until completion or the 120-second timeout. |
+| [25](../../config/macros/calibration.cfg#L25) | <code>CALIBRATION_RECORD TYPE=auto_calibrate STATUS=completed DETAILS=graphs_generated_not_saved</code> | Append completion after both shaper graphs are generated and explicitly record that this macro did not persist the recommendations. |
+| [26](../../config/macros/calibration.cfg#L26) | <code>M117 Shaper calibration complete</code> | Set the printer/LCD status message to the following text; an empty message clears it. |

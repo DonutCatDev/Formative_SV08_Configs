@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/custom-macros.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `37fe98824914a7e0b16aa308afe8bcb277f31d6cf7285afa89e3ea4dead7986c`.
+Source text SHA256 (LF-normalized): `9f1808259319dd0992a20ef03232db73960d1966381eb970b9587f95ef93b703`.
 
 ## Macro and action index
 
@@ -19,7 +19,7 @@ None.
 
 ## gcode_macro MULTI_PID_CALIBRATE
 
-Homes, raises Z to 150mm, tunes nozzle PID and bed PID, and optionally saves/restarts. SAVE defaults to yes, so ordinary invocation requests persistence. This is a calibration action, not a print-start requirement.
+Record a calibration-history start with both targets and the requested save mode, home, raise Z to 150mm, tune nozzle PID and bed PID, then record completion before optionally saving/restarting. SAVE defaults to yes, so ordinary invocation requests persistence; the completion detail reports that request rather than claiming the restart succeeded. A start without completion indicates interruption or failure. This is a calibration action, not a print-start requirement.
 
 **Calls and state references:** [HOME_ALL](homing.cfg.md#gcode_macro-home_all). Conditional references are not necessarily executed.
 
@@ -31,23 +31,25 @@ Homes, raises Z to 150mm, tunes nozzle PID and bed PID, and optionally saves/res
 | [4](../../config/macros/custom-macros.cfg#L4) | <code>{% set target_extruder = params.EXT&#124;default(270)&#124;float %}</code> | Calculate local <code>target_extruder</code> from <code>the supplied EXT argument (use 270 if absent) as a decimal</code>. It lasts for this evaluation only. |
 | [5](../../config/macros/custom-macros.cfg#L5) | <code>{% set target_bed = params.BED&#124;default(70)&#124;float %}</code> | Calculate local <code>target_bed</code> from <code>the supplied BED argument (use 70 if absent) as a decimal</code>. It lasts for this evaluation only. |
 | [6](../../config/macros/custom-macros.cfg#L6) | <code>{% set save_flag = params.SAVE&#124;default(&#x27;yes&#x27;)&#124;string&#124;lower %}</code> | Calculate local <code>save_flag</code> from <code>the supplied SAVE argument (use &#x27;yes&#x27; if absent) as text in lowercase</code>. It lasts for this evaluation only. |
-| [8](../../config/macros/custom-macros.cfg#L8) | <code>HOME_ALL</code> | Run [HOME_ALL](homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
-| [9](../../config/macros/custom-macros.cfg#L9) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [10](../../config/macros/custom-macros.cfg#L10) | <code>G1 Z150 F1200</code> | command Z=<code>150</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [11](../../config/macros/custom-macros.cfg#L11) | <code># 2. Run extruder calibration</code> | Comment only; Klipper does not execute this line. |
-| [12](../../config/macros/custom-macros.cfg#L12) | <code>M117 Calibrating extruder to {target_extruder}C...</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [13](../../config/macros/custom-macros.cfg#L13) | <code>RESPOND MSG=&quot;Starting extruder PID calibration...&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [14](../../config/macros/custom-macros.cfg#L14) | <code>PID_CALIBRATE HEATER=extruder TARGET={target_extruder}</code> | Run heater PID tuning for HEATER at TARGET temperature. Results are machine-specific and are not saved merely by issuing this command. |
-| [16](../../config/macros/custom-macros.cfg#L16) | <code># 3. Run bed calibration</code> | Comment only; Klipper does not execute this line. |
-| [17](../../config/macros/custom-macros.cfg#L17) | <code>M117 Calibrating bed to {target_bed}C...</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [18](../../config/macros/custom-macros.cfg#L18) | <code>RESPOND MSG=&quot;Starting bed PID calibration...&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [19](../../config/macros/custom-macros.cfg#L19) | <code>PID_CALIBRATE HEATER=heater_bed TARGET={target_bed}</code> | Run heater PID tuning for HEATER at TARGET temperature. Results are machine-specific and are not saved merely by issuing this command. |
-| [21](../../config/macros/custom-macros.cfg#L21) | <code># 4. Conditional Save Config block</code> | Comment only; Klipper does not execute this line. |
-| [22](../../config/macros/custom-macros.cfg#L22) | <code>{% if save_flag == &#x27;yes&#x27; %}</code> | Start a conditional branch: <code>save_flag  equals  &#x27;yes&#x27;</code>. Only a true branch emits its commands. |
-| [23](../../config/macros/custom-macros.cfg#L23) | <code>M117 Saving configuration and restarting...</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [24](../../config/macros/custom-macros.cfg#L24) | <code>RESPOND MSG=&quot;SAVE=yes detected. Saving configuration now.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [25](../../config/macros/custom-macros.cfg#L25) | <code>SAVE_CONFIG</code> | Persist pending calibration/configuration results and restart Klipper; this interrupts normal operation. |
-| [26](../../config/macros/custom-macros.cfg#L26) | <code>{% else %}</code> | Otherwise use this branch. |
-| [27](../../config/macros/custom-macros.cfg#L27) | <code>M117 Calibration complete!</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [28](../../config/macros/custom-macros.cfg#L28) | <code>RESPOND MSG=&quot;Calibration finished. Values NOT saved.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [29](../../config/macros/custom-macros.cfg#L29) | <code>{% endif %}</code> | End this conditional block. |
+| [8](../../config/macros/custom-macros.cfg#L8) | <code>CALIBRATION_RECORD TYPE=pid_multi STATUS=started DETAILS=extruder_{target_extruder&#124;int}C_bed_{target_bed&#124;int}C_save_{save_flag}</code> | Append a durable multi-PID start event with the integer nozzle/bed targets and requested SAVE mode before homing. |
+| [9](../../config/macros/custom-macros.cfg#L9) | <code>HOME_ALL</code> | Run [HOME_ALL](homing.cfg.md#gcode_macro-home_all), which is evaluated separately when reached. Use its default arguments. |
+| [10](../../config/macros/custom-macros.cfg#L10) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
+| [11](../../config/macros/custom-macros.cfg#L11) | <code>G1 Z150 F1200</code> | command Z=<code>150</code> mm; use feed rate 20 mm/s (1200 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [12](../../config/macros/custom-macros.cfg#L12) | <code># 2. Run extruder calibration</code> | Comment only; Klipper does not execute this line. |
+| [13](../../config/macros/custom-macros.cfg#L13) | <code>M117 Calibrating extruder to {target_extruder}C...</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [14](../../config/macros/custom-macros.cfg#L14) | <code>RESPOND MSG=&quot;Starting extruder PID calibration...&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [15](../../config/macros/custom-macros.cfg#L15) | <code>PID_CALIBRATE HEATER=extruder TARGET={target_extruder}</code> | Run heater PID tuning for HEATER at TARGET temperature. Results are machine-specific and are not saved merely by issuing this command. |
+| [17](../../config/macros/custom-macros.cfg#L17) | <code># 3. Run bed calibration</code> | Comment only; Klipper does not execute this line. |
+| [18](../../config/macros/custom-macros.cfg#L18) | <code>M117 Calibrating bed to {target_bed}C...</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [19](../../config/macros/custom-macros.cfg#L19) | <code>RESPOND MSG=&quot;Starting bed PID calibration...&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [20](../../config/macros/custom-macros.cfg#L20) | <code>PID_CALIBRATE HEATER=heater_bed TARGET={target_bed}</code> | Run heater PID tuning for HEATER at TARGET temperature. Results are machine-specific and are not saved merely by issuing this command. |
+| [22](../../config/macros/custom-macros.cfg#L22) | <code>CALIBRATION_RECORD TYPE=pid_multi STATUS=completed DETAILS=extruder_{target_extruder&#124;int}C_bed_{target_bed&#124;int}C_save_requested_{save_flag}</code> | Append completion after both PID routines return; record only whether persistence was requested because SAVE_CONFIG and its restart have not yet executed. |
+| [24](../../config/macros/custom-macros.cfg#L24) | <code># 4. Conditional Save Config block</code> | Comment only; Klipper does not execute this line. |
+| [25](../../config/macros/custom-macros.cfg#L25) | <code>{% if save_flag == &#x27;yes&#x27; %}</code> | Start a conditional branch: <code>save_flag  equals  &#x27;yes&#x27;</code>. Only a true branch emits its commands. |
+| [26](../../config/macros/custom-macros.cfg#L26) | <code>M117 Saving configuration and restarting...</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [27](../../config/macros/custom-macros.cfg#L27) | <code>RESPOND MSG=&quot;SAVE=yes detected. Saving configuration now.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [28](../../config/macros/custom-macros.cfg#L28) | <code>SAVE_CONFIG</code> | Persist pending calibration/configuration results and restart Klipper; this interrupts normal operation. |
+| [29](../../config/macros/custom-macros.cfg#L29) | <code>{% else %}</code> | Otherwise use this branch. |
+| [30](../../config/macros/custom-macros.cfg#L30) | <code>M117 Calibration complete!</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [31](../../config/macros/custom-macros.cfg#L31) | <code>RESPOND MSG=&quot;Calibration finished. Values NOT saved.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [32](../../config/macros/custom-macros.cfg#L32) | <code>{% endif %}</code> | End this conditional block. |
