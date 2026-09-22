@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/filament.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `23d05048d3ca01cc725051dd3882ee99cab757f3a915184469de519ca1c8b95a`.
+Source text SHA256 (LF-normalized): `40fb7a41049d8b6c7d7e20d70607aa9ceb4bdd6b9ba3b200abc5ea4d92c9ad79`.
 
 ## Macro and action index
 
@@ -46,30 +46,32 @@ One tenth of a second after Klipper becomes ready, disable filament-sensor event
 
 ## gcode_macro _FILAMENT_CHANGE
 
-Stores whether the automatic M600 unload has completed. The empty command body does not change that state by itself.
+Stores whether the automatic M600 unload has completed and its immutable pre-change nozzle target. The dedicated target prevents a repeated runout PAUSE at the 240C loading temperature from replacing the print temperature needed by RESUME. The empty command body does not change that state by itself.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
 | [8](../../config/macros/filament.cfg#L8) | <code>[gcode_macro _FILAMENT_CHANGE]</code> | Declare this callable macro. |
 | [9](../../config/macros/filament.cfg#L9) | <code>variable_active: False</code> | Initialize <code>active</code> (whether M600 automatic unloading has completed) to <code>False</code> at restart; later calls may change it. |
-| [10](../../config/macros/filament.cfg#L10) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [10](../../config/macros/filament.cfg#L10) | <code>variable_resume_target: 0.0</code> | Initialize <code>resume_target</code> (resume target) to <code>0.0</code> at restart; later calls may change it. |
+| [11](../../config/macros/filament.cfg#L11) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="gcode_macro-_reset_filament_change"></a>
 
 ## gcode_macro _RESET_FILAMENT_CHANGE
 
-Clears the completed-change and pending-load flags, restores the ordinary 1mm pause retract and keeps Mainsail's generic cancel retract disabled because the SV08 cleanup hook owns cancellation retraction. Used after resume, end or cancel.
+Clears the completed-change flag, its saved pre-change nozzle target and the pending-load flag; restores the ordinary 1mm pause retract and keeps Mainsail's generic cancel retract disabled because the SV08 cleanup hook owns cancellation retraction. Used after resume, end or cancel.
 
 **Calls and state references:** [_CLIENT_VARIABLE](client.cfg.md#gcode_macro-_client_variable), [_FILAMENT_CHANGE](filament.cfg.md#gcode_macro-_filament_change), [_FILAMENT_LOAD](filament.cfg.md#gcode_macro-_filament_load). Conditional references are not necessarily executed.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [12](../../config/macros/filament.cfg#L12) | <code>[gcode_macro _RESET_FILAMENT_CHANGE]</code> | Declare this callable macro. |
-| [13](../../config/macros/filament.cfg#L13) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [14](../../config/macros/filament.cfg#L14) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_CHANGE VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
-| [15](../../config/macros/filament.cfg#L15) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
-| [16](../../config/macros/filament.cfg#L16) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=retract VALUE=1.0</code> | Store <code>1.0</code> in the named macro's <code>retract</code> variable for later calls. This changes runtime state, not the config file. |
-| [17](../../config/macros/filament.cfg#L17) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=cancel_retract VALUE=0.0</code> | Store <code>0.0</code> in the named macro's <code>cancel_retract</code> variable for later calls. This changes runtime state, not the config file. |
+| [13](../../config/macros/filament.cfg#L13) | <code>[gcode_macro _RESET_FILAMENT_CHANGE]</code> | Declare this callable macro. |
+| [14](../../config/macros/filament.cfg#L14) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [15](../../config/macros/filament.cfg#L15) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_CHANGE VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
+| [16](../../config/macros/filament.cfg#L16) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_CHANGE VARIABLE=resume_target VALUE=0.0</code> | Store <code>0.0</code> in the named macro's <code>resume_target</code> variable for later calls. This changes runtime state, not the config file. |
+| [17](../../config/macros/filament.cfg#L17) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
+| [18](../../config/macros/filament.cfg#L18) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=retract VALUE=1.0</code> | Store <code>1.0</code> in the named macro's <code>retract</code> variable for later calls. This changes runtime state, not the config file. |
+| [19](../../config/macros/filament.cfg#L19) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=cancel_retract VALUE=0.0</code> | Store <code>0.0</code> in the named macro's <code>cancel_retract</code> variable for later calls. This changes runtime state, not the config file. |
 
 <a id="gcode_macro-_filament_change_unload"></a>
 
@@ -81,23 +83,23 @@ Requires a hot paused printer, retracts 53mm, waits for the withdrawal to comple
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [19](../../config/macros/filament.cfg#L19) | <code>[gcode_macro _FILAMENT_CHANGE_UNLOAD]</code> | Declare this callable macro. |
-| [20](../../config/macros/filament.cfg#L20) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [21](../../config/macros/filament.cfg#L21) | <code>{% if not printer.pause_resume.is_paused or not printer.extruder.can_extrude %}</code> | Reject unloading unless the printer is paused and the nozzle is hot enough to extrude. |
-| [22](../../config/macros/filament.cfg#L22) | <code>{action_raise_error(&quot;M600 unload requires a paused printer and hot nozzle.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [23](../../config/macros/filament.cfg#L23) | <code>{% endif %}</code> | End this conditional block. |
-| [24](../../config/macros/filament.cfg#L24) | <code>SAVE_GCODE_STATE NAME=m600_unload_state</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [25](../../config/macros/filament.cfg#L25) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
-| [26](../../config/macros/filament.cfg#L26) | <code>G1 E-3 F2700</code> | command filament E=<code>-3</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 45 mm/s (2700 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [27](../../config/macros/filament.cfg#L27) | <code>G1 E-50 F3000</code> | command filament E=<code>-50</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 50 mm/s (3000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [28](../../config/macros/filament.cfg#L28) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [29](../../config/macros/filament.cfg#L29) | <code>RESTORE_GCODE_STATE NAME=m600_unload_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
-| [30](../../config/macros/filament.cfg#L30) | <code>RELEASE_EXTRUDER</code> | Run [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), which is evaluated separately when reached. Use its default arguments. |
-| [31](../../config/macros/filament.cfg#L31) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_CHANGE VARIABLE=active VALUE=True</code> | Store <code>True</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
-| [32](../../config/macros/filament.cfg#L32) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=retract VALUE=1.0</code> | Store <code>1.0</code> in the named macro's <code>retract</code> variable for later calls. This changes runtime state, not the config file. |
-| [33](../../config/macros/filament.cfg#L33) | <code># Already unloaded: cancellation must not pull another 15mm.</code> | Comment only; Klipper does not execute this line. |
-| [34](../../config/macros/filament.cfg#L34) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=cancel_retract VALUE=0.0</code> | Store <code>0.0</code> in the named macro's <code>cancel_retract</code> variable for later calls. This changes runtime state, not the config file. |
-| [35](../../config/macros/filament.cfg#L35) | <code>M117 Manually load and purge, then RESUME</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [21](../../config/macros/filament.cfg#L21) | <code>[gcode_macro _FILAMENT_CHANGE_UNLOAD]</code> | Declare this callable macro. |
+| [22](../../config/macros/filament.cfg#L22) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [23](../../config/macros/filament.cfg#L23) | <code>{% if not printer.pause_resume.is_paused or not printer.extruder.can_extrude %}</code> | Reject unloading unless the printer is paused and the nozzle is hot enough to extrude. |
+| [24](../../config/macros/filament.cfg#L24) | <code>{action_raise_error(&quot;M600 unload requires a paused printer and hot nozzle.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [25](../../config/macros/filament.cfg#L25) | <code>{% endif %}</code> | End this conditional block. |
+| [26](../../config/macros/filament.cfg#L26) | <code>SAVE_GCODE_STATE NAME=m600_unload_state</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [27](../../config/macros/filament.cfg#L27) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
+| [28](../../config/macros/filament.cfg#L28) | <code>G1 E-3 F2700</code> | command filament E=<code>-3</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 45 mm/s (2700 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [29](../../config/macros/filament.cfg#L29) | <code>G1 E-50 F3000</code> | command filament E=<code>-50</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 50 mm/s (3000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [30](../../config/macros/filament.cfg#L30) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [31](../../config/macros/filament.cfg#L31) | <code>RESTORE_GCODE_STATE NAME=m600_unload_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [32](../../config/macros/filament.cfg#L32) | <code>RELEASE_EXTRUDER</code> | Run [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), which is evaluated separately when reached. Use its default arguments. |
+| [33](../../config/macros/filament.cfg#L33) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_CHANGE VARIABLE=active VALUE=True</code> | Store <code>True</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
+| [34](../../config/macros/filament.cfg#L34) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=retract VALUE=1.0</code> | Store <code>1.0</code> in the named macro's <code>retract</code> variable for later calls. This changes runtime state, not the config file. |
+| [35](../../config/macros/filament.cfg#L35) | <code># Already unloaded: cancellation must not pull another 15mm.</code> | Comment only; Klipper does not execute this line. |
+| [36](../../config/macros/filament.cfg#L36) | <code>SET_GCODE_VARIABLE MACRO=_CLIENT_VARIABLE VARIABLE=cancel_retract VALUE=0.0</code> | Store <code>0.0</code> in the named macro's <code>cancel_retract</code> variable for later calls. This changes runtime state, not the config file. |
+| [37](../../config/macros/filament.cfg#L37) | <code>M117 Manually load and purge, then RESUME</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
 
 <a id="gcode_macro-release_extruder"></a>
 
@@ -107,14 +109,14 @@ Waits for queued moves, then releases only the extruder motor for manual handlin
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [37](../../config/macros/filament.cfg#L37) | <code>[gcode_macro RELEASE_EXTRUDER]</code> | Declare this callable macro. |
-| [38](../../config/macros/filament.cfg#L38) | <code>description: Release E for manual feeding; pause before using during a print</code> | Set the help text: <code>Release E for manual feeding; pause before using during a print</code>. |
-| [39](../../config/macros/filament.cfg#L39) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [40](../../config/macros/filament.cfg#L40) | <code>{% if printer.print_stats.state == &#x27;printing&#x27; and not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>the print state  equals  &#x27;printing&#x27; and not the printer is paused</code>. Only a true branch emits its commands. |
-| [41](../../config/macros/filament.cfg#L41) | <code>{action_raise_error(&quot;Pause before releasing the extruder.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [42](../../config/macros/filament.cfg#L42) | <code>{% endif %}</code> | End this conditional block. |
-| [43](../../config/macros/filament.cfg#L43) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [44](../../config/macros/filament.cfg#L44) | <code>SET_STEPPER_ENABLE STEPPER=extruder ENABLE=0</code> | Release the selected motor so it can be turned manually; this does not disable the other motors. |
+| [39](../../config/macros/filament.cfg#L39) | <code>[gcode_macro RELEASE_EXTRUDER]</code> | Declare this callable macro. |
+| [40](../../config/macros/filament.cfg#L40) | <code>description: Release E for manual feeding; pause before using during a print</code> | Set the help text: <code>Release E for manual feeding; pause before using during a print</code>. |
+| [41](../../config/macros/filament.cfg#L41) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [42](../../config/macros/filament.cfg#L42) | <code>{% if printer.print_stats.state == &#x27;printing&#x27; and not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>the print state  equals  &#x27;printing&#x27; and not the printer is paused</code>. Only a true branch emits its commands. |
+| [43](../../config/macros/filament.cfg#L43) | <code>{action_raise_error(&quot;Pause before releasing the extruder.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [44](../../config/macros/filament.cfg#L44) | <code>{% endif %}</code> | End this conditional block. |
+| [45](../../config/macros/filament.cfg#L45) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [46](../../config/macros/filament.cfg#L46) | <code>SET_STEPPER_ENABLE STEPPER=extruder ENABLE=0</code> | Release the selected motor so it can be turned manually; this does not disable the other motors. |
 
 <a id="gcode_macro-load_filament"></a>
 
@@ -126,15 +128,15 @@ Reject a second pending load, remember the incoming nozzle target, and heat to t
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [46](../../config/macros/filament.cfg#L46) | <code>[gcode_macro LOAD_FILAMENT]</code> | Declare this callable macro. |
-| [47](../../config/macros/filament.cfg#L47) | <code>description: Heat for manual loading and wait for operator confirmation</code> | Set the help text: <code>Heat for manual loading and wait for operator confirmation</code>. |
-| [48](../../config/macros/filament.cfg#L48) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [49](../../config/macros/filament.cfg#L49) | <code>{% set initial_target = printer.extruder.target&#124;float %}</code> | Calculate local <code>initial_target</code> from <code>the nozzle temperature target as a decimal</code>. It lasts for this evaluation only. |
-| [50](../../config/macros/filament.cfg#L50) | <code>{% if printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active %}</code> | Start a conditional branch: <code>the stored state of _FILAMENT_LOAD.active</code>. Only a true branch emits its commands. |
-| [51](../../config/macros/filament.cfg#L51) | <code>{action_raise_error(&quot;Load Filament is already waiting for confirmation.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [52](../../config/macros/filament.cfg#L52) | <code>{% endif %}</code> | End this conditional block. |
-| [53](../../config/macros/filament.cfg#L53) | <code>_FILAMENT_HEAT</code> | Run [_FILAMENT_HEAT](filament.cfg.md#gcode_macro-_filament_heat), which is evaluated separately when reached. Use its default arguments. |
-| [54](../../config/macros/filament.cfg#L54) | <code>_BEGIN_FILAMENT_LOAD RESTORE_TARGET={initial_target}</code> | Run [_BEGIN_FILAMENT_LOAD](filament.cfg.md#gcode_macro-_begin_filament_load), which is evaluated separately when reached. Forward <code>RESTORE_TARGET={initial_target}</code>. |
+| [48](../../config/macros/filament.cfg#L48) | <code>[gcode_macro LOAD_FILAMENT]</code> | Declare this callable macro. |
+| [49](../../config/macros/filament.cfg#L49) | <code>description: Heat for manual loading and wait for operator confirmation</code> | Set the help text: <code>Heat for manual loading and wait for operator confirmation</code>. |
+| [50](../../config/macros/filament.cfg#L50) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [51](../../config/macros/filament.cfg#L51) | <code>{% set initial_target = printer.extruder.target&#124;float %}</code> | Calculate local <code>initial_target</code> from <code>the nozzle temperature target as a decimal</code>. It lasts for this evaluation only. |
+| [52](../../config/macros/filament.cfg#L52) | <code>{% if printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;].active %}</code> | Start a conditional branch: <code>the stored state of _FILAMENT_LOAD.active</code>. Only a true branch emits its commands. |
+| [53](../../config/macros/filament.cfg#L53) | <code>{action_raise_error(&quot;Load Filament is already waiting for confirmation.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [54](../../config/macros/filament.cfg#L54) | <code>{% endif %}</code> | End this conditional block. |
+| [55](../../config/macros/filament.cfg#L55) | <code>_FILAMENT_HEAT</code> | Run [_FILAMENT_HEAT](filament.cfg.md#gcode_macro-_filament_heat), which is evaluated separately when reached. Use its default arguments. |
+| [56](../../config/macros/filament.cfg#L56) | <code>_BEGIN_FILAMENT_LOAD RESTORE_TARGET={initial_target}</code> | Run [_BEGIN_FILAMENT_LOAD](filament.cfg.md#gcode_macro-_begin_filament_load), which is evaluated separately when reached. Forward <code>RESTORE_TARGET={initial_target}</code>. |
 
 <a id="gcode_macro-_filament_load"></a>
 
@@ -144,10 +146,10 @@ Stores whether manual loading awaits confirmation and the nozzle target that mus
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [56](../../config/macros/filament.cfg#L56) | <code>[gcode_macro _FILAMENT_LOAD]</code> | Declare this callable macro. |
-| [57](../../config/macros/filament.cfg#L57) | <code>variable_active: False</code> | Initialize <code>active</code> (whether M600 automatic unloading has completed) to <code>False</code> at restart; later calls may change it. |
-| [58](../../config/macros/filament.cfg#L58) | <code>variable_restore_target: 0.0</code> | Initialize <code>restore_target</code> (restore target) to <code>0.0</code> at restart; later calls may change it. |
-| [59](../../config/macros/filament.cfg#L59) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [58](../../config/macros/filament.cfg#L58) | <code>[gcode_macro _FILAMENT_LOAD]</code> | Declare this callable macro. |
+| [59](../../config/macros/filament.cfg#L59) | <code>variable_active: False</code> | Initialize <code>active</code> (whether M600 automatic unloading has completed) to <code>False</code> at restart; later calls may change it. |
+| [60](../../config/macros/filament.cfg#L60) | <code>variable_restore_target: 0.0</code> | Initialize <code>restore_target</code> (restore target) to <code>0.0</code> at restart; later calls may change it. |
+| [61](../../config/macros/filament.cfg#L61) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 
 <a id="gcode_macro-_begin_filament_load"></a>
 
@@ -159,16 +161,16 @@ After the loading-temperature wait completes, mark manual loading active, store 
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [61](../../config/macros/filament.cfg#L61) | <code>[gcode_macro _BEGIN_FILAMENT_LOAD]</code> | Declare this callable macro. |
-| [62](../../config/macros/filament.cfg#L62) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [63](../../config/macros/filament.cfg#L63) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=True</code> | Store <code>True</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
-| [64](../../config/macros/filament.cfg#L64) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=restore_target VALUE={params.RESTORE_TARGET&#124;float}</code> | Store <code>{params.RESTORE_TARGET&#124;float}</code> in the named macro's <code>restore_target</code> variable for later calls. This changes runtime state, not the config file. |
-| [65](../../config/macros/filament.cfg#L65) | <code>M117 Manually load filament</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [66](../../config/macros/filament.cfg#L66) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_begin Confirm filament load&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [67](../../config/macros/filament.cfg#L67) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_text Manually feed and purge filament, then confirm. No automatic extrusion will occur.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [68](../../config/macros/filament.cfg#L68) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_footer_button Filament loaded&#124;CONFIRM_FILAMENT_LOADED&#124;primary&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [69](../../config/macros/filament.cfg#L69) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_footer_button Cancel&#124;CANCEL_FILAMENT_LOAD&#124;warning&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [70](../../config/macros/filament.cfg#L70) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_show&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [63](../../config/macros/filament.cfg#L63) | <code>[gcode_macro _BEGIN_FILAMENT_LOAD]</code> | Declare this callable macro. |
+| [64](../../config/macros/filament.cfg#L64) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [65](../../config/macros/filament.cfg#L65) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=True</code> | Store <code>True</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
+| [66](../../config/macros/filament.cfg#L66) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=restore_target VALUE={params.RESTORE_TARGET&#124;float}</code> | Store <code>{params.RESTORE_TARGET&#124;float}</code> in the named macro's <code>restore_target</code> variable for later calls. This changes runtime state, not the config file. |
+| [67](../../config/macros/filament.cfg#L67) | <code>M117 Manually load filament</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [68](../../config/macros/filament.cfg#L68) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_begin Confirm filament load&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [69](../../config/macros/filament.cfg#L69) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_text Manually feed and purge filament, then confirm. No automatic extrusion will occur.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [70](../../config/macros/filament.cfg#L70) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_footer_button Filament loaded&#124;CONFIRM_FILAMENT_LOADED&#124;primary&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [71](../../config/macros/filament.cfg#L71) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_footer_button Cancel&#124;CANCEL_FILAMENT_LOAD&#124;warning&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [72](../../config/macros/filament.cfg#L72) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_show&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
 
 <a id="gcode_macro-confirm_filament_loaded"></a>
 
@@ -180,21 +182,21 @@ Require an active loading operation and, when enabled, positive filament-sensor 
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [72](../../config/macros/filament.cfg#L72) | <code>[gcode_macro CONFIRM_FILAMENT_LOADED]</code> | Declare this callable macro. |
-| [73](../../config/macros/filament.cfg#L73) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [74](../../config/macros/filament.cfg#L74) | <code>{% set load = printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;] %}</code> | Calculate local <code>load</code> from <code>the stored state of _FILAMENT_LOAD</code>. It lasts for this evaluation only. |
-| [75](../../config/macros/filament.cfg#L75) | <code>{% set sensor = printer[&#x27;filament_switch_sensor filament_sensor&#x27;] %}</code> | Calculate local <code>sensor</code> from <code>printer[&#x27;filament_switch_sensor filament_sensor&#x27;]</code>. It lasts for this evaluation only. |
-| [76](../../config/macros/filament.cfg#L76) | <code>{% if not load.active %}</code> | Start a conditional branch: <code>not load.active</code>. Only a true branch emits its commands. |
-| [77](../../config/macros/filament.cfg#L77) | <code>{action_raise_error(&quot;No Load Filament operation is waiting for confirmation.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [78](../../config/macros/filament.cfg#L78) | <code>{% endif %}</code> | End this conditional block. |
-| [79](../../config/macros/filament.cfg#L79) | <code>{% if sensor.enabled and not sensor.filament_detected %}</code> | If filament monitoring is enabled but no filament is detected, enter the error branch. A deliberately disabled sensor does not block this resume or confirmation check. |
-| [80](../../config/macros/filament.cfg#L80) | <code>{action_raise_error(&quot;Filament is not detected. Insert filament before confirming.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [81](../../config/macros/filament.cfg#L81) | <code>{% endif %}</code> | End this conditional block. |
-| [82](../../config/macros/filament.cfg#L82) | <code>M104 S{load.restore_target}</code> | Set the nozzle target using <code>{load.restore_target}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [83](../../config/macros/filament.cfg#L83) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
-| [84](../../config/macros/filament.cfg#L84) | <code>M117 Filament loaded - press RESUME</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [85](../../config/macros/filament.cfg#L85) | <code>RESPOND TYPE=echo MSG=&quot;Filament load confirmed. Previous nozzle target restored; press RESUME when ready.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
-| [86](../../config/macros/filament.cfg#L86) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_end&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [74](../../config/macros/filament.cfg#L74) | <code>[gcode_macro CONFIRM_FILAMENT_LOADED]</code> | Declare this callable macro. |
+| [75](../../config/macros/filament.cfg#L75) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [76](../../config/macros/filament.cfg#L76) | <code>{% set load = printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;] %}</code> | Calculate local <code>load</code> from <code>the stored state of _FILAMENT_LOAD</code>. It lasts for this evaluation only. |
+| [77](../../config/macros/filament.cfg#L77) | <code>{% set sensor = printer[&#x27;filament_switch_sensor filament_sensor&#x27;] %}</code> | Calculate local <code>sensor</code> from <code>printer[&#x27;filament_switch_sensor filament_sensor&#x27;]</code>. It lasts for this evaluation only. |
+| [78](../../config/macros/filament.cfg#L78) | <code>{% if not load.active %}</code> | Start a conditional branch: <code>not load.active</code>. Only a true branch emits its commands. |
+| [79](../../config/macros/filament.cfg#L79) | <code>{action_raise_error(&quot;No Load Filament operation is waiting for confirmation.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [80](../../config/macros/filament.cfg#L80) | <code>{% endif %}</code> | End this conditional block. |
+| [81](../../config/macros/filament.cfg#L81) | <code>{% if sensor.enabled and not sensor.filament_detected %}</code> | If filament monitoring is enabled but no filament is detected, enter the error branch. A deliberately disabled sensor does not block this resume or confirmation check. |
+| [82](../../config/macros/filament.cfg#L82) | <code>{action_raise_error(&quot;Filament is not detected. Insert filament before confirming.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [83](../../config/macros/filament.cfg#L83) | <code>{% endif %}</code> | End this conditional block. |
+| [84](../../config/macros/filament.cfg#L84) | <code>M104 S{load.restore_target}</code> | Set the nozzle target using <code>{load.restore_target}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [85](../../config/macros/filament.cfg#L85) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
+| [86](../../config/macros/filament.cfg#L86) | <code>M117 Filament loaded - press RESUME</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [87](../../config/macros/filament.cfg#L87) | <code>RESPOND TYPE=echo MSG=&quot;Filament load confirmed. Previous nozzle target restored; press RESUME when ready.&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [88](../../config/macros/filament.cfg#L88) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_end&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
 
 <a id="gcode_macro-cancel_filament_load"></a>
 
@@ -206,15 +208,15 @@ If manual loading is active, restore its saved nozzle target and clear the pendi
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [88](../../config/macros/filament.cfg#L88) | <code>[gcode_macro CANCEL_FILAMENT_LOAD]</code> | Declare this callable macro. |
-| [89](../../config/macros/filament.cfg#L89) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [90](../../config/macros/filament.cfg#L90) | <code>{% set load = printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;] %}</code> | Calculate local <code>load</code> from <code>the stored state of _FILAMENT_LOAD</code>. It lasts for this evaluation only. |
-| [91](../../config/macros/filament.cfg#L91) | <code>{% if load.active %}</code> | Start a conditional branch: <code>load.active</code>. Only a true branch emits its commands. |
-| [92](../../config/macros/filament.cfg#L92) | <code>M104 S{load.restore_target}</code> | Set the nozzle target using <code>{load.restore_target}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [93](../../config/macros/filament.cfg#L93) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
-| [94](../../config/macros/filament.cfg#L94) | <code>{% endif %}</code> | End this conditional block. |
-| [95](../../config/macros/filament.cfg#L95) | <code>M117 Filament load canceled</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [96](../../config/macros/filament.cfg#L96) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_end&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
+| [90](../../config/macros/filament.cfg#L90) | <code>[gcode_macro CANCEL_FILAMENT_LOAD]</code> | Declare this callable macro. |
+| [91](../../config/macros/filament.cfg#L91) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [92](../../config/macros/filament.cfg#L92) | <code>{% set load = printer[&#x27;gcode_macro _FILAMENT_LOAD&#x27;] %}</code> | Calculate local <code>load</code> from <code>the stored state of _FILAMENT_LOAD</code>. It lasts for this evaluation only. |
+| [93](../../config/macros/filament.cfg#L93) | <code>{% if load.active %}</code> | Start a conditional branch: <code>load.active</code>. Only a true branch emits its commands. |
+| [94](../../config/macros/filament.cfg#L94) | <code>M104 S{load.restore_target}</code> | Set the nozzle target using <code>{load.restore_target}</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [95](../../config/macros/filament.cfg#L95) | <code>SET_GCODE_VARIABLE MACRO=_FILAMENT_LOAD VARIABLE=active VALUE=False</code> | Store <code>False</code> in the named macro's <code>active</code> variable for later calls. This changes runtime state, not the config file. |
+| [96](../../config/macros/filament.cfg#L96) | <code>{% endif %}</code> | End this conditional block. |
+| [97](../../config/macros/filament.cfg#L97) | <code>M117 Filament load canceled</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [98](../../config/macros/filament.cfg#L98) | <code>RESPOND TYPE=command MSG=&quot;action:prompt_end&quot;</code> | Send the specified message or UI action to the console/client. TYPE selects normal, error or command output. |
 
 <a id="gcode_macro-unload_filament"></a>
 
@@ -226,11 +228,11 @@ Heats first, then calls a separate unload macro. This standalone unload pattern 
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [98](../../config/macros/filament.cfg#L98) | <code>[gcode_macro UNLOAD_FILAMENT]</code> | Declare this callable macro. |
-| [99](../../config/macros/filament.cfg#L99) | <code>description: Heat and unload filament without changing the caller&#x27;s G-code modes</code> | Set the help text: <code>Heat and unload filament without changing the caller&#x27;s G-code modes</code>. |
-| [100](../../config/macros/filament.cfg#L100) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [101](../../config/macros/filament.cfg#L101) | <code>_FILAMENT_HEAT</code> | Run [_FILAMENT_HEAT](filament.cfg.md#gcode_macro-_filament_heat), which is evaluated separately when reached. Use its default arguments. |
-| [102](../../config/macros/filament.cfg#L102) | <code>_UNLOAD_FILAMENT_MOVES</code> | Run [_UNLOAD_FILAMENT_MOVES](filament.cfg.md#gcode_macro-_unload_filament_moves), which is evaluated separately when reached. Use its default arguments. |
+| [100](../../config/macros/filament.cfg#L100) | <code>[gcode_macro UNLOAD_FILAMENT]</code> | Declare this callable macro. |
+| [101](../../config/macros/filament.cfg#L101) | <code>description: Heat and unload filament without changing the caller&#x27;s G-code modes</code> | Set the help text: <code>Heat and unload filament without changing the caller&#x27;s G-code modes</code>. |
+| [102](../../config/macros/filament.cfg#L102) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [103](../../config/macros/filament.cfg#L103) | <code>_FILAMENT_HEAT</code> | Run [_FILAMENT_HEAT](filament.cfg.md#gcode_macro-_filament_heat), which is evaluated separately when reached. Use its default arguments. |
+| [104](../../config/macros/filament.cfg#L104) | <code>_UNLOAD_FILAMENT_MOVES</code> | Run [_UNLOAD_FILAMENT_MOVES](filament.cfg.md#gcode_macro-_unload_filament_moves), which is evaluated separately when reached. Use its default arguments. |
 
 <a id="gcode_macro-_filament_heat"></a>
 
@@ -242,20 +244,20 @@ Rejects active printing and invalid configured loading temperature. Always sets 
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [104](../../config/macros/filament.cfg#L104) | <code>[gcode_macro _FILAMENT_HEAT]</code> | Declare this callable macro. |
-| [105](../../config/macros/filament.cfg#L105) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [106](../../config/macros/filament.cfg#L106) | <code>{% if printer.print_stats.state == &#x27;printing&#x27; %}</code> | Start a conditional branch: <code>the print state  equals  &#x27;printing&#x27;</code>. Only a true branch emits its commands. |
-| [107](../../config/macros/filament.cfg#L107) | <code>{action_raise_error(&quot;Pause before loading or unloading filament.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [108](../../config/macros/filament.cfg#L108) | <code>{% endif %}</code> | End this conditional block. |
-| [109](../../config/macros/filament.cfg#L109) | <code>{% set load = printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].load_temperature&#124;float %}</code> | Calculate local <code>load</code> from <code>the stored state of _PILOT_SETTINGS.load_temperature as a decimal</code>. It lasts for this evaluation only. |
-| [110](../../config/macros/filament.cfg#L110) | <code>{% set minimum = printer.configfile.settings.extruder.min_extrude_temp&#124;float %}</code> | Calculate local <code>minimum</code> from <code>the loaded settings (including defaults).extruder.min_extrude_temp as a decimal</code>. It lasts for this evaluation only. |
-| [111](../../config/macros/filament.cfg#L111) | <code>{% set maximum = printer.configfile.settings.extruder.max_temp&#124;float %}</code> | Calculate local <code>maximum</code> from <code>the loaded settings (including defaults).extruder.max_temp as a decimal</code>. It lasts for this evaluation only. |
-| [112](../../config/macros/filament.cfg#L112) | <code>{% if load &lt;= minimum or load &gt;= maximum %}</code> | Start a conditional branch: <code>load  is at most  minimum or load  is at least  maximum</code>. Only a true branch emits its commands. |
-| [113](../../config/macros/filament.cfg#L113) | <code>{action_raise_error(&quot;The configured filament loading temperature is invalid.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [114](../../config/macros/filament.cfg#L114) | <code>{% endif %}</code> | End this conditional block. |
-| [115](../../config/macros/filament.cfg#L115) | <code># Always establish the configured loading target, including from pause standby.</code> | Comment only; Klipper does not execute this line. |
-| [116](../../config/macros/filament.cfg#L116) | <code># M109 waits before the caller unloads or opens the manual-load prompt.</code> | Comment only; Klipper does not execute this line. |
-| [117](../../config/macros/filament.cfg#L117) | <code>M109 S{load}</code> | Set the nozzle target using <code>{load}</code> °C; zero turns its heater off. Wait for the requested temperature. |
+| [106](../../config/macros/filament.cfg#L106) | <code>[gcode_macro _FILAMENT_HEAT]</code> | Declare this callable macro. |
+| [107](../../config/macros/filament.cfg#L107) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [108](../../config/macros/filament.cfg#L108) | <code>{% if printer.print_stats.state == &#x27;printing&#x27; %}</code> | Start a conditional branch: <code>the print state  equals  &#x27;printing&#x27;</code>. Only a true branch emits its commands. |
+| [109](../../config/macros/filament.cfg#L109) | <code>{action_raise_error(&quot;Pause before loading or unloading filament.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [110](../../config/macros/filament.cfg#L110) | <code>{% endif %}</code> | End this conditional block. |
+| [111](../../config/macros/filament.cfg#L111) | <code>{% set load = printer[&#x27;gcode_macro _PILOT_SETTINGS&#x27;].load_temperature&#124;float %}</code> | Calculate local <code>load</code> from <code>the stored state of _PILOT_SETTINGS.load_temperature as a decimal</code>. It lasts for this evaluation only. |
+| [112](../../config/macros/filament.cfg#L112) | <code>{% set minimum = printer.configfile.settings.extruder.min_extrude_temp&#124;float %}</code> | Calculate local <code>minimum</code> from <code>the loaded settings (including defaults).extruder.min_extrude_temp as a decimal</code>. It lasts for this evaluation only. |
+| [113](../../config/macros/filament.cfg#L113) | <code>{% set maximum = printer.configfile.settings.extruder.max_temp&#124;float %}</code> | Calculate local <code>maximum</code> from <code>the loaded settings (including defaults).extruder.max_temp as a decimal</code>. It lasts for this evaluation only. |
+| [114](../../config/macros/filament.cfg#L114) | <code>{% if load &lt;= minimum or load &gt;= maximum %}</code> | Start a conditional branch: <code>load  is at most  minimum or load  is at least  maximum</code>. Only a true branch emits its commands. |
+| [115](../../config/macros/filament.cfg#L115) | <code>{action_raise_error(&quot;The configured filament loading temperature is invalid.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [116](../../config/macros/filament.cfg#L116) | <code>{% endif %}</code> | End this conditional block. |
+| [117](../../config/macros/filament.cfg#L117) | <code># Always establish the configured loading target, including from pause standby.</code> | Comment only; Klipper does not execute this line. |
+| [118](../../config/macros/filament.cfg#L118) | <code># M109 waits before the caller unloads or opens the manual-load prompt.</code> | Comment only; Klipper does not execute this line. |
+| [119](../../config/macros/filament.cfg#L119) | <code>M109 S{load}</code> | Set the nozzle target using <code>{load}</code> °C; zero turns its heater off. Wait for the requested temperature. |
 
 <a id="gcode_macro-_unload_filament_moves"></a>
 
@@ -267,23 +269,23 @@ Feeds 25mm, retracts 10mm and 20mm, waits three seconds, then retracts another 5
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
-| [120](../../config/macros/filament.cfg#L120) | <code>[gcode_macro _UNLOAD_FILAMENT_MOVES]</code> | Declare this callable macro. |
-| [121](../../config/macros/filament.cfg#L121) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [122](../../config/macros/filament.cfg#L122) | <code>{% if not printer.extruder.can_extrude %}</code> | Start a conditional branch: <code>not the nozzle is hot enough to extrude</code>. Only a true branch emits its commands. |
-| [123](../../config/macros/filament.cfg#L123) | <code>{action_raise_error(&quot;Nozzle is too cold to unload filament.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
-| [124](../../config/macros/filament.cfg#L124) | <code>{% endif %}</code> | End this conditional block. |
-| [125](../../config/macros/filament.cfg#L125) | <code>SAVE_GCODE_STATE NAME=unload_filament_state</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
-| [126](../../config/macros/filament.cfg#L126) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
-| [127](../../config/macros/filament.cfg#L127) | <code>G1 E25 F300</code> | command filament E=<code>25</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [128](../../config/macros/filament.cfg#L128) | <code>G1 E-10 F1500</code> | command filament E=<code>-10</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 25 mm/s (1500 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [129](../../config/macros/filament.cfg#L129) | <code>G1 E-20 F600</code> | command filament E=<code>-20</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 10 mm/s (600 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [130](../../config/macros/filament.cfg#L130) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [131](../../config/macros/filament.cfg#L131) | <code>G4 P3000</code> | Wait for <code>P3000</code> (P is milliseconds; 1000 ms = 1 second). |
-| [132](../../config/macros/filament.cfg#L132) | <code>G1 E-50 F300</code> | command filament E=<code>-50</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
-| [133](../../config/macros/filament.cfg#L133) | <code>M400</code> | Wait until queued movement has completed before continuing. |
-| [134](../../config/macros/filament.cfg#L134) | <code>RESTORE_GCODE_STATE NAME=unload_filament_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
-| [135](../../config/macros/filament.cfg#L135) | <code>RELEASE_EXTRUDER</code> | Run [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), which is evaluated separately when reached. Use its default arguments. |
-| [136](../../config/macros/filament.cfg#L136) | <code>{% if not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>not the printer is paused</code>. Only a true branch emits its commands. |
-| [137](../../config/macros/filament.cfg#L137) | <code>M104 S0</code> | Set the nozzle target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
-| [138](../../config/macros/filament.cfg#L138) | <code>{% endif %}</code> | End this conditional block. |
-| [139](../../config/macros/filament.cfg#L139) | <code>M117 Filament unloaded</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
+| [122](../../config/macros/filament.cfg#L122) | <code>[gcode_macro _UNLOAD_FILAMENT_MOVES]</code> | Declare this callable macro. |
+| [123](../../config/macros/filament.cfg#L123) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
+| [124](../../config/macros/filament.cfg#L124) | <code>{% if not printer.extruder.can_extrude %}</code> | Start a conditional branch: <code>not the nozzle is hot enough to extrude</code>. Only a true branch emits its commands. |
+| [125](../../config/macros/filament.cfg#L125) | <code>{action_raise_error(&quot;Nozzle is too cold to unload filament.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
+| [126](../../config/macros/filament.cfg#L126) | <code>{% endif %}</code> | End this conditional block. |
+| [127](../../config/macros/filament.cfg#L127) | <code>SAVE_GCODE_STATE NAME=unload_filament_state</code> | Save the current coordinate modes, offsets, E accounting, feed rate and multipliers under NAME. Does not save a printer calibration or move anything. |
+| [128](../../config/macros/filament.cfg#L128) | <code>M83</code> | Use relative filament distances for subsequent E moves. |
+| [129](../../config/macros/filament.cfg#L129) | <code>G1 E25 F300</code> | command filament E=<code>25</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [130](../../config/macros/filament.cfg#L130) | <code>G1 E-10 F1500</code> | command filament E=<code>-10</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 25 mm/s (1500 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [131](../../config/macros/filament.cfg#L131) | <code>G1 E-20 F600</code> | command filament E=<code>-20</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 10 mm/s (600 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [132](../../config/macros/filament.cfg#L132) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [133](../../config/macros/filament.cfg#L133) | <code>G4 P3000</code> | Wait for <code>P3000</code> (P is milliseconds; 1000 ms = 1 second). |
+| [134](../../config/macros/filament.cfg#L134) | <code>G1 E-50 F300</code> | command filament E=<code>-50</code> mm; in relative E mode negative retracts and positive feeds; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
+| [135](../../config/macros/filament.cfg#L135) | <code>M400</code> | Wait until queued movement has completed before continuing. |
+| [136](../../config/macros/filament.cfg#L136) | <code>RESTORE_GCODE_STATE NAME=unload_filament_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
+| [137](../../config/macros/filament.cfg#L137) | <code>RELEASE_EXTRUDER</code> | Run [RELEASE_EXTRUDER](filament.cfg.md#gcode_macro-release_extruder), which is evaluated separately when reached. Use its default arguments. |
+| [138](../../config/macros/filament.cfg#L138) | <code>{% if not printer.pause_resume.is_paused %}</code> | Start a conditional branch: <code>not the printer is paused</code>. Only a true branch emits its commands. |
+| [139](../../config/macros/filament.cfg#L139) | <code>M104 S0</code> | Set the nozzle target using <code>0</code> °C; zero turns its heater off. Continue without waiting for temperature. |
+| [140](../../config/macros/filament.cfg#L140) | <code>{% endif %}</code> | End this conditional block. |
+| [141](../../config/macros/filament.cfg#L141) | <code>M117 Filament unloaded</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
