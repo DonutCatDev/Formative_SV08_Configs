@@ -5,7 +5,7 @@ Active in a configured printer entry-point include tree.
 
 [Source file](../../config/macros/sovol-macros.cfg) · [All files](../README.md) · [Reading guide](../READING_GUIDE.md)
 
-Source text SHA256 (LF-normalized): `2570755ccbaf89f1bc512ee65553ac450fd063b55f2ef2ae14dd61133265eab9`.
+Source text SHA256 (LF-normalized): `aff001ed233ba7245444f9e83a1a9e201a132e31fe15923a1b155e94ac9bbefe`.
 
 ## Macro and action index
 
@@ -68,14 +68,14 @@ Preserve ordinary and explicit P0 part-cooling control through Klipper's renamed
 | --- | --- | --- |
 | [20](../../config/macros/sovol-macros.cfg#L20) | <code>[gcode_macro M106]</code> | Declare this callable macro. |
 | [21](../../config/macros/sovol-macros.cfg#L21) | <code>description: Set the part fan, or map OrcaSlicer P3 to the exhaust fan</code> | Set the help text: <code>Set the part fan, or map OrcaSlicer P3 to the exhaust fan</code>. |
-| [22](../../config/macros/sovol-macros.cfg#L22) | <code>rename_existing: M106_BASE</code> | Keep the original command under <code>M106_BASE</code> so this wrapper can call it without recursing. |
+| [22](../../config/macros/sovol-macros.cfg#L22) | <code>rename_existing: M106.1</code> | Keep the original command under <code>M106.1</code> so this wrapper can call it without recursing. |
 | [23](../../config/macros/sovol-macros.cfg#L23) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 | [24](../../config/macros/sovol-macros.cfg#L24) | <code>{% set fan_index = params.P&#124;int if params.P is defined else 0 %}</code> | Calculate local <code>fan_index</code> from <code>the supplied P argument as an integer if the supplied P argument is defined else 0</code>. It lasts for this evaluation only. |
 | [25](../../config/macros/sovol-macros.cfg#L25) | <code>{% set speed = params.S&#124;float if params.S is defined else 255.0 %}</code> | Calculate local <code>speed</code> from <code>the supplied S argument as a decimal if the supplied S argument is defined else 255.0</code>. It lasts for this evaluation only. |
 | [26](../../config/macros/sovol-macros.cfg#L26) | <code>{% if speed &lt; 0 or speed &gt; 255 %}</code> | Start a conditional branch: <code>speed &lt; 0 or speed &gt; 255</code>. Only a true branch emits its commands. |
 | [27](../../config/macros/sovol-macros.cfg#L27) | <code>{action_raise_error(&quot;M106 S must be between 0 and 255.&quot;)}</code> | Stop this macro and its callers during template evaluation; report the shown error message. |
 | [28](../../config/macros/sovol-macros.cfg#L28) | <code>{% elif fan_index == 0 %}</code> | Otherwise test: <code>fan_index  equals  0</code>. Only a true branch emits its commands. |
-| [29](../../config/macros/sovol-macros.cfg#L29) | <code>M106_BASE S{speed}</code> | Call the original command saved by [M106](sovol-macros.cfg.md#gcode_macro-m106); bypass that macro wrapper. |
+| [29](../../config/macros/sovol-macros.cfg#L29) | <code>M106.1 S{speed}</code> | Call Klipper's renamed native M106 implementation for the part-cooling fan, forwarding the validated 0..255 speed. |
 | [30](../../config/macros/sovol-macros.cfg#L30) | <code>{% elif fan_index == 3 %}</code> | Otherwise test: <code>fan_index  equals  3</code>. Only a true branch emits its commands. |
 | [31](../../config/macros/sovol-macros.cfg#L31) | <code>UPDATE_DELAYED_GCODE ID=_END_PRINT_EXHAUST_OFF DURATION=0</code> | Cancel the named delayed callback. |
 | [32](../../config/macros/sovol-macros.cfg#L32) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED={speed / 255.0}</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
@@ -95,11 +95,11 @@ Preserve ordinary and explicit P0 part-cooling shutdown through Klipper's rename
 | --- | --- | --- |
 | [37](../../config/macros/sovol-macros.cfg#L37) | <code>[gcode_macro M107]</code> | Declare this callable macro. |
 | [38](../../config/macros/sovol-macros.cfg#L38) | <code>description: Stop the part fan, or map OrcaSlicer P3 to the exhaust fan</code> | Set the help text: <code>Stop the part fan, or map OrcaSlicer P3 to the exhaust fan</code>. |
-| [39](../../config/macros/sovol-macros.cfg#L39) | <code>rename_existing: M107_BASE</code> | Keep the original command under <code>M107_BASE</code> so this wrapper can call it without recursing. |
+| [39](../../config/macros/sovol-macros.cfg#L39) | <code>rename_existing: M107.1</code> | Keep the original command under <code>M107.1</code> so this wrapper can call it without recursing. |
 | [40](../../config/macros/sovol-macros.cfg#L40) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
 | [41](../../config/macros/sovol-macros.cfg#L41) | <code>{% set fan_index = params.P&#124;int if params.P is defined else 0 %}</code> | Calculate local <code>fan_index</code> from <code>the supplied P argument as an integer if the supplied P argument is defined else 0</code>. It lasts for this evaluation only. |
 | [42](../../config/macros/sovol-macros.cfg#L42) | <code>{% if fan_index == 0 %}</code> | Start a conditional branch: <code>fan_index  equals  0</code>. Only a true branch emits its commands. |
-| [43](../../config/macros/sovol-macros.cfg#L43) | <code>M107_BASE</code> | Call the original command saved by [M107](sovol-macros.cfg.md#gcode_macro-m107); bypass that macro wrapper. |
+| [43](../../config/macros/sovol-macros.cfg#L43) | <code>M107.1</code> | Call Klipper's renamed native M107 implementation to stop the part-cooling fan. |
 | [44](../../config/macros/sovol-macros.cfg#L44) | <code>{% elif fan_index == 3 %}</code> | Otherwise test: <code>fan_index  equals  3</code>. Only a true branch emits its commands. |
 | [45](../../config/macros/sovol-macros.cfg#L45) | <code>UPDATE_DELAYED_GCODE ID=_END_PRINT_EXHAUST_OFF DURATION=0</code> | Cancel the named delayed callback. |
 | [46](../../config/macros/sovol-macros.cfg#L46) | <code>SET_FAN_SPEED FAN=exhaust_fan SPEED=0</code> | Set the named generic fan to SPEED on a 0..1 scale; zero is off and one is full duty. |
