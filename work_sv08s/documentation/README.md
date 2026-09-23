@@ -51,6 +51,8 @@ These pages explain the saved candidate, including inactive files. They do not c
 - [HOME_ALL](macros/homing.cfg.md#gcode_macro-home_all)
 - [HYPERLAPSE](timelapse.cfg.md#gcode_macro-hyperlapse)
 - [LOAD_FILAMENT](macros/filament.cfg.md#gcode_macro-load_filament)
+- [M106](macros/sovol-macros.cfg.md#gcode_macro-m106)
+- [M107](macros/sovol-macros.cfg.md#gcode_macro-m107)
 - [M600](macros/client.cfg.md#gcode_macro-m600)
 - [MAINLED_OFF](macros/sovol-macros.cfg.md#gcode_macro-mainled_off)
 - [MAINLED_ON](macros/sovol-macros.cfg.md#gcode_macro-mainled_on)

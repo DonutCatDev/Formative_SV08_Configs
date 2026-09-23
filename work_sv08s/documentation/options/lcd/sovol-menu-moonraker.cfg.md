@@ -234,6 +234,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 LCD item: its type and enable expression below determine whether it is visible and what selecting/editing it does.
 
+**Calls and state references:** [M106](../../macros/sovol-macros.cfg.md#gcode_macro-m106). Conditional references are not necessarily executed.
+
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
 | [56](../../../config/options/lcd/sovol-menu-moonraker.cfg#L56) | <code>[menu __main __tune __fanspeed]</code> | Declare this configuration section. |
@@ -245,7 +247,7 @@ LCD item: its type and enable expression below determine whether it is visible a
 | [62](../../../config/options/lcd/sovol-menu-moonraker.cfg#L62) | <code># More than 100 steps enables Klipper&#x27;s automatic 10x fast-encoder step.</code> | Comment only; Klipper does not execute this line. |
 | [63](../../../config/options/lcd/sovol-menu-moonraker.cfg#L63) | <code>input_step: 0.005</code> | Set the amount changed per encoder step: <code>0.005</code>. |
 | [64](../../../config/options/lcd/sovol-menu-moonraker.cfg#L64) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [65](../../../config/options/lcd/sovol-menu-moonraker.cfg#L65) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
+| [65](../../../config/options/lcd/sovol-menu-moonraker.cfg#L65) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Run [M106](../../macros/sovol-macros.cfg.md#gcode_macro-m106), which is evaluated separately when reached. Forward <code>S{&#x27;%d&#x27; % (menu.input*255)}</code>. |
 
 <a id="menu-__main-__tune-__hotend0_target"></a>
 
@@ -822,6 +824,8 @@ LCD item: its type and enable expression below determine whether it is visible a
 
 LCD item: its type and enable expression below determine whether it is visible and what selecting/editing it does.
 
+**Calls and state references:** [M106](../../macros/sovol-macros.cfg.md#gcode_macro-m106). Conditional references are not necessarily executed.
+
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
 | [368](../../../config/options/lcd/sovol-menu-moonraker.cfg#L368) | <code>[menu __main __control2 __fanspeed]</code> | Declare this configuration section. |
@@ -833,7 +837,7 @@ LCD item: its type and enable expression below determine whether it is visible a
 | [374](../../../config/options/lcd/sovol-menu-moonraker.cfg#L374) | <code># More than 100 steps enables Klipper&#x27;s automatic 10x fast-encoder step.</code> | Comment only; Klipper does not execute this line. |
 | [375](../../../config/options/lcd/sovol-menu-moonraker.cfg#L375) | <code>input_step: 0.005</code> | Set the amount changed per encoder step: <code>0.005</code>. |
 | [376](../../../config/options/lcd/sovol-menu-moonraker.cfg#L376) | <code>gcode:</code> | Begin the command template. The following indented lines belong to it. |
-| [377](../../../config/options/lcd/sovol-menu-moonraker.cfg#L377) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
+| [377](../../../config/options/lcd/sovol-menu-moonraker.cfg#L377) | <code>M106 S{&#x27;%d&#x27; % (menu.input*255)}</code> | Run [M106](../../macros/sovol-macros.cfg.md#gcode_macro-m106), which is evaluated separately when reached. Forward <code>S{&#x27;%d&#x27; % (menu.input*255)}</code>. |
 
 <a id="menu-__main-__control2-__exhaustfanonoff"></a>
 

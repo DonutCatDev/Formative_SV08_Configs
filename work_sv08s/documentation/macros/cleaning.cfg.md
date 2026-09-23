@@ -21,7 +21,7 @@ None.
 
 Requires homing, heats for cleaning and follows the stored brush coordinates. It has no filament extrusion or unretraction, no homing, no QGL and no mesh/tap operation. Restores fan speed and G-code modes; leaves the nozzle raised. Coordinates require physical clearance checks.
 
-**Calls and state references:** [_REQUIRE_HOMED](homing.cfg.md#gcode_macro-_require_homed). Conditional references are not necessarily executed.
+**Calls and state references:** [M106](sovol-macros.cfg.md#gcode_macro-m106), [M107](sovol-macros.cfg.md#gcode_macro-m107), [_REQUIRE_HOMED](homing.cfg.md#gcode_macro-_require_homed). Conditional references are not necessarily executed.
 
 | Source line | Code | Plain explanation |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ Requires homing, heats for cleaning and follows the stored brush coordinates. It
 | [12](../../config/macros/cleaning.cfg#L12) | <code>G91</code> | Use relative coordinates for following moves; in Klipper this also makes E moves relative while G91 remains active. |
 | [13](../../config/macros/cleaning.cfg#L13) | <code>G1 Z10 F300</code> | command Z=<code>10</code> mm; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [14](../../config/macros/cleaning.cfg#L14) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [15](../../config/macros/cleaning.cfg#L15) | <code>M106 S255</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
+| [15](../../config/macros/cleaning.cfg#L15) | <code>M106 S255</code> | Run [M106](sovol-macros.cfg.md#gcode_macro-m106), which is evaluated separately when reached. Forward <code>S255</code>. |
 | [16](../../config/macros/cleaning.cfg#L16) | <code>M117 Clean nozzle</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
 | [17](../../config/macros/cleaning.cfg#L17) | <code>G1 X240 Y360 F9000</code> | command X=<code>240</code> mm; command Y=<code>360</code> mm; use feed rate 150 mm/s (9000 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [18](../../config/macros/cleaning.cfg#L18) | <code>G1 Z0.5 F300 # was G1 Z-1.5 F300, added 2mm</code> | command Z=<code>0.5</code> mm; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
@@ -77,9 +77,9 @@ Requires homing, heats for cleaning and follows the stored brush coordinates. It
 | [51](../../config/macros/cleaning.cfg#L51) | <code>G1 X245</code> | command X=<code>245</code> mm. XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [52](../../config/macros/cleaning.cfg#L52) | <code>M400</code> | Wait until queued movement has completed before continuing. |
 | [53](../../config/macros/cleaning.cfg#L53) | <code>M117 Finished cleaning</code> | Set the printer/LCD status message to the following text; an empty message clears it. |
-| [54](../../config/macros/cleaning.cfg#L54) | <code>M107</code> | Turn off the part-cooling fan. |
+| [54](../../config/macros/cleaning.cfg#L54) | <code>M107</code> | Run [M107](sovol-macros.cfg.md#gcode_macro-m107), which is evaluated separately when reached. Use its default arguments. |
 | [55](../../config/macros/cleaning.cfg#L55) | <code>G91</code> | Use relative coordinates for following moves; in Klipper this also makes E moves relative while G91 remains active. |
 | [56](../../config/macros/cleaning.cfg#L56) | <code>G1 Z10 F300</code> | command Z=<code>10</code> mm; use feed rate 5 mm/s (300 mm/min). XYZ follows G90/G91; E follows G91/M82/M83. Omitted axes and feed rate retain their previous values. |
 | [57](../../config/macros/cleaning.cfg#L57) | <code>G90</code> | Use absolute XYZ coordinates for following moves. This does not move the printer or independently change M82/M83. |
-| [58](../../config/macros/cleaning.cfg#L58) | <code>M106 S{printer.fan.speed * 255}</code> | Set part-cooling fan duty using S on a 0..255 scale (zero off, 255 full). This does not control the separate exhaust fan. |
+| [58](../../config/macros/cleaning.cfg#L58) | <code>M106 S{printer.fan.speed * 255}</code> | Run [M106](sovol-macros.cfg.md#gcode_macro-m106), which is evaluated separately when reached. Forward <code>S{printer.fan.speed * 255}</code>. |
 | [59](../../config/macros/cleaning.cfg#L59) | <code>RESTORE_GCODE_STATE NAME=clean_nozzle_state</code> | Restore the saved coordinate modes, E accounting, offsets and feed settings. Do not move back to the saved XYZ position (MOVE defaults to 0). |
