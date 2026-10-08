@@ -8,6 +8,7 @@ CONFIG_DIR="${PRINTER_CONFIG_DIR:-$HOME/printer_data/config}"
 SOURCE_SUBDIR="${FORMATIVE_SOURCE_SUBDIR:-work_sv08s/config}"
 PRIMARY_BRANCH="${FORMATIVE_PRIMARY_BRANCH:-main}"
 RESTART_MOONRAKER=1
+SKIP_UPDATE="${FORMATIVE_SKIP_UPDATE:-0}"
 
 usage() {
     printf 'Usage: %s [--no-restart]\n' "${0##*/}"
@@ -16,6 +17,7 @@ usage() {
     printf '  FORMATIVE_REPO_DIR       Clone destination\n'
     printf '  FORMATIVE_SOURCE_SUBDIR  Config path inside the repository\n'
     printf '  FORMATIVE_PRIMARY_BRANCH Moonraker update branch\n'
+    printf '  FORMATIVE_SKIP_UPDATE    Set to 1 when an orchestrator already pinned the checkout\n'
     printf '  PRINTER_CONFIG_DIR       Klipper/Moonraker config directory\n'
 }
 
@@ -60,6 +62,11 @@ if [[ -e "$REPO_DIR" && ! -d "$REPO_DIR/.git" ]]; then
     exit 1
 fi
 
+if [[ "$SKIP_UPDATE" != 0 && "$SKIP_UPDATE" != 1 ]]; then
+    printf 'FORMATIVE_SKIP_UPDATE must be 0 or 1.\n' >&2
+    exit 2
+fi
+
 if [[ -d "$REPO_DIR/.git" ]]; then
     CURRENT_ORIGIN="$(git -C "$REPO_DIR" remote get-url origin 2>/dev/null || true)"
     if [[ "$CURRENT_ORIGIN" != "$REPO_URL" ]]; then
@@ -67,8 +74,12 @@ if [[ -d "$REPO_DIR/.git" ]]; then
         printf 'Expected: %s\nActual:   %s\n' "$REPO_URL" "$CURRENT_ORIGIN" >&2
         exit 1
     fi
-    printf 'Updating %s\n' "$REPO_DIR"
-    git -C "$REPO_DIR" pull --ff-only
+    if [[ "$SKIP_UPDATE" == 1 ]]; then
+        printf 'Using orchestrator-pinned checkout at %s\n' "$REPO_DIR"
+    else
+        printf 'Updating %s\n' "$REPO_DIR"
+        git -C "$REPO_DIR" pull --ff-only
+    fi
 else
     printf 'Cloning %s into %s\n' "$REPO_URL" "$REPO_DIR"
     git clone "$REPO_URL" "$REPO_DIR"

@@ -53,3 +53,9 @@ Follow [the working configuration README](work_sv08s/README.md) for installation
 Release tags are created by the repository workflow when a pushed `main` commit
 contains `[release]`, or through the reviewed manual workflow. Creating a local
 commit does not deploy or publish it.
+
+Fleet automation may set `FORMATIVE_SKIP_UPDATE=1` after it has independently
+verified and pinned the checkout to a reviewed commit. The installer still
+validates the repository origin and preservation boundaries; the flag only
+suppresses its own `git pull` so the checkout cannot race past the approved
+revision.
